@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Administración Seguro - Verifica La Paz</title>
+  <title>Panel de Administración - La Paz te Acerca</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
@@ -13,19 +13,19 @@
     .hidden { display: none !important; }
     .provider-card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: transform 0.2s; }
     .provider-card:hover { transform: translateY(-2px); }
-    .btn-primary { background: #2563EB; border: none; }
-    .btn-primary:hover { background: #1E40AF; }
+    .btn-primary { background: #1E40AF; border: none; }
+    .btn-primary:hover { background: #0F172A; }
     .image-upload-container { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
     .image-upload-container input[type="text"] { flex: 1; }
     .image-preview { max-width: 100px; max-height: 100px; border-radius: 8px; margin-top: 5px; }
     
     .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
     .admin-tab { padding: 10px 20px; background: white; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
-    .admin-tab:hover { border-color: #2563EB; color: #2563EB; }
-    .admin-tab.active { background: #2563EB; color: white; border-color: #2563EB; }
+    .admin-tab:hover { border-color: #D97706; color: #D97706; }
+    .admin-tab.active { background: #D97706; color: white; border-color: #D97706; }
     
     .quick-search-container { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    .quick-provider-row { background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #2563EB; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .quick-provider-row { background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #1E40AF; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .quick-provider-info { flex: 1; min-width: 250px; }
     .quick-provider-info h6 { margin: 0 0 5px 0; font-weight: 700; }
     .quick-provider-info p { margin: 2px 0; font-size: 0.9rem; color: #64748b; }
@@ -38,16 +38,15 @@
     .badge-destacado { background: #F59E0B; color: #1F2937; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
     .badge-24h { background: #1F2937; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
     .badge-plan { padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
-    .badge-gratuito { background: #E2E8F0; color: #475569; }
-    .badge-premium { background: #FCD34D; color: #78350F; }
-    .badge-ultra { background: linear-gradient(135deg, #F59E0B, #D97706); color: white; }
+    .badge-basico { background: #E2E8F0; color: #475569; }
+    .badge-destacado-plan { background: #FCD34D; color: #78350F; }
+    .badge-recomendado { background: linear-gradient(135deg, #D97706, #B45309); color: white; }
     
     .no-results { text-align: center; padding: 40px; color: #94A3B8; }
     .no-results i { font-size: 3rem; margin-bottom: 10px; }
     
     .results-counter { background: #EFF6FF; padding: 10px 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9rem; color: #1E40AF; font-weight: 600; }
 
-    /* Nuevos estilos de seguridad */
     .security-badge {
       background: #10B981;
       color: white;
@@ -64,6 +63,28 @@
       color: #64748b;
       margin-left: 10px;
     }
+    
+    .upload-progress {
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    .upload-progress-bar {
+      height: 100%;
+      background: #D97706;
+      width: 0%;
+      transition: width 0.3s;
+    }
+    
+    .upload-status {
+      font-size: 0.75rem;
+      margin-top: 3px;
+      color: #64748b;
+    }
+    .upload-status.success { color: #10B981; }
+    .upload-status.error { color: #EF4444; }
   </style>
 </head>
 <body>
@@ -72,44 +93,45 @@
   <div id="loginSection" class="login-container">
     <div class="text-center mb-4">
       <div class="security-badge">
-        <i class="fas fa-shield-alt"></i> Conexión Segura
+        <i class="fas fa-lock"></i> Conexión Segura
       </div>
-      <h3 class="mb-1"><i class="fas fa-shield-alt text-primary"></i> Admin Verifica La Paz</h3>
-      <p class="text-muted small">Panel de Administración Seguro</p>
+      <h3 class="mb-1"><i class="fas fa-hands-helping text-primary"></i> Admin La Paz te Acerca</h3>
+      <p class="text-muted small">Panel de Administración del Directorio</p>
     </div>
     
-    <div class="mb-3">
-      <label class="form-label fw-bold">Usuario Administrador</label>
-      <input type="text" id="adminUser" class="form-control" placeholder="admin" value="admin">
-    </div>
-    
-    <div class="mb-3">
-      <label class="form-label fw-bold">Contraseña / GitHub Token</label>
-      <div class="input-group">
-        <input type="password" id="tokenInput" class="form-control" placeholder="ghp_...">
-        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
-          <i class="fas fa-eye" id="toggleIcon"></i>
-        </button>
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="mb-3">
+        <label class="form-label fw-bold">Usuario Administrador</label>
+        <input type="text" id="adminUser" class="form-control" placeholder="admin" required autocomplete="username">
       </div>
-      <small class="text-muted d-block mt-1">Genera uno en: github.com/settings/tokens (scope: repo)</small>
-    </div>
-    
-    <button onclick="secureLogin()" class="btn btn-primary w-100 py-2">
-      <i class="fas fa-lock-open me-2"></i> Ingresar de forma segura
-    </button>
-    
-    <div id="loginError" class="alert alert-danger mt-3 hidden small"></div>
-    
-    <div class="text-center mt-3">
-      <small class="text-muted"><i class="fas fa-info-circle"></i> La sesión expira en 2 horas o al cerrar la pestaña.</small>
-    </div>
+      
+      <div class="mb-3">
+        <label class="form-label fw-bold">Contraseña</label>
+        <div class="input-group">
+          <input type="password" id="adminPass" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
+            <i class="fas fa-eye" id="toggleIcon"></i>
+          </button>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-100 py-2" id="loginBtn">
+        <i class="fas fa-lock-open me-2"></i> Ingresar al Panel
+      </button>
+      
+      <div id="loginError" class="alert alert-danger mt-3 hidden small"></div>
+      
+      <div class="text-center mt-3">
+        <small class="text-muted"><i class="fas fa-info-circle"></i> La sesión expira en 2 horas o al cerrar la pestaña.</small>
+      </div>
+    </form>
   </div>
 
   <!-- ADMIN PANEL -->
   <div id="adminSection" class="admin-container hidden">
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
       <div class="d-flex align-items-center">
-        <h3 class="mb-0"><i class="fas fa-shield-alt text-primary"></i> Panel de Administración</h3>
+        <h3 class="mb-0"><i class="fas fa-hands-helping text-primary"></i> Panel de Administración</h3>
         <span class="session-timer" id="sessionTimer"><i class="fas fa-clock"></i> Sesión activa</span>
       </div>
       <div>
@@ -123,7 +145,7 @@
     <!-- TABS DE NAVEGACIÓN -->
     <div class="admin-tabs">
       <div class="admin-tab active" onclick="cambiarTab('gestion')">
-        <i class="fas fa-cogs"></i> Gestión de Proveedores
+        <i class="fas fa-cogs"></i> Gestión del Directorio
       </div>
       <div class="admin-tab" onclick="cambiarTab('consulta')">
         <i class="fas fa-search"></i> Consulta Rápida
@@ -137,7 +159,7 @@
           <h5 class="card-title mb-0">Gestión de Proveedores</h5>
           <div>
             <button onclick="addProvider()" class="btn btn-success">
-              <i class="fas fa-plus"></i> Agregar Proveedor
+              <i class="fas fa-plus"></i> Agregar Negocio
             </button>
             <button onclick="loadProviders()" class="btn btn-primary ms-2">
               <i class="fas fa-sync"></i> Recargar
@@ -149,7 +171,7 @@
       <div id="providersList"></div>
       <div id="loading" class="text-center py-5 hidden">
         <i class="fas fa-spinner fa-spin fa-3x text-primary"></i>
-        <p class="mt-3">Cargando proveedores...</p>
+        <p class="mt-3">Cargando directorio...</p>
       </div>
     </div>
 
@@ -157,7 +179,7 @@
     <div id="tabConsulta" class="hidden">
       <div class="quick-search-container">
         <h5 class="mb-3"><i class="fas fa-search text-primary"></i> Consulta Rápida</h5>
-        <p class="text-muted mb-3">Busca proveedores rápidamente para responder consultas por WhatsApp. Los filtros se aplican automáticamente.</p>
+        <p class="text-muted mb-3">Busca negocios rápidamente para responder consultas por WhatsApp. Los filtros se aplican automáticamente.</p>
         
         <div class="row g-3">
           <div class="col-md-4">
@@ -198,7 +220,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle">Proveedor</h5>
+          <h5 class="modal-title" id="modalTitle">Negocio en el Directorio</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
@@ -211,7 +233,7 @@
                 <small class="text-muted">Se genera automáticamente. No modificar.</small>
               </div>
               <div class="col-md-6">
-                <label class="form-label">Nombre del Proveedor *</label>
+                <label class="form-label">Nombre del Negocio *</label>
                 <input type="text" id="f_nombre" class="form-control" required>
               </div>
               
@@ -261,54 +283,62 @@
                 <textarea id="f_descripcion" class="form-control" rows="2"></textarea>
               </div>
 
-              <!-- IMÁGENES CON IMGBB -->
+              <!-- IMÁGENES CON SUBIDA SEGURA -->
               <div class="col-12">
-                <label class="form-label fw-bold">Imágenes del Proveedor</label>
-                <small class="text-muted d-block mb-2">Gratis: 1 imagen | Premium: 2 imágenes | Ultra Premium: 4 imágenes</small>
+                <label class="form-label fw-bold">Imágenes del Negocio</label>
+                <small class="text-muted d-block mb-2">Básico: 1 imagen | Destacado: 2 imágenes | Recomendado: 4 imágenes</small>
                 
                 <div class="image-upload-container">
-                  <input type="text" id="f_imagen1" class="form-control" placeholder="URL de Imagen 1">
+                  <input type="text" id="f_imagen1" class="form-control" placeholder="URL de Imagen 1" readonly>
                   <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput1').click()">
                     <i class="fas fa-camera"></i> Subir
                   </button>
                   <input type="file" id="fileInput1" style="display:none" accept="image/*" onchange="handleFileSelect(1, this)">
                 </div>
+                <div class="upload-progress hidden" id="progress1"><div class="upload-progress-bar"></div></div>
+                <div class="upload-status" id="status1"></div>
                 <img id="preview1" class="image-preview hidden" src="" alt="Preview 1">
 
                 <div class="image-upload-container">
-                  <input type="text" id="f_imagen2" class="form-control" placeholder="URL de Imagen 2">
+                  <input type="text" id="f_imagen2" class="form-control" placeholder="URL de Imagen 2" readonly>
                   <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput2').click()">
                     <i class="fas fa-camera"></i> Subir
                   </button>
                   <input type="file" id="fileInput2" style="display:none" accept="image/*" onchange="handleFileSelect(2, this)">
                 </div>
+                <div class="upload-progress hidden" id="progress2"><div class="upload-progress-bar"></div></div>
+                <div class="upload-status" id="status2"></div>
                 <img id="preview2" class="image-preview hidden" src="" alt="Preview 2">
 
                 <div class="image-upload-container ultra-premium-only hidden">
-                  <input type="text" id="f_imagen3" class="form-control" placeholder="URL de Imagen 3">
+                  <input type="text" id="f_imagen3" class="form-control" placeholder="URL de Imagen 3" readonly>
                   <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput3').click()">
                     <i class="fas fa-camera"></i> Subir
                   </button>
                   <input type="file" id="fileInput3" style="display:none" accept="image/*" onchange="handleFileSelect(3, this)">
                 </div>
+                <div class="upload-progress hidden" id="progress3"><div class="upload-progress-bar"></div></div>
+                <div class="upload-status" id="status3"></div>
                 <img id="preview3" class="image-preview hidden" src="" alt="Preview 3">
 
                 <div class="image-upload-container ultra-premium-only hidden">
-                  <input type="text" id="f_imagen4" class="form-control" placeholder="URL de Imagen 4">
+                  <input type="text" id="f_imagen4" class="form-control" placeholder="URL de Imagen 4" readonly>
                   <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput4').click()">
                     <i class="fas fa-camera"></i> Subir
                   </button>
                   <input type="file" id="fileInput4" style="display:none" accept="image/*" onchange="handleFileSelect(4, this)">
                 </div>
+                <div class="upload-progress hidden" id="progress4"><div class="upload-progress-bar"></div></div>
+                <div class="upload-status" id="status4"></div>
                 <img id="preview4" class="image-preview hidden" src="" alt="Preview 4">
               </div>
 
               <div class="col-md-4">
-                <label class="form-label">Plan</label>
+                <label class="form-label">Plan de Visibilidad</label>
                 <select id="f_tipo_plan" class="form-select" onchange="toggleUltraPremiumFields()">
-                  <option value="gratuito">Gratuito</option>
-                  <option value="premium">Premium</option>
-                  <option value="ultra_premium">Ultra Premium</option>
+                  <option value="gratuito">Básico</option>
+                  <option value="premium">Destacado</option>
+                  <option value="ultra_premium">Recomendado (Máxima visibilidad)</option>
                 </select>
               </div>
               <div class="col-md-4">
@@ -316,7 +346,7 @@
                 <div class="form-check form-switch mt-2">
                   <input class="form-check-input" type="checkbox" id="f_destacado_switch">
                   <label class="form-check-label" for="f_destacado_switch">
-                    Mostrar en "Destacados"
+                    Mostrar en "Recomendados"
                   </label>
                 </div>
               </div>
@@ -338,7 +368,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" onclick="saveProvider()" class="btn btn-primary">
+          <button type="button" onclick="saveProvider()" class="btn btn-primary" id="saveBtn">
             <i class="fas fa-save"></i> Guardar Cambios
           </button>
         </div>
@@ -348,12 +378,17 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const REPO = 'roberttivo29-sys/verifica-la-paz';
-    const BRANCH = 'main';
-    const FILE_PATH = 'data/proveedores.json';
-    const IMGBB_API_KEY = '4fe0adea7f03a09e9c615226b80a533a';
-    const SESSION_TIMEOUT = 7200000; // 2 horas en milisegundos
-    
+    // ==========================================
+    // CONFIGURACIÓN
+    // ==========================================
+    const CONFIG = {
+      // URLs de los Cloudflare Workers (ajustar según tu dominio)
+      API_BASE: '/api', // En producción: 'https://tu-worker.tu-subdominio.workers.dev/api'
+      SESSION_TIMEOUT: 7200000, // 2 horas
+      MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+      ALLOWED_TYPES: ['image/jpeg', 'image/png', 'image/webp']
+    };
+
     const subcategoriasPorCategoria = {
       "Salud y Bienestar": [
         "Clínicas y Urgencias", "Consultorios y Especialistas", "Odontología", "Laboratorios y Análisis",
@@ -388,16 +423,15 @@
       ]
     };
 
-    let token = '';
+    let sessionToken = '';
     let providers = [];
-    let fileSha = '';
     let sessionTimerInterval;
 
     // ==========================================
     // FUNCIONES DE SEGURIDAD Y SESIÓN
     // ==========================================
     function togglePassword() {
-      const input = document.getElementById('tokenInput');
+      const input = document.getElementById('adminPass');
       const icon = document.getElementById('toggleIcon');
       if (input.type === 'password') {
         input.type = 'text';
@@ -410,40 +444,54 @@
       }
     }
 
-    async function secureLogin() {
-      const user = document.getElementById('adminUser').value.trim();
-      const inputToken = document.getElementById('tokenInput').value.trim();
+    async function handleLogin(event) {
+      event.preventDefault();
       
-      if (!inputToken) {
-        showError('Ingresa el Token de GitHub o contraseña');
+      const user = document.getElementById('adminUser').value.trim();
+      const pass = document.getElementById('adminPass').value;
+      const loginBtn = document.getElementById('loginBtn');
+      
+      if (!user || !pass) {
+        showError('Por favor completa todos los campos');
         return;
       }
-
-      // Validar token contra la API de GitHub
+      
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Verificando...';
+      
       try {
-        const res = await fetch('https://api.github.com/user', { 
-          headers: { 'Authorization': `token ${inputToken}` } 
+        const response = await fetch(`${CONFIG.API_BASE}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: user, password: pass })
         });
         
-        if (!res.ok) throw new Error('Token inválido o sin permisos de repo');
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Credenciales inválidas');
+        }
         
-        const userData = await res.json();
+        const data = await response.json();
         
-        // Guardar en sessionStorage (se borra al cerrar la pestaña)
-        sessionStorage.setItem('gh_token', inputToken);
-        sessionStorage.setItem('gh_user', userData.login);
-        sessionStorage.setItem('login_time', Date.now().toString());
+        // Guardar token de sesión
+        sessionToken = data.token;
+        sessionStorage.setItem('lp_session_token', sessionToken);
+        sessionStorage.setItem('lp_session_user', user);
+        sessionStorage.setItem('lp_session_time', Date.now().toString());
         
-        token = inputToken;
-        document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${userData.login}`;
-        
+        document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${user}`;
         document.getElementById('loginSection').classList.add('hidden');
         document.getElementById('adminSection').classList.remove('hidden');
         
         startSessionTimer();
         loadProviders();
+        
+        showToast('Bienvenido', `Hola ${user}, sesión iniciada correctamente`, 'success');
       } catch (e) {
         showError('Error de autenticación: ' + e.message);
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-lock-open me-2"></i> Ingresar al Panel';
       }
     }
 
@@ -455,9 +503,9 @@
 
     function startSessionTimer() {
       const updateTimer = () => {
-        const loginTime = parseInt(sessionStorage.getItem('login_time'));
+        const loginTime = parseInt(sessionStorage.getItem('lp_session_time'));
         const elapsed = Date.now() - loginTime;
-        const remaining = SESSION_TIMEOUT - elapsed;
+        const remaining = CONFIG.SESSION_TIMEOUT - elapsed;
         
         if (remaining <= 0) {
           alert('Tu sesión ha expirado por seguridad. Por favor inicia sesión nuevamente.');
@@ -478,6 +526,38 @@
       const el = document.getElementById('loginError');
       el.textContent = msg;
       el.classList.remove('hidden');
+    }
+
+    // ==========================================
+    // FUNCIONES DE API CON AUTENTICACIÓN
+    // ==========================================
+    async function apiRequest(endpoint, method = 'GET', body = null) {
+      const options = {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionToken}`
+        }
+      };
+      
+      if (body) {
+        options.body = JSON.stringify(body);
+      }
+      
+      const response = await fetch(`${CONFIG.API_BASE}${endpoint}`, options);
+      
+      if (response.status === 401) {
+        alert('Tu sesión ha expirado. Por favor inicia sesión nuevamente.');
+        logout();
+        throw new Error('Sesión expirada');
+      }
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Error en la petición');
+      }
+      
+      return response.json();
     }
 
     // ==========================================
@@ -555,40 +635,90 @@
       document.getElementById('f_subcategoria').value = this.value;
     });
 
+    // ==========================================
+    // SUBIDA DE IMÁGENES SEGURA
+    // ==========================================
     function handleFileSelect(numero, input) {
       const file = input.files[0];
       if (!file) return;
 
+      // Validar tipo de archivo
+      if (!CONFIG.ALLOWED_TYPES.includes(file.type)) {
+        showToast('Error', 'Solo se permiten imágenes JPG, PNG o WebP', 'error');
+        input.value = '';
+        return;
+      }
+
+      // Validar tamaño
+      if (file.size > CONFIG.MAX_FILE_SIZE) {
+        showToast('Error', 'La imagen no puede superar los 5MB', 'error');
+        input.value = '';
+        return;
+      }
+
       const preview = document.getElementById(`preview${numero}`);
+      const progress = document.getElementById(`progress${numero}`);
+      const progressBar = progress.querySelector('.upload-progress-bar');
+      const status = document.getElementById(`status${numero}`);
+
+      // Mostrar preview local
       preview.src = URL.createObjectURL(file);
       preview.classList.remove('hidden');
 
-      subirImagenImgBB(numero, file);
+      // Mostrar progreso
+      progress.classList.remove('hidden');
+      status.textContent = 'Subiendo imagen...';
+      status.className = 'upload-status';
+      progressBar.style.width = '30%';
+
+      subirImagenSegura(numero, file);
     }
 
-    async function subirImagenImgBB(numero, file) {
-      const formData = new FormData();
-      formData.append('image', file);
-      formData.append('key', IMGBB_API_KEY);
+    async function subirImagenSegura(numero, file) {
+      const progress = document.getElementById(`progress${numero}`);
+      const progressBar = progress.querySelector('.upload-progress-bar');
+      const status = document.getElementById(`status${numero}`);
 
       try {
-        showToast('Subiendo...', `Imagen ${numero} en proceso`, 'info', 2000);
-        
-        const response = await fetch('https://api.imgbb.com/1/upload', {
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('numero', numero);
+
+        progressBar.style.width = '60%';
+
+        const response = await fetch(`${CONFIG.API_BASE}/upload`, {
           method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`
+          },
           body: formData
         });
 
-        const data = await response.json();
-
-        if (data.success) {
-          const imageUrl = data.data.url;
-          document.getElementById(`f_imagen${numero}`).value = imageUrl;
-          showToast('¡Listo!', `Imagen ${numero} cargada correctamente`, 'success');
-        } else {
-          throw new Error(data.error?.message || 'Error al subir imagen');
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Error al subir imagen');
         }
+
+        const data = await response.json();
+        
+        progressBar.style.width = '100%';
+        status.textContent = '✓ Imagen cargada correctamente';
+        status.className = 'upload-status success';
+        
+        document.getElementById(`f_imagen${numero}`).value = data.url;
+        
+        showToast('¡Listo!', `Imagen ${numero} cargada correctamente`, 'success');
+        
+        // Ocultar progreso después de 2 segundos
+        setTimeout(() => {
+          progress.classList.add('hidden');
+          progressBar.style.width = '0%';
+        }, 2000);
+        
       } catch (error) {
+        progressBar.style.width = '0%';
+        status.textContent = '✗ Error: ' + error.message;
+        status.className = 'upload-status error';
         showToast('Error', `No se pudo subir imagen ${numero}: ${error.message}`, 'error');
         console.error('Error subiendo imagen:', error);
       }
@@ -610,29 +740,33 @@
     }
 
     // ==========================================
-    // FUNCIONES DE DATOS (GITHUB API)
+    // FUNCIONES DE DATOS (API SEGURA)
     // ==========================================
     async function loadProviders() {
       document.getElementById('loading').classList.remove('hidden');
       document.getElementById('providersList').innerHTML = '';
+      
       try {
-        const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`, {
-          headers: { 'Authorization': `token ${token}` }
-        });
-        if (!res.ok) throw new Error('No se pudo cargar el archivo. Verifica que exista data/proveedores.json');
-        const data = await res.json();
-        fileSha = data.sha;
-        
-        const binaryString = atob(data.content);
-        const content = decodeURIComponent(escape(binaryString));
-        
-        providers = JSON.parse(content);
+        const data = await apiRequest('/proveedores');
+        providers = data.proveedores || [];
         renderProviders();
       } catch (e) {
         document.getElementById('providersList').innerHTML = `<div class="alert alert-danger">Error: ${e.message}</div>`;
       } finally {
         document.getElementById('loading').classList.add('hidden');
       }
+    }
+
+    function getPlanLabel(plan) {
+      if (plan === 'ultra_premium') return 'RECOMENDADO';
+      if (plan === 'premium') return 'DESTACADO';
+      return 'BÁSICO';
+    }
+
+    function getPlanClass(plan) {
+      if (plan === 'ultra_premium') return 'badge-recomendado';
+      if (plan === 'premium') return 'badge-destacado-plan';
+      return 'badge-basico';
     }
 
     function renderProviders() {
@@ -644,7 +778,7 @@
                 ${p.nombre}
                 ${p.destacado == 1 ? '<span class="badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
                 ${p['24horas'] ? '<span class="badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
-                <span class="badge-plan badge-${p.tipo_plan || 'gratuito'}">${(p.tipo_plan || 'gratuito').replace('_', ' ').toUpperCase()}</span>
+                <span class="badge-plan ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span>
               </h5>
               <p class="text-muted mb-1"><strong>${p.categoria}</strong> > ${p.subcategoria || 'Sin subcategoría'}</p>
               <p class="mb-1"><i class="fas fa-map-marker-alt text-danger"></i> ${p.direccion || 'Sin dirección'}</p>
@@ -660,7 +794,7 @@
           </div>
         </div>
       `).join('');
-      document.getElementById('providersList').innerHTML = html || '<p class="text-center text-muted py-4">No hay proveedores registrados aún.</p>';
+      document.getElementById('providersList').innerHTML = html || '<p class="text-center text-muted py-4">No hay negocios registrados aún.</p>';
     }
 
     function filtrarConsultaRapida() {
@@ -684,7 +818,7 @@
 
       const counter = document.getElementById('resultsCounter');
       if (filtrados.length > 0) {
-        counter.textContent = `📊 ${filtrados.length} proveedor${filtrados.length !== 1 ? 'es' : ''} encontrado${filtrados.length !== 1 ? 's' : ''}`;
+        counter.textContent = `📊 ${filtrados.length} negocio${filtrados.length !== 1 ? 's' : ''} encontrado${filtrados.length !== 1 ? 's' : ''}`;
         counter.classList.remove('hidden');
       } else {
         counter.classList.add('hidden');
@@ -700,7 +834,7 @@
         container.innerHTML = `
           <div class="no-results">
             <i class="fas fa-search"></i>
-            <p>No se encontraron proveedores con esos filtros</p>
+            <p>No se encontraron negocios con esos filtros</p>
             <small class="text-muted">Intenta cambiar la categoría o el texto de búsqueda</small>
           </div>
         `;
@@ -733,7 +867,7 @@
                 <button class="btn-copy" onclick="copiarNumero('${whatsappNum}')" title="Copiar solo el número">
                   <i class="fas fa-phone"></i> ${whatsappNum}
                 </button>
-                <a href="${whatsappLink}?text=${encodeURIComponent('Hola, vi tu perfil en Verifica La Paz')}" target="_blank" class="btn-whatsapp-direct" title="Abrir WhatsApp directo">
+                <a href="${whatsappLink}?text=${encodeURIComponent('Hola, vi tu perfil en La Paz te Acerca')}" target="_blank" class="btn-whatsapp-direct" title="Abrir WhatsApp directo">
                   <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
               ` : '<span class="text-muted">Sin contacto</span>'}
@@ -762,7 +896,7 @@
     }
 
     function addProvider() {
-      document.getElementById('modalTitle').textContent = 'Agregar Nuevo Proveedor';
+      document.getElementById('modalTitle').textContent = 'Agregar Nuevo Negocio';
       document.getElementById('editIndex').value = '-1';
       document.getElementById('providerForm').reset();
       
@@ -778,6 +912,7 @@
       for (let i = 1; i <= 4; i++) {
         document.getElementById(`preview${i}`).classList.add('hidden');
         document.getElementById(`preview${i}`).src = '';
+        document.getElementById(`f_imagen${i}`).value = '';
       }
       
       new bootstrap.Modal(document.getElementById('editModal')).show();
@@ -785,7 +920,7 @@
 
     function editProvider(index) {
       const p = providers[index];
-      document.getElementById('modalTitle').textContent = 'Editar Proveedor';
+      document.getElementById('modalTitle').textContent = 'Editar Negocio';
       document.getElementById('editIndex').value = index;
       
       document.getElementById('f_id').value = p.id;
@@ -838,6 +973,7 @@
 
     async function saveProvider() {
       const index = parseInt(document.getElementById('editIndex').value);
+      const saveBtn = document.getElementById('saveBtn');
       
       toggleOtroInput(); 
       
@@ -846,7 +982,7 @@
       if (index === -1) {
         const idDuplicado = providers.find(p => p.id === nuevoId);
         if (idDuplicado) {
-          showToast('Error', `El ID ${nuevoId} ya existe (proveedor: ${idDuplicado.nombre}). Usa otro ID.`, 'error');
+          showToast('Error', `El ID ${nuevoId} ya existe (negocio: ${idDuplicado.nombre}). Usa otro ID.`, 'error');
           return;
         }
       } else {
@@ -883,56 +1019,45 @@
         audio_url: document.getElementById('f_audio_url').value
       };
 
-      if (index === -1) {
-        providers.push(newProvider);
-      } else {
-        providers[index] = newProvider;
-      }
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
 
-      await commitChanges();
-      bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
-    }
-
-    async function deleteProvider(index) {
-      if (!confirm('¿Estás seguro de eliminar este proveedor? Esta acción no se puede deshacer.')) return;
-      providers.splice(index, 1);
-      await commitChanges();
-    }
-
-    async function commitChanges() {
-      document.getElementById('loading').classList.remove('hidden');
       try {
-        const jsonString = JSON.stringify(providers, null, 2);
-        const content = btoa(unescape(encodeURIComponent(jsonString)));
-        
-        const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `token ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: 'Update providers via custom admin panel',
-            content: content,
-            sha: fileSha,
-            branch: BRANCH
-          })
-        });
-        
-        if (!res.ok) {
-          const errData = await res.json();
-          throw new Error(errData.message || 'Error al guardar en GitHub');
+        if (index === -1) {
+          await apiRequest('/proveedores', 'POST', newProvider);
+          showToast('¡Éxito!', 'Negocio agregado correctamente', 'success');
+        } else {
+          await apiRequest(`/proveedores/${nuevoId}`, 'PUT', newProvider);
+          showToast('¡Éxito!', 'Negocio actualizado correctamente', 'success');
         }
         
-        showToast('¡Éxito!', 'Cambios guardados. La web se actualizará en 1-2 minutos.', 'success');
+        bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
         loadProviders();
       } catch (e) {
         showToast('Error', 'No se pudo guardar: ' + e.message, 'error');
       } finally {
-        document.getElementById('loading').classList.add('hidden');
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Cambios';
       }
     }
 
+    async function deleteProvider(index) {
+      if (!confirm('¿Estás seguro de eliminar este negocio? Esta acción no se puede deshacer.')) return;
+      
+      const provider = providers[index];
+      
+      try {
+        await apiRequest(`/proveedores/${provider.id}`, 'DELETE');
+        showToast('¡Eliminado!', 'Negocio eliminado correctamente', 'success');
+        loadProviders();
+      } catch (e) {
+        showToast('Error', 'No se pudo eliminar: ' + e.message, 'error');
+      }
+    }
+
+    // ==========================================
+    // SISTEMA DE NOTIFICACIONES TOAST
+    // ==========================================
     function showToast(title, message, type = 'info', duration = 5000) {
       const container = document.getElementById('toastContainer') || createToastContainer();
       const icons = { 
@@ -981,13 +1106,12 @@
     // INICIALIZACIÓN SEGURA
     // ==========================================
     window.addEventListener('load', () => {
-      const savedToken = sessionStorage.getItem('gh_token');
-      const loginTime = sessionStorage.getItem('login_time');
-      const savedUser = sessionStorage.getItem('gh_user');
+      const savedToken = sessionStorage.getItem('lp_session_token');
+      const loginTime = sessionStorage.getItem('lp_session_time');
+      const savedUser = sessionStorage.getItem('lp_session_user');
       
-      // Verificar si hay sesión activa y no ha expirado
-      if (savedToken && loginTime && (Date.now() - parseInt(loginTime) < SESSION_TIMEOUT)) {
-        token = savedToken;
+      if (savedToken && loginTime && (Date.now() - parseInt(loginTime) < CONFIG.SESSION_TIMEOUT)) {
+        sessionToken = savedToken;
         document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${savedUser || 'Admin'}`;
         document.getElementById('loginSection').classList.add('hidden');
         document.getElementById('adminSection').classList.remove('hidden');
