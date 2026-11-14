@@ -1,7 +1,7 @@
 /* ========================================
-   LA PAZ TE ACERCA - CSS v13.0
-   Revisión completa: alineación, tamaños, responsive
-   Última actualización: Noviembre 2026
+   LA PAZ TE ACERCA - CSS v14.0
+   Header: 2 filas de 5 + Proveedor al lado
+   Responsive completo: Desktop / Tablet / Mobile
    ======================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -17,7 +17,7 @@
 }
 
 :root {
-    /* Colores */
+    /* Colores base */
     --azul-profundo: #0F172A;
     --azul-confianza: #1E40AF;
     --azul-claro: #3B82F6;
@@ -195,7 +195,7 @@ ul {
 }
 
 /* ========================================
-   HEADER - ALINEACIÓN PERFECTA
+   HEADER - 2 FILAS DE 5 + PROVEEDOR
    ======================================== */
 
 .header {
@@ -226,18 +226,40 @@ ul {
     align-items: center;
     gap: var(--espacio-md);
     width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--espacio-md);
 }
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-md);
+    flex-shrink: 0;
+}
+
+.header-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--espacio-md);
+    min-width: 0;
+}
+
+/* ========================================
+   LOGO
+   ======================================== */
 
 .logo {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    min-width: 0;
 }
 
 .logo h1 {
     font-family: var(--fuente-titulos);
-    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
     font-weight: 900;
     background: var(--gradiente-azul);
     -webkit-background-clip: text;
@@ -255,7 +277,7 @@ ul {
 .logo h1 i {
     color: var(--ocre-calidad);
     -webkit-text-fill-color: var(--ocre-calidad);
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
     flex-shrink: 0;
 }
 
@@ -318,17 +340,24 @@ ul {
 }
 
 /* ========================================
-   NAVEGACIÓN - ALINEADA
+   NAVEGACIÓN - 2 FILAS DE 5
    ======================================== */
 
 .nav {
     display: flex;
-    align-items: center;
-    gap: 0.2rem;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
     flex: 1;
     min-width: 0;
+}
+
+.nav-row {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
 }
 
 .nav-link {
@@ -336,7 +365,7 @@ ul {
     color: var(--gris-oscuro);
     font-weight: 600;
     font-size: 0.82rem;
-    padding: 0.45rem 0.6rem;
+    padding: 0.4rem 0.6rem;
     border-radius: var(--radio-sm);
     transition: var(--transicion-rapida);
     position: relative;
@@ -381,6 +410,7 @@ ul {
     flex-shrink: 0;
 }
 
+/* Botón Soy Proveedor destacado */
 .btn-proveedor {
     background: var(--gradiente-ocre);
     color: var(--blanco) !important;
@@ -389,7 +419,8 @@ ul {
     border-radius: var(--radio-md);
     padding: 0.55rem 1rem;
     white-space: nowrap;
-    margin-left: 0.3rem;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
 }
 
 .btn-proveedor:hover {
@@ -2171,13 +2202,9 @@ kbd {
    ======================================== */
 
 @media (max-width: 1200px) {
-    .nav {
-        gap: 0.1rem;
-    }
-    
     .nav-link {
-        font-size: 0.78rem;
-        padding: 0.4rem 0.5rem;
+        font-size: 0.75rem;
+        padding: 0.35rem 0.5rem;
     }
     
     .nav-link i {
@@ -2186,7 +2213,7 @@ kbd {
     
     .btn-proveedor {
         padding: 0.5rem 0.8rem;
-        font-size: 0.85rem;
+        font-size: 0.82rem;
     }
 }
 
@@ -2211,11 +2238,15 @@ kbd {
         overflow-y: auto;
         align-items: stretch;
         gap: 0.25rem;
-        flex-wrap: wrap;
     }
     
     .nav.active {
         right: 0;
+    }
+    
+    .nav-row {
+        flex-direction: column;
+        gap: 0.25rem;
     }
     
     .nav-link {
@@ -2231,8 +2262,10 @@ kbd {
     }
     
     .btn-proveedor {
+        margin-left: 0;
         margin-top: var(--espacio-sm);
         justify-content: center;
+        width: 100%;
     }
     
     .hero-title {
