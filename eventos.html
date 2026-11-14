@@ -22,15 +22,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
 </head>
 <body>
 
     <header class="header" id="header" role="banner">
         <div class="container header-content">
-            <div class="logo">
-                <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
-                <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
+                    <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
+                </div>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
@@ -55,190 +58,67 @@
     <main class="main-content" role="main">
         <div class="container content-grid">
             <div class="content-main">
-                
-                <section class="hero" aria-labelledby="hero-title">
-                    <div class="hero-content fade-in">
-                        <div class="hero-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Servicios para Eventos de Confianza</div>
-                        <h2 class="hero-title" id="hero-title">Filmación, Sonido, Bandas en Vivo y Locales para tu Evento</h2>
-                        <p class="hero-subtitle">Todo lo que necesitas para que tu celebración sea inolvidable: desde la filmación profesional hasta la banda en vivo, el local perfecto y la decoración soñada. Verificamos cada proveedor para que tú solo te preocupes por disfrutar.</p>
+
+                <section class="hero hero-compact" aria-labelledby="hero-title">
+                    <div class="hero-content">
+                        <div class="hero-badge fade-in"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Servicios para Eventos</div>
+                        <h2 class="hero-title fade-in" id="hero-title">Filmación, Sonido, Bandas en Vivo y Locales para tu Evento</h2>
+                        <p class="hero-subtitle fade-in">Todo lo que necesitas para que tu celebración sea inolvidable. Verificamos cada proveedor para que tú solo te preocupes por disfrutar.</p>
                         
-                        <div class="hero-buttons" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                            <a href="#filmacion" class="btn btn-primary btn-eventos"><i class="fas fa-video" aria-hidden="true"></i> Filmación y Foto</a>
-                            <a href="#sonido" class="btn btn-primary btn-eventos"><i class="fas fa-music" aria-hidden="true"></i> Sonido</a>
-                            <a href="#bandas" class="btn btn-primary btn-eventos"><i class="fas fa-guitar" aria-hidden="true"></i> Bandas en Vivo</a>
-                            <a href="#locales" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-building" aria-hidden="true"></i> Locales</a>
-                            <a href="#decoracion" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-palette" aria-hidden="true"></i> Decoración</a>
-                            <a href="#animacion" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-microphone" aria-hidden="true"></i> Animación</a>
-                        </div>
-                        
-                        <div class="hero-features">
+                        <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-star" aria-hidden="true"></i><span>Profesionales Verificados</span></div>
                             <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Presupuestos Claros</span></div>
                             <div class="hero-feature"><i class="fas fa-heart" aria-hidden="true"></i><span>Eventos Inolvidables</span></div>
                         </div>
                         
                         <a href="https://wa.me/59176536286?text=Hola,%20necesito%20servicios%20para%20un%20evento" class="btn-provider-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar por WhatsApp: 76536286
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar: 76536286
                         </a>
                     </div>
                 </section>
 
-                <section class="stats-section fade-in" aria-labelledby="stats-title">
-                    <h2 class="section-title" id="stats-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Compromiso con tus Eventos</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-handshake" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">100%</div><div class="stat-label">Compromiso con la Calidad</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">< 2h</div><div class="stat-label">Tiempo de Respuesta</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Gratis</div><div class="stat-label">Para Ciudadanos</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Creciendo</div><div class="stat-label">Red de Profesionales</div></div>
+                <section aria-labelledby="proveedores-title">
+                    <h2 class="section-title fade-in" id="proveedores-title"><i class="fas fa-store" aria-hidden="true"></i> PROVEEDORES DISPONIBLES</h2>
+                    
+                    <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
+                    
+                    <div id="contenedor-principal" class="proveedores-grid">
+                        <p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Cargando proveedores...</p>
                     </div>
                 </section>
 
-                <section id="filmacion" class="fade-in" aria-labelledby="filmacion-title">
-                    <h2 class="section-title" id="filmacion-title"><i class="fas fa-video" aria-hidden="true"></i> FILMACIÓN Y FOTOGRAFÍA</h2>
-                    <p class="section-description"><strong>Captura los Momentos Más Importantes de tu Vida</strong><br>Fotógrafos y videógrafos profesionales para bodas, quinceañeros, bautizos, eventos corporativos y más. Equipos de alta calidad, edición profesional y entrega puntual.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada profesional:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos de alta calidad (cámaras, lentes, drones)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Portafolio comprobable con trabajos anteriores</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Edición profesional incluida</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Entrega en el plazo acordado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Contrato claro con detalles del servicio</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Referencias de clientes satisfechos</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Filmación y Fotografía Disponibles:</h3>
-                    <div id="contenedor-filmacion" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando profesionales...</p></div>
-                </section>
-
-                <section id="sonido" class="fade-in" style="margin-top: 4rem;" aria-labelledby="sonido-title">
-                    <h2 class="section-title" id="sonido-title"><i class="fas fa-music" aria-hidden="true"></i> SONIDO E ILUMINACIÓN</h2>
-                    <p class="section-description"><strong>Amplificación, DJs, Luces y Pantallas LED</strong><br>Sistemas de sonido profesional para que tu evento suene perfecto. DJs con experiencia, luces led, pantallas gigantes y efectos especiales. Ideal para bodas, fiestas y eventos corporativos.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada servicio:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos de sonido de marcas reconocidas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Potencia adecuada para el tamaño del evento</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Técnico de sonido presente durante el evento</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Luces led, láser y efectos coordinados</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Pantallas LED para proyecciones</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Prueba de sonido antes del evento</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Sonido e Iluminación Disponibles:</h3>
-                    <div id="contenedor-sonido" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando servicios...</p></div>
-                </section>
-
-                <section id="bandas" class="fade-in" style="margin-top: 4rem;" aria-labelledby="bandas-title">
-                    <h2 class="section-title" id="bandas-title"><i class="fas fa-guitar" aria-hidden="true"></i> BANDAS Y MÚSICA EN VIVO</h2>
-                    <p class="section-description"><strong>Cumbia, Rock, Folklore, Jazz y Más</strong><br>Bandas en vivo para darle vida a tu evento. Desde grupos de cumbia para bailar hasta bandas de rock, folklore boliviano, jazz o música clásica. Repertorio amplio y profesionalismo garantizado.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada banda:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Músicos con experiencia y formación</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Repertorio amplio y adaptable</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos propios de sonido e instrumentos</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Puntualidad y profesionalismo</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Vestimenta adecuada al tipo de evento</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Referencias de eventos anteriores</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Bandas y Música en Vivo Disponibles:</h3>
-                    <div id="contenedor-bandas" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando bandas...</p></div>
-                </section>
-
-                <section id="locales" class="fade-in" style="margin-top: 4rem;" aria-labelledby="locales-title">
-                    <h2 class="section-title" id="locales-title"><i class="fas fa-building" aria-hidden="true"></i> LOCALES Y SALONES DE EVENTOS</h2>
-                    <p class="section-description"><strong>Espacios para Bodas, Quinceañeros, Corporativos y Más</strong><br>Salones y locales equipados para todo tipo de celebraciones. Desde espacios íntimos hasta grandes salones con capacidad para cientos de personas. Incluye mobiliario, cocina y estacionamiento.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada local:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Capacidad clara y documentada</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Mobiliario incluido (sillas, mesas, mantelería)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Cocina equipada o permitida</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Estacionamiento disponible</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Baños en buen estado y suficientes</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Contrato claro con políticas de cancelación</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Locales y Salones Disponibles:</h3>
-                    <div id="contenedor-locales" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando locales...</p></div>
-                </section>
-
-                <section id="decoracion" class="fade-in" style="margin-top: 4rem;" aria-labelledby="decoracion-title">
-                    <h2 class="section-title" id="decoracion-title"><i class="fas fa-palette" aria-hidden="true"></i> DECORACIÓN Y MOBILIARIO</h2>
-                    <p class="section-description"><strong>Carpas, Sillas, Mesas, Arreglos Florales y Toldos</strong><br>Decoradores profesionales que transforman cualquier espacio en el escenario perfecto para tu evento. Alquiler de mobiliario, carpas, arreglos florales y ambientación temática.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada decorador:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Portafolio de trabajos anteriores</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Mobiliario en buen estado y limpio</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Carpas y toldos resistentes y seguros</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Arreglos florales frescos y de calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Puntualidad en montaje y desmontaje</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Presupuesto detallado por ítem</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Decoración y Mobiliario Disponibles:</h3>
-                    <div id="contenedor-decoracion" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando servicios...</p></div>
-                </section>
-
-                <section id="animacion" class="fade-in" style="margin-top: 4rem;" aria-labelledby="animacion-title">
-                    <h2 class="section-title" id="animacion-title"><i class="fas fa-microphone" aria-hidden="true"></i> ANIMACIÓN Y ESPECTÁCULOS</h2>
-                    <p class="section-description"><strong>Maestros de Ceremonia, Shows de Magia, Fuegos Artificiales y Más</strong><br>Animadores profesionales que mantienen la energía de tu evento en su punto más alto. Maestros de ceremonia, shows de magia, malabares, fuegos artificiales y actividades interactivas para todos los públicos.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada animador:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Experiencia comprobable en eventos</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Carisma y capacidad de conectar con el público</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Repertorio adaptable al tipo de evento</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos propios de sonido básico</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Puntualidad y profesionalismo</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Referencias de eventos anteriores</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Animación y Espectáculos Disponibles:</h3>
-                    <div id="contenedor-animacion" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando animadores...</p></div>
-                </section>
-
-                <section class="why-us-section fade-in" style="margin-top: 4rem;" aria-labelledby="why-title">
-                    <h2 class="section-title" id="why-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> ¿POR QUÉ CONFIAR EN NUESTROS PROFESIONALES?</h2>
-                    <div class="why-us-grid">
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-star" aria-hidden="true"></i></div><h3>Profesionales Verificados</h3><p>Revisamos portafolios, referencias y trabajos anteriores antes de listar a cada proveedor.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></div><h3>Presupuestos Claros</h3><p>Promovemos que cada proveedor te dé un presupuesto detallado por escrito. Sin sorpresas ni cobros ocultos.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div><h3>Regla de las 3 Quejas</h3><p>Si un proveedor recibe 3 quejas verificadas por incumplimiento o mal servicio, lo retiramos inmediatamente.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-heart" aria-hidden="true"></i></div><h3>Eventos Inolvidables</h3><p>Nuestro objetivo es que tu celebración sea perfecta. Te conectamos con los mejores profesionales de La Paz y El Alto.</p></div>
+                <section class="fade-in" style="margin-top: 3rem;">
+                    <div class="acordeon-info">
+                        <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                            <span><i class="fas fa-search" style="margin-right: 0.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acordeon-content">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Equipos de alta calidad (cámaras, lentes, drones, sonido)</li>
+                                <li><i class="fas fa-check"></i> Portafolio comprobable con trabajos anteriores</li>
+                                <li><i class="fas fa-check"></i> Potencia adecuada para el tamaño del evento</li>
+                                <li><i class="fas fa-check"></i> Repertorio amplio y adaptable (bandas)</li>
+                                <li><i class="fas fa-check"></i> Capacidad clara, mobiliario y estacionamiento (locales)</li>
+                                <li><i class="fas fa-check"></i> Puntualidad en montaje y desmontaje</li>
+                                <li><i class="fas fa-check"></i> Contrato claro con detalles del servicio</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                <section class="featured-section fade-in" style="margin-top: 4rem; background: var(--gradiente-hero); color: white; border-left: none;" aria-labelledby="cta-title">
-                    <div class="featured-badge" style="background: rgba(255,255,255,0.2); color: white;"><i class="fas fa-calendar-alt" aria-hidden="true"></i> ¿PLANEANDO UN EVENTO?</div>
-                    <h3 id="cta-title" style="color: white;">Cuéntanos qué tipo de evento tienes en mente y te conectamos con los profesionales ideales</h3>
-                    <p style="color: rgba(255,255,255,0.9);">Asesoría gratuita y sin compromiso. Respuesta en menos de 2 horas en horario de oficina.</p>
-                    <div class="hero-features" style="margin: 2rem 0; justify-content: center;">
-                        <div class="hero-feature"><i class="fas fa-search" aria-hidden="true"></i> Asesoría personalizada</div>
-                        <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i> Profesionales verificados</div>
-                        <div class="hero-feature"><i class="fas fa-gift" aria-hidden="true"></i> 100% gratuito para ciudadanos</div>
-                    </div>
-                    <div class="category-actions">
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20servicios%20para%20un%20evento" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    </div>
+                <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
+                    <div class="featured-badge"><i class="fas fa-calendar-alt" aria-hidden="true"></i> ¿PLANEANDO UN EVENTO?</div>
+                    <h3 id="cta-title">Cuéntanos qué tipo de evento tienes en mente</h3>
+                    <p>Asesoría gratuita y sin compromiso. Respuesta en menos de 2 horas.</p>
+                    <a href="https://wa.me/59176536286?text=Hola,%20necesito%20servicios%20para%20un%20evento" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp directo
+                    </a>
                 </section>
 
             </div>
 
             <aside class="sidebar" role="complementary">
-                <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-fire" aria-hidden="true"></i> LO MÁS BUSCADO</h3>
-                    <ul class="popular-list">
-                        <li><a href="#filmacion"><i class="fas fa-chevron-right" aria-hidden="true"></i> Fotógrafos de bodas</a></li>
-                        <li><a href="#sonido"><i class="fas fa-chevron-right" aria-hidden="true"></i> DJs para quinceañeros</a></li>
-                        <li><a href="#bandas"><i class="fas fa-chevron-right" aria-hidden="true"></i> Bandas de cumbia en vivo</a></li>
-                        <li><a href="#locales"><i class="fas fa-chevron-right" aria-hidden="true"></i> Salones para eventos en Zona Sur</a></li>
-                        <li><a href="#decoracion"><i class="fas fa-chevron-right" aria-hidden="true"></i> Decoración temática</a></li>
-                        <li><a href="#animacion"><i class="fas fa-chevron-right" aria-hidden="true"></i> Maestros de ceremonia</a></li>
-                    </ul>
-                </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
                     <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
@@ -322,6 +202,11 @@
         </div>
     </footer>
 
+    <div class="mobile-showcase" id="mobileShowcase">
+        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
@@ -329,19 +214,29 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const secciones = [
-                { id: 'contenedor-filmacion', categoria: 'Servicios para Eventos', keyword: 'filmacion' },
-                { id: 'contenedor-sonido', categoria: 'Servicios para Eventos', keyword: 'sonido' },
-                { id: 'contenedor-bandas', categoria: 'Servicios para Eventos', keyword: 'banda' },
-                { id: 'contenedor-locales', categoria: 'Servicios para Eventos', keyword: 'local' },
-                { id: 'contenedor-decoracion', categoria: 'Servicios para Eventos', keyword: 'decoracion' },
-                { id: 'contenedor-animacion', categoria: 'Servicios para Eventos', keyword: 'animacion' }
+                { id: 'contenedor-principal', categoria: 'Servicios para Eventos', keyword: null, label: 'Todos', icono: 'fa-th-large' },
+                { id: 'contenedor-principal', categoria: 'Servicios para Eventos', keyword: 'filmacion', label: 'Filmación', icono: 'fa-video' },
+                { id: 'contenedor-principal', categoria: 'Servicios para Eventos', keyword: 'sonido', label: 'Sonido', icono: 'fa-music' },
+                { id: 'contenedor-principal', categoria: 'Servicios para Eventos', keyword: 'banda', label: 'Bandas', icono: 'fa-guitar' },
+                { id: 'contenedor-principal', categoria: 'Servicios para Eventos', keyword: 'local', label: 'Locales', icono: 'fa-building' },
+                { id: 'contenedor-principal', categoria: 'Servicios para Eventos', keyword: 'decoracion', label: 'Decoración', icono: 'fa-palette' },
+                { id: 'contenedor-principal', categoria: 'Servicios para Eventos', keyword: 'animacion', label: 'Animación', icono: 'fa-microphone' }
             ];
-            secciones.forEach(sec => {
-                if (typeof cargarProveedoresEnContenedor === 'function') {
-                    cargarProveedoresEnContenedor(sec.id, sec.categoria, sec.keyword);
-                }
-            });
+            
+            const filtrosContainer = document.getElementById('filtrosVivos');
+            filtrosContainer.innerHTML = secciones.map((sec, i) => `
+                <button class="filtro-chip ${i === 0 ? 'active' : ''}" data-contenedor="${sec.id}" data-categoria="${sec.categoria}" data-keyword="${sec.keyword || ''}">
+                    <i class="fas ${sec.icono}"></i> ${sec.label}
+                </button>
+            `).join('');
+            
+            cargarProveedoresEnContenedor('contenedor-principal', 'Servicios para Eventos');
         });
+
+        function toggleAcordeon(header) {
+            header.classList.toggle('active');
+            header.nextElementSibling.classList.toggle('open');
+        }
     </script>
 </body>
 </html>

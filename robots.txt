@@ -1,0 +1,3 @@
+﻿User-agent: *
+Allow: /
+Sitemap: https://lapazteacerca.com/sitemap.xml

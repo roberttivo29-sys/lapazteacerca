@@ -1,36 +1,34 @@
 // ========================================
-// VERIFICA LA PAZ - JavaScript v8.3
-// Arquitectura: 100% Frontend (Sin Backend)
-// Actualizado: Octubre 2026
-// Enfoque: CTA WhatsApp en Hero + Ctrl+K oculto
+// LA PAZ TE ACERCA - JavaScript v9.2
+// Header dinámico + Nav simétrico + Filtros en vivo
+// Regla de oro: el proveedor es el héroe
 // ========================================
 
 window.VerificaLP = window.VerificaLP || {};
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Verifica La Paz - JavaScript v8.3 cargado correctamente');
+    console.log('✅ Verifica La Paz - JavaScript v9.2 cargado');
     
     initHeader();
     initMenuHamburguesa();
     initFadeInAnimations();
-    initContadoresAnimados();
+    initStaggerAnimations();
     initSmoothScroll();
     initHoverCards();
     initMobileDetection();
     initLazyLoading();
     initWhatsAppTracking();
     initPrevencionClicksDobles();
-    initConexionLenta();
-    initServiceWorker();
     initBackToTop();
-    initPrefetchEnlaces();
-    initModoOscuroSistema();
-    initMobileAccordion();
-    initQuickSearch();       // Ctrl+K oculto (accesible solo por atajo)
-    initSmartContact();      // Botones flotantes
+    initMobileShowcase();
+    initHeroSearch();
+    initFiltrosEnVivo();
     cargarDestacados();
+    cargarContadoresReales();
+    initTicker();
+    actualizarHeaderDinamico();
     
-    console.log('✅ Todos los módulos inicializados correctamente');
+    console.log('✅ Todos los módulos inicializados');
 });
 
 // ========================================
@@ -100,7 +98,7 @@ const cacheProveedores = { datos: null, tiempo: 0 };
 
 async function obtenerProveedores() {
     const ahora = Date.now();
-    if (cacheProveedores.datos && ahora - cacheProveedores.tiempo < 300000) {
+    if (cacheProveedores.datos && ahora - cacheProveedores.tiempo < 60000) {
         return cacheProveedores.datos;
     }
 
@@ -125,7 +123,7 @@ async function obtenerProveedores() {
 }
 
 // ========================================
-// RENDERIZADO DE PROVEEDORES
+// CARGAR PROVEEDORES EN CONTENEDOR
 // ========================================
 
 async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraClave = null) {
@@ -187,7 +185,7 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
 
 function generarTarjetaProveedor(p) {
     const whatsappNum = (p.whatsapp || p.telefono || '').replace(/\D/g, '');
-    const whatsappLink = whatsappNum ? `https://wa.me/591${whatsappNum}?text=${encodeURIComponent('Hola, vi tu perfil en Verifica La Paz y me interesa tu servicio')}` : '#';
+    const whatsappLink = whatsappNum ? `https://wa.me/591${whatsappNum}?text=${encodeURIComponent('Hola, vi tu perfil en La Paz te Acerca y me interesa tu servicio')}` : '#';
     const categoriaClass = getCategoriaClass(p.categoria);
     const colorVar = getColorVariable(p.categoria);
     const planBadge = getPlanBadge(p.tipo_plan);
@@ -207,14 +205,14 @@ function generarTarjetaProveedor(p) {
     
     let html24h = '';
     if (p['24horas']) {
-        html24h = `<span class="badge-24horas"><i class="fas fa-moon"></i> Atención 24h</span><p class="aviso-24horas">⚠️ Te sugerimos llamar para confirmar disponibilidad en horarios nocturnos o festivos.</p>`;
+        html24h = `<span class="badge-24horas badge-24h-pulse"><i class="fas fa-moon"></i> Atención 24h</span><p class="aviso-24horas">⚠️ Te sugerimos llamar para confirmar disponibilidad en horarios nocturnos o festivos.</p>`;
     }
     
     let zonaBadge = '';
     if (p.direccion) {
         const dirLower = p.direccion.toLowerCase();
         if (dirLower.includes('el alto')) zonaBadge = '<span style="font-size:0.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 El Alto</span>';
-        else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:0.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;"> La Paz</span>';
+        else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:0.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 La Paz</span>';
     }
 
     return `
@@ -271,7 +269,7 @@ async function cargarDestacados() {
 
 function generarTarjetaDestacada(p) {
     const whatsappNum = (p.whatsapp || p.telefono || '').replace(/\D/g, '');
-    const whatsappLink = whatsappNum ? `https://wa.me/591${whatsappNum}?text=${encodeURIComponent('Hola, vi tu perfil destacado en Verifica La Paz')}` : '#';
+    const whatsappLink = whatsappNum ? `https://wa.me/591${whatsappNum}?text=${encodeURIComponent('Hola, vi tu perfil destacado en La Paz te Acerca')}` : '#';
     const colorVar = getColorVariable(p.categoria);
     const imagenes = [p.imagen1, p.imagen2, p.imagen3, p.imagen4].filter(img => img && img.trim() !== '');
     const totalImagenes = imagenes.length;
@@ -298,19 +296,252 @@ function generarTarjetaDestacada(p) {
 }
 
 // ========================================
-// INICIALIZADORES
+// HEADER DINÁMICO - Contadores en vivo
 // ========================================
 
-function initMobileAccordion() {
-    if (window.innerWidth <= 768) {
-        document.querySelectorAll('.featured-section, .categories-grid').forEach(el => {
-            if (el.querySelector('ul') || el.querySelectorAll('.category-card').length > 2) {
-                el.style.cursor = 'pointer';
-                el.addEventListener('click', function() { this.classList.toggle('expanded'); });
+async function actualizarHeaderDinamico() {
+    try {
+        const proveedores = await obtenerProveedores();
+        
+        // Contador global en el tagline
+        const contadorGlobal = document.getElementById('contadorGlobal');
+        if (contadorGlobal) {
+            contadorGlobal.textContent = proveedores.length;
+        }
+        
+        // Badges por categoría en el nav
+        document.querySelectorAll('.nav-badge').forEach(badge => {
+            const categoria = badge.getAttribute('data-cat');
+            const count = proveedores.filter(p => 
+                normalizarTexto(p.categoria) === normalizarTexto(categoria)
+            ).length;
+            
+            badge.textContent = count;
+            
+            // Animación si el número es mayor a 0
+            if (count > 0) {
+                badge.classList.add('updated');
+                setTimeout(() => badge.classList.remove('updated'), 500);
+            }
+        });
+    } catch (error) {
+        console.error('Error actualizando header dinámico:', error);
+    }
+}
+
+// ========================================
+// CONTADORES REALES (Stats section)
+// ========================================
+
+async function cargarContadoresReales() {
+    try {
+        const proveedores = await obtenerProveedores();
+        
+        // Contador total
+        const statProveedores = document.getElementById('statProveedores');
+        if (statProveedores) {
+            statProveedores.setAttribute('data-target', proveedores.length);
+            animateCounter(statProveedores, proveedores.length, '');
+        }
+        
+        // Contador 24h
+        const count24h = proveedores.filter(p => p['24horas']).length;
+        const stat24h = document.getElementById('stat24h');
+        if (stat24h) {
+            stat24h.setAttribute('data-target', count24h);
+            animateCounter(stat24h, count24h, '');
+        }
+        
+        // Contadores por categoría (en tarjetas de categorías)
+        document.querySelectorAll('.counter-number').forEach(el => {
+            const cat = el.getAttribute('data-categoria');
+            const count = proveedores.filter(p => normalizarTexto(p.categoria) === normalizarTexto(cat)).length;
+            el.textContent = count;
+        });
+    } catch (error) {
+        console.error('Error cargando contadores reales:', error);
+    }
+}
+
+function animateCounter(element, target, suffix = '') {
+    let current = 0;
+    const increment = target / 60;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) { current = target; clearInterval(timer); }
+        element.textContent = Math.floor(current).toLocaleString() + suffix;
+    }, 2000 / 60);
+}
+
+// ========================================
+// TICKER DE VIDA
+// ========================================
+
+async function initTicker() {
+    const track = document.getElementById('tickerTrack');
+    if (!track) return;
+    
+    try {
+        const proveedores = await obtenerProveedores();
+        const ultimos = [...proveedores].sort((a, b) => (b.id || 0) - (a.id || 0)).slice(0, 8);
+        
+        if (ultimos.length === 0) {
+            track.innerHTML = '<span class="ticker-item">Sin proveedores aún</span>';
+            return;
+        }
+        
+        // Duplicar para scroll infinito
+        const items = [...ultimos, ...ultimos];
+        track.innerHTML = items.map(p => `
+            <div class="ticker-item">
+                <i class="fas fa-store ticker-icon"></i>
+                <strong>${p.nombre}</strong>
+                <span class="ticker-cat">${p.subcategoria || p.categoria}</span>
+                ${p.direccion ? `<span class="ticker-zona">📍 ${p.direccion.split(',')[0]}</span>` : ''}
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Error en ticker:', error);
+    }
+}
+
+// ========================================
+// BÚSQUEDA VISIBLE EN HERO
+// ========================================
+
+function initHeroSearch() {
+    const input = document.getElementById('heroSearchInput');
+    const btn = document.getElementById('heroSearchBtn');
+    const results = document.getElementById('heroSearchResults');
+    if (!input || !results) return;
+    
+    let debounceTimer;
+    
+    input.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => buscarEnHero(e.target.value, results), 300);
+    });
+    
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const query = input.value.trim();
+            if (query) {
+                const primeraCat = getCategoryUrlFromQuery(query);
+                if (primeraCat) window.location.href = primeraCat + '#buscar=' + encodeURIComponent(query);
             }
         });
     }
+    
+    document.addEventListener('click', (e) => {
+        if (!input.contains(e.target) && !results.contains(e.target)) {
+            results.innerHTML = '';
+        }
+    });
 }
+
+async function buscarEnHero(query, resultsContainer) {
+    if (query.length < 2) {
+        resultsContainer.innerHTML = '';
+        return;
+    }
+    
+    const q = normalizarTexto(query);
+    const proveedores = await obtenerProveedores();
+    const resultados = proveedores.filter(p => 
+        normalizarTexto(p.nombre).includes(q) ||
+        normalizarTexto(p.subcategoria).includes(q) ||
+        normalizarTexto(p.categoria).includes(q)
+    ).slice(0, 5);
+    
+    if (resultados.length === 0) {
+        resultsContainer.innerHTML = `<div class="search-result-item"><i class="fas fa-search"></i><span>No encontramos "${query}"</span></div>`;
+        return;
+    }
+    
+    resultsContainer.innerHTML = resultados.map(p => {
+        const url = getCategoryUrl(p.categoria);
+        return `
+            <a href="${url}" class="search-result-item">
+                <i class="fas fa-store"></i>
+                <div class="search-result-info">
+                    <strong>${p.nombre}</strong>
+                    <span>${p.categoria} > ${p.subcategoria}</span>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        `;
+    }).join('');
+}
+
+function getCategoryUrl(categoria) {
+    const urls = {
+        'Salud y Bienestar': 'salud.html',
+        'Mantenimiento del Hogar': 'hogar.html',
+        'Materiales de Construcción': 'construccion.html',
+        'Talleres Automotrices': 'automotriz.html',
+        'Tecnología y Redes': 'tecnologia.html',
+        'Servicios de Despedida': 'funerarias.html',
+        'Servicios para Eventos': 'eventos.html',
+        'Imagen y Cuidado Personal': 'imagen.html'
+    };
+    return urls[categoria] || 'index.html';
+}
+
+function getCategoryUrlFromQuery(query) {
+    const q = normalizarTexto(query);
+    const map = {
+        'salud': 'salud.html', 'clinica': 'salud.html', 'odont': 'salud.html', 'veterinaria': 'salud.html',
+        'plomer': 'hogar.html', 'electric': 'hogar.html', 'albañil': 'hogar.html', 'pintur': 'hogar.html',
+        'construc': 'construccion.html', 'ferreter': 'construccion.html', 'cemento': 'construccion.html',
+        'taller': 'automotriz.html', 'mecan': 'automotriz.html', 'grua': 'automotriz.html', 'auto': 'automotriz.html',
+        'pc': 'tecnologia.html', 'laptop': 'tecnologia.html', 'celular': 'tecnologia.html', 'camara': 'tecnologia.html',
+        'funeraria': 'funerarias.html', 'crematorio': 'funerarias.html',
+        'evento': 'eventos.html', 'filmacion': 'eventos.html', 'banda': 'eventos.html',
+        'barber': 'imagen.html', 'salon': 'imagen.html', 'spa': 'imagen.html', 'maquillaje': 'imagen.html'
+    };
+    for (const [key, url] of Object.entries(map)) {
+        if (q.includes(key)) return url;
+    }
+    return null;
+}
+
+// ========================================
+// FILTROS EN VIVO
+// ========================================
+
+function initFiltrosEnVivo() {
+    const filtros = document.querySelectorAll('.filtro-chip');
+    if (!filtros.length) return;
+    
+    filtros.forEach(chip => {
+        chip.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            // Quitar active de todos
+            filtros.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            
+            const contenedorId = chip.getAttribute('data-contenedor');
+            const categoria = chip.getAttribute('data-categoria');
+            const keyword = chip.getAttribute('data-keyword');
+            
+            const container = document.getElementById(contenedorId);
+            if (!container) return;
+            
+            // Mostrar loading
+            container.innerHTML = '<p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Filtrando...</p>';
+            
+            await cargarProveedoresEnContenedor(contenedorId, categoria, keyword || null);
+            
+            // Scroll suave al contenedor
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+}
+
+// ========================================
+// INICIALIZADORES
+// ========================================
 
 function initHeader() {
     const header = document.getElementById('header');
@@ -363,30 +594,14 @@ function initFadeInAnimations() {
     window.fadeObserver = fadeObserver;
 }
 
-function initContadoresAnimados() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-    if (!statNumbers.length) return;
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.getAttribute('data-target')) || 0;
-                const suffix = entry.target.getAttribute('data-suffix') || '';
-                if (target > 0) animateCounter(entry.target, target, suffix);
-                counterObserver.unobserve(entry.target);
-            }
+function initStaggerAnimations() {
+    const staggerContainers = document.querySelectorAll('.categories-grid, .destacados-grid, .proveedores-grid, .stats-grid, .why-us-grid, .testimonials-grid');
+    staggerContainers.forEach(container => {
+        const items = container.querySelectorAll('.fade-in');
+        items.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 80}ms`;
         });
-    }, { threshold: 0.5 });
-    statNumbers.forEach(el => counterObserver.observe(el));
-}
-
-function animateCounter(element, target, suffix = '') {
-    let current = 0;
-    const increment = target / 60;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) { current = target; clearInterval(timer); }
-        element.textContent = Math.floor(current).toLocaleString() + suffix;
-    }, 2000 / 60);
+    });
 }
 
 function initSmoothScroll() {
@@ -451,23 +666,6 @@ function initPrevencionClicksDobles() {
     });
 }
 
-function initConexionLenta() {
-    if ('connection' in navigator) {
-        const connection = navigator.connection;
-        if (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g') {
-            document.body.classList.add('slow-connection');
-        }
-    }
-}
-
-function initServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW no registrado:', err));
-        });
-    }
-}
-
 function initBackToTop() {
     const backToTopBtn = document.getElementById('backToTop');
     if (!backToTopBtn) return;
@@ -477,248 +675,29 @@ function initBackToTop() {
     backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-function initPrefetchEnlaces() {
-    const enlacesInternos = document.querySelectorAll('a[href^="/"]:not([target="_blank"]), a[href$=".html"]:not([target="_blank"])');
-    const prefetchCache = new Set();
-    enlacesInternos.forEach(enlace => {
-        enlace.addEventListener('mouseenter', () => {
-            const url = enlace.href;
-            if (!prefetchCache.has(url)) {
-                prefetchCache.add(url);
-                const link = document.createElement('link');
-                link.rel = 'prefetch';
-                link.href = url;
-                document.head.appendChild(link);
-            }
-        }, { passive: true });
-    });
-}
-
-function initModoOscuroSistema() {
-    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const aplicarModoOscuro = (isDark) => {
-        if (isDark) document.documentElement.setAttribute('data-theme', 'dark');
-        else document.documentElement.removeAttribute('data-theme');
-    };
-    aplicarModoOscuro(darkModeQuery.matches);
-    darkModeQuery.addEventListener('change', (e) => aplicarModoOscuro(e.matches));
+function initMobileShowcase() {
+    const showcase = document.getElementById('mobileShowcase');
+    if (!showcase) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 400) {
+            showcase.classList.add('visible');
+        } else {
+            showcase.classList.remove('visible');
+        }
+    }, { passive: true });
 }
 
 // ========================================
-// BÚSQUEDA RÁPIDA OCULTA (Ctrl+K)
+// ACORDEÓN (usado en páginas de categoría y contacto)
 // ========================================
 
-function initQuickSearch() {
-    const modalHTML = `
-        <div id="quickSearchModal" class="quick-search-modal">
-            <div class="quick-search-overlay"></div>
-            <div class="quick-search-container">
-                <div class="search-header">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="quickSearchInput" placeholder="Buscar servicios, categorías o proveedores..." autocomplete="off">
-                    <kbd>ESC</kbd>
-                </div>
-                <div class="search-shortcuts">
-                    <span class="shortcut-label">Atajos:</span>
-                    <kbd>S</kbd> Salud <kbd>H</kbd> Hogar <kbd>A</kbd> Auto <kbd>T</kbd> Tecnología
-                </div>
-                <div id="quickSearchResults" class="quick-search-results"></div>
-                <div class="search-footer">
-                    <small><i class="fas fa-keyboard"></i> Usa <kbd>↑</kbd> <kbd>↓</kbd> para navegar, <kbd>Enter</kbd> para seleccionar</small>
-                </div>
-            </div>
-        </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-
-    const modal = document.getElementById('quickSearchModal');
-    const input = document.getElementById('quickSearchInput');
-    const resultsDiv = document.getElementById('quickSearchResults');
-    const overlay = modal.querySelector('.quick-search-overlay');
-    let currentIndex = -1;
-    let currentResults = [];
-
-    document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-            e.preventDefault();
-            openQuickSearch();
-        }
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeQuickSearch();
-        }
-        if (modal.classList.contains('active')) {
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                currentIndex = (currentIndex + 1) % currentResults.length;
-                updateActiveResult();
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                currentIndex = (currentIndex - 1 + currentResults.length) % currentResults.length;
-                updateActiveResult();
-            } else if (e.key === 'Enter' && currentIndex >= 0) {
-                e.preventDefault();
-                window.location.href = currentResults[currentIndex].url;
-            }
-        }
-        if (!modal.classList.contains('active') && !e.target.matches('input, textarea')) {
-            const shortcuts = { 's': 'salud.html', 'h': 'hogar.html', 'a': 'automotriz.html', 't': 'tecnologia.html', 'c': 'construccion.html' };
-            if (shortcuts[e.key.toLowerCase()]) window.location.href = shortcuts[e.key.toLowerCase()];
-        }
-    });
-
-    overlay.addEventListener('click', closeQuickSearch);
-
-    input.addEventListener('input', async (e) => {
-        const query = e.target.value.trim().toLowerCase();
-        currentIndex = -1;
-        
-        if (query.length < 2) { resultsDiv.innerHTML = ''; return; }
-        
-        const categorias = [
-            { nombre: 'Salud y Bienestar', url: 'salud.html', icono: 'fa-heartbeat', tipo: 'Categoría' },
-            { nombre: 'Mantenimiento del Hogar', url: 'hogar.html', icono: 'fa-tools', tipo: 'Categoría' },
-            { nombre: 'Talleres Automotrices', url: 'automotriz.html', icono: 'fa-car', tipo: 'Categoría' },
-            { nombre: 'Tecnología y Redes', url: 'tecnologia.html', icono: 'fa-laptop-code', tipo: 'Categoría' },
-            { nombre: 'Materiales de Construcción', url: 'construccion.html', icono: 'fa-cubes', tipo: 'Categoría' },
-            { nombre: 'Servicios de Despedida', url: 'funerarias.html', icono: 'fa-dove', tipo: 'Categoría' },
-            { nombre: 'Servicios para Eventos', url: 'eventos.html', icono: 'fa-calendar-alt', tipo: 'Categoría' },
-            { nombre: 'Imagen y Cuidado Personal', url: 'imagen.html', icono: 'fa-spa', tipo: 'Categoría' }
-        ];
-        
-        let resultados = categorias.filter(c => c.nombre.toLowerCase().includes(query));
-        
-        try {
-            const proveedores = await obtenerProveedores();
-            const provFiltrados = proveedores.filter(p => 
-                (p.nombre && p.nombre.toLowerCase().includes(query)) || 
-                (p.subcategoria && p.subcategoria.toLowerCase().includes(query))
-            ).slice(0, 5);
-            
-            provFiltrados.forEach(p => {
-                resultados.push({
-                    nombre: p.nombre,
-                    url: getCategoryUrl(p.categoria) + (p.subcategoria ? '#' + normalizarTexto(p.subcategoria) : ''),
-                    icono: 'fa-store',
-                    tipo: p.categoria,
-                    esProveedor: true
-                });
-            });
-        } catch (err) { console.error('Error en búsqueda rápida:', err); }
-        
-        currentResults = resultados.slice(0, 8);
-        renderQuickResults(currentResults, query);
-    });
-
-    function openQuickSearch() {
-        modal.classList.add('active');
-        input.value = '';
-        input.focus();
-        resultsDiv.innerHTML = '';
-        currentResults = [];
-        currentIndex = -1;
-    }
-
-    function closeQuickSearch() {
-        modal.classList.remove('active');
-        input.blur();
-    }
-
-    function renderQuickResults(results, query) {
-        if (results.length === 0) {
-            resultsDiv.innerHTML = `<div class="no-results" style="padding: 2rem; text-align: center; color: #64748b;"><i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i><p>No encontramos resultados para "${query}"</p></div>`;
-            return;
-        }
-        
-        resultsDiv.innerHTML = results.map((r, i) => `
-            <a href="${r.url}" class="quick-result-item" data-index="${i}">
-                <i class="fas ${r.icono}"></i>
-                <div class="result-info">
-                    <strong>${r.nombre.replace(new RegExp(`(${query})`, 'gi'), '<mark style="background: #fcd34d; padding: 0 2px; border-radius: 2px;">$1</mark>')}</strong>
-                    <span>${r.tipo}</span>
-                </div>
-                ${r.esProveedor ? '<i class="fas fa-chevron-right" style="color: #cbd5e1;"></i>' : ''}
-            </a>
-        `).join('');
-    }
-
-    function updateActiveResult() {
-        document.querySelectorAll('.quick-result-item').forEach((el, i) => {
-            if (i === currentIndex) el.classList.add('active');
-            else el.classList.remove('active');
-        });
-    }
-
-    function getCategoryUrl(categoria) {
-        const urls = {
-            'Salud y Bienestar': 'salud.html', 'Mantenimiento del Hogar': 'hogar.html',
-            'Talleres Automotrices': 'automotriz.html', 'Tecnología y Redes': 'tecnologia.html',
-            'Materiales de Construcción': 'construccion.html', 'Servicios de Despedida': 'funerarias.html',
-            'Servicios para Eventos': 'eventos.html', 'Imagen y Cuidado Personal': 'imagen.html'
-        };
-        return urls[categoria] || 'index.html';
-    }
-}
-
-// ========================================
-// INYECCIÓN DE CONTACTO MULTICANAL
-// ========================================
-
-function initSmartContact() {
-    if (document.getElementById('smart-contact-container')) return;
-    
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const whatsappNum = '59176536286';
-    const telegramUrl = 'https://t.me/verificalapaz';
-    const email = 'contactoverificalapaz@gmail.com';
-    
-    const container = document.createElement('div');
-    container.id = 'smart-contact-container';
-    container.className = 'smart-contact-buttons';
-    
-    container.innerHTML = `
-        <div class="contact-button-wrapper" id="btn-email">
-            <a href="mailto:${email}" class="contact-btn email" title="Enviar Email">
-                <i class="fas fa-envelope"></i>
-                <span class="btn-tooltip">Email</span>
-            </a>
-        </div>
-        <div class="contact-button-wrapper" id="btn-telegram">
-            <a href="${telegramUrl}" class="contact-btn telegram" target="_blank" rel="noopener" title="Canal de Telegram">
-                <i class="fab fa-telegram"></i>
-                <span class="btn-tooltip">Telegram</span>
-            </a>
-        </div>
-        <div class="contact-button-wrapper" id="btn-whatsapp">
-            <a href="https://wa.me/${whatsappNum}" class="contact-btn whatsapp ${isMobile ? 'primary' : ''}" target="_blank" rel="noopener" title="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-                <span class="btn-tooltip">WhatsApp</span>
-            </a>
-        </div>
-    `;
-    
-    document.body.appendChild(container);
-    
-    setTimeout(() => {
-        document.getElementById('btn-whatsapp').classList.add('visible');
-    }, 500);
-    setTimeout(() => {
-        if (!isMobile) document.getElementById('btn-telegram').classList.add('visible');
-    }, 800);
-    setTimeout(() => {
-        document.getElementById('btn-email').classList.add('visible');
-    }, 1100);
-
-    if (!isMobile) {
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar && !document.querySelector('.telegram-subtle-invite')) {
-            const invite = document.createElement('div');
-            invite.className = 'telegram-subtle-invite fade-in visible';
-            invite.innerHTML = `
-                <p>📢 ¿Prefieres novedades sin ruido? Únete a nuestro canal.</p>
-                <a href="${telegramUrl}" target="_blank" rel="noopener">Suscribirse a Telegram <i class="fas fa-arrow-right"></i></a>
-            `;
-            sidebar.appendChild(invite);
-        }
+function toggleAcordeon(header) {
+    if (!header) return;
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    if (content) {
+        content.classList.toggle('open');
     }
 }
 

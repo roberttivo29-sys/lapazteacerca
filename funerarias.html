@@ -22,15 +22,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
 </head>
 <body>
 
     <header class="header" id="header" role="banner">
         <div class="container header-content">
-            <div class="logo">
-                <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
-                <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
+                    <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
+                </div>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
@@ -55,20 +58,14 @@
     <main class="main-content" role="main">
         <div class="container content-grid">
             <div class="content-main">
-                
-                <section class="hero" aria-labelledby="hero-title">
-                    <div class="hero-content fade-in">
-                        <div class="hero-badge"><i class="fas fa-dove" aria-hidden="true"></i> Servicios de Despedida de Confianza</div>
-                        <h2 class="hero-title" id="hero-title">Servicios Funerarios con Respeto y Transparencia</h2>
-                        <p class="hero-subtitle">En los momentos más difíciles, mereces servicios de calidad con precios transparentes, trato humano y acompañamiento profesional. Verificamos cada proveedor para que puedas despedirte en paz.</p>
+
+                <section class="hero hero-compact" aria-labelledby="hero-title">
+                    <div class="hero-content">
+                        <div class="hero-badge fade-in"><i class="fas fa-dove" aria-hidden="true"></i> Servicios de Despedida</div>
+                        <h2 class="hero-title fade-in" id="hero-title">Servicios Funerarios con Respeto y Transparencia</h2>
+                        <p class="hero-subtitle fade-in">En los momentos más difíciles, mereces servicios de calidad con precios transparentes, trato humano y acompañamiento profesional.</p>
                         
-                        <div class="hero-buttons" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                            <a href="#funerarias" class="btn btn-primary btn-funeraria"><i class="fas fa-church" aria-hidden="true"></i> Funerarias</a>
-                            <a href="#cremacion" class="btn btn-primary btn-funeraria"><i class="fas fa-fire" aria-hidden="true"></i> Cremación</a>
-                            <a href="#floristerias" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-spa" aria-hidden="true"></i> Floristerías</a>
-                        </div>
-                        
-                        <div class="hero-features">
+                        <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-heart" aria-hidden="true"></i><span>Trato Humano</span></div>
                             <div class="hero-feature"><i class="fas fa-clock" aria-hidden="true"></i><span>Atención 24/7</span></div>
                             <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Precios Transparentes</span></div>
@@ -80,108 +77,50 @@
                     </div>
                 </section>
 
-                <section class="stats-section fade-in" aria-labelledby="stats-title">
-                    <h2 class="section-title" id="stats-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Compromiso con el Sector Funerario</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-heart" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">100%</div><div class="stat-label">Trato Humano</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">24/7</div><div class="stat-label">Atención Disponible</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Gratis</div><div class="stat-label">Para Ciudadanos</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Creciendo</div><div class="stat-label">Red de Proveedores</div></div>
+                <section aria-labelledby="proveedores-title">
+                    <h2 class="section-title fade-in" id="proveedores-title"><i class="fas fa-store" aria-hidden="true"></i> PROVEEDORES DISPONIBLES</h2>
+                    
+                    <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
+                    
+                    <div id="contenedor-principal" class="proveedores-grid">
+                        <p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Cargando proveedores...</p>
                     </div>
                 </section>
 
-                <section id="funerarias" class="fade-in" aria-labelledby="funerarias-title">
-                    <h2 class="section-title" id="funerarias-title"><i class="fas fa-church" aria-hidden="true"></i> FUNERARIAS Y VELATORIOS</h2>
-                    <p class="section-description"><strong>Atención Inmediata, Salas Dignas y Gestión de Trámites</strong><br>Funerarias con atención 24 horas, salas de velatorio climatizadas y planes que se adaptan a cada familia. Incluye la gestión de trámites legales (certificados y partidas) para tu tranquilidad.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada funeraria:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Atención disponible las 24 horas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Salas de velatorio limpias y dignas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Personal capacitado con trato empático</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Planes con precios detallados y sin cobros ocultos</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Gestión de trámites legales</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Servicio de carroza fúnebre disponible</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Funerarias Disponibles:</h3>
-                    <div id="contenedor-funerarias" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando funerarias...</p></div>
-                </section>
-
-                <section id="cremacion" class="fade-in" style="margin-top: 4rem;" aria-labelledby="cremacion-title">
-                    <h2 class="section-title" id="cremacion-title"><i class="fas fa-fire" aria-hidden="true"></i> CREMACIÓN Y URNAS</h2>
-                    <p class="section-description"><strong>Servicio Certificado con Respeto y Dignidad</strong><br>Crematorios con procesos dignos y transparentes. Verificamos que cuenten con permisos vigentes, personal capacitado y urnas de calidad.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada crematorio:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Permisos vigentes</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Horno crematorio en buen estado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Proceso individual garantizado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Entrega de cenizas en urna certificada</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Certificado de cremación oficial</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Tiempos de entrega claros</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Crematorios Disponibles:</h3>
-                    <div id="contenedor-cremacion" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando crematorios...</p></div>
-                </section>
-
-                <section id="floristerias" class="fade-in" style="margin-top: 4rem;" aria-labelledby="floristerias-title">
-                    <h2 class="section-title" id="floristerias-title"><i class="fas fa-spa" aria-hidden="true"></i> FLORISTERÍAS Y HOMENAJES</h2>
-                    <p class="section-description"><strong>Coronas, Arreglos Florales, Obituarios y Música</strong><br>Floristerías independientes y servicios complementarios para honrar la memoria de tu ser querido. Entrega puntual en velatorios y cementerios, con diseños personalizados y respeto por los tiempos de la ceremonia.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada floristería:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Flores frescas de calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Entrega puntual en velatorio o cementerio</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Diseños personalizados según preferencia</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Gestión de obituarios en periódicos locales</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Músicos con repertorio adecuado para ceremonias</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Trato respetuoso y discreto</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Floristerías y Servicios de Homenaje Disponibles:</h3>
-                    <div id="contenedor-floristerias" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando floristerías...</p></div>
-                </section>
-
-                <section class="why-us-section fade-in" style="margin-top: 4rem;" aria-labelledby="why-title">
-                    <h2 class="section-title" id="why-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> ¿POR QUÉ CONFIAR EN NUESTROS SERVICIOS?</h2>
-                    <div class="why-us-grid">
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-heart" aria-hidden="true"></i></div><h3>Trato Humano</h3><p>Verificamos que cada proveedor tenga personal empático y respetuoso. En momentos difíciles, el trato lo es todo.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></div><h3>Precios Transparentes</h3><p>Promovemos que cada proveedor muestre sus precios claramente. Sin cobros sorpresa en el momento más vulnerable.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div><h3>Regla de las 3 Quejas</h3><p>Si un proveedor recibe 3 quejas verificadas, pierde nuestro sello. La dignidad de tu familia es sagrada.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-clock" aria-hidden="true"></i></div><h3>Atención 24/7</h3><p>Las emergencias no esperan. Verificamos que los servicios respondan a cualquier hora del día o la noche.</p></div>
+                <section class="fade-in" style="margin-top: 3rem;">
+                    <div class="acordeon-info">
+                        <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                            <span><i class="fas fa-search" style="margin-right: 0.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acordeon-content">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Atención disponible las 24 horas</li>
+                                <li><i class="fas fa-check"></i> Salas de velatorio limpias y dignas</li>
+                                <li><i class="fas fa-check"></i> Personal capacitado con trato empático</li>
+                                <li><i class="fas fa-check"></i> Planes con precios detallados y sin cobros ocultos</li>
+                                <li><i class="fas fa-check"></i> Gestión de trámites legales</li>
+                                <li><i class="fas fa-check"></i> Servicio de carroza fúnebre disponible</li>
+                                <li><i class="fas fa-check"></i> Permisos vigentes (crematorios)</li>
+                                <li><i class="fas fa-check"></i> Proceso individual garantizado (cremación)</li>
+                                <li><i class="fas fa-check"></i> Flores frescas de calidad (floristerías)</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                <section class="featured-section fade-in" style="margin-top: 4rem; background: var(--gradiente-hero); color: white; border-left: none;" aria-labelledby="cta-title">
-                    <div class="featured-badge" style="background: rgba(255,255,255,0.2); color: white;"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿NECESITAS ACOMPAÑAMIENTO EN ESTE MOMENTO?</div>
-                    <h3 id="cta-title" style="color: white;">Contáctanos y te conectamos con el servicio más cercano</h3>
-                    <p style="color: rgba(255,255,255,0.9);">Atención inmediata 24 horas. Te acompañamos con respeto, transparencia y calidez humana en cada paso.</p>
-                    <div class="hero-features" style="margin: 2rem 0; justify-content: center;">
-                        <div class="hero-feature"><i class="fas fa-bolt" aria-hidden="true"></i> Respuesta inmediata 24/7</div>
-                        <div class="hero-feature"><i class="fas fa-user-friends" aria-hidden="true"></i> Acompañamiento personalizado</div>
-                        <div class="hero-feature"><i class="fas fa-gift" aria-hidden="true"></i> 100% gratuito para ciudadanos</div>
-                    </div>
-                    <div class="category-actions">
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20información%20urgente%20sobre%20servicios%20funerarios" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    </div>
+                <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
+                    <div class="featured-badge"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿NECESITAS ACOMPAÑAMIENTO?</div>
+                    <h3 id="cta-title">Contáctanos y te conectamos con el servicio más cercano</h3>
+                    <p>Atención inmediata 24 horas. Te acompañamos con respeto y transparencia.</p>
+                    <a href="https://wa.me/59176536286?text=Hola,%20necesito%20información%20urgente%20sobre%20servicios%20funerarios" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp directo
+                    </a>
                 </section>
 
             </div>
 
             <aside class="sidebar" role="complementary">
-                <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-fire" aria-hidden="true"></i> LO MÁS BUSCADO</h3>
-                    <ul class="popular-list">
-                        <li><a href="#funerarias"><i class="fas fa-chevron-right" aria-hidden="true"></i> Funerarias 24h en Zona Sur</a></li>
-                        <li><a href="#cremacion"><i class="fas fa-chevron-right" aria-hidden="true"></i> Crematorios en La Paz</a></li>
-                        <li><a href="#floristerias"><i class="fas fa-chevron-right" aria-hidden="true"></i> Coronas florales con entrega urgente</a></li>
-                        <li><a href="#funerarias"><i class="fas fa-chevron-right" aria-hidden="true"></i> Funerarias con planes accesibles</a></li>
-                        <li><a href="#floristerias"><i class="fas fa-chevron-right" aria-hidden="true"></i> Obituarios en periódicos locales</a></li>
-                        <li><a href="#cremacion"><i class="fas fa-chevron-right" aria-hidden="true"></i> Urnas biodegradables</a></li>
-                    </ul>
-                </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
                     <p>Atención 24 horas para emergencias. Estamos aquí para acompañarte.</p>
@@ -265,6 +204,11 @@
         </div>
     </footer>
 
+    <div class="mobile-showcase" id="mobileShowcase">
+        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
@@ -272,16 +216,26 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const secciones = [
-                { id: 'contenedor-funerarias', categoria: 'Servicios de Despedida', keyword: 'funeraria' },
-                { id: 'contenedor-cremacion', categoria: 'Servicios de Despedida', keyword: 'crematorio' },
-                { id: 'contenedor-floristerias', categoria: 'Servicios de Despedida', keyword: 'florister' }
+                { id: 'contenedor-principal', categoria: 'Servicios de Despedida', keyword: null, label: 'Todos', icono: 'fa-th-large' },
+                { id: 'contenedor-principal', categoria: 'Servicios de Despedida', keyword: 'funeraria', label: 'Funerarias', icono: 'fa-church' },
+                { id: 'contenedor-principal', categoria: 'Servicios de Despedida', keyword: 'crematorio', label: 'Cremación', icono: 'fa-fire' },
+                { id: 'contenedor-principal', categoria: 'Servicios de Despedida', keyword: 'florister', label: 'Floristerías', icono: 'fa-spa' }
             ];
-            secciones.forEach(sec => {
-                if (typeof cargarProveedoresEnContenedor === 'function') {
-                    cargarProveedoresEnContenedor(sec.id, sec.categoria, sec.keyword);
-                }
-            });
+            
+            const filtrosContainer = document.getElementById('filtrosVivos');
+            filtrosContainer.innerHTML = secciones.map((sec, i) => `
+                <button class="filtro-chip ${i === 0 ? 'active' : ''}" data-contenedor="${sec.id}" data-categoria="${sec.categoria}" data-keyword="${sec.keyword || ''}">
+                    <i class="fas ${sec.icono}"></i> ${sec.label}
+                </button>
+            `).join('');
+            
+            cargarProveedoresEnContenedor('contenedor-principal', 'Servicios de Despedida');
         });
+
+        function toggleAcordeon(header) {
+            header.classList.toggle('active');
+            header.nextElementSibling.classList.toggle('open');
+        }
     </script>
 </body>
 </html>

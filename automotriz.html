@@ -22,15 +22,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
 </head>
 <body>
 
     <header class="header" id="header" role="banner">
         <div class="container header-content">
-            <div class="logo">
-                <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
-                <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
+                    <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
+                </div>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
@@ -55,211 +58,68 @@
     <main class="main-content" role="main">
         <div class="container content-grid">
             <div class="content-main">
-                
-                <section class="hero" aria-labelledby="hero-title">
-                    <div class="hero-content fade-in">
-                        <div class="hero-badge"><i class="fas fa-car" aria-hidden="true"></i> Talleres Automotrices de Confianza</div>
-                        <h2 class="hero-title" id="hero-title">Talleres, Grúas, Lavado y Servicios Automotrices de Confianza</h2>
-                        <p class="hero-subtitle">Mecánicos con experiencia, especialistas en frenos, muñonería, chapistería, eléctricos y grúas 24h. Cotizaciones por escrito antes de tocar tu vehículo. Sin sorpresas ni cobros ocultos.</p>
+
+                <section class="hero hero-compact" aria-labelledby="hero-title">
+                    <div class="hero-content">
+                        <div class="hero-badge fade-in"><i class="fas fa-car" aria-hidden="true"></i> Talleres Automotrices</div>
+                        <h2 class="hero-title fade-in" id="hero-title">Talleres, Grúas, Lavado y Servicios Automotrices de Confianza</h2>
+                        <p class="hero-subtitle fade-in">Mecánicos con experiencia, especialistas en frenos, muñonería, chapistería y grúas 24h. Cotizaciones por escrito antes de tocar tu vehículo.</p>
                         
-                        <div class="hero-buttons" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                            <a href="#talleres" class="btn btn-primary btn-auto"><i class="fas fa-wrench" aria-hidden="true"></i> Taller Mecánico</a>
-                            <a href="#frenos" class="btn btn-primary btn-auto"><i class="fas fa-circle-notch" aria-hidden="true"></i> Frenos</a>
-                            <a href="#munoneria" class="btn btn-primary btn-auto"><i class="fas fa-sync-alt" aria-hidden="true"></i> Muñonería</a>
-                            <a href="#chapista" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-spray-can" aria-hidden="true"></i> Chapista</a>
-                            <a href="#electrico" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-bolt" aria-hidden="true"></i> Eléctrico</a>
-                            <a href="#gruas" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-truck-pickup" aria-hidden="true"></i> Grúas 24h</a>
-                            <a href="#lavado" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-shower" aria-hidden="true"></i> Lavado</a>
-                        </div>
-                        
-                        <div class="hero-features">
+                        <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-user-cog" aria-hidden="true"></i><span>Mecánicos con Experiencia</span></div>
                             <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Cotización por Escrito</span></div>
                             <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Garantía de Trabajo</span></div>
                         </div>
                         
                         <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio%20automotriz" class="btn-provider-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar por WhatsApp: 76536286
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar: 76536286
                         </a>
                     </div>
                 </section>
 
-                <section class="stats-section fade-in" aria-labelledby="stats-title">
-                    <h2 class="section-title" id="stats-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Compromiso con el Sector Automotriz</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-handshake" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">100%</div><div class="stat-label">Compromiso con la Calidad</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">< 2h</div><div class="stat-label">Tiempo de Respuesta</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Gratis</div><div class="stat-label">Para Ciudadanos</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Creciendo</div><div class="stat-label">Red de Talleres</div></div>
+                <section aria-labelledby="proveedores-title">
+                    <h2 class="section-title fade-in" id="proveedores-title"><i class="fas fa-store" aria-hidden="true"></i> PROVEEDORES DISPONIBLES</h2>
+                    
+                    <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
+                    
+                    <div id="contenedor-principal" class="proveedores-grid">
+                        <p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Cargando proveedores...</p>
                     </div>
                 </section>
 
-                <section id="talleres" class="fade-in" aria-labelledby="talleres-title">
-                    <h2 class="section-title" id="talleres-title"><i class="fas fa-wrench" aria-hidden="true"></i> TALLER MECÁNICO GENERAL</h2>
-                    <p class="section-description"><strong>Afinación, Motor, Suspensión y Diagnóstico Computarizado</strong><br>Talleres con mecánicos con experiencia, herramientas de diagnóstico modernas y garantía por escrito en cada reparación. Cotización detallada antes de empezar.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada taller:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Mecánicos con experiencia en el oficio</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Herramientas de diagnóstico adecuadas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Cotización por escrito con desglose claro</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía del trabajo realizado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Limpieza del vehículo al entregarlo</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Repuestos de calidad (originales o genéricos certificados)</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-tag" aria-hidden="true"></i> 💡 Sobre los Precios:</h3>
-                    <p class="rango-estimado-texto">Los costos varían según el modelo de tu vehículo, el tipo de repuesto y la complejidad del trabajo. <strong>Siempre pide una cotización por escrito antes de autorizar cualquier reparación.</strong> Compara al menos 2 presupuestos.</p>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Talleres Mecánicos Disponibles:</h3>
-                    <div id="contenedor-talleres" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando talleres...</p></div>
-                </section>
-
-                <section id="frenos" class="fade-in" style="margin-top: 4rem;" aria-labelledby="frenos-title">
-                    <h2 class="section-title" id="frenos-title"><i class="fas fa-circle-notch" aria-hidden="true"></i> FRENOS Y SUSPENSIÓN</h2>
-                    <p class="section-description"><strong>Pastillas, Discos, Tambores y Amortiguadores</strong><br>Especialistas en sistemas de frenado y suspensión. Tu seguridad es primero: verificamos que usen repuestos de calidad y que hagan pruebas antes de entregar el vehículo.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada especialista:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Uso de pastillas y discos de marcas reconocidas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Rectificación de discos con equipo profesional</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Purga completa del sistema de frenos</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Pruebas de frenado antes de entregar</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Revisión de amortiguadores y suspensión</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía en mano de obra</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Especialistas en Frenos y Suspensión Disponibles:</h3>
-                    <div id="contenedor-frenos" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando especialistas...</p></div>
-                </section>
-
-                <section id="munoneria" class="fade-in" style="margin-top: 4rem;" aria-labelledby="munoneria-title">
-                    <h2 class="section-title" id="munoneria-title"><i class="fas fa-sync-alt" aria-hidden="true"></i> MUÑONERÍA (ALINEACIÓN Y BALANCEO)</h2>
-                    <p class="section-description"><strong>Alineación Computarizada, Balanceo Dinámico y Suspensión</strong><br>Servicios de muñonería con equipos computarizados. Verificamos que usen tecnología adecuada para alineación precisa y balanceo dinámico profesional.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada muñonería:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipo de alineación computarizada</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Balanceo dinámico con máquina calibrada</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Técnicos capacitados en suspensión</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Revisión completa de dirección y suspensión</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Informe de ángulos antes y después</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía del trabajo realizado</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Muñonerías Disponibles:</h3>
-                    <div id="contenedor-munoneria" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando muñonerías...</p></div>
-                </section>
-
-                <section id="chapista" class="fade-in" style="margin-top: 4rem;" aria-labelledby="chapista-title">
-                    <h2 class="section-title" id="chapista-title"><i class="fas fa-spray-can" aria-hidden="true"></i> CHAPISTERÍA Y PINTURA</h2>
-                    <p class="section-description"><strong>Enderezado, Pintura al Horno, Pulido y Reparación de Siniestros</strong><br>Chapistas con cabina de pintura, equipos de enderezado y materiales de calidad. Trabajos garantizados con buenos acabados.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada chapista:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Cabina de pintura con control de polvo</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Pinturas de marca reconocida</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipo de enderezado adecuado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Igualación de color profesional</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Presupuestos detallados con fotos del daño</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía en el trabajo de pintura</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Chapistas Disponibles:</h3>
-                    <div id="contenedor-chapista" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando chapistas...</p></div>
-                </section>
-
-                <section id="electrico" class="fade-in" style="margin-top: 4rem;" aria-labelledby="electrico-title">
-                    <h2 class="section-title" id="electrico-title"><i class="fas fa-bolt" aria-hidden="true"></i> ELECTRICIDAD Y ELECTROMECÁNICA</h2>
-                    <p class="section-description"><strong>Baterías, Alternadores, Inyección Electrónica y Sensores</strong><br>Electricistas y electromecánicos automotrices con equipos de diagnóstico electrónico. Especialistas en sistemas eléctricos modernos, computadoras de auto, sensores e inyección electrónica.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada especialista:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Scanner electrónico para diagnóstico</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos de prueba para alternador y marcha</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Conocimiento en sistemas eléctricos modernos</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Capacidad de diagnóstico de inyección electrónica</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Uso de repuestos de calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía en reparaciones eléctricas</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Electricistas y Electromecánicos Disponibles:</h3>
-                    <div id="contenedor-electrico" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando especialistas...</p></div>
-                </section>
-
-                <section id="gruas" class="fade-in" style="margin-top: 4rem;" aria-labelledby="gruas-title">
-                    <h2 class="section-title" id="gruas-title"><i class="fas fa-truck-pickup" aria-hidden="true"></i> GRÚAS Y AUXILIO VIAL</h2>
-                    <p class="section-description"><strong>Traslado Seguro, Rápido y con Tarifas Claras</strong><br>Servicios de grúa y auxilio vial disponibles. Tarifa base clara por kilómetro, sin cobros sorpresa por "espera" o "maniobra" no acordados previamente.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada servicio de grúa:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Disponibilidad y tiempo de respuesta</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Grúas en buen estado con seguros vigentes</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Tarifas claras por zona (La Paz, El Alto, Carreteras)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Trato respetuoso y profesional en emergencias</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Capacidad para diferentes tipos de vehículos</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Grúas y Auxilio Vial Disponibles:</h3>
-                    <div id="contenedor-gruas" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando grúas...</p></div>
-                </section>
-
-                <section id="lavado" class="fade-in" style="margin-top: 4rem;" aria-labelledby="lavado-title">
-                    <h2 class="section-title" id="lavado-title"><i class="fas fa-shower" aria-hidden="true"></i> LAVADO Y DETALLADO</h2>
-                    <p class="section-description"><strong>Lavado Exterior, Interior, Encerado y Limpieza de Motor</strong><br>Centros de lavado con productos de calidad, atención al detalle y cuidado de la pintura de tu vehículo. Desde un lavado rápido hasta un detallado completo que deja tu auto como nuevo.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada centro de lavado:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Uso de shampoo automotriz de pH neutro</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Toallas de microfibra limpias</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Aspirado completo de interiores</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Limpieza de tablero y plásticos con productos adecuados</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Limpieza de motor con desengrasante y protección</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Tiempo de servicio respetado</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Centros de Lavado Disponibles:</h3>
-                    <div id="contenedor-lavado" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando centros de lavado...</p></div>
-                </section>
-
-                <section class="why-us-section fade-in" style="margin-top: 4rem;" aria-labelledby="why-title">
-                    <h2 class="section-title" id="why-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> ¿POR QUÉ CONFIAR EN NUESTROS TALLERES?</h2>
-                    <div class="why-us-grid">
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></div><h3>Cotización por Escrito</h3><p>Antes de tocar tu auto, recibes un desglose claro del precio de repuestos y mano de obra. Sin sorpresas.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-user-check" aria-hidden="true"></i></div><h3>Verificación Humana</h3><p>Llevamos nuestros propios vehículos a estos talleres para probar la calidad del servicio antes de recomendarlos.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div><h3>Regla de las 3 Quejas</h3><p>Si un taller recibe 3 quejas verificadas por cobros excesivos o mal trabajo, pierde nuestro sello inmediatamente.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div><h3>Respuesta Rápida</h3><p>En emergencias, te conectamos con la grúa o taller disponible más cercano en menos de 15 minutos.</p></div>
+                <section class="fade-in" style="margin-top: 3rem;">
+                    <div class="acordeon-info">
+                        <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                            <span><i class="fas fa-search" style="margin-right: 0.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acordeon-content">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Mecánicos con experiencia en el oficio</li>
+                                <li><i class="fas fa-check"></i> Herramientas de diagnóstico adecuadas</li>
+                                <li><i class="fas fa-check"></i> Cotización por escrito con desglose claro</li>
+                                <li><i class="fas fa-check"></i> Garantía del trabajo realizado</li>
+                                <li><i class="fas fa-check"></i> Limpieza del vehículo al entregarlo</li>
+                                <li><i class="fas fa-check"></i> Repuestos de calidad (originales o genéricos certificados)</li>
+                                <li><i class="fas fa-check"></i> Tarifas claras por kilómetro (grúas)</li>
+                                <li><i class="fas fa-check"></i> Uso de shampoo automotriz de pH neutro (lavado)</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                <section class="featured-section fade-in" style="margin-top: 4rem; background: var(--gradiente-hero); color: white; border-left: none;" aria-labelledby="cta-title">
-                    <div class="featured-badge" style="background: rgba(255,255,255,0.2); color: white;"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿TU AUTO NECESITA ATENCIÓN?</div>
-                    <h3 id="cta-title" style="color: white;">Cuéntanos qué tiene tu vehículo y te conectamos con el especialista ideal</h3>
-                    <p style="color: rgba(255,255,255,0.9);">Cotización gratis y sin compromiso. Respuesta en menos de 2 horas en horario de oficina.</p>
-                    <div class="hero-features" style="margin: 2rem 0; justify-content: center;">
-                        <div class="hero-feature"><i class="fas fa-file-alt" aria-hidden="true"></i> Cotización por escrito</div>
-                        <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i> Garantía de buen trabajo</div>
-                        <div class="hero-feature"><i class="fas fa-gift" aria-hidden="true"></i> 100% gratuito para ciudadanos</div>
-                    </div>
-                    <div class="category-actions">
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio%20automotriz" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    </div>
+                <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
+                    <div class="featured-badge"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿TU AUTO NECESITA ATENCIÓN?</div>
+                    <h3 id="cta-title">Cuéntanos qué tiene tu vehículo y te conectamos con el especialista ideal</h3>
+                    <p>Cotización gratis y sin compromiso. Respuesta en menos de 2 horas.</p>
+                    <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio%20automotriz" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp directo
+                    </a>
                 </section>
 
             </div>
 
             <aside class="sidebar" role="complementary">
-                <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-fire" aria-hidden="true"></i> LO MÁS BUSCADO</h3>
-                    <ul class="popular-list">
-                        <li><a href="#talleres"><i class="fas fa-chevron-right" aria-hidden="true"></i> Talleres de confianza en Zona Sur</a></li>
-                        <li><a href="#frenos"><i class="fas fa-chevron-right" aria-hidden="true"></i> Cambio de pastillas de freno</a></li>
-                        <li><a href="#munoneria"><i class="fas fa-chevron-right" aria-hidden="true"></i> Alineación y balanceo</a></li>
-                        <li><a href="#chapista"><i class="fas fa-chevron-right" aria-hidden="true"></i> Chapistería y pintura</a></li>
-                        <li><a href="#electrico"><i class="fas fa-chevron-right" aria-hidden="true"></i> Fallas eléctricas y baterías</a></li>
-                        <li><a href="#gruas"><i class="fas fa-chevron-right" aria-hidden="true"></i> Grúas 24h en El Alto</a></li>
-                        <li><a href="#lavado"><i class="fas fa-chevron-right" aria-hidden="true"></i> Lavado y detallado</a></li>
-                    </ul>
-                </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
                     <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
@@ -343,6 +203,11 @@
         </div>
     </footer>
 
+    <div class="mobile-showcase" id="mobileShowcase">
+        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
@@ -350,20 +215,30 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const secciones = [
-                { id: 'contenedor-talleres', categoria: 'Talleres Automotrices', keyword: 'taller' },
-                { id: 'contenedor-frenos', categoria: 'Talleres Automotrices', keyword: 'freno' },
-                { id: 'contenedor-munoneria', categoria: 'Talleres Automotrices', keyword: 'muñon' },
-                { id: 'contenedor-chapista', categoria: 'Talleres Automotrices', keyword: 'chapista' },
-                { id: 'contenedor-electrico', categoria: 'Talleres Automotrices', keyword: 'eléctric' },
-                { id: 'contenedor-gruas', categoria: 'Talleres Automotrices', keyword: 'grúa' },
-                { id: 'contenedor-lavado', categoria: 'Talleres Automotrices', keyword: 'lavado' }
+                { id: 'contenedor-principal', categoria: 'Talleres Automotrices', keyword: null, label: 'Todos', icono: 'fa-th-large' },
+                { id: 'contenedor-principal', categoria: 'Talleres Automotrices', keyword: 'taller', label: 'Taller Mecánico', icono: 'fa-wrench' },
+                { id: 'contenedor-principal', categoria: 'Talleres Automotrices', keyword: 'freno', label: 'Frenos', icono: 'fa-circle-notch' },
+                { id: 'contenedor-principal', categoria: 'Talleres Automotrices', keyword: 'muñon', label: 'Muñonería', icono: 'fa-sync-alt' },
+                { id: 'contenedor-principal', categoria: 'Talleres Automotrices', keyword: 'chapista', label: 'Chapista', icono: 'fa-spray-can' },
+                { id: 'contenedor-principal', categoria: 'Talleres Automotrices', keyword: 'eléctric', label: 'Eléctrico', icono: 'fa-bolt' },
+                { id: 'contenedor-principal', categoria: 'Talleres Automotrices', keyword: 'grúa', label: 'Grúas', icono: 'fa-truck-pickup' },
+                { id: 'contenedor-principal', categoria: 'Talleres Automotrices', keyword: 'lavado', label: 'Lavado', icono: 'fa-shower' }
             ];
-            secciones.forEach(sec => {
-                if (typeof cargarProveedoresEnContenedor === 'function') {
-                    cargarProveedoresEnContenedor(sec.id, sec.categoria, sec.keyword);
-                }
-            });
+            
+            const filtrosContainer = document.getElementById('filtrosVivos');
+            filtrosContainer.innerHTML = secciones.map((sec, i) => `
+                <button class="filtro-chip ${i === 0 ? 'active' : ''}" data-contenedor="${sec.id}" data-categoria="${sec.categoria}" data-keyword="${sec.keyword || ''}">
+                    <i class="fas ${sec.icono}"></i> ${sec.label}
+                </button>
+            `).join('');
+            
+            cargarProveedoresEnContenedor('contenedor-principal', 'Talleres Automotrices');
         });
+
+        function toggleAcordeon(header) {
+            header.classList.toggle('active');
+            header.nextElementSibling.classList.toggle('open');
+        }
     </script>
 </body>
 </html>

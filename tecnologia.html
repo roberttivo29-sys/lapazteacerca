@@ -22,15 +22,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
 </head>
 <body>
 
     <header class="header" id="header" role="banner">
         <div class="container header-content">
-            <div class="logo">
-                <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
-                <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
+                    <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
+                </div>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
@@ -55,166 +58,68 @@
     <main class="main-content" role="main">
         <div class="container content-grid">
             <div class="content-main">
-                
-                <section class="hero" aria-labelledby="hero-title">
-                    <div class="hero-content fade-in">
-                        <div class="hero-badge"><i class="fas fa-laptop-code" aria-hidden="true"></i> Tecnología y Redes de Confianza</div>
-                        <h2 class="hero-title" id="hero-title">Reparación de Equipos, Cámaras de Seguridad y Redes</h2>
-                        <p class="hero-subtitle">Técnicos con experiencia, repuestos de calidad y garantía por escrito. Verificamos que usen materiales adecuados y cumplan los plazos. Sin estafas, sin sorpresas.</p>
+
+                <section class="hero hero-compact" aria-labelledby="hero-title">
+                    <div class="hero-content">
+                        <div class="hero-badge fade-in"><i class="fas fa-laptop-code" aria-hidden="true"></i> Tecnología y Redes</div>
+                        <h2 class="hero-title fade-in" id="hero-title">Reparación de Equipos, Cámaras de Seguridad y Redes</h2>
+                        <p class="hero-subtitle fade-in">Técnicos con experiencia, repuestos de calidad y garantía por escrito. Sin estafas, sin sorpresas.</p>
                         
-                        <div class="hero-buttons" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                            <a href="#pc-laptops" class="btn btn-primary btn-tecnologia"><i class="fas fa-laptop" aria-hidden="true"></i> PC y Laptops</a>
-                            <a href="#celulares" class="btn btn-primary btn-tecnologia"><i class="fas fa-mobile-alt" aria-hidden="true"></i> Celulares</a>
-                            <a href="#camaras" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-video" aria-hidden="true"></i> Cámaras</a>
-                            <a href="#redes" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-wifi" aria-hidden="true"></i> Redes</a>
-                            <a href="#soporte" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-headset" aria-hidden="true"></i> Soporte Domicilio</a>
-                        </div>
-                        
-                        <div class="hero-features">
+                        <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Repuestos de Calidad</span></div>
                             <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Garantía Escrita</span></div>
                             <div class="hero-feature"><i class="fas fa-user-check" aria-hidden="true"></i><span>Técnicos con Experiencia</span></div>
                         </div>
                         
                         <a href="https://wa.me/59176536286?text=Hola,%20necesito%20reparar%20mi%20equipo%20tecnológico" class="btn-provider-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar por WhatsApp: 76536286
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar: 76536286
                         </a>
                     </div>
                 </section>
 
-                <section class="stats-section fade-in" aria-labelledby="stats-title">
-                    <h2 class="section-title" id="stats-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Compromiso con el Sector Tecnología</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-handshake" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">100%</div><div class="stat-label">Compromiso con la Calidad</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">< 2h</div><div class="stat-label">Tiempo de Respuesta</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Gratis</div><div class="stat-label">Para Ciudadanos</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Creciendo</div><div class="stat-label">Red de Técnicos</div></div>
+                <section aria-labelledby="proveedores-title">
+                    <h2 class="section-title fade-in" id="proveedores-title"><i class="fas fa-store" aria-hidden="true"></i> PROVEEDORES DISPONIBLES</h2>
+                    
+                    <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
+                    
+                    <div id="contenedor-principal" class="proveedores-grid">
+                        <p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Cargando proveedores...</p>
                     </div>
                 </section>
 
-                <section id="pc-laptops" class="fade-in" aria-labelledby="pc-laptops-title">
-                    <h2 class="section-title" id="pc-laptops-title"><i class="fas fa-laptop" aria-hidden="true"></i> REPARACIÓN DE PC Y LAPTOPS</h2>
-                    <p class="section-description"><strong>Formateo, Upgrade, Mantenimiento y Reparación</strong><br>Técnicos especializados en laptops y PCs de escritorio. Desde formateo hasta cambio de componentes internos. Verificamos que den garantía y un buen servicio.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada técnico:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Experiencia comprobable en reparación</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Diagnóstico claro antes de empezar</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Uso de repuestos de buena calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Limpieza y cuidado del equipo</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía del trabajo realizado</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Técnicos de PC y Laptops Disponibles:</h3>
-                    <div id="contenedor-pc-laptops" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando técnicos...</p></div>
-                </section>
-
-                <section id="celulares" class="fade-in" style="margin-top: 4rem;" aria-labelledby="celulares-title">
-                    <h2 class="section-title" id="celulares-title"><i class="fas fa-mobile-alt" aria-hidden="true"></i> REPARACIÓN DE CELULARES Y TABLETS</h2>
-                    <p class="section-description"><strong>Pantallas, Baterías, Puertos de Carga y Desbloqueo</strong><br>Técnicos especializados en diversas marcas. Verificamos que usen repuestos de buena calidad, que te entreguen factura y que den garantía real por el trabajo.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada técnico:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Experiencia en reparación de móviles</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Diagnóstico gratuito o claro antes de reparar</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Repuestos de buena calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Entrega en el plazo acordado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía por escrito en la reparación</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Técnicos de Celulares Disponibles:</h3>
-                    <div id="contenedor-celulares" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando técnicos...</p></div>
-                </section>
-
-                <section id="camaras" class="fade-in" style="margin-top: 4rem;" aria-labelledby="camaras-title">
-                    <h2 class="section-title" id="camaras-title"><i class="fas fa-video" aria-hidden="true"></i> CÁMARAS DE SEGURIDAD Y CCTV</h2>
-                    <p class="section-description"><strong>Instalación, Configuración y Mantenimiento</strong><br>Instaladores para hogares, oficinas y comercios. Usamos equipos de marcas reconocidas con garantía y configuración de monitoreo remoto en tu celular.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada instalador:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Uso de cámaras de marcas reconocidas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Cableado ordenado, protegido y etiquetado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Configuración correcta para monitoreo remoto</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Capacitación básica al usuario</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía en equipos e instalación</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Instaladores de Cámaras Disponibles:</h3>
-                    <div id="contenedor-camaras" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando instaladores...</p></div>
-                </section>
-
-                <section id="redes" class="fade-in" style="margin-top: 4rem;" aria-labelledby="redes-title">
-                    <h2 class="section-title" id="redes-title"><i class="fas fa-wifi" aria-hidden="true"></i> REDES E INTERNET</h2>
-                    <p class="section-description"><strong>WiFi Mesh, Cableado Estructurado y Configuración de Routers</strong><br>Especialistas en eliminar zonas muertas de WiFi, cablear oficinas y configurar redes estables. Usamos equipos de calidad para garantizar velocidad y estabilidad.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada técnico:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Conocimiento en configuración de routers y redes</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Cableado ordenado y etiquetado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Pruebas de velocidad y estabilidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Configuración de seguridad básica</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía de funcionamiento</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Técnicos en Redes Disponibles:</h3>
-                    <div id="contenedor-redes" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando técnicos en redes...</p></div>
-                </section>
-
-                <section id="soporte" class="fade-in" style="margin-top: 4rem;" aria-labelledby="soporte-title">
-                    <h2 class="section-title" id="soporte-title"><i class="fas fa-headset" aria-hidden="true"></i> SOPORTE TÉCNICO A DOMICILIO</h2>
-                    <p class="section-description"><strong>Asistencia en tu Casa u Oficina</strong><br>Técnicos que van hasta tu ubicación para resolver problemas de software, hardware, redes o configuración. Ideal para oficinas, hogares y personas que no pueden mover sus equipos.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada técnico:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Puntualidad y responsabilidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Herramientas y equipos de diagnóstico portátiles</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Trato respetuoso y profesional</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Solución en el mismo día cuando es posible</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Presupuesto claro antes de iniciar</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Técnicos con Soporte a Domicilio:</h3>
-                    <div id="contenedor-soporte" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando técnicos...</p></div>
-                </section>
-
-                <section class="why-us-section fade-in" style="margin-top: 4rem;" aria-labelledby="why-title">
-                    <h2 class="section-title" id="why-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> ¿POR QUÉ CONFIAR EN NUESTROS TÉCNICOS?</h2>
-                    <div class="why-us-grid">
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-microchip" aria-hidden="true"></i></div><h3>Repuestos de Calidad</h3><p>Verificamos que cada técnico use repuestos originales o genéricos certificados. Nada de piezas de mala calidad.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></div><h3>Cotización por Escrito</h3><p>Antes de reparar, recibes un mensaje con el precio estimado de piezas y mano de obra. Sin sorpresas.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div><h3>Regla de las 3 Quejas</h3><p>Si un técnico recibe 3 quejas verificadas por cambiar piezas o no dar garantía, lo retiramos de nuestra red inmediatamente.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div><h3>Garantía Real</h3><p>Todos nuestros técnicos dan garantía por escrito. Si falla la reparación, te la arreglan gratis.</p></div>
+                <section class="fade-in" style="margin-top: 3rem;">
+                    <div class="acordeon-info">
+                        <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                            <span><i class="fas fa-search" style="margin-right: 0.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acordeon-content">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Experiencia comprobable en reparación</li>
+                                <li><i class="fas fa-check"></i> Diagnóstico claro antes de empezar</li>
+                                <li><i class="fas fa-check"></i> Uso de repuestos de buena calidad</li>
+                                <li><i class="fas fa-check"></i> Limpieza y cuidado del equipo</li>
+                                <li><i class="fas fa-check"></i> Garantía del trabajo realizado</li>
+                                <li><i class="fas fa-check"></i> Uso de cámaras de marcas reconocidas (CCTV)</li>
+                                <li><i class="fas fa-check"></i> Cableado ordenado, protegido y etiquetado</li>
+                                <li><i class="fas fa-check"></i> Configuración correcta para monitoreo remoto</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                <section class="featured-section fade-in" style="margin-top: 4rem; background: var(--gradiente-hero); color: white; border-left: none;" aria-labelledby="cta-title">
-                    <div class="featured-badge" style="background: rgba(255,255,255,0.2); color: white;"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿TU EQUIPO O RED NECESITA ATENCIÓN?</div>
-                    <h3 id="cta-title" style="color: white;">Cuéntanos qué tienes y te conectamos con el técnico ideal</h3>
-                    <p style="color: rgba(255,255,255,0.9);">Diagnóstico gratis y sin compromiso. Respuesta en menos de 1 hora en horario de oficina.</p>
-                    <div class="hero-features" style="margin: 2rem 0; justify-content: center;">
-                        <div class="hero-feature"><i class="fas fa-search" aria-hidden="true"></i> Diagnóstico gratuito</div>
-                        <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i> Garantía por escrito</div>
-                        <div class="hero-feature"><i class="fas fa-gift" aria-hidden="true"></i> 100% gratuito para ciudadanos</div>
-                    </div>
-                    <div class="category-actions">
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20reparar%20mi%20equipo%20tecnológico" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    </div>
+                <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
+                    <div class="featured-badge"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿TU EQUIPO O RED NECESITA ATENCIÓN?</div>
+                    <h3 id="cta-title">Cuéntanos qué tienes y te conectamos con el técnico ideal</h3>
+                    <p>Diagnóstico gratis y sin compromiso. Respuesta en menos de 1 hora.</p>
+                    <a href="https://wa.me/59176536286?text=Hola,%20necesito%20reparar%20mi%20equipo%20tecnológico" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp directo
+                    </a>
                 </section>
 
             </div>
 
             <aside class="sidebar" role="complementary">
-                <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-fire" aria-hidden="true"></i> LO MÁS BUSCADO</h3>
-                    <ul class="popular-list">
-                        <li><a href="#pc-laptops"><i class="fas fa-chevron-right" aria-hidden="true"></i> Formateo y cambio a SSD</a></li>
-                        <li><a href="#celulares"><i class="fas fa-chevron-right" aria-hidden="true"></i> Cambio de pantalla</a></li>
-                        <li><a href="#camaras"><i class="fas fa-chevron-right" aria-hidden="true"></i> Instalación de cámaras en casa</a></li>
-                        <li><a href="#redes"><i class="fas fa-chevron-right" aria-hidden="true"></i> Mejorar señal de WiFi</a></li>
-                        <li><a href="#celulares"><i class="fas fa-chevron-right" aria-hidden="true"></i> Recuperación de datos</a></li>
-                        <li><a href="#soporte"><i class="fas fa-chevron-right" aria-hidden="true"></i> Soporte técnico a domicilio</a></li>
-                    </ul>
-                </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
                     <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
@@ -298,6 +203,11 @@
         </div>
     </footer>
 
+    <div class="mobile-showcase" id="mobileShowcase">
+        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
@@ -305,18 +215,28 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const secciones = [
-                { id: 'contenedor-pc-laptops', categoria: 'Tecnología y Redes', keyword: 'pc' },
-                { id: 'contenedor-celulares', categoria: 'Tecnología y Redes', keyword: 'celular' },
-                { id: 'contenedor-camaras', categoria: 'Tecnología y Redes', keyword: 'camara' },
-                { id: 'contenedor-redes', categoria: 'Tecnología y Redes', keyword: 'red' },
-                { id: 'contenedor-soporte', categoria: 'Tecnología y Redes', keyword: 'soporte' }
+                { id: 'contenedor-principal', categoria: 'Tecnología y Redes', keyword: null, label: 'Todos', icono: 'fa-th-large' },
+                { id: 'contenedor-principal', categoria: 'Tecnología y Redes', keyword: 'pc', label: 'PC/Laptops', icono: 'fa-laptop' },
+                { id: 'contenedor-principal', categoria: 'Tecnología y Redes', keyword: 'celular', label: 'Celulares', icono: 'fa-mobile-alt' },
+                { id: 'contenedor-principal', categoria: 'Tecnología y Redes', keyword: 'camara', label: 'Cámaras', icono: 'fa-video' },
+                { id: 'contenedor-principal', categoria: 'Tecnología y Redes', keyword: 'red', label: 'Redes', icono: 'fa-wifi' },
+                { id: 'contenedor-principal', categoria: 'Tecnología y Redes', keyword: 'soporte', label: 'Soporte', icono: 'fa-headset' }
             ];
-            secciones.forEach(sec => {
-                if (typeof cargarProveedoresEnContenedor === 'function') {
-                    cargarProveedoresEnContenedor(sec.id, sec.categoria, sec.keyword);
-                }
-            });
+            
+            const filtrosContainer = document.getElementById('filtrosVivos');
+            filtrosContainer.innerHTML = secciones.map((sec, i) => `
+                <button class="filtro-chip ${i === 0 ? 'active' : ''}" data-contenedor="${sec.id}" data-categoria="${sec.categoria}" data-keyword="${sec.keyword || ''}">
+                    <i class="fas ${sec.icono}"></i> ${sec.label}
+                </button>
+            `).join('');
+            
+            cargarProveedoresEnContenedor('contenedor-principal', 'Tecnología y Redes');
         });
+
+        function toggleAcordeon(header) {
+            header.classList.toggle('active');
+            header.nextElementSibling.classList.toggle('open');
+        }
     </script>
 </body>
 </html>

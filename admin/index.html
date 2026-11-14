@@ -85,11 +85,16 @@
     }
     .upload-status.success { color: #10B981; }
     .upload-status.error { color: #EF4444; }
+
+    .stats-bar { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .stats-bar .stat-box { background: white; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); flex: 1; min-width: 150px; }
+    .stats-bar .stat-box strong { display: block; font-size: 1.5rem; color: #1E40AF; }
+    .stats-bar .stat-box span { font-size: 0.85rem; color: #64748b; }
   </style>
 </head>
 <body>
 
-  <!-- LOGIN SEGURO -->
+  <!-- LOGIN -->
   <div id="loginSection" class="login-container">
     <div class="text-center mb-4">
       <div class="security-badge">
@@ -142,7 +147,7 @@
       </div>
     </div>
 
-    <!-- TABS DE NAVEGACIÓN -->
+    <!-- TABS -->
     <div class="admin-tabs">
       <div class="admin-tab active" onclick="cambiarTab('gestion')">
         <i class="fas fa-cogs"></i> Gestión del Directorio
@@ -152,8 +157,15 @@
       </div>
     </div>
 
-    <!-- SECCIÓN: GESTIÓN DE PROVEEDORES -->
+    <!-- GESTIÓN -->
     <div id="tabGestion">
+      <div class="stats-bar" id="statsBar">
+        <div class="stat-box"><strong id="statTotal">0</strong><span>Proveedores</span></div>
+        <div class="stat-box"><strong id="statPremium">0</strong><span>Premium</span></div>
+        <div class="stat-box"><strong id="statDestacados">0</strong><span>Destacados</span></div>
+        <div class="stat-box"><strong id="stat24h">0</strong><span>Atención 24h</span></div>
+      </div>
+
       <div class="card mb-4">
         <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-2">
           <h5 class="card-title mb-0">Gestión de Proveedores</h5>
@@ -175,11 +187,11 @@
       </div>
     </div>
 
-    <!-- SECCIÓN: CONSULTA RÁPIDA -->
+    <!-- CONSULTA RÁPIDA -->
     <div id="tabConsulta" class="hidden">
       <div class="quick-search-container">
         <h5 class="mb-3"><i class="fas fa-search text-primary"></i> Consulta Rápida</h5>
-        <p class="text-muted mb-3">Busca negocios rápidamente para responder consultas por WhatsApp. Los filtros se aplican automáticamente.</p>
+        <p class="text-muted mb-3">Busca negocios rápidamente para responder consultas por WhatsApp.</p>
         
         <div class="row g-3">
           <div class="col-md-4">
@@ -283,7 +295,7 @@
                 <textarea id="f_descripcion" class="form-control" rows="2"></textarea>
               </div>
 
-              <!-- IMÁGENES CON SUBIDA SEGURA -->
+              <!-- IMÁGENES -->
               <div class="col-12">
                 <label class="form-label fw-bold">Imágenes del Negocio</label>
                 <small class="text-muted d-block mb-2">Básico: 1 imagen | Destacado: 2 imágenes | Recomendado: 4 imágenes</small>
@@ -382,45 +394,21 @@
     // CONFIGURACIÓN
     // ==========================================
     const CONFIG = {
-      // URLs de los Cloudflare Workers (ajustar según tu dominio)
-      API_BASE: '/api', // En producción: 'https://tu-worker.tu-subdominio.workers.dev/api'
-      SESSION_TIMEOUT: 7200000, // 2 horas
-      MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+      API_BASE: '/api',
+      SESSION_TIMEOUT: 7200000,
+      MAX_FILE_SIZE: 5 * 1024 * 1024,
       ALLOWED_TYPES: ['image/jpeg', 'image/png', 'image/webp']
     };
 
     const subcategoriasPorCategoria = {
-      "Salud y Bienestar": [
-        "Clínicas y Urgencias", "Consultorios y Especialistas", "Odontología", "Laboratorios y Análisis",
-        "Veterinaria y Mascotas", "Óptica y Audición", "Ambulancias y Traslados", "Fisioterapia y Rehabilitación", "Otros Servicios de Salud"
-      ],
-      "Mantenimiento del Hogar": [
-        "Plomería", "Electricidad", "Albañilería y Reparaciones", "Pintura y Acabados", "Cerrajería",
-        "Carpintería", "Limpieza y Fumigación", "Jardinería y Paisajismo", "Instalación y Mantenimiento de Gas", "Otros Oficios del Hogar"
-      ],
-      "Materiales de Construcción": [
-        "Cemento, Estuco y Yeso", "Áridos: Arena, Grava y Piedra", "Ladrillos, Bloques y Prefabricados",
-        "Barracas de Madera y Cubiertas", "Alquiler de Equipos y Maquinaria"
-      ],
-      "Talleres Automotrices": [
-        "Taller Mecánico General", "Frenos y Suspensión", "Muñonería (Alineación y Balanceo)", "Chapistería y Pintura",
-        "Electricidad y Electromecánica", "Grúas y Auxilio Vial", "Lavado y Detallado", "Repuestos y Accesorios",
-        "Lubricentros y Cambio de Aceite", "Otros Servicios Automotrices"
-      ],
-      "Tecnología y Redes": [
-        "Reparación de PC y Laptops", "Reparación de Celulares y Tablets", "Cámaras de Seguridad y CCTV",
-        "Redes e Internet", "Soporte Técnico a Domicilio", "Impresoras y Suministros de Oficina", "Videojuegos y Consolas", "Otros Servicios Tecnológicos"
-      ],
-      "Servicios de Despedida": [
-        "Funerarias y Velatorios", "Cremación y Urnas", "Floristerías y Homenajes", "Trámites y Gestoría Funeraria"
-      ],
-      "Servicios para Eventos": [
-        "Filmación y Fotografía", "Sonido e Iluminación", "Bandas y Música en Vivo", "Locales y Salones de Eventos",
-        "Decoración y Mobiliario", "Catering y Banquetes", "Animación y Espectáculos", "Alquiler de Vestuario y Trajes", "Otros Servicios para Eventos"
-      ],
-      "Imagen y Cuidado Personal": [
-        "Barberías", "Salones de Belleza Unisex", "Centros de Estética", "Maquillaje Profesional", "Spas y Masajes", "Servicios a Domicilio"
-      ]
+      "Salud y Bienestar": ["Clínicas y Urgencias", "Consultorios y Especialistas", "Odontología", "Laboratorios y Análisis", "Veterinaria y Mascotas", "Óptica y Audición", "Ambulancias y Traslados", "Fisioterapia y Rehabilitación", "Otros Servicios de Salud"],
+      "Mantenimiento del Hogar": ["Plomería", "Electricidad", "Albañilería y Reparaciones", "Pintura y Acabados", "Cerrajería", "Carpintería", "Limpieza y Fumigación", "Jardinería y Paisajismo", "Instalación y Mantenimiento de Gas", "Otros Oficios del Hogar"],
+      "Materiales de Construcción": ["Cemento, Estuco y Yeso", "Áridos: Arena, Grava y Piedra", "Ladrillos, Bloques y Prefabricados", "Barracas de Madera y Cubiertas", "Alquiler de Equipos y Maquinaria"],
+      "Talleres Automotrices": ["Taller Mecánico General", "Frenos y Suspensión", "Muñonería (Alineación y Balanceo)", "Chapistería y Pintura", "Electricidad y Electromecánica", "Grúas y Auxilio Vial", "Lavado y Detallado", "Repuestos y Accesorios", "Lubricentros y Cambio de Aceite", "Otros Servicios Automotrices"],
+      "Tecnología y Redes": ["Reparación de PC y Laptops", "Reparación de Celulares y Tablets", "Cámaras de Seguridad y CCTV", "Redes e Internet", "Soporte Técnico a Domicilio", "Impresoras y Suministros de Oficina", "Videojuegos y Consolas", "Otros Servicios Tecnológicos"],
+      "Servicios de Despedida": ["Funerarias y Velatorios", "Cremación y Urnas", "Floristerías y Homenajes", "Trámites y Gestoría Funeraria"],
+      "Servicios para Eventos": ["Filmación y Fotografía", "Sonido e Iluminación", "Bandas y Música en Vivo", "Locales y Salones de Eventos", "Decoración y Mobiliario", "Catering y Banquetes", "Animación y Espectáculos", "Alquiler de Vestuario y Trajes", "Otros Servicios para Eventos"],
+      "Imagen y Cuidado Personal": ["Barberías", "Salones de Belleza Unisex", "Centros de Estética", "Maquillaje Profesional", "Spas y Masajes", "Servicios a Domicilio"]
     };
 
     let sessionToken = '';
@@ -428,7 +416,7 @@
     let sessionTimerInterval;
 
     // ==========================================
-    // FUNCIONES DE SEGURIDAD Y SESIÓN
+    // LOGIN
     // ==========================================
     function togglePassword() {
       const input = document.getElementById('adminPass');
@@ -473,7 +461,6 @@
         
         const data = await response.json();
         
-        // Guardar token de sesión
         sessionToken = data.token;
         sessionStorage.setItem('lp_session_token', sessionToken);
         sessionStorage.setItem('lp_session_user', user);
@@ -529,7 +516,7 @@
     }
 
     // ==========================================
-    // FUNCIONES DE API CON AUTENTICACIÓN
+    // API
     // ==========================================
     async function apiRequest(endpoint, method = 'GET', body = null) {
       const options = {
@@ -561,7 +548,7 @@
     }
 
     // ==========================================
-    // FUNCIONES DE NAVEGACIÓN Y UI
+    // NAVEGACIÓN
     // ==========================================
     function cambiarTab(tab) {
       document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -636,20 +623,18 @@
     });
 
     // ==========================================
-    // SUBIDA DE IMÁGENES SEGURA
+    // SUBIDA DE IMÁGENES
     // ==========================================
     function handleFileSelect(numero, input) {
       const file = input.files[0];
       if (!file) return;
 
-      // Validar tipo de archivo
       if (!CONFIG.ALLOWED_TYPES.includes(file.type)) {
         showToast('Error', 'Solo se permiten imágenes JPG, PNG o WebP', 'error');
         input.value = '';
         return;
       }
 
-      // Validar tamaño
       if (file.size > CONFIG.MAX_FILE_SIZE) {
         showToast('Error', 'La imagen no puede superar los 5MB', 'error');
         input.value = '';
@@ -661,11 +646,9 @@
       const progressBar = progress.querySelector('.upload-progress-bar');
       const status = document.getElementById(`status${numero}`);
 
-      // Mostrar preview local
       preview.src = URL.createObjectURL(file);
       preview.classList.remove('hidden');
 
-      // Mostrar progreso
       progress.classList.remove('hidden');
       status.textContent = 'Subiendo imagen...';
       status.className = 'upload-status';
@@ -709,7 +692,6 @@
         
         showToast('¡Listo!', `Imagen ${numero} cargada correctamente`, 'success');
         
-        // Ocultar progreso después de 2 segundos
         setTimeout(() => {
           progress.classList.add('hidden');
           progressBar.style.width = '0%';
@@ -720,7 +702,6 @@
         status.textContent = '✗ Error: ' + error.message;
         status.className = 'upload-status error';
         showToast('Error', `No se pudo subir imagen ${numero}: ${error.message}`, 'error');
-        console.error('Error subiendo imagen:', error);
       }
     }
 
@@ -740,7 +721,7 @@
     }
 
     // ==========================================
-    // FUNCIONES DE DATOS (API SEGURA)
+    // CRUD
     // ==========================================
     async function loadProviders() {
       document.getElementById('loading').classList.remove('hidden');
@@ -749,12 +730,20 @@
       try {
         const data = await apiRequest('/proveedores');
         providers = data.proveedores || [];
+        updateStats();
         renderProviders();
       } catch (e) {
         document.getElementById('providersList').innerHTML = `<div class="alert alert-danger">Error: ${e.message}</div>`;
       } finally {
         document.getElementById('loading').classList.add('hidden');
       }
+    }
+
+    function updateStats() {
+      document.getElementById('statTotal').textContent = providers.length;
+      document.getElementById('statPremium').textContent = providers.filter(p => p.tipo_plan === 'premium' || p.tipo_plan === 'ultra_premium').length;
+      document.getElementById('statDestacados').textContent = providers.filter(p => p.destacado == 1).length;
+      document.getElementById('stat24h').textContent = providers.filter(p => p['24horas']).length;
     }
 
     function getPlanLabel(plan) {
@@ -1056,7 +1045,7 @@
     }
 
     // ==========================================
-    // SISTEMA DE NOTIFICACIONES TOAST
+    // TOASTS
     // ==========================================
     function showToast(title, message, type = 'info', duration = 5000) {
       const container = document.getElementById('toastContainer') || createToastContainer();
@@ -1103,7 +1092,7 @@
     }
 
     // ==========================================
-    // INICIALIZACIÓN SEGURA
+    // INICIALIZACIÓN
     // ==========================================
     window.addEventListener('load', () => {
       const savedToken = sessionStorage.getItem('lp_session_token');

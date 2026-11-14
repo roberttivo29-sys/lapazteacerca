@@ -22,15 +22,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
 </head>
 <body>
 
     <header class="header" id="header" role="banner">
         <div class="container header-content">
-            <div class="logo">
-                <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
-                <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
+                    <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
+                </div>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
@@ -55,219 +58,66 @@
     <main class="main-content" role="main">
         <div class="container content-grid">
             <div class="content-main">
-                
-                <section class="hero" aria-labelledby="hero-title">
-                    <div class="hero-content fade-in">
-                        <div class="hero-badge"><i class="fas fa-heartbeat" aria-hidden="true"></i> Salud y Bienestar de Confianza</div>
-                        <h2 class="hero-title" id="hero-title">Clínicas, Consultorios, Odontología y Más Servicios de Salud</h2>
-                        <p class="hero-subtitle">Horarios reales, trato humano y transparencia en costos. Verificamos personalmente cada centro de salud para que tú y tu familia estén en las mejores manos.</p>
+
+                <section class="hero hero-compact" aria-labelledby="hero-title">
+                    <div class="hero-content">
+                        <div class="hero-badge fade-in"><i class="fas fa-heartbeat" aria-hidden="true"></i> Salud y Bienestar</div>
+                        <h2 class="hero-title fade-in" id="hero-title">Clínicas, Consultorios, Odontología y Más Servicios de Salud</h2>
+                        <p class="hero-subtitle fade-in">Horarios reales, trato humano y transparencia en costos. Verificamos personalmente cada centro de salud.</p>
                         
-                        <div class="hero-buttons" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                            <a href="#clinicas" class="btn btn-primary btn-salud"><i class="fas fa-hospital" aria-hidden="true"></i> Clínicas</a>
-                            <a href="#consultorios" class="btn btn-primary btn-salud"><i class="fas fa-user-md" aria-hidden="true"></i> Consultorios</a>
-                            <a href="#odontologia" class="btn btn-primary btn-salud"><i class="fas fa-tooth" aria-hidden="true"></i> Odontología</a>
-                            <a href="#laboratorios" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-flask" aria-hidden="true"></i> Laboratorios</a>
-                            <a href="#veterinarias" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-paw" aria-hidden="true"></i> Veterinaria</a>
-                            <a href="#optica" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-glasses" aria-hidden="true"></i> Óptica</a>
-                            <a href="#ambulancias" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-ambulance" aria-hidden="true"></i> Ambulancias</a>
-                            <a href="#fisioterapia" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-running" aria-hidden="true"></i> Fisioterapia</a>
-                        </div>
-                        
-                        <div class="hero-features">
+                        <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-user-md" aria-hidden="true"></i><span>Personal con Experiencia</span></div>
                             <div class="hero-feature"><i class="fas fa-clock" aria-hidden="true"></i><span>Horarios Verificados</span></div>
                             <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Referencias Reales</span></div>
                         </div>
                         
                         <a href="https://wa.me/59176536286?text=Hola,%20necesito%20información%20sobre%20un%20servicio%20de%20salud" class="btn-provider-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar por WhatsApp: 76536286
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar: 76536286
                         </a>
                     </div>
                 </section>
 
-                <section class="stats-section fade-in" aria-labelledby="stats-title">
-                    <h2 class="section-title" id="stats-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Compromiso con el Sector Salud</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-heart" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">100%</div><div class="stat-label">Trato Humano</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">24/7</div><div class="stat-label">Atención Disponible</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Gratis</div><div class="stat-label">Para Ciudadanos</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Creciendo</div><div class="stat-label">Red de Centros</div></div>
+                <section aria-labelledby="proveedores-title">
+                    <h2 class="section-title fade-in" id="proveedores-title"><i class="fas fa-store" aria-hidden="true"></i> PROVEEDORES DISPONIBLES</h2>
+                    
+                    <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
+                    
+                    <div id="contenedor-principal" class="proveedores-grid">
+                        <p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Cargando proveedores...</p>
                     </div>
                 </section>
 
-                <section id="clinicas" class="fade-in" aria-labelledby="clinicas-title">
-                    <h2 class="section-title" id="clinicas-title"><i class="fas fa-hospital" aria-hidden="true"></i> CLÍNICAS Y URGENCIAS</h2>
-                    <p class="section-description"><strong>Atención Médica Integral, Urgencias y Especialidades</strong><br>Clínicas y postas con infraestructura adecuada y personal con experiencia. Verificamos limpieza, tiempos de espera y que te den una cotización clara antes de atenderte.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada centro:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Personal con experiencia y buenas referencias</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Área de emergencias con equipamiento básico funcional</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Limpieza y protocolos de bioseguridad observables</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Transparencia en costos: Cotización clara antes de la atención</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Clínicas y Postas Disponibles:</h3>
-                    <div id="contenedor-clinicas" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando clínicas...</p></div>
-                </section>
-
-                <section id="consultorios" class="fade-in" style="margin-top: 4rem;" aria-labelledby="consultorios-title">
-                    <h2 class="section-title" id="consultorios-title"><i class="fas fa-user-md" aria-hidden="true"></i> CONSULTORIOS Y ESPECIALISTAS</h2>
-                    <p class="section-description"><strong>Pediatras, Ginecólogos, Cardiólogos y Más</strong><br>Médicos especialistas que atienden en consultorios privados o edificios médicos. Ideal para consultas programadas, controles y seguimientos. Verificamos trayectoria y referencias.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada consultorio:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Médico con título y especialidad verificable</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Consultorio limpio y equipado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Atención personalizada y con tiempo</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Buenas referencias de pacientes</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Precios claros de consulta</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Consultorios y Especialistas Disponibles:</h3>
-                    <div id="contenedor-consultorios" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando consultorios...</p></div>
-                </section>
-
-                <section id="odontologia" class="fade-in" style="margin-top: 4rem;" aria-labelledby="odontologia-title">
-                    <h2 class="section-title" id="odontologia-title"><i class="fas fa-tooth" aria-hidden="true"></i> ODONTOLOGÍA</h2>
-                    <p class="section-description"><strong>Dentistas, Ortodoncia, Limpieza y Urgencias Dentales</strong><br>Consultorios odontológicos con equipos modernos y profesionales capacitados. Desde una limpieza preventiva hasta tratamientos de ortodoncia, endodoncia y urgencias por dolor de muela.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada odontólogo:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos de radiografía y esterilización</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Materiales dentales de calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Protocolos de bioseguridad estrictos</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Presupuesto claro antes del tratamiento</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía en trabajos realizados</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Odontólogos Disponibles:</h3>
-                    <div id="contenedor-odontologia" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando odontólogos...</p></div>
-                </section>
-
-                <section id="laboratorios" class="fade-in" style="margin-top: 4rem;" aria-labelledby="laboratorios-title">
-                    <h2 class="section-title" id="laboratorios-title"><i class="fas fa-flask" aria-hidden="true"></i> LABORATORIOS Y ANÁLISIS</h2>
-                    <p class="section-description"><strong>Resultados Confiables y Entrega Puntual</strong><br>Laboratorios clínicos con tecnología actualizada, toma de muestras a domicilio y resultados digitales. Verificamos los controles de calidad y los tiempos reales de entrega.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada laboratorio:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Personal técnico capacitado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Reactivos con fecha de vencimiento vigente</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Resultados entregados en el tiempo prometido</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Opción de resultados en línea o por WhatsApp</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Servicio de toma de muestras a domicilio</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Laboratorios Disponibles:</h3>
-                    <div id="contenedor-laboratorios" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando laboratorios...</p></div>
-                </section>
-
-                <section id="veterinarias" class="fade-in" style="margin-top: 4rem;" aria-labelledby="veterinarias-title">
-                    <h2 class="section-title" id="veterinarias-title"><i class="fas fa-paw" aria-hidden="true"></i> VETERINARIA Y MASCOTAS</h2>
-                    <p class="section-description"><strong>Cuidado Profesional para tu Mascota</strong><br>Clínicas veterinarias con capacidad de cirugía, hospitalización y atención de emergencias. Verificamos la experiencia del personal y el estado de las instalaciones.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada veterinaria:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Personal veterinario con experiencia</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos de diagnóstico y laboratorio básico funcional</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Área de hospitalización limpia y climatizada</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Stock de vacunas y medicamentos esenciales</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Servicio de ambulancia o traslado disponible</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Veterinarias Disponibles:</h3>
-                    <div id="contenedor-veterinarias" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando veterinarias...</p></div>
-                </section>
-
-                <section id="optica" class="fade-in" style="margin-top: 4rem;" aria-labelledby="optica-title">
-                    <h2 class="section-title" id="optica-title"><i class="fas fa-glasses" aria-hidden="true"></i> ÓPTICA Y AUDICIÓN</h2>
-                    <p class="section-description"><strong>Exámenes de Vista, Lentes, Lentillas y Audífonos</strong><br>Ópticas con equipos de medición modernos, amplia variedad de monturas y lentes de calidad. También servicios de audición con pruebas auditivas y audífonos personalizados.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada óptica:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos de medición de vista actualizados</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Variedad de monturas y marcas de lentes</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Lentes con garantía y tratamientos (antirreflejo, UV)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Entrega en el plazo prometido</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Servicio de reparación y ajuste de monturas</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Ópticas y Servicios de Audición Disponibles:</h3>
-                    <div id="contenedor-optica" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando ópticas...</p></div>
-                </section>
-
-                <section id="ambulancias" class="fade-in" style="margin-top: 4rem;" aria-labelledby="ambulancias-title">
-                    <h2 class="section-title" id="ambulancias-title"><i class="fas fa-ambulance" aria-hidden="true"></i> AMBULANCIAS Y TRASLADOS</h2>
-                    <p class="section-description"><strong>Traslados de Emergencia y Programados</strong><br>Servicios de ambulancia equipadas para traslados de emergencia y traslados programados de adultos mayores o pacientes en tratamiento. Personal capacitado y tiempos de respuesta verificados.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada servicio:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Ambulancias equipadas con oxígeno y camilla</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Personal paramédico capacitado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Tiempos de respuesta razonables</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Tarifas claras por kilómetro o por traslado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Disponibilidad para traslados interprovinciales</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Ambulancias y Servicios de Traslado Disponibles:</h3>
-                    <div id="contenedor-ambulancias" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando ambulancias...</p></div>
-                </section>
-
-                <section id="fisioterapia" class="fade-in" style="margin-top: 4rem;" aria-labelledby="fisioterapia-title">
-                    <h2 class="section-title" id="fisioterapia-title"><i class="fas fa-running" aria-hidden="true"></i> FISIOTERAPIA Y REHABILITACIÓN</h2>
-                    <p class="section-description"><strong>Kinesiología, Terapias Post-Operatorias y de Columna</strong><br>Centros de fisioterapia y rehabilitación con profesionales capacitados. Ideal para recuperación de lesiones, terapias de columna, post-operatorios y tratamientos de dolor crónico.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada centro:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Fisioterapeutas con título y especialización</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos de rehabilitación modernos</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Plan de tratamiento personalizado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Seguimiento del progreso del paciente</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Ambiente limpio y adecuado</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Centros de Fisioterapia y Rehabilitación Disponibles:</h3>
-                    <div id="contenedor-fisioterapia" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando centros...</p></div>
-                </section>
-
-                <section class="why-us-section fade-in" style="margin-top: 4rem;" aria-labelledby="why-title">
-                    <h2 class="section-title" id="why-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> ¿POR QUÉ CONFIAR EN NUESTROS CENTROS DE SALUD?</h2>
-                    <div class="why-us-grid">
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-user-md" aria-hidden="true"></i></div><h3>Personal con Experiencia</h3><p>Verificamos la trayectoria y las referencias de cada centro antes de listarlos.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></div><h3>Precios Sin Sorpresas</h3><p>Promovemos que te den los costos de consultas y procedimientos básicos antes de entrar al consultorio.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div><h3>Regla de las 3 Quejas</h3><p>Si un centro de salud recibe 3 quejas verificadas por mala atención o cobros indebidos, pierde nuestro sello inmediatamente.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div><h3>Urgencias Reales</h3><p>Llamamos a las "urgencias" en horarios nocturnos para confirmar que realmente haya personal disponible.</p></div>
+                <section class="fade-in" style="margin-top: 3rem;">
+                    <div class="acordeon-info">
+                        <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                            <span><i class="fas fa-search" style="margin-right: 0.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acordeon-content">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Personal con experiencia y buenas referencias</li>
+                                <li><i class="fas fa-check"></i> Área de emergencias con equipamiento básico funcional</li>
+                                <li><i class="fas fa-check"></i> Limpieza y protocolos de bioseguridad observables</li>
+                                <li><i class="fas fa-check"></i> Transparencia en costos: Cotización clara antes de la atención</li>
+                                <li><i class="fas fa-check"></i> Equipos de radiografía y esterilización (odontología)</li>
+                                <li><i class="fas fa-check"></i> Reactivos con fecha de vencimiento vigente (laboratorios)</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                <section class="featured-section fade-in" style="margin-top: 4rem; background: var(--gradiente-hero); color: white; border-left: none;" aria-labelledby="cta-title">
-                    <div class="featured-badge" style="background: rgba(255,255,255,0.2); color: white;"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿NECESITAS ORIENTACIÓN MÉDICA?</div>
-                    <h3 id="cta-title" style="color: white;">Cuéntanos qué síntomas tienes y te conectamos con el especialista o centro ideal</h3>
-                    <p style="color: rgba(255,255,255,0.9);">Orientación gratuita y confidencial. Respuesta en menos de 1 hora en horario de oficina.</p>
-                    <div class="hero-features" style="margin: 2rem 0; justify-content: center;">
-                        <div class="hero-feature"><i class="fas fa-user-shield" aria-hidden="true"></i> Confidencialidad total</div>
-                        <div class="hero-feature"><i class="fas fa-hospital" aria-hidden="true"></i> Solo centros verificados</div>
-                        <div class="hero-feature"><i class="fas fa-gift" aria-hidden="true"></i> 100% gratuito para ciudadanos</div>
-                    </div>
-                    <div class="category-actions">
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20orientación%20sobre%20un%20servicio%20de%20salud" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    </div>
+                <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
+                    <div class="featured-badge"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿NECESITAS ATENCIÓN MÉDICA?</div>
+                    <h3 id="cta-title">Conecta directo con el profesional ideal</h3>
+                    <p>Orientación gratuita y confidencial. Respuesta en menos de 2 horas.</p>
+                    <a href="https://wa.me/59176536286?text=Hola,%20necesito%20orientación%20sobre%20un%20servicio%20de%20salud" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp directo
+                    </a>
                 </section>
 
             </div>
 
             <aside class="sidebar" role="complementary">
-                <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-fire" aria-hidden="true"></i> LO MÁS BUSCADO</h3>
-                    <ul class="popular-list">
-                        <li><a href="#clinicas"><i class="fas fa-chevron-right" aria-hidden="true"></i> Clínicas con urgencias en Zona Sur</a></li>
-                        <li><a href="#odontologia"><i class="fas fa-chevron-right" aria-hidden="true"></i> Odontólogos de guardia</a></li>
-                        <li><a href="#laboratorios"><i class="fas fa-chevron-right" aria-hidden="true"></i> Laboratorios con resultados en 1 hora</a></li>
-                        <li><a href="#veterinarias"><i class="fas fa-chevron-right" aria-hidden="true"></i> Veterinarias 24h en El Alto</a></li>
-                        <li><a href="#ambulancias"><i class="fas fa-chevron-right" aria-hidden="true"></i> Ambulancias para traslados</a></li>
-                        <li><a href="#fisioterapia"><i class="fas fa-chevron-right" aria-hidden="true"></i> Fisioterapia de columna</a></li>
-                    </ul>
-                </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
                     <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
@@ -283,7 +133,7 @@
                         <li><i class="fas fa-check" aria-hidden="true"></i> Sin comisión por paciente</li>
                         <li><i class="fas fa-check" aria-hidden="true"></i> Mayor visibilidad online</li>
                     </ul>
-                    <a href="https://wa.me/59178835306?text=Hola,%20soy%20un%20centro%20de%20salud%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
+                    <a href="https://wa.me/59178835306?text=Hola,%20soy%20centro%20de%20salud%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
                 </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
@@ -351,6 +201,11 @@
         </div>
     </footer>
 
+    <div class="mobile-showcase" id="mobileShowcase">
+        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
@@ -358,21 +213,31 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const secciones = [
-                { id: 'contenedor-clinicas', categoria: 'Salud y Bienestar', keyword: 'clinica' },
-                { id: 'contenedor-consultorios', categoria: 'Salud y Bienestar', keyword: 'consultorio' },
-                { id: 'contenedor-odontologia', categoria: 'Salud y Bienestar', keyword: 'odont' },
-                { id: 'contenedor-laboratorios', categoria: 'Salud y Bienestar', keyword: 'laboratorio' },
-                { id: 'contenedor-veterinarias', categoria: 'Salud y Bienestar', keyword: 'veterinaria' },
-                { id: 'contenedor-optica', categoria: 'Salud y Bienestar', keyword: 'optica' },
-                { id: 'contenedor-ambulancias', categoria: 'Salud y Bienestar', keyword: 'ambulancia' },
-                { id: 'contenedor-fisioterapia', categoria: 'Salud y Bienestar', keyword: 'fisio' }
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: null, label: 'Todos', icono: 'fa-th-large' },
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: 'clinica', label: 'Clínicas', icono: 'fa-hospital' },
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: 'consultorio', label: 'Consultorios', icono: 'fa-user-md' },
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: 'odont', label: 'Odontología', icono: 'fa-tooth' },
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: 'laboratorio', label: 'Laboratorios', icono: 'fa-flask' },
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: 'veterinaria', label: 'Veterinaria', icono: 'fa-paw' },
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: 'optica', label: 'Óptica', icono: 'fa-glasses' },
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: 'ambulancia', label: 'Ambulancias', icono: 'fa-ambulance' },
+                { id: 'contenedor-principal', categoria: 'Salud y Bienestar', keyword: 'fisio', label: 'Fisioterapia', icono: 'fa-running' }
             ];
-            secciones.forEach(sec => {
-                if (typeof cargarProveedoresEnContenedor === 'function') {
-                    cargarProveedoresEnContenedor(sec.id, sec.categoria, sec.keyword);
-                }
-            });
+            
+            const filtrosContainer = document.getElementById('filtrosVivos');
+            filtrosContainer.innerHTML = secciones.map((sec, i) => `
+                <button class="filtro-chip ${i === 0 ? 'active' : ''}" data-contenedor="${sec.id}" data-categoria="${sec.categoria}" data-keyword="${sec.keyword || ''}">
+                    <i class="fas ${sec.icono}"></i> ${sec.label}
+                </button>
+            `).join('');
+            
+            cargarProveedoresEnContenedor('contenedor-principal', 'Salud y Bienestar');
         });
+
+        function toggleAcordeon(header) {
+            header.classList.toggle('active');
+            header.nextElementSibling.classList.toggle('open');
+        }
     </script>
 </body>
 </html>

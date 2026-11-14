@@ -22,15 +22,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
 </head>
 <body>
 
     <header class="header" id="header" role="banner">
         <div class="container header-content">
-            <div class="logo">
-                <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
-                <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
+                    <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
+                </div>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
@@ -55,213 +58,67 @@
     <main class="main-content" role="main">
         <div class="container content-grid">
             <div class="content-main">
-                
-                <section class="hero" aria-labelledby="hero-title">
-                    <div class="hero-content fade-in">
-                        <div class="hero-badge"><i class="fas fa-tools" aria-hidden="true"></i> Mantenimiento del Hogar de Confianza</div>
-                        <h2 class="hero-title" id="hero-title">Plomeros, Electricistas, Pintores y Técnicos de Confianza</h2>
-                        <p class="hero-subtitle">Especialistas en <strong>reparaciones, mantenimiento y pequeñas modificaciones</strong> en tu hogar. Cotizaciones claras por escrito, garantía de buen trabajo y técnicos con referencias comprobadas.</p>
+
+                <section class="hero hero-compact" aria-labelledby="hero-title">
+                    <div class="hero-content">
+                        <div class="hero-badge fade-in"><i class="fas fa-tools" aria-hidden="true"></i> Mantenimiento del Hogar</div>
+                        <h2 class="hero-title fade-in" id="hero-title">Plomeros, Electricistas, Pintores y Técnicos de Confianza</h2>
+                        <p class="hero-subtitle fade-in">Especialistas en reparaciones, mantenimiento y pequeñas modificaciones. Cotizaciones claras por escrito y garantía de buen trabajo.</p>
                         
-                        <div class="hero-buttons" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                            <a href="#plomeria" class="btn btn-primary btn-hogar"><i class="fas fa-wrench" aria-hidden="true"></i> Plomería</a>
-                            <a href="#electricidad" class="btn btn-primary btn-hogar"><i class="fas fa-bolt" aria-hidden="true"></i> Electricidad</a>
-                            <a href="#albanileria" class="btn btn-primary btn-hogar"><i class="fas fa-hammer" aria-hidden="true"></i> Albañilería</a>
-                            <a href="#pintura" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-paint-roller" aria-hidden="true"></i> Pintura</a>
-                            <a href="#cerrajeria" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-key" aria-hidden="true"></i> Cerrajería</a>
-                            <a href="#carpinteria" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-hammer" aria-hidden="true"></i> Carpintería</a>
-                            <a href="#limpieza" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-broom" aria-hidden="true"></i> Limpieza</a>
-                        </div>
-                        
-                        <div class="hero-features">
+                        <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-user-check" aria-hidden="true"></i><span>Verificación Humana</span></div>
                             <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Cotización Escrita</span></div>
                             <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Garantía Real</span></div>
                         </div>
                         
                         <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20técnico%20para%20mi%20hogar" class="btn-provider-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar por WhatsApp: 76536286
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar: 76536286
                         </a>
                     </div>
                 </section>
 
-                <section class="stats-section fade-in" aria-labelledby="stats-title">
-                    <h2 class="section-title" id="stats-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Compromiso con el Sector Hogar</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-handshake" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">100%</div><div class="stat-label">Compromiso con la Calidad</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">< 2h</div><div class="stat-label">Tiempo de Respuesta</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Gratis</div><div class="stat-label">Para Ciudadanos</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Creciendo</div><div class="stat-label">Red de Técnicos</div></div>
+                <section aria-labelledby="proveedores-title">
+                    <h2 class="section-title fade-in" id="proveedores-title"><i class="fas fa-store" aria-hidden="true"></i> PROVEEDORES DISPONIBLES</h2>
+                    
+                    <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
+                    
+                    <div id="contenedor-principal" class="proveedores-grid">
+                        <p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Cargando proveedores...</p>
                     </div>
                 </section>
 
-                <section id="plomeria" class="fade-in" aria-labelledby="plomeria-title">
-                    <h2 class="section-title" id="plomeria-title"><i class="fas fa-wrench" aria-hidden="true"></i> PLOMERÍA</h2>
-                    <p class="section-description"><strong>Fugas, Destapes e Instalaciones</strong><br>Plomeros con herramientas profesionales y materiales de calidad. Desde una fuga pequeña hasta instalaciones completas. Cotización por escrito antes de empezar, sin sorpresas al final.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada plomero:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Experiencia en el oficio</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Herramientas profesionales propias</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Cotización por escrito antes de empezar</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Buenas referencias de clientes anteriores</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía del trabajo realizado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Limpieza del área al terminar</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-tag" aria-hidden="true"></i> 💡 Sobre los Precios:</h3>
-                    <p class="rango-estimado-texto">Los costos varían según el tipo de reparación y los materiales necesarios. <strong>Siempre pide una cotización por escrito antes de autorizar cualquier trabajo.</strong></p>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Plomeros Disponibles:</h3>
-                    <div id="contenedor-plomeria" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando plomeros...</p></div>
-                </section>
-
-                <section id="electricidad" class="fade-in" style="margin-top: 4rem;" aria-labelledby="electricidad-title">
-                    <h2 class="section-title" id="electricidad-title"><i class="fas fa-bolt" aria-hidden="true"></i> ELECTRICIDAD</h2>
-                    <p class="section-description"><strong>Instalaciones, Reparaciones y Emergencias</strong><br>Electricistas con conocimientos técnicos actualizados, herramientas de medición y cumplimiento de normas de seguridad. Desde cambiar un tomacorriente hasta instalaciones completas.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada electricista:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Conocimientos técnicos actualizados</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Uso de herramientas de medición adecuadas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Materiales de calidad y seguros</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Cumplimiento de normas básicas de seguridad eléctrica</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Buenas referencias de trabajos anteriores</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Compromiso con la seguridad durante el trabajo</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-tag" aria-hidden="true"></i> 💡 Sobre los Precios:</h3>
-                    <p class="rango-estimado-texto">Los costos varían según la complejidad de la instalación y los materiales. <strong>Siempre pide una cotización por escrito antes de autorizar.</strong></p>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Electricistas Disponibles:</h3>
-                    <div id="contenedor-electricidad" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando electricistas...</p></div>
-                </section>
-
-                <section id="albanileria" class="fade-in" style="margin-top: 4rem;" aria-labelledby="albanileria-title">
-                    <h2 class="section-title" id="albanileria-title"><i class="fas fa-hammer" aria-hidden="true"></i> ALBAÑILERÍA Y REPARACIONES</h2>
-                    <p class="section-description"><strong>Reparación de Paredes, Techos y Pisos</strong><br>Albañiles con experiencia en <strong>reparaciones y mantenimiento</strong> de viviendas existentes. Desde reparar una pared agrietada hasta impermeabilizar techos. Trabajo limpio y acabados de calidad.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada albañil:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Experiencia en reparaciones y mantenimiento</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipo propio de herramientas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Conocimiento de materiales de calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Presupuestos claros de materiales y mano de obra</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Buenas referencias de trabajos anteriores</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Limpieza y orden durante y después de la obra</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-tag" aria-hidden="true"></i> 💡 Sobre los Precios:</h3>
-                    <p class="rango-estimado-texto">Los costos varían según el tipo de reparación y los materiales. <strong>Siempre pide una cotización por escrito antes de autorizar.</strong></p>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Albañiles Disponibles:</h3>
-                    <div id="contenedor-albanileria" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando albañiles...</p></div>
-                </section>
-
-                <section id="pintura" class="fade-in" style="margin-top: 4rem;" aria-labelledby="pintura-title">
-                    <h2 class="section-title" id="pintura-title"><i class="fas fa-paint-roller" aria-hidden="true"></i> PINTURA Y ACABADOS</h2>
-                    <p class="section-description"><strong>Repintado, Tratamiento de Humedad y Acabados de Calidad</strong><br>Pintores profesionales que devuelven la vida a tus paredes. Usamos materiales de buena calidad, protegemos tus muebles y dejamos todo impecable al terminar.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada pintor:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Uso de pinturas de marca reconocida</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Preparación adecuada de superficie (lijado, masilla)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Protección de pisos, muebles y enchufes durante el trabajo</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Limpieza total del área al terminar</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía de acabado</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-tag" aria-hidden="true"></i> 💡 Sobre los Precios:</h3>
-                    <p class="rango-estimado-texto">Los costos varían según los metros cuadrados, el tipo de pintura y el estado de las paredes. <strong>Siempre pide una cotización por escrito antes de autorizar.</strong></p>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Pintores Disponibles:</h3>
-                    <div id="contenedor-pintura" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando pintores...</p></div>
-                </section>
-
-                <section id="cerrajeria" class="fade-in" style="margin-top: 4rem;" aria-labelledby="cerrajeria-title">
-                    <h2 class="section-title" id="cerrajeria-title"><i class="fas fa-key" aria-hidden="true"></i> CERRAJERÍA</h2>
-                    <p class="section-description"><strong>Apertura de Puertas, Cambio de Chapas y Copias de Llaves</strong><br>Cerrajeros con servicio urgente y herramientas profesionales. Desde abrir una puerta con llave perdida hasta instalar chapas de alta seguridad.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada cerrajero:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Servicio de urgencia disponible</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Herramientas profesionales</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Chapas y cerraduras de calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Precios claros antes de iniciar</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Garantía del trabajo</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Cerrajeros Disponibles:</h3>
-                    <div id="contenedor-cerrajeria" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando cerrajeros...</p></div>
-                </section>
-
-                <section id="carpinteria" class="fade-in" style="margin-top: 4rem;" aria-labelledby="carpinteria-title">
-                    <h2 class="section-title" id="carpinteria-title"><i class="fas fa-hammer" aria-hidden="true"></i> CARPINTERÍA</h2>
-                    <p class="section-description"><strong>Reparación de Muebles, Puertas y Ventanas</strong><br>Carpinteros con experiencia en trabajos de madera. Desde reparar un mueble hasta instalar puertas y ventanas nuevas. Acabados de calidad y materiales duraderos.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada carpintero:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Experiencia en trabajos de madera</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Herramientas propias y adecuadas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Maderas y materiales de calidad</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Acabados prolijos y duraderos</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Presupuestos claros</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Carpinteros Disponibles:</h3>
-                    <div id="contenedor-carpinteria" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando carpinteros...</p></div>
-                </section>
-
-                <section id="limpieza" class="fade-in" style="margin-top: 4rem;" aria-labelledby="limpieza-title">
-                    <h2 class="section-title" id="limpieza-title"><i class="fas fa-broom" aria-hidden="true"></i> LIMPIEZA Y FUMIGACIÓN</h2>
-                    <p class="section-description"><strong>Limpieza de Tanques, Control de Plagas y Limpieza Profunda</strong><br>Servicios de limpieza profesional y fumigación con productos seguros. Ideal para hogares, oficinas y comercios. Personal capacitado y equipos especializados.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> Qué buscamos en cada servicio:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Productos seguros y autorizados</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Personal capacitado y uniformado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Equipos especializados</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Resultados garantizados</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Precios claros por servicio</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Servicios de Limpieza y Fumigación Disponibles:</h3>
-                    <div id="contenedor-limpieza" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando servicios...</p></div>
-                </section>
-
-                <section class="why-us-section fade-in" style="margin-top: 4rem;" aria-labelledby="why-title">
-                    <h2 class="section-title" id="why-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> ¿POR QUÉ CONFIAR EN NUESTROS TÉCNICOS?</h2>
-                    <div class="why-us-grid">
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-user-check" aria-hidden="true"></i></div><h3>Verificación Humana</h3><p>Llamamos a las referencias de cada técnico. Solo aceptamos a los que cumplen con nuestros estándares de calidad.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></div><h3>Cotización por Escrito</h3><p>Antes de empezar, recibes un mensaje con el precio estimado. Sin sorpresas ni cobros extras al final.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div><h3>Regla de las 3 Quejas</h3><p>Si un técnico recibe 3 quejas verificadas, lo retiramos de nuestra red. Tu tranquilidad es primero.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div><h3>Respuesta Rápida</h3><p>Conectamos con el técnico disponible más cercano en menos de 2 horas. Emergencias atendidas de inmediato.</p></div>
+                <section class="fade-in" style="margin-top: 3rem;">
+                    <div class="acordeon-info">
+                        <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                            <span><i class="fas fa-search" style="margin-right: 0.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acordeon-content">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Experiencia en el oficio comprobable</li>
+                                <li><i class="fas fa-check"></i> Herramientas profesionales propias</li>
+                                <li><i class="fas fa-check"></i> Cotización por escrito antes de empezar</li>
+                                <li><i class="fas fa-check"></i> Buenas referencias de clientes anteriores</li>
+                                <li><i class="fas fa-check"></i> Garantía del trabajo realizado</li>
+                                <li><i class="fas fa-check"></i> Limpieza del área al terminar</li>
+                                <li><i class="fas fa-check"></i> Uso de materiales de calidad y seguros</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                <section class="featured-section fade-in" style="margin-top: 4rem; background: var(--gradiente-hero); color: white; border-left: none;" aria-labelledby="cta-title">
-                    <div class="featured-badge" style="background: rgba(255,255,255,0.2); color: white;"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿NECESITAS UN TÉCNICO DE CONFIANZA?</div>
-                    <h3 id="cta-title" style="color: white;">Cuéntanos qué necesitas reparar y te conectamos con el técnico ideal</h3>
-                    <p style="color: rgba(255,255,255,0.9);">Cotización gratis y sin compromiso. Respuesta en menos de 2 horas en horario de oficina.</p>
-                    <div class="hero-features" style="margin: 2rem 0; justify-content: center;">
-                        <div class="hero-feature"><i class="fas fa-search" aria-hidden="true"></i> Diagnóstico gratuito</div>
-                        <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i> Garantía por escrito</div>
-                        <div class="hero-feature"><i class="fas fa-gift" aria-hidden="true"></i> 100% gratuito para ciudadanos</div>
-                    </div>
-                    <div class="category-actions">
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20técnico%20para%20mi%20hogar" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    </div>
+                <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
+                    <div class="featured-badge"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿NECESITAS UN TÉCNICO?</div>
+                    <h3 id="cta-title">Conecta directo con el profesional ideal</h3>
+                    <p>Cotización gratis y sin compromiso. Respuesta en menos de 2 horas.</p>
+                    <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20técnico%20para%20mi%20hogar" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp directo
+                    </a>
                 </section>
 
             </div>
 
             <aside class="sidebar" role="complementary">
-                <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-fire" aria-hidden="true"></i> LO MÁS BUSCADO</h3>
-                    <ul class="popular-list">
-                        <li><a href="#plomeria"><i class="fas fa-chevron-right" aria-hidden="true"></i> Plomeros 24h en Zona Sur</a></li>
-                        <li><a href="#electricidad"><i class="fas fa-chevron-right" aria-hidden="true"></i> Electricistas en El Alto</a></li>
-                        <li><a href="#pintura"><i class="fas fa-chevron-right" aria-hidden="true"></i> Pintores para interiores</a></li>
-                        <li><a href="#albanileria"><i class="fas fa-chevron-right" aria-hidden="true"></i> Reparación de filtraciones</a></li>
-                        <li><a href="#cerrajeria"><i class="fas fa-chevron-right" aria-hidden="true"></i> Cerrajeros urgentes 24h</a></li>
-                        <li><a href="#limpieza"><i class="fas fa-chevron-right" aria-hidden="true"></i> Fumigación de plagas</a></li>
-                    </ul>
-                </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
                     <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
@@ -345,6 +202,11 @@
         </div>
     </footer>
 
+    <div class="mobile-showcase" id="mobileShowcase">
+        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
@@ -352,20 +214,30 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const secciones = [
-                { id: 'contenedor-plomeria', categoria: 'Mantenimiento del Hogar', keyword: 'plom' },
-                { id: 'contenedor-electricidad', categoria: 'Mantenimiento del Hogar', keyword: 'electric' },
-                { id: 'contenedor-albanileria', categoria: 'Mantenimiento del Hogar', keyword: 'albañil' },
-                { id: 'contenedor-pintura', categoria: 'Mantenimiento del Hogar', keyword: 'pintur' },
-                { id: 'contenedor-cerrajeria', categoria: 'Mantenimiento del Hogar', keyword: 'cerraj' },
-                { id: 'contenedor-carpinteria', categoria: 'Mantenimiento del Hogar', keyword: 'carpint' },
-                { id: 'contenedor-limpieza', categoria: 'Mantenimiento del Hogar', keyword: 'limp' }
+                { id: 'contenedor-principal', categoria: 'Mantenimiento del Hogar', keyword: null, label: 'Todos', icono: 'fa-th-large' },
+                { id: 'contenedor-principal', categoria: 'Mantenimiento del Hogar', keyword: 'plom', label: 'Plomería', icono: 'fa-wrench' },
+                { id: 'contenedor-principal', categoria: 'Mantenimiento del Hogar', keyword: 'electric', label: 'Electricidad', icono: 'fa-bolt' },
+                { id: 'contenedor-principal', categoria: 'Mantenimiento del Hogar', keyword: 'albañil', label: 'Albañilería', icono: 'fa-hammer' },
+                { id: 'contenedor-principal', categoria: 'Mantenimiento del Hogar', keyword: 'pintur', label: 'Pintura', icono: 'fa-paint-roller' },
+                { id: 'contenedor-principal', categoria: 'Mantenimiento del Hogar', keyword: 'cerraj', label: 'Cerrajería', icono: 'fa-key' },
+                { id: 'contenedor-principal', categoria: 'Mantenimiento del Hogar', keyword: 'carpint', label: 'Carpintería', icono: 'fa-hammer' },
+                { id: 'contenedor-principal', categoria: 'Mantenimiento del Hogar', keyword: 'limp', label: 'Limpieza', icono: 'fa-broom' }
             ];
-            secciones.forEach(sec => {
-                if (typeof cargarProveedoresEnContenedor === 'function') {
-                    cargarProveedoresEnContenedor(sec.id, sec.categoria, sec.keyword);
-                }
-            });
+            
+            const filtrosContainer = document.getElementById('filtrosVivos');
+            filtrosContainer.innerHTML = secciones.map((sec, i) => `
+                <button class="filtro-chip ${i === 0 ? 'active' : ''}" data-contenedor="${sec.id}" data-categoria="${sec.categoria}" data-keyword="${sec.keyword || ''}">
+                    <i class="fas ${sec.icono}"></i> ${sec.label}
+                </button>
+            `).join('');
+            
+            cargarProveedoresEnContenedor('contenedor-principal', 'Mantenimiento del Hogar');
         });
+
+        function toggleAcordeon(header) {
+            header.classList.toggle('active');
+            header.nextElementSibling.classList.toggle('open');
+        }
     </script>
 </body>
 </html>

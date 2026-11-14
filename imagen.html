@@ -22,15 +22,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
 </head>
 <body>
 
     <header class="header" id="header" role="banner">
         <div class="container header-content">
-            <div class="logo">
-                <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
-                <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
+                    <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
+                </div>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
@@ -55,178 +58,66 @@
     <main class="main-content" role="main">
         <div class="container content-grid">
             <div class="content-main">
-                
-                <section class="hero" aria-labelledby="hero-title">
-                    <div class="hero-content fade-in">
-                        <div class="hero-badge"><i class="fas fa-spa" aria-hidden="true"></i> Imagen y Cuidado Personal</div>
-                        <h2 class="hero-title" id="hero-title">Barberías, Salones y Servicios de Cuidado Personal</h2>
-                        <p class="hero-subtitle">Encuentra barberías, salones de belleza, centros de estética, maquillaje profesional, spas y servicios a domicilio en La Paz y El Alto. Datos de contacto verificados para que reserves con confianza.</p>
+
+                <section class="hero hero-compact" aria-labelledby="hero-title">
+                    <div class="hero-content">
+                        <div class="hero-badge fade-in"><i class="fas fa-spa" aria-hidden="true"></i> Imagen y Cuidado Personal</div>
+                        <h2 class="hero-title fade-in" id="hero-title">Barberías, Salones y Servicios de Cuidado Personal</h2>
+                        <p class="hero-subtitle fade-in">Encuentra barberías, salones de belleza, centros de estética, maquillaje profesional, spas y servicios a domicilio. Reserva con confianza.</p>
                         
-                        <div class="hero-buttons" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                            <a href="#barberias" class="btn btn-primary btn-imagen"><i class="fas fa-cut" aria-hidden="true"></i> Barberías</a>
-                            <a href="#salones" class="btn btn-primary btn-imagen"><i class="fas fa-magic" aria-hidden="true"></i> Salones Unisex</a>
-                            <a href="#estetica" class="btn btn-primary btn-imagen"><i class="fas fa-leaf" aria-hidden="true"></i> Estética</a>
-                            <a href="#maquillaje" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-paint-brush" aria-hidden="true"></i> Maquillaje</a>
-                            <a href="#spas" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-hot-tub" aria-hidden="true"></i> Spas</a>
-                            <a href="#domicilio" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-home" aria-hidden="true"></i> A Domicilio</a>
-                        </div>
-                        
-                        <div class="hero-features">
+                        <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Locales Verificados</span></div>
                             <div class="hero-feature"><i class="fas fa-comments" aria-hidden="true"></i><span>Contacto Directo</span></div>
                             <div class="hero-feature"><i class="fas fa-calendar-check" aria-hidden="true"></i><span>Reserva Fácil</span></div>
                         </div>
                         
                         <a href="https://wa.me/59176536286?text=Hola,%20busco%20un%20servicio%20de%20imagen%20y%20cuidado%20personal" class="btn-provider-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar por WhatsApp: 76536286
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i> Consultar: 76536286
                         </a>
                     </div>
                 </section>
 
-                <section class="stats-section fade-in" aria-labelledby="stats-title">
-                    <h2 class="section-title" id="stats-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Directorio de Imagen y Cuidado Personal</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-gift" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Gratis</div><div class="stat-label">Para ciudadanos</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-th-large" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">6</div><div class="stat-label">Subcategorías disponibles</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-map-marked-alt" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Local</div><div class="stat-label">La Paz y El Alto</div></div>
-                        <div class="stat-card"><div class="stat-icon"><i class="fas fa-comments" aria-hidden="true"></i></div><div class="stat-number" style="font-size: 1.5rem;">Directo</div><div class="stat-label">Contacto sin intermediarios</div></div>
+                <section aria-labelledby="proveedores-title">
+                    <h2 class="section-title fade-in" id="proveedores-title"><i class="fas fa-store" aria-hidden="true"></i> PROVEEDORES DISPONIBLES</h2>
+                    
+                    <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
+                    
+                    <div id="contenedor-principal" class="proveedores-grid">
+                        <p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Cargando proveedores...</p>
                     </div>
                 </section>
 
-                <section id="barberias" class="fade-in" aria-labelledby="barberias-title">
-                    <h2 class="section-title" id="barberias-title"><i class="fas fa-cut" aria-hidden="true"></i> BARBERÍAS</h2>
-                    <p class="section-description"><strong>Cortes masculinos, degradados, perfilado de barba y afeitado tradicional</strong><br>Barberías especializadas en el cuidado masculino. Desde cortes clásicos hasta los degradados más modernos. Reserva directamente con el barbero.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-circle-question" aria-hidden="true"></i> Qué consultar antes de reservar:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si atienden con cita previa o por orden de llegada</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> El precio del corte según el estilo que buscas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si incluyen perfilado de barba en el servicio</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Los horarios de atención, especialmente fines de semana</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Barberías Disponibles:</h3>
-                    <div id="contenedor-barberias" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando barberías...</p></div>
-                </section>
-
-                <section id="salones" class="fade-in" style="margin-top: 4rem;" aria-labelledby="salones-title">
-                    <h2 class="section-title" id="salones-title"><i class="fas fa-magic" aria-hidden="true"></i> SALONES DE BELLEZA UNISEX</h2>
-                    <p class="section-description"><strong>Cortes, tintes, peinados, tratamientos capilares y servicios básicos de uñas</strong><br>Salones que atienden a toda la familia. Desde un corte de cabello hasta un tinte completo o un peinado para evento. Reserva con anticipación para fechas especiales.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-circle-question" aria-hidden="true"></i> Qué consultar antes de reservar:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> El tiempo estimado del servicio (especialmente tintes)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si el precio incluye lavado y secado</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> La marca de productos que utilizan</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si requieren anticipo para servicios largos</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Salones Unisex Disponibles:</h3>
-                    <div id="contenedor-salones" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando salones...</p></div>
-                </section>
-
-                <section id="estetica" class="fade-in" style="margin-top: 4rem;" aria-labelledby="estetica-title">
-                    <h2 class="section-title" id="estetica-title"><i class="fas fa-leaf" aria-hidden="true"></i> CENTROS DE ESTÉTICA</h2>
-                    <p class="section-description"><strong>Limpiezas faciales, tratamientos corporales y cuidado de la piel</strong><br>Centros especializados en el cuidado de la piel con equipos y protocolos de higiene. Desde una limpieza facial profunda hasta tratamientos corporales específicos.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-circle-question" aria-hidden="true"></i> Qué consultar antes de reservar:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> El tipo de tratamiento según tu tipo de piel</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> La duración de la sesión y cantidad de sesiones recomendadas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Los productos que utilizan y sus marcas</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si ofrecen evaluación previa gratuita</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Centros de Estética Disponibles:</h3>
-                    <div id="contenedor-estetica" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando centros de estética...</p></div>
-                </section>
-
-                <section id="maquillaje" class="fade-in" style="margin-top: 4rem;" aria-labelledby="maquillaje-title">
-                    <h2 class="section-title" id="maquillaje-title"><i class="fas fa-paint-brush" aria-hidden="true"></i> MAQUILLAJE PROFESIONAL</h2>
-                    <p class="section-description"><strong>Maquillaje para novias, quinceañeros, sesiones fotográficas y eventos</strong><br>Maquilladoras profesionales para tus momentos especiales. Reserva con anticipación, especialmente para temporadas de graduaciones, bodas y quinceañeros.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-circle-question" aria-hidden="true"></i> Qué consultar antes de reservar:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si ofrecen prueba de maquillaje previa</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si el servicio es en estudio o a domicilio</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> La marca de productos que utilizan</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> El tiempo de duración del maquillaje</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Maquilladoras Profesionales Disponibles:</h3>
-                    <div id="contenedor-maquillaje" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando maquilladoras...</p></div>
-                </section>
-
-                <section id="spas" class="fade-in" style="margin-top: 4rem;" aria-labelledby="spas-title">
-                    <h2 class="section-title" id="spas-title"><i class="fas fa-hot-tub" aria-hidden="true"></i> SPAS Y MASAJES</h2>
-                    <p class="section-description"><strong>Masajes relajantes, descontracturantes, terapéuticos y aromaterapia</strong><br>Spas y centros de masajes para relajación y bienestar. Desde un masaje relajante después de una semana pesada hasta terapias descontracturantes específicas.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-circle-question" aria-hidden="true"></i> Qué consultar antes de reservar:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> El tipo de masaje según tu necesidad (relajante, terapéutico, deportivo)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> La duración de la sesión (30, 60, 90 minutos)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si incluyen aceites o productos especiales</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Los horarios disponibles, especialmente fines de semana</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Spas y Centros de Masajes Disponibles:</h3>
-                    <div id="contenedor-spas" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando spas...</p></div>
-                </section>
-
-                <section id="domicilio" class="fade-in" style="margin-top: 4rem;" aria-labelledby="domicilio-title">
-                    <h2 class="section-title" id="domicilio-title"><i class="fas fa-home" aria-hidden="true"></i> SERVICIOS A DOMICILIO</h2>
-                    <p class="section-description"><strong>Peluquería, maquillaje y masajes en la comodidad de tu hogar</strong><br>Profesionales que van hasta tu casa u oficina. Ideal para prepararte antes de un evento, para adultos mayores o simplemente por comodidad.</p>
-                    <div class="featured-section">
-                        <div class="featured-badge"><i class="fas fa-circle-question" aria-hidden="true"></i> Qué consultar antes de reservar:</div>
-                        <ul class="category-services">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> La cobertura de zonas (qué distritos atienden)</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Si el costo del traslado está incluido o se cobra aparte</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Qué equipos y productos llevan</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> El tiempo estimado del servicio</li>
-                        </ul>
-                    </div>
-                    <h3 class="section-title" style="font-size: 1.5rem; margin-top: 2rem;"><i class="fas fa-list" aria-hidden="true"></i> Profesionales a Domicilio Disponibles:</h3>
-                    <div id="contenedor-domicilio" class="proveedores-grid"><p class="text-center text-muted"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Cargando profesionales...</p></div>
-                </section>
-
-                <section class="why-us-section fade-in" style="margin-top: 4rem;" aria-labelledby="why-title">
-                    <h2 class="section-title" id="why-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> ¿POR QUÉ USAR NUESTRO DIRECTORIO?</h2>
-                    <div class="why-us-grid">
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div><h3>Datos Confirmados</h3><p>Verificamos que los números de contacto contesten y que las direcciones sean fáciles de encontrar.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-comments" aria-hidden="true"></i></div><h3>Contacto Directo</h3><p>Te comunicas directamente con el proveedor sin intermediarios. Preguntas lo que necesitas y reservas cuando quieras.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-calendar-check" aria-hidden="true"></i></div><h3>Reserva Fácil</h3><p>Consulta disponibilidad y agenda tu cita por WhatsApp o teléfono. Sin complicaciones.</p></div>
-                        <div class="why-card"><div class="why-icon"><i class="fas fa-gift" aria-hidden="true"></i></div><h3>100% Gratuito</h3><p>Buscar y contactar proveedores en el directorio no tiene ningún costo para ti.</p></div>
+                <section class="fade-in" style="margin-top: 3rem;">
+                    <div class="acordeon-info">
+                        <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                            <span><i class="fas fa-search" style="margin-right: 0.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acordeon-content">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Si atienden con cita previa o por orden de llegada</li>
+                                <li><i class="fas fa-check"></i> El precio del servicio según el estilo que buscas</li>
+                                <li><i class="fas fa-check"></i> La marca y calidad de los productos que utilizan</li>
+                                <li><i class="fas fa-check"></i> Higiene, bioseguridad y esterilización de herramientas</li>
+                                <li><i class="fas fa-check"></i> Puntualidad y respeto por los tiempos de la cita</li>
+                                <li><i class="fas fa-check"></i> Cobertura de zonas y costo de traslado (domicilio)</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                <section class="featured-section fade-in" style="margin-top: 4rem; background: var(--gradiente-hero); color: white; border-left: none;" aria-labelledby="cta-title">
-                    <div class="featured-badge" style="background: rgba(255,255,255,0.2); color: white;"><i class="fas fa-spa" aria-hidden="true"></i> ¿BUSCAS UN SERVICIO ESPECIAL?</div>
-                    <h3 id="cta-title" style="color: white;">Cuéntanos qué necesitas y te orientamos para encontrar al profesional ideal</h3>
-                    <p style="color: rgba(255,255,255,0.9);">Asesoría gratuita y sin compromiso. Respuesta en menos de 2 horas en horario de oficina.</p>
-                    <div class="hero-features" style="margin: 2rem 0; justify-content: center;">
-                        <div class="hero-feature"><i class="fas fa-search" aria-hidden="true"></i> Búsqueda personalizada</div>
-                        <div class="hero-feature"><i class="fas fa-map-pin" aria-hidden="true"></i> Cerca de tu zona</div>
-                        <div class="hero-feature"><i class="fas fa-gift" aria-hidden="true"></i> 100% gratuito</div>
-                    </div>
-                    <div class="category-actions">
-                        <a href="https://wa.me/59176536286?text=Hola,%20busco%20un%20servicio%20de%20imagen%20y%20cuidado%20personal" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    </div>
+                <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
+                    <div class="featured-badge"><i class="fas fa-spa" aria-hidden="true"></i> ¿BUSCAS UN SERVICIO ESPECIAL?</div>
+                    <h3 id="cta-title">Cuéntanos qué necesitas y te orientamos</h3>
+                    <p>Asesoría gratuita y sin compromiso. Respuesta en menos de 2 horas.</p>
+                    <a href="https://wa.me/59176536286?text=Hola,%20busco%20un%20servicio%20de%20imagen%20y%20cuidado%20personal" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp directo
+                    </a>
                 </section>
 
             </div>
 
             <aside class="sidebar" role="complementary">
-                <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-fire" aria-hidden="true"></i> LO MÁS BUSCADO</h3>
-                    <ul class="popular-list">
-                        <li><a href="#barberias"><i class="fas fa-chevron-right" aria-hidden="true"></i> Barberías en Zona Sur</a></li>
-                        <li><a href="#salones"><i class="fas fa-chevron-right" aria-hidden="true"></i> Salones para tintes</a></li>
-                        <li><a href="#maquillaje"><i class="fas fa-chevron-right" aria-hidden="true"></i> Maquillaje para novias</a></li>
-                        <li><a href="#estetica"><i class="fas fa-chevron-right" aria-hidden="true"></i> Limpiezas faciales</a></li>
-                        <li><a href="#spas"><i class="fas fa-chevron-right" aria-hidden="true"></i> Masajes descontracturantes</a></li>
-                        <li><a href="#domicilio"><i class="fas fa-chevron-right" aria-hidden="true"></i> Peluquería a domicilio</a></li>
-                    </ul>
-                </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
                     <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
@@ -303,12 +194,17 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-legal">
-                    <p><strong>NOTA LEGAL:</strong> La Paz te Acerca es un directorio informativo. No prestamos servicios de imagen ni cuidado personal directamente. Los servicios, precios, disponibilidad y calidad son responsabilidad exclusiva de cada proveedor. Verificamos datos de contacto y dirección publicados. Reserva directamente con el proveedor y confirma los detalles del servicio.</p>
+                    <p><strong>NOTA LEGAL:</strong> La Paz te Acerca es un directorio informativo. No prestamos servicios de imagen ni cuidado personal directamente. Los servicios, precios, disponibilidad y calidad son responsabilidad exclusiva de cada proveedor.</p>
                 </div>
                 <p class="copyright">© 2026 La Paz te Acerca. Todos los derechos reservados. | Hecho con <i class="fas fa-heart" aria-hidden="true"></i> en Bolivia</p>
             </div>
         </div>
     </footer>
+
+    <div class="mobile-showcase" id="mobileShowcase">
+        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
 
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
@@ -317,19 +213,29 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const secciones = [
-                { id: 'contenedor-barberias', categoria: 'Imagen y Cuidado Personal', keyword: 'barber' },
-                { id: 'contenedor-salones', categoria: 'Imagen y Cuidado Personal', keyword: 'salon' },
-                { id: 'contenedor-estetica', categoria: 'Imagen y Cuidado Personal', keyword: 'estetica' },
-                { id: 'contenedor-maquillaje', categoria: 'Imagen y Cuidado Personal', keyword: 'maquillaje' },
-                { id: 'contenedor-spas', categoria: 'Imagen y Cuidado Personal', keyword: 'spa' },
-                { id: 'contenedor-domicilio', categoria: 'Imagen y Cuidado Personal', keyword: 'domicilio' }
+                { id: 'contenedor-principal', categoria: 'Imagen y Cuidado Personal', keyword: null, label: 'Todos', icono: 'fa-th-large' },
+                { id: 'contenedor-principal', categoria: 'Imagen y Cuidado Personal', keyword: 'barber', label: 'Barberías', icono: 'fa-cut' },
+                { id: 'contenedor-principal', categoria: 'Imagen y Cuidado Personal', keyword: 'salon', label: 'Salones', icono: 'fa-magic' },
+                { id: 'contenedor-principal', categoria: 'Imagen y Cuidado Personal', keyword: 'estetica', label: 'Estética', icono: 'fa-leaf' },
+                { id: 'contenedor-principal', categoria: 'Imagen y Cuidado Personal', keyword: 'maquillaje', label: 'Maquillaje', icono: 'fa-paint-brush' },
+                { id: 'contenedor-principal', categoria: 'Imagen y Cuidado Personal', keyword: 'spa', label: 'Spas', icono: 'fa-hot-tub' },
+                { id: 'contenedor-principal', categoria: 'Imagen y Cuidado Personal', keyword: 'domicilio', label: 'A Domicilio', icono: 'fa-home' }
             ];
-            secciones.forEach(sec => {
-                if (typeof cargarProveedoresEnContenedor === 'function') {
-                    cargarProveedoresEnContenedor(sec.id, sec.categoria, sec.keyword);
-                }
-            });
+            
+            const filtrosContainer = document.getElementById('filtrosVivos');
+            filtrosContainer.innerHTML = secciones.map((sec, i) => `
+                <button class="filtro-chip ${i === 0 ? 'active' : ''}" data-contenedor="${sec.id}" data-categoria="${sec.categoria}" data-keyword="${sec.keyword || ''}">
+                    <i class="fas ${sec.icono}"></i> ${sec.label}
+                </button>
+            `).join('');
+            
+            cargarProveedoresEnContenedor('contenedor-principal', 'Imagen y Cuidado Personal');
         });
+
+        function toggleAcordeon(header) {
+            header.classList.toggle('active');
+            header.nextElementSibling.classList.toggle('open');
+        }
     </script>
 </body>
 </html>
