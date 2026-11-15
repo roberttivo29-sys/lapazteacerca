@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="La Paz te Acerca - Directorio de confianza con servicios seleccionados cuidadosamente en La Paz y El Alto.">
+    <meta name="description" content="La Paz te Acerca - Directorio de confianza con servicios seleccionados cuidadosamente en La Paz y El Alto. Encuentra profesionales recomendados por la comunidad.">
     <meta property="og:title" content="La Paz te Acerca | Conectamos vecinos con servicios de confianza">
     <meta property="og:description" content="Olvídate de buscar a ciegas. Encuentra profesionales y negocios recomendados por la comunidad en La Paz y El Alto.">
     <meta property="og:type" content="website">
@@ -23,11 +23,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "La Paz te Acerca",
+        "url": "https://lapazteacerca.com",
+        "description": "Directorio de confianza de servicios en La Paz y El Alto"
+    }
+    </script>
 </head>
 <body>
 
-    <!-- HEADER CANÓNICO v9.3 -->
-    <header class="header header-canonical" id="header" role="banner">
+    <!-- HEADER DINÁMICO v10 -->
+    <header class="header header-dynamic" id="header" role="banner">
         <div class="container header-content">
             <a href="index.html" class="logo-link">
                 <div class="logo">
@@ -40,42 +49,42 @@
                 <span></span><span></span><span></span>
             </button>
             
-            <nav class="nav nav-canonical" id="nav" role="navigation" aria-label="Navegación principal">
+            <nav class="nav nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
                 <div class="nav-row">
                     <a href="index.html" class="nav-link active" aria-current="page">Inicio</a>
                     <a href="salud.html" class="nav-link">
                         <i class="fas fa-heartbeat" aria-hidden="true"></i> 
-                        Salud <span class="nav-badge" data-cat="Salud y Bienestar">0</span>
+                        Salud
                     </a>
                     <a href="hogar.html" class="nav-link">
                         <i class="fas fa-tools" aria-hidden="true"></i> 
-                        Hogar <span class="nav-badge" data-cat="Mantenimiento del Hogar">0</span>
+                        Hogar
                     </a>
                     <a href="construccion.html" class="nav-link">
                         <i class="fas fa-cubes" aria-hidden="true"></i> 
-                        Construcción <span class="nav-badge" data-cat="Materiales de Construcción">0</span>
+                        Construcción
                     </a>
                     <a href="automotriz.html" class="nav-link">
                         <i class="fas fa-car" aria-hidden="true"></i> 
-                        Auto <span class="nav-badge" data-cat="Talleres Automotrices">0</span>
+                        Auto
                     </a>
                 </div>
                 <div class="nav-row">
                     <a href="tecnologia.html" class="nav-link">
                         <i class="fas fa-laptop-code" aria-hidden="true"></i> 
-                        Tecnología <span class="nav-badge" data-cat="Tecnología y Redes">0</span>
+                        Tecnología
                     </a>
                     <a href="funerarias.html" class="nav-link">
                         <i class="fas fa-dove" aria-hidden="true"></i> 
-                        Despedida <span class="nav-badge" data-cat="Servicios de Despedida">0</span>
+                        Despedida
                     </a>
                     <a href="eventos.html" class="nav-link">
                         <i class="fas fa-calendar-alt" aria-hidden="true"></i> 
-                        Eventos <span class="nav-badge" data-cat="Servicios para Eventos">0</span>
+                        Eventos
                     </a>
                     <a href="imagen.html" class="nav-link">
                         <i class="fas fa-spa" aria-hidden="true"></i> 
-                        Imagen <span class="nav-badge" data-cat="Imagen y Cuidado Personal">0</span>
+                        Imagen
                     </a>
                     <a href="contacto.html" class="nav-link">Contacto</a>
                 </div>
@@ -91,7 +100,7 @@
         <div class="container content-grid">
             <div class="content-main">
 
-                <!-- HERO: Número como héroe -->
+                <!-- HERO COMPACTO -->
                 <section class="hero hero-compact" aria-labelledby="hero-title">
                     <div class="hero-content">
                         <div class="hero-badge fade-in"><i class="fas fa-check-circle" aria-hidden="true"></i> Tu red de confianza local</div>
@@ -112,27 +121,18 @@
                             <p class="showcase-sub">Respuesta en menos de 2 horas · Lunes a Domingo</p>
                         </div>
 
-                        <!-- CHIPS 4+4 -->
-                        <div class="hero-chips fade-in">
-                            <a href="salud.html" class="chip"><i class="fas fa-heartbeat"></i> Salud</a>
-                            <a href="hogar.html" class="chip"><i class="fas fa-tools"></i> Hogar</a>
-                            <a href="automotriz.html" class="chip"><i class="fas fa-car"></i> Auto</a>
-                            <a href="construccion.html" class="chip"><i class="fas fa-cubes"></i> Construcción</a>
-                            <a href="tecnologia.html" class="chip"><i class="fas fa-laptop-code"></i> Tecnología</a>
-                            <a href="eventos.html" class="chip"><i class="fas fa-calendar-alt"></i> Eventos</a>
-                            <a href="imagen.html" class="chip"><i class="fas fa-spa"></i> Imagen</a>
-                            <a href="funerarias.html" class="chip"><i class="fas fa-dove"></i> Despedida</a>
+                        <!-- CHIPS DE CATEGORÍA (4+4 por CSS) -->
+                        <div class="hero-chips fade-in" id="heroChips">
+                            <a href="salud.html" class="chip chip-salud"><i class="fas fa-heartbeat"></i> Salud</a>
+                            <a href="hogar.html" class="chip chip-hogar"><i class="fas fa-tools"></i> Hogar</a>
+                            <a href="construccion.html" class="chip chip-construccion"><i class="fas fa-cubes"></i> Construcción</a>
+                            <a href="automotriz.html" class="chip chip-auto"><i class="fas fa-car"></i> Auto</a>
+                            <a href="tecnologia.html" class="chip chip-tecnologia"><i class="fas fa-laptop-code"></i> Tecnología</a>
+                            <a href="funerarias.html" class="chip chip-funeraria"><i class="fas fa-dove"></i> Despedida</a>
+                            <a href="eventos.html" class="chip chip-eventos"><i class="fas fa-calendar-alt"></i> Eventos</a>
+                            <a href="imagen.html" class="chip chip-imagen"><i class="fas fa-spa"></i> Imagen</a>
                         </div>
                     </div>
-                </section>
-
-                <!-- TICKER DE VIDA -->
-                <section class="ticker-section fade-in" aria-label="Últimos proveedores agregados">
-                    <div class="ticker-header">
-                        <span class="ticker-live"><i class="fas fa-circle"></i> EN VIVO</span>
-                        <span class="ticker-title">Últimos proveedores verificados</span>
-                    </div>
-                    <div class="ticker-track" id="tickerTrack"></div>
                 </section>
 
                 <!-- NEGOCIOS RECOMENDADOS -->
@@ -233,14 +233,26 @@
                     </div>
                 </section>
 
-                <!-- TRUST BAR -->
+                <!-- TRUST BAR COMPACTA -->
                 <section class="trust-bar fade-in" aria-labelledby="trust-title">
                     <h2 class="section-title" id="trust-title" style="font-size: 1.5rem;"><i class="fas fa-shield-alt" aria-hidden="true"></i> POR QUÉ CONFIAR</h2>
                     <div class="trust-grid">
-                        <div class="trust-item"><i class="fas fa-search" aria-hidden="true"></i><span>Selección cuidadosa</span></div>
-                        <div class="trust-item"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Precios claros</span></div>
-                        <div class="trust-item"><i class="fas fa-microphone-alt" aria-hidden="true"></i><span>Referencias reales</span></div>
-                        <div class="trust-item"><i class="fas fa-handshake" aria-hidden="true"></i><span>Sin intermediarios</span></div>
+                        <div class="trust-item">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <span>Selección cuidadosa</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-file-invoice" aria-hidden="true"></i>
+                            <span>Precios claros</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-microphone-alt" aria-hidden="true"></i>
+                            <span>Referencias reales</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-handshake" aria-hidden="true"></i>
+                            <span>Sin intermediarios</span>
+                        </div>
                     </div>
                 </section>
 
@@ -260,20 +272,29 @@
 
             </div>
 
+            <!-- SIDEBAR -->
             <aside class="sidebar sidebar-compact" role="complementary">
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-comments" aria-hidden="true"></i> ¿Dudas?</h3>
                     <p style="font-size: 0.9rem; margin-bottom: 1rem;">Escríbenos y te respondemos en menos de 2 horas.</p>
                     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-                        <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal</a>
+                        <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+                        </a>
+                        <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-sm" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-telegram" aria-hidden="true"></i> Canal
+                        </a>
                     </div>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-sm btn-block" style="margin-top: 0.5rem;"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-sm btn-block" style="margin-top: 0.5rem;">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Email
+                    </a>
                 </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿Eres proveedor?</h3>
                     <p style="font-size: 0.9rem; margin-bottom: 1rem;">Únete al directorio y aumenta tu visibilidad.</p>
-                    <a href="contacto.html" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Quiero aparecer aquí</a>
+                    <a href="contacto.html" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-store" aria-hidden="true"></i> Quiero aparecer aquí
+                    </a>
                 </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> Síguenos</h3>
@@ -286,6 +307,7 @@
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
@@ -341,6 +363,7 @@
         </div>
     </footer>
 
+    <!-- BARRA FIJA MOBILE -->
     <div class="mobile-showcase" id="mobileShowcase">
         <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
         <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>

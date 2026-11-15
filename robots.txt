@@ -1,3 +1,7 @@
 ﻿User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /functions/
+Disallow: /.wrangler/
+
 Sitemap: https://lapazteacerca.com/sitemap.xml

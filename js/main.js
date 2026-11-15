@@ -1,13 +1,13 @@
 // ========================================
-// LA PAZ TE ACERCA - JavaScript v9.3
-// Header canónico + Filtros en vivo
+// LA PAZ TE ACERCA - JavaScript v10.0
 // Regla de oro: el proveedor es el héroe
+// Cambios: filtros con delegación · sin buscador/contador/ticker/badges
 // ========================================
 
 window.VerificaLP = window.VerificaLP || {};
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Verifica La Paz - JavaScript v9.3 cargado');
+    console.log('✅ Verifica La Paz - JavaScript v10.0 cargado');
     
     initHeader();
     initMenuHamburguesa();
@@ -21,10 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initPrevencionClicksDobles();
     initBackToTop();
     initMobileShowcase();
-    initFiltrosEnVivo();
+    initFiltrosEnVivo();       // ← ahora con delegación (funciona aunque los chips se creen después)
     cargarDestacados();
-    initTicker();
-    actualizarBadgesNav();
     
     console.log('✅ Todos los módulos inicializados');
 });
@@ -72,8 +70,8 @@ function getColorVariable(categoria) {
         'Materiales de Construcción': 'var(--color-construccion, #C2410C)',
         'Talleres Automotrices': 'var(--color-auto, #1D4ED8)',
         'Tecnología y Redes': 'var(--color-tecnologia, #0891B2)',
-        'Servicios de Despedida': 'var(--color-funeraria, #4338CA)',
-        'Servicios para Eventos': '#8B5CF6',
+        'Servicios de Despedida': 'var(--color-funeraria, #475569)',  // ← corregido (antes #4338CA)
+        'Servicios para Eventos': 'var(--color-eventos, #8B5CF6)',
         'Imagen y Cuidado Personal': 'var(--color-imagen, #7C3AED)'
     };
     return colors[categoria] || '#2563EB';
@@ -117,32 +115,6 @@ async function obtenerProveedores() {
     } catch (error) {
         console.error('Error obteniendo proveedores:', error);
         return [];
-    }
-}
-
-// ========================================
-// ACTUALIZAR BADGES DEL NAV
-// ========================================
-
-async function actualizarBadgesNav() {
-    try {
-        const proveedores = await obtenerProveedores();
-        
-        document.querySelectorAll('.nav-badge').forEach(badge => {
-            const categoria = badge.getAttribute('data-cat');
-            const count = proveedores.filter(p => 
-                normalizarTexto(p.categoria) === normalizarTexto(categoria)
-            ).length;
-            
-            badge.textContent = count;
-            
-            if (count > 0) {
-                badge.classList.add('updated');
-                setTimeout(() => badge.classList.remove('updated'), 500);
-            }
-        });
-    } catch (error) {
-        console.error('Error actualizando badges:', error);
     }
 }
 
@@ -320,64 +292,36 @@ function generarTarjetaDestacada(p) {
 }
 
 // ========================================
-// TICKER DE VIDA
-// ========================================
-
-async function initTicker() {
-    const track = document.getElementById('tickerTrack');
-    if (!track) return;
-    
-    try {
-        const proveedores = await obtenerProveedores();
-        const ultimos = [...proveedores].sort((a, b) => (b.id || 0) - (a.id || 0)).slice(0, 8);
-        
-        if (ultimos.length === 0) {
-            track.innerHTML = '<span class="ticker-item">Sin proveedores aún</span>';
-            return;
-        }
-        
-        const items = [...ultimos, ...ultimos];
-        track.innerHTML = items.map(p => `
-            <div class="ticker-item">
-                <i class="fas fa-store ticker-icon"></i>
-                <strong>${p.nombre}</strong>
-                <span class="ticker-cat">${p.subcategoria || p.categoria}</span>
-                ${p.direccion ? `<span class="ticker-zona">📍 ${p.direccion.split(',')[0]}</span>` : ''}
-            </div>
-        `).join('');
-    } catch (error) {
-        console.error('Error en ticker:', error);
-    }
-}
-
-// ========================================
-// FILTROS EN VIVO
+// FILTROS EN VIVO (con delegación de eventos)
 // ========================================
 
 function initFiltrosEnVivo() {
-    const filtros = document.querySelectorAll('.filtro-chip');
-    if (!filtros.length) return;
-    
-    filtros.forEach(chip => {
-        chip.addEventListener('click', async (e) => {
-            e.preventDefault();
-            
-            filtros.forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            
-            const contenedorId = chip.getAttribute('data-contenedor');
-            const categoria = chip.getAttribute('data-categoria');
-            const keyword = chip.getAttribute('data-keyword');
-            
-            const container = document.getElementById(contenedorId);
-            if (!container) return;
-            
-            container.innerHTML = '<p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Filtrando...</p>';
-            
-            await cargarProveedoresEnContenedor(contenedorId, categoria, keyword || null);
-            
-            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+    // Delegación en document: funciona aunque los chips se creen después (como en las 8 secciones)
+    document.addEventListener('click', async function(e) {
+        const chip = e.target.closest('.filtro-chip');
+        if (!chip) return;
+        
+        e.preventDefault();
+        
+        // Desactivar todos los chips hermanos (del mismo contenedor de filtros)
+        const parent = chip.parentElement;
+        if (parent) {
+            parent.querySelectorAll('.filtro-chip').forEach(c => c.classList.remove('active'));
+        }
+        chip.classList.add('active');
+        
+        const contenedorId = chip.getAttribute('data-contenedor');
+        const categoria = chip.getAttribute('data-categoria');
+        const keyword = chip.getAttribute('data-keyword');
+        
+        const container = document.getElementById(contenedorId);
+        if (!container) return;
+        
+        container.innerHTML = '<p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Filtrando...</p>';
+        
+        await cargarProveedoresEnContenedor(contenedorId, categoria, keyword || null);
+        
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 }
 
@@ -393,8 +337,6 @@ function initHeader() {
         const currentScroll = window.pageYOffset;
         if (currentScroll > 50) header.classList.add('scrolled');
         else header.classList.remove('scrolled');
-        if (currentScroll > lastScroll && currentScroll > 200) header.classList.add('hidden');
-        else header.classList.remove('hidden');
         lastScroll = currentScroll;
     }, { passive: true });
 }
@@ -437,7 +379,7 @@ function initFadeInAnimations() {
 }
 
 function initStaggerAnimations() {
-    const staggerContainers = document.querySelectorAll('.categories-grid, .destacados-grid, .proveedores-grid, .stats-grid, .why-us-grid, .testimonials-grid');
+    const staggerContainers = document.querySelectorAll('.categories-grid, .destacados-grid, .proveedores-grid, .why-us-grid, .testimonials-grid');
     staggerContainers.forEach(container => {
         const items = container.querySelectorAll('.fade-in');
         items.forEach((item, index) => {
@@ -531,7 +473,7 @@ function initMobileShowcase() {
 }
 
 // ========================================
-// ACORDEÓN
+// ACORDEÓN (única definición global)
 // ========================================
 
 function toggleAcordeon(header) {

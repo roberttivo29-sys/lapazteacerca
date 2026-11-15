@@ -26,7 +26,7 @@
 </head>
 <body>
 
-    <header class="header" id="header" role="banner">
+    <header class="header header-dynamic" id="header" role="banner">
         <div class="container header-content">
             <a href="index.html" class="logo-link">
                 <div class="logo">
@@ -37,21 +37,25 @@
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
-            <nav class="nav" id="nav" role="navigation" aria-label="Navegación principal">
-                <a href="index.html" class="nav-link">Inicio</a>
-                <a href="salud.html" class="nav-link"><i class="fas fa-heartbeat" aria-hidden="true"></i> Salud</a>
-                <a href="hogar.html" class="nav-link"><i class="fas fa-tools" aria-hidden="true"></i> Hogar</a>
-                <a href="construccion.html" class="nav-link"><i class="fas fa-cubes" aria-hidden="true"></i> Construcción</a>
-                <a href="automotriz.html" class="nav-link"><i class="fas fa-car" aria-hidden="true"></i> Auto</a>
-                <a href="tecnologia.html" class="nav-link"><i class="fas fa-laptop-code" aria-hidden="true"></i> Tecnología</a>
-                <a href="funerarias.html" class="nav-link"><i class="fas fa-dove" aria-hidden="true"></i> Despedida</a>
-                <a href="eventos.html" class="nav-link"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Eventos</a>
-                <a href="imagen.html" class="nav-link active" aria-current="page"><i class="fas fa-spa" aria-hidden="true"></i> Imagen</a>
-                <a href="contacto.html" class="nav-link">Contacto</a>
-                <a href="contacto.html" class="nav-link btn-proveedor" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor
-                </a>
+            <nav class="nav nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
+                <div class="nav-row">
+                    <a href="index.html" class="nav-link">Inicio</a>
+                    <a href="salud.html" class="nav-link"><i class="fas fa-heartbeat" aria-hidden="true"></i> Salud</a>
+                    <a href="hogar.html" class="nav-link"><i class="fas fa-tools" aria-hidden="true"></i> Hogar</a>
+                    <a href="construccion.html" class="nav-link"><i class="fas fa-cubes" aria-hidden="true"></i> Construcción</a>
+                    <a href="automotriz.html" class="nav-link"><i class="fas fa-car" aria-hidden="true"></i> Auto</a>
+                </div>
+                <div class="nav-row">
+                    <a href="tecnologia.html" class="nav-link"><i class="fas fa-laptop-code" aria-hidden="true"></i> Tecnología</a>
+                    <a href="funerarias.html" class="nav-link"><i class="fas fa-dove" aria-hidden="true"></i> Despedida</a>
+                    <a href="eventos.html" class="nav-link"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Eventos</a>
+                    <a href="imagen.html" class="nav-link active" aria-current="page"><i class="fas fa-spa" aria-hidden="true"></i> Imagen</a>
+                    <a href="contacto.html" class="nav-link">Contacto</a>
+                </div>
             </nav>
+            <a href="contacto.html" class="cta-proveedor" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor
+            </a>
         </div>
     </header>
 
@@ -79,9 +83,7 @@
 
                 <section aria-labelledby="proveedores-title">
                     <h2 class="section-title fade-in" id="proveedores-title"><i class="fas fa-store" aria-hidden="true"></i> PROVEEDORES DISPONIBLES</h2>
-                    
                     <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
-                    
                     <div id="contenedor-principal" class="proveedores-grid">
                         <p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Cargando proveedores...</p>
                     </div>
