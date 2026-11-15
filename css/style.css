@@ -1,9 +1,9 @@
 /* ========================================
-   LA PAZ TE ACERCA - CSS v10.2
+   LA PAZ TE ACERCA - CSS v10.3
    (base íntegra v9.2 + ediciones quirúrgicas)
-   Header dinámico + Nav 1 fila + CTA independiente
+   Header dinámico + Nav 1 fila con íconos + CTA independiente
    Regla de oro: el proveedor es el héroe
-   Ediciones: logo dominante · nav limpio 1 fila · chips 4+4 notorios · sin buscador/contador/badges/ticker/stats
+   Ediciones: logo dominante · nav 1 fila homogéneo · chips 4+4 notorios · móvil compacto · sin buscador/contador/badges/ticker/stats
    ======================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -188,7 +188,7 @@ ul {
 }
 
 /* ========================================
-   HEADER DINÁMICO v10.2
+   HEADER DINÁMICO v10.3
    ======================================== */
 
 .header-dynamic {
@@ -273,7 +273,7 @@ ul {
 }
 
 /* ========================================
-   NAV LIMPIO — 1 SOLA FILA EN DESKTOP
+   NAV HOMOGÉNEO — 1 FILA CON ÍCONOS
    ======================================== */
 
 .nav-simetrico {
@@ -281,10 +281,10 @@ ul {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 0.15rem;
+    gap: 0.1rem;
     flex: 1;
     min-width: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Forzar 1 sola fila */
 }
 
 .nav-row {
@@ -295,8 +295,8 @@ ul {
     text-decoration: none;
     color: var(--gris-oscuro);
     font-weight: 600;
-    font-size: 0.88rem;
-    padding: 0.5rem 0.7rem;
+    font-size: 0.82rem;
+    padding: 0.4rem 0.5rem;
     border-radius: var(--radio-sm);
     transition: var(--transicion-rapida);
     position: relative;
@@ -304,7 +304,7 @@ ul {
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.3rem;
     line-height: 1;
     flex-shrink: 0;
 }
@@ -340,7 +340,9 @@ ul {
 .nav-link i {
     font-size: 0.85rem;
     flex-shrink: 0;
-    display: none; /* Oculto en desktop: nav limpio de solo texto */
+    display: inline-block; /* Íconos visibles en desktop */
+    width: 16px;
+    text-align: center;
 }
 
 /* ========================================
@@ -699,7 +701,7 @@ ul {
 }
 
 /* ========================================
-   CHIPS DE CATEGORÍA (4+4 NOTORIOS Y ORGANIZADOS)
+   CHIPS DE CATEGORÍA (4+4 notorios)
    ======================================== */
 
 .hero-chips {
@@ -2280,12 +2282,14 @@ section + section {
     }
     
     .nav-link {
-        font-size: 0.78rem;
-        padding: 0.4rem 0.55rem;
+        font-size: 0.75rem;
+        padding: 0.35rem 0.4rem;
     }
     
     .nav-link i {
-        display: none;
+        display: inline-block;
+        width: 14px;
+        font-size: 0.75rem;
     }
 }
 
@@ -2308,17 +2312,17 @@ section + section {
         top: 0;
         right: -100%;
         width: 85%;
-        max-width: 340px;
+        max-width: 300px;
         height: 100vh;
         background: var(--blanco);
         flex-direction: column;
-        padding: 5rem var(--espacio-md) var(--espacio-md);
+        padding: 4rem 1rem 1rem;
         box-shadow: var(--sombra-xl);
         transition: right 0.3s ease;
         z-index: var(--z-header);
         overflow-y: auto;
         align-items: stretch;
-        gap: 0.5rem;
+        gap: 0.3rem;
     }
     
     .nav-simetrico.active {
@@ -2335,15 +2339,16 @@ section + section {
     .nav-link {
         width: 100%;
         text-align: left;
-        padding: 0.8rem var(--espacio-sm);
-        font-size: 1rem;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.95rem;
         justify-content: flex-start;
     }
     
     .nav-link i {
         display: inline-block;
-        width: 24px;
+        width: 20px;
         text-align: center;
+        margin-right: 0.5rem;
     }
     
     .nav-simetrico .cta-proveedor-mobile {
@@ -2417,7 +2422,15 @@ section + section {
     }
     
     .logo h1 {
-        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        font-size: clamp(1rem, 4vw, 1.4rem);
+    }
+    
+    .logo h1 i {
+        font-size: clamp(1rem, 4vw, 1.3rem);
+    }
+    
+    .tagline {
+        font-size: 0.55rem;
     }
     
     .hero {
