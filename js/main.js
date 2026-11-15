@@ -1,4 +1,4 @@
-// ========================================
+﻿// ========================================
 // LA PAZ TE ACERCA - JavaScript v10.0
 // Regla de oro: el proveedor es el héroe
 // Cambios: filtros con delegación · sin buscador/contador/ticker/badges
@@ -344,20 +344,20 @@ function initHeader() {
 function initMenuHamburguesa() {
     const menuToggle = document.getElementById('menuToggle');
     const nav = document.getElementById('nav');
+    const overlay = document.getElementById('navOverlay');
     if (!menuToggle || !nav) return;
     
     const toggleMenu = () => {
         const isActive = nav.classList.toggle('active');
         menuToggle.classList.toggle('active');
         menuToggle.setAttribute('aria-expanded', isActive);
+        if (overlay) overlay.classList.toggle('active', isActive);
         document.body.style.overflow = isActive ? 'hidden' : '';
     };
     
     menuToggle.addEventListener('click', toggleMenu);
+    if (overlay) overlay.addEventListener('click', toggleMenu);
     document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', toggleMenu));
-    document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && !menuToggle.contains(e.target) && nav.classList.contains('active')) toggleMenu();
-    });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && nav.classList.contains('active')) toggleMenu();
     });

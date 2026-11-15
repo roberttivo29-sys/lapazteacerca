@@ -1,9 +1,9 @@
 /* ========================================
-   LA PAZ TE ACERCA - CSS v10.3
+   LA PAZ TE ACERCA - CSS v10.4
    (base íntegra v9.2 + ediciones quirúrgicas)
    Header dinámico + Nav 1 fila con íconos + CTA independiente
    Regla de oro: el proveedor es el héroe
-   Ediciones: logo dominante · nav 1 fila homogéneo · chips 4+4 notorios · móvil compacto · sin buscador/contador/badges/ticker/stats
+   Ediciones: logo dominante · nav 1 fila homogéneo · chips 4+4 notorios · móvil compacto estético · sin buscador/contador/badges/ticker/stats
    ======================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -112,6 +112,7 @@
     --z-modal: 9999;
     --z-toast: 9999;
     --z-float: 990;
+    --z-overlay: 999;
 }
 
 /* ========================================
@@ -188,7 +189,7 @@ ul {
 }
 
 /* ========================================
-   HEADER DINÁMICO v10.3
+   HEADER DINÁMICO v10.4
    ======================================== */
 
 .header-dynamic {
@@ -284,7 +285,7 @@ ul {
     gap: 0.1rem;
     flex: 1;
     min-width: 0;
-    flex-wrap: nowrap; /* Forzar 1 sola fila */
+    flex-wrap: nowrap;
 }
 
 .nav-row {
@@ -340,7 +341,7 @@ ul {
 .nav-link i {
     font-size: 0.85rem;
     flex-shrink: 0;
-    display: inline-block; /* Íconos visibles en desktop */
+    display: inline-block;
     width: 16px;
     text-align: center;
 }
@@ -447,6 +448,29 @@ ul {
 
 .menu-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* ========================================
+   OVERLAY OSCURO (para cuando el menú móvil está abierto)
+   ======================================== */
+
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: var(--z-overlay);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-overlay.active {
+    display: block;
+    opacity: 1;
 }
 
 /* ========================================
@@ -2307,22 +2331,25 @@ section + section {
         display: none;
     }
     
+    /* MENÚ MÓVIL COMPACTO Y ESTÉTICO */
     .nav-simetrico {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 85%;
-        max-width: 300px;
-        height: 100vh;
+        width: 75%;
+        max-width: 280px;
+        height: auto;
+        max-height: 80vh;
         background: var(--blanco);
         flex-direction: column;
-        padding: 4rem 1rem 1rem;
-        box-shadow: var(--sombra-xl);
+        padding: 3.5rem 1.2rem 1.2rem;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
         transition: right 0.3s ease;
         z-index: var(--z-header);
         overflow-y: auto;
         align-items: stretch;
-        gap: 0.3rem;
+        gap: 0.2rem;
+        border-radius: 0 0 0 12px;
     }
     
     .nav-simetrico.active {
@@ -2332,23 +2359,24 @@ section + section {
     .nav-row {
         display: flex;
         flex-direction: column;
-        gap: 0.3rem;
+        gap: 0.2rem;
         align-items: stretch;
     }
     
     .nav-link {
         width: 100%;
         text-align: left;
-        padding: 0.6rem 0.8rem;
-        font-size: 0.95rem;
+        padding: 0.65rem 0.8rem;
+        font-size: 0.9rem;
         justify-content: flex-start;
+        border-radius: 8px;
     }
     
     .nav-link i {
         display: inline-block;
-        width: 20px;
+        width: 18px;
         text-align: center;
-        margin-right: 0.5rem;
+        margin-right: 0.4rem;
     }
     
     .nav-simetrico .cta-proveedor-mobile {
@@ -2359,11 +2387,11 @@ section + section {
         background: var(--gradiente-ocre);
         color: var(--blanco);
         font-weight: 700;
-        font-size: 1rem;
-        padding: 1rem;
+        font-size: 0.95rem;
+        padding: 0.85rem;
         border-radius: var(--radio-md);
         text-decoration: none;
-        margin-top: var(--espacio-md);
+        margin-top: var(--espacio-sm);
         width: 100%;
     }
     
