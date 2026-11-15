@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="La Paz te Acerca - Directorio de confianza con servicios seleccionados cuidadosamente en La Paz y El Alto. Encuentra profesionales recomendados por la comunidad.">
+    <meta name="description" content="La Paz te Acerca - Directorio de confianza con servicios seleccionados cuidadosamente en La Paz y El Alto.">
     <meta property="og:title" content="La Paz te Acerca | Conectamos vecinos con servicios de confianza">
     <meta property="og:description" content="Olvídate de buscar a ciegas. Encuentra profesionales y negocios recomendados por la comunidad en La Paz y El Alto.">
     <meta property="og:type" content="website">
@@ -23,29 +23,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "La Paz te Acerca",
-        "url": "https://lapazteacerca.com",
-        "description": "Directorio de confianza de servicios en La Paz y El Alto"
-    }
-    </script>
 </head>
 <body>
 
-    <!-- HEADER DINÁMICO v9.2 -->
-    <header class="header header-dynamic" id="header" role="banner">
+    <!-- HEADER CANÓNICO v9.3 -->
+    <header class="header header-canonical" id="header" role="banner">
         <div class="container header-content">
             <a href="index.html" class="logo-link">
                 <div class="logo">
                     <h1><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h1>
                     <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
-                    <p class="tagline-dynamic" id="headerCounter">
-                        <i class="fas fa-store" aria-hidden="true"></i> 
-                        <span id="contadorGlobal">0</span> proveedores verificados
-                    </p>
                 </div>
             </a>
             
@@ -53,7 +40,7 @@
                 <span></span><span></span><span></span>
             </button>
             
-            <nav class="nav nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
+            <nav class="nav nav-canonical" id="nav" role="navigation" aria-label="Navegación principal">
                 <div class="nav-row">
                     <a href="index.html" class="nav-link active" aria-current="page">Inicio</a>
                     <a href="salud.html" class="nav-link">
@@ -104,22 +91,12 @@
         <div class="container content-grid">
             <div class="content-main">
 
-                <!-- HERO COMPACTO -->
+                <!-- HERO: Número como héroe -->
                 <section class="hero hero-compact" aria-labelledby="hero-title">
                     <div class="hero-content">
                         <div class="hero-badge fade-in"><i class="fas fa-check-circle" aria-hidden="true"></i> Tu red de confianza local</div>
                         <h2 class="hero-title fade-in" id="hero-title">Encuentra servicios de confianza en La Paz y El Alto</h2>
                         <p class="hero-subtitle fade-in">Profesionales verificados, sin intermediarios. Conecta directo.</p>
-
-                        <!-- BUSCADOR VISIBLE -->
-                        <div class="hero-search fade-in">
-                            <div class="search-box">
-                                <i class="fas fa-search search-icon" aria-hidden="true"></i>
-                                <input type="text" id="heroSearchInput" placeholder="¿Qué servicio necesitas? (plomería, grúa, odontólogo...)" autocomplete="off">
-                                <button id="heroSearchBtn" class="btn-search"><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div id="heroSearchResults" class="search-results"></div>
-                        </div>
 
                         <!-- MOSTRADOR DEL NÚMERO -->
                         <div class="hero-showcase fade-in">
@@ -135,16 +112,16 @@
                             <p class="showcase-sub">Respuesta en menos de 2 horas · Lunes a Domingo</p>
                         </div>
 
-                        <!-- CHIPS DE CATEGORÍA -->
-                        <div class="hero-chips fade-in" id="heroChips">
-                            <a href="salud.html" class="chip chip-salud"><i class="fas fa-heartbeat"></i> Salud</a>
-                            <a href="hogar.html" class="chip chip-hogar"><i class="fas fa-tools"></i> Hogar</a>
-                            <a href="construccion.html" class="chip chip-construccion"><i class="fas fa-cubes"></i> Construcción</a>
-                            <a href="automotriz.html" class="chip chip-auto"><i class="fas fa-car"></i> Auto</a>
-                            <a href="tecnologia.html" class="chip chip-tecnologia"><i class="fas fa-laptop-code"></i> Tecnología</a>
-                            <a href="funerarias.html" class="chip chip-funeraria"><i class="fas fa-dove"></i> Despedida</a>
-                            <a href="eventos.html" class="chip chip-eventos"><i class="fas fa-calendar-alt"></i> Eventos</a>
-                            <a href="imagen.html" class="chip chip-imagen"><i class="fas fa-spa"></i> Imagen</a>
+                        <!-- CHIPS 4+4 -->
+                        <div class="hero-chips fade-in">
+                            <a href="salud.html" class="chip"><i class="fas fa-heartbeat"></i> Salud</a>
+                            <a href="hogar.html" class="chip"><i class="fas fa-tools"></i> Hogar</a>
+                            <a href="automotriz.html" class="chip"><i class="fas fa-car"></i> Auto</a>
+                            <a href="construccion.html" class="chip"><i class="fas fa-cubes"></i> Construcción</a>
+                            <a href="tecnologia.html" class="chip"><i class="fas fa-laptop-code"></i> Tecnología</a>
+                            <a href="eventos.html" class="chip"><i class="fas fa-calendar-alt"></i> Eventos</a>
+                            <a href="imagen.html" class="chip"><i class="fas fa-spa"></i> Imagen</a>
+                            <a href="funerarias.html" class="chip"><i class="fas fa-dove"></i> Despedida</a>
                         </div>
                     </div>
                 </section>
@@ -155,9 +132,7 @@
                         <span class="ticker-live"><i class="fas fa-circle"></i> EN VIVO</span>
                         <span class="ticker-title">Últimos proveedores verificados</span>
                     </div>
-                    <div class="ticker-track" id="tickerTrack">
-                        <!-- Se llena dinámicamente con JS -->
-                    </div>
+                    <div class="ticker-track" id="tickerTrack"></div>
                 </section>
 
                 <!-- NEGOCIOS RECOMENDADOS -->
@@ -171,34 +146,6 @@
                     </div>
                 </section>
 
-                <!-- STATS REALES -->
-                <section class="stats-section fade-in" aria-labelledby="stats-title">
-                    <h2 class="section-title" id="stats-title"><i class="fas fa-heart" aria-hidden="true"></i> DIRECTORIO EN NÚMEROS</h2>
-                    <p class="section-description">Datos reales de nuestro directorio</p>
-                    <div class="stats-grid" id="realStats">
-                        <div class="stat-card">
-                            <div class="stat-icon"><i class="fas fa-store" aria-hidden="true"></i></div>
-                            <div class="stat-number" data-target="0" id="statProveedores">0</div>
-                            <div class="stat-label">Proveedores verificados</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon"><i class="fas fa-th-large" aria-hidden="true"></i></div>
-                            <div class="stat-number" data-target="8">8</div>
-                            <div class="stat-label">Categorías activas</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon"><i class="fas fa-map-marked-alt" aria-hidden="true"></i></div>
-                            <div class="stat-number">2</div>
-                            <div class="stat-label">Ciudades: La Paz y El Alto</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div>
-                            <div class="stat-number" data-target="0" id="stat24h">0</div>
-                            <div class="stat-label">Atención 24 horas</div>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- CATEGORÍAS -->
                 <section class="categories-section" id="categorias" aria-labelledby="categorias-title">
                     <h2 class="section-title fade-in" id="categorias-title"><i class="fas fa-th-large" aria-hidden="true"></i> EXPLORA POR CATEGORÍA</h2>
@@ -209,7 +156,6 @@
                             <h3>Salud y Bienestar</h3>
                             <p class="category-subtitle">Humana y Animal</p>
                             <p>Clínicas, consultorios, veterinarias y laboratorios con horarios reales.</p>
-                            <div class="category-counter"><span class="counter-number" data-categoria="Salud y Bienestar">0</span> proveedores</div>
                             <div class="category-actions">
                                 <a href="salud.html" class="btn btn-outline btn-salud">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </div>
@@ -220,7 +166,6 @@
                             <h3>Mantenimiento del Hogar</h3>
                             <p class="category-subtitle">Reparaciones Domiciliarias</p>
                             <p>Técnicos seleccionados para plomería, electricidad, albañilería y más.</p>
-                            <div class="category-counter"><span class="counter-number" data-categoria="Mantenimiento del Hogar">0</span> proveedores</div>
                             <div class="category-actions">
                                 <a href="hogar.html" class="btn btn-outline btn-hogar">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </div>
@@ -231,7 +176,6 @@
                             <h3>Materiales de Construcción</h3>
                             <p class="category-subtitle">Distribuidores y Obra Gruesa</p>
                             <p>Cemento, áridos, ladrillos, madera y alquiler de maquinaria.</p>
-                            <div class="category-counter"><span class="counter-number" data-categoria="Materiales de Construcción">0</span> proveedores</div>
                             <div class="category-actions">
                                 <a href="construccion.html" class="btn btn-outline btn-construccion">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </div>
@@ -242,7 +186,6 @@
                             <h3>Talleres Automotrices</h3>
                             <p class="category-subtitle">Mecánica y Grúas</p>
                             <p>Talleres mecánicos y grúas con cotizaciones claras antes de tocar tu auto.</p>
-                            <div class="category-counter"><span class="counter-number" data-categoria="Talleres Automotrices">0</span> proveedores</div>
                             <div class="category-actions">
                                 <a href="automotriz.html" class="btn btn-outline btn-auto">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </div>
@@ -253,7 +196,6 @@
                             <h3>Tecnología y Redes</h3>
                             <p class="category-subtitle">Reparaciones y Soporte</p>
                             <p>Técnicos en celulares, laptops, cámaras y soporte a domicilio.</p>
-                            <div class="category-counter"><span class="counter-number" data-categoria="Tecnología y Redes">0</span> proveedores</div>
                             <div class="category-actions">
                                 <a href="tecnologia.html" class="btn btn-outline btn-tecnologia">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </div>
@@ -264,7 +206,6 @@
                             <h3>Servicios de Despedida</h3>
                             <p class="category-subtitle">Respeto y Transparencia</p>
                             <p>Servicios funerarios con precios transparentes y trato humano.</p>
-                            <div class="category-counter"><span class="counter-number" data-categoria="Servicios de Despedida">0</span> proveedores</div>
                             <div class="category-actions">
                                 <a href="funerarias.html" class="btn btn-outline btn-funeraria">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </div>
@@ -275,7 +216,6 @@
                             <h3>Servicios para Eventos</h3>
                             <p class="category-subtitle">Filmación, Sonido y Locales</p>
                             <p>Todo lo que necesitas para que tu evento sea inolvidable.</p>
-                            <div class="category-counter"><span class="counter-number" data-categoria="Servicios para Eventos">0</span> proveedores</div>
                             <div class="category-actions">
                                 <a href="eventos.html" class="btn btn-outline btn-eventos">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </div>
@@ -286,7 +226,6 @@
                             <h3>Imagen y Cuidado Personal</h3>
                             <p class="category-subtitle">Barberías, Salones y Estética</p>
                             <p>Barberías, salones de belleza, maquillaje profesional y spas.</p>
-                            <div class="category-counter"><span class="counter-number" data-categoria="Imagen y Cuidado Personal">0</span> proveedores</div>
                             <div class="category-actions">
                                 <a href="imagen.html" class="btn btn-outline btn-imagen">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                             </div>
@@ -294,26 +233,14 @@
                     </div>
                 </section>
 
-                <!-- TRUST BAR COMPACTA -->
+                <!-- TRUST BAR -->
                 <section class="trust-bar fade-in" aria-labelledby="trust-title">
                     <h2 class="section-title" id="trust-title" style="font-size: 1.5rem;"><i class="fas fa-shield-alt" aria-hidden="true"></i> POR QUÉ CONFIAR</h2>
                     <div class="trust-grid">
-                        <div class="trust-item">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                            <span>Selección cuidadosa</span>
-                        </div>
-                        <div class="trust-item">
-                            <i class="fas fa-file-invoice" aria-hidden="true"></i>
-                            <span>Precios claros</span>
-                        </div>
-                        <div class="trust-item">
-                            <i class="fas fa-microphone-alt" aria-hidden="true"></i>
-                            <span>Referencias reales</span>
-                        </div>
-                        <div class="trust-item">
-                            <i class="fas fa-handshake" aria-hidden="true"></i>
-                            <span>Sin intermediarios</span>
-                        </div>
+                        <div class="trust-item"><i class="fas fa-search" aria-hidden="true"></i><span>Selección cuidadosa</span></div>
+                        <div class="trust-item"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Precios claros</span></div>
+                        <div class="trust-item"><i class="fas fa-microphone-alt" aria-hidden="true"></i><span>Referencias reales</span></div>
+                        <div class="trust-item"><i class="fas fa-handshake" aria-hidden="true"></i><span>Sin intermediarios</span></div>
                     </div>
                 </section>
 
@@ -333,29 +260,20 @@
 
             </div>
 
-            <!-- SIDEBAR -->
             <aside class="sidebar sidebar-compact" role="complementary">
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-comments" aria-hidden="true"></i> ¿Dudas?</h3>
                     <p style="font-size: 0.9rem; margin-bottom: 1rem;">Escríbenos y te respondemos en menos de 2 horas.</p>
                     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
-                        </a>
-                        <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-sm" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-telegram" aria-hidden="true"></i> Canal
-                        </a>
+                        <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+                        <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal</a>
                     </div>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-sm btn-block" style="margin-top: 0.5rem;">
-                        <i class="fas fa-envelope" aria-hidden="true"></i> Email
-                    </a>
+                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-sm btn-block" style="margin-top: 0.5rem;"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
                 </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿Eres proveedor?</h3>
                     <p style="font-size: 0.9rem; margin-bottom: 1rem;">Únete al directorio y aumenta tu visibilidad.</p>
-                    <a href="contacto.html" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-store" aria-hidden="true"></i> Quiero aparecer aquí
-                    </a>
+                    <a href="contacto.html" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Quiero aparecer aquí</a>
                 </div>
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> Síguenos</h3>
@@ -368,7 +286,6 @@
         </div>
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
@@ -424,7 +341,6 @@
         </div>
     </footer>
 
-    <!-- BARRA FIJA MOBILE -->
     <div class="mobile-showcase" id="mobileShowcase">
         <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
         <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>

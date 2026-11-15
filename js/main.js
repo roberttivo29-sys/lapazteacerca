@@ -1,13 +1,13 @@
 // ========================================
-// LA PAZ TE ACERCA - JavaScript v9.2
-// Header dinámico + Nav simétrico + Filtros en vivo
+// LA PAZ TE ACERCA - JavaScript v9.3
+// Header canónico + Filtros en vivo
 // Regla de oro: el proveedor es el héroe
 // ========================================
 
 window.VerificaLP = window.VerificaLP || {};
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Verifica La Paz - JavaScript v9.2 cargado');
+    console.log('✅ Verifica La Paz - JavaScript v9.3 cargado');
     
     initHeader();
     initMenuHamburguesa();
@@ -21,12 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initPrevencionClicksDobles();
     initBackToTop();
     initMobileShowcase();
-    initHeroSearch();
     initFiltrosEnVivo();
     cargarDestacados();
-    cargarContadoresReales();
     initTicker();
-    actualizarHeaderDinamico();
+    actualizarBadgesNav();
     
     console.log('✅ Todos los módulos inicializados');
 });
@@ -119,6 +117,32 @@ async function obtenerProveedores() {
     } catch (error) {
         console.error('Error obteniendo proveedores:', error);
         return [];
+    }
+}
+
+// ========================================
+// ACTUALIZAR BADGES DEL NAV
+// ========================================
+
+async function actualizarBadgesNav() {
+    try {
+        const proveedores = await obtenerProveedores();
+        
+        document.querySelectorAll('.nav-badge').forEach(badge => {
+            const categoria = badge.getAttribute('data-cat');
+            const count = proveedores.filter(p => 
+                normalizarTexto(p.categoria) === normalizarTexto(categoria)
+            ).length;
+            
+            badge.textContent = count;
+            
+            if (count > 0) {
+                badge.classList.add('updated');
+                setTimeout(() => badge.classList.remove('updated'), 500);
+            }
+        });
+    } catch (error) {
+        console.error('Error actualizando badges:', error);
     }
 }
 
@@ -296,84 +320,6 @@ function generarTarjetaDestacada(p) {
 }
 
 // ========================================
-// HEADER DINÁMICO - Contadores en vivo
-// ========================================
-
-async function actualizarHeaderDinamico() {
-    try {
-        const proveedores = await obtenerProveedores();
-        
-        // Contador global en el tagline
-        const contadorGlobal = document.getElementById('contadorGlobal');
-        if (contadorGlobal) {
-            contadorGlobal.textContent = proveedores.length;
-        }
-        
-        // Badges por categoría en el nav
-        document.querySelectorAll('.nav-badge').forEach(badge => {
-            const categoria = badge.getAttribute('data-cat');
-            const count = proveedores.filter(p => 
-                normalizarTexto(p.categoria) === normalizarTexto(categoria)
-            ).length;
-            
-            badge.textContent = count;
-            
-            // Animación si el número es mayor a 0
-            if (count > 0) {
-                badge.classList.add('updated');
-                setTimeout(() => badge.classList.remove('updated'), 500);
-            }
-        });
-    } catch (error) {
-        console.error('Error actualizando header dinámico:', error);
-    }
-}
-
-// ========================================
-// CONTADORES REALES (Stats section)
-// ========================================
-
-async function cargarContadoresReales() {
-    try {
-        const proveedores = await obtenerProveedores();
-        
-        // Contador total
-        const statProveedores = document.getElementById('statProveedores');
-        if (statProveedores) {
-            statProveedores.setAttribute('data-target', proveedores.length);
-            animateCounter(statProveedores, proveedores.length, '');
-        }
-        
-        // Contador 24h
-        const count24h = proveedores.filter(p => p['24horas']).length;
-        const stat24h = document.getElementById('stat24h');
-        if (stat24h) {
-            stat24h.setAttribute('data-target', count24h);
-            animateCounter(stat24h, count24h, '');
-        }
-        
-        // Contadores por categoría (en tarjetas de categorías)
-        document.querySelectorAll('.counter-number').forEach(el => {
-            const cat = el.getAttribute('data-categoria');
-            const count = proveedores.filter(p => normalizarTexto(p.categoria) === normalizarTexto(cat)).length;
-            el.textContent = count;
-        });
-    } catch (error) {
-        console.error('Error cargando contadores reales:', error);
-    }
-}
-
-function animateCounter(element, target, suffix = '') {
-    let current = 0;
-    const increment = target / 60;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) { current = target; clearInterval(timer); }
-        element.textContent = Math.floor(current).toLocaleString() + suffix;
-    }, 2000 / 60);
-}
-
-// ========================================
 // TICKER DE VIDA
 // ========================================
 
@@ -390,7 +336,6 @@ async function initTicker() {
             return;
         }
         
-        // Duplicar para scroll infinito
         const items = [...ultimos, ...ultimos];
         track.innerHTML = items.map(p => `
             <div class="ticker-item">
@@ -406,106 +351,6 @@ async function initTicker() {
 }
 
 // ========================================
-// BÚSQUEDA VISIBLE EN HERO
-// ========================================
-
-function initHeroSearch() {
-    const input = document.getElementById('heroSearchInput');
-    const btn = document.getElementById('heroSearchBtn');
-    const results = document.getElementById('heroSearchResults');
-    if (!input || !results) return;
-    
-    let debounceTimer;
-    
-    input.addEventListener('input', (e) => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => buscarEnHero(e.target.value, results), 300);
-    });
-    
-    if (btn) {
-        btn.addEventListener('click', () => {
-            const query = input.value.trim();
-            if (query) {
-                const primeraCat = getCategoryUrlFromQuery(query);
-                if (primeraCat) window.location.href = primeraCat + '#buscar=' + encodeURIComponent(query);
-            }
-        });
-    }
-    
-    document.addEventListener('click', (e) => {
-        if (!input.contains(e.target) && !results.contains(e.target)) {
-            results.innerHTML = '';
-        }
-    });
-}
-
-async function buscarEnHero(query, resultsContainer) {
-    if (query.length < 2) {
-        resultsContainer.innerHTML = '';
-        return;
-    }
-    
-    const q = normalizarTexto(query);
-    const proveedores = await obtenerProveedores();
-    const resultados = proveedores.filter(p => 
-        normalizarTexto(p.nombre).includes(q) ||
-        normalizarTexto(p.subcategoria).includes(q) ||
-        normalizarTexto(p.categoria).includes(q)
-    ).slice(0, 5);
-    
-    if (resultados.length === 0) {
-        resultsContainer.innerHTML = `<div class="search-result-item"><i class="fas fa-search"></i><span>No encontramos "${query}"</span></div>`;
-        return;
-    }
-    
-    resultsContainer.innerHTML = resultados.map(p => {
-        const url = getCategoryUrl(p.categoria);
-        return `
-            <a href="${url}" class="search-result-item">
-                <i class="fas fa-store"></i>
-                <div class="search-result-info">
-                    <strong>${p.nombre}</strong>
-                    <span>${p.categoria} > ${p.subcategoria}</span>
-                </div>
-                <i class="fas fa-chevron-right"></i>
-            </a>
-        `;
-    }).join('');
-}
-
-function getCategoryUrl(categoria) {
-    const urls = {
-        'Salud y Bienestar': 'salud.html',
-        'Mantenimiento del Hogar': 'hogar.html',
-        'Materiales de Construcción': 'construccion.html',
-        'Talleres Automotrices': 'automotriz.html',
-        'Tecnología y Redes': 'tecnologia.html',
-        'Servicios de Despedida': 'funerarias.html',
-        'Servicios para Eventos': 'eventos.html',
-        'Imagen y Cuidado Personal': 'imagen.html'
-    };
-    return urls[categoria] || 'index.html';
-}
-
-function getCategoryUrlFromQuery(query) {
-    const q = normalizarTexto(query);
-    const map = {
-        'salud': 'salud.html', 'clinica': 'salud.html', 'odont': 'salud.html', 'veterinaria': 'salud.html',
-        'plomer': 'hogar.html', 'electric': 'hogar.html', 'albañil': 'hogar.html', 'pintur': 'hogar.html',
-        'construc': 'construccion.html', 'ferreter': 'construccion.html', 'cemento': 'construccion.html',
-        'taller': 'automotriz.html', 'mecan': 'automotriz.html', 'grua': 'automotriz.html', 'auto': 'automotriz.html',
-        'pc': 'tecnologia.html', 'laptop': 'tecnologia.html', 'celular': 'tecnologia.html', 'camara': 'tecnologia.html',
-        'funeraria': 'funerarias.html', 'crematorio': 'funerarias.html',
-        'evento': 'eventos.html', 'filmacion': 'eventos.html', 'banda': 'eventos.html',
-        'barber': 'imagen.html', 'salon': 'imagen.html', 'spa': 'imagen.html', 'maquillaje': 'imagen.html'
-    };
-    for (const [key, url] of Object.entries(map)) {
-        if (q.includes(key)) return url;
-    }
-    return null;
-}
-
-// ========================================
 // FILTROS EN VIVO
 // ========================================
 
@@ -517,7 +362,6 @@ function initFiltrosEnVivo() {
         chip.addEventListener('click', async (e) => {
             e.preventDefault();
             
-            // Quitar active de todos
             filtros.forEach(c => c.classList.remove('active'));
             chip.classList.add('active');
             
@@ -528,12 +372,10 @@ function initFiltrosEnVivo() {
             const container = document.getElementById(contenedorId);
             if (!container) return;
             
-            // Mostrar loading
             container.innerHTML = '<p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Filtrando...</p>';
             
             await cargarProveedoresEnContenedor(contenedorId, categoria, keyword || null);
             
-            // Scroll suave al contenedor
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
@@ -689,7 +531,7 @@ function initMobileShowcase() {
 }
 
 // ========================================
-// ACORDEÓN (usado en páginas de categoría y contacto)
+// ACORDEÓN
 // ========================================
 
 function toggleAcordeon(header) {
