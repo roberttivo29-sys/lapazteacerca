@@ -1,16 +1,22 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA - JavaScript v11.0
+// LA PAZ TE ACERCA - JavaScript v11.2
 // Regla de oro: el NÚMERO es el héroe
+// 
+// Cambios v11.2:
+// - Nomenclatura de planes: basico / destacado / completo
+// - getPlanBadge() actualizada
+// - ordenPorPlan actualizado
+// - Card "completo" reemplaza a "ultra-premium"
 // 
 // Cambios v11.0:
 // - Toast público funcional (reutiliza CSS)
 // - Fix WhatsApp 591 duplicado
-// - Eliminación de código muerto (~150 líneas)
+// - Eliminación de código muerto
 // - Unificación de formato y comentarios
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Verifica La Paz - JavaScript v11.0 cargado');
+    console.log('✅ Verifica La Paz - JavaScript v11.2 cargado');
     
     initHeader();
     initMenuHamburguesa();
@@ -82,11 +88,15 @@ function getColorVariable(categoria) {
     return colors[categoria] || '#2563EB';
 }
 
+// ========================================
+// BADGES DE PLAN v11.2
+// ========================================
+
 function getPlanBadge(tipo_plan) {
     const badges = {
-        'gratuito': '',
-        'premium': '<span class="badge-nivel nivel-premium"><i class="fas fa-star"></i> Premium</span>',
-        'ultra_premium': '<span class="badge-nivel nivel-ultra"><i class="fas fa-crown"></i> Ultra Premium</span>'
+        'basico': '<span class="badge-nivel nivel-basico"><i class="fas fa-list"></i> Básico</span>',
+        'destacado': '<span class="badge-nivel nivel-destacado"><i class="fas fa-star"></i> Destacado</span>',
+        'completo': '<span class="badge-nivel nivel-completo"><i class="fas fa-crown"></i> Completo</span>'
     };
     return badges[tipo_plan] || '';
 }
@@ -142,7 +152,8 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
     try {
         const todos = await obtenerProveedores();
         
-        const ordenPorPlan = { 'ultra_premium': 0, 'premium': 1, 'gratuito': 2 };
+        // v11.2: nuevo orden de prioridad
+        const ordenPorPlan = { 'completo': 0, 'destacado': 1, 'basico': 2 };
         todos.sort((a, b) => (ordenPorPlan[a.tipo_plan] || 2) - (ordenPorPlan[b.tipo_plan] || 2));
         
         const catNormal = normalizarTexto(categoria);
@@ -200,7 +211,7 @@ function generarTarjetaProveedor(p) {
     
     const imagenes = [p.imagen1, p.imagen2, p.imagen3, p.imagen4].filter(img => img && img.trim() !== '');
     const totalImagenes = imagenes.length;
-    const esUltraPremium = p.tipo_plan === 'ultra_premium';
+    const esCompleto = p.tipo_plan === 'completo';
     
     let htmlImagenes = '';
     if (totalImagenes === 1) {
@@ -224,7 +235,7 @@ function generarTarjetaProveedor(p) {
     }
 
     return `
-        <article class="category-card ${categoriaClass} ${esUltraPremium ? 'card-ultra-premium' : ''} fade-in" style="position: relative; border-left: 4px solid ${colorVar};">
+        <article class="category-card ${categoriaClass} ${esCompleto ? 'card-completo' : ''} fade-in" style="position: relative; border-left: 4px solid ${colorVar};">
             ${p.destacado == 1 ? '<div class="featured-badge" style="position:absolute; top:10px; right:10px; z-index:2;"><i class="fas fa-crown"></i> DESTACADO</div>' : ''}
             ${planBadge ? `<div style="position:absolute; top:10px; left:10px; z-index:2;">${planBadge}</div>` : ''}
             
@@ -260,7 +271,8 @@ async function cargarDestacados() {
     
     try {
         const proveedores = await obtenerProveedores();
-        const ordenPorPlan = { 'ultra_premium': 0, 'premium': 1, 'gratuito': 2 };
+        // v11.2: nuevo orden de prioridad
+        const ordenPorPlan = { 'completo': 0, 'destacado': 1, 'basico': 2 };
         const destacados = proveedores
             .filter(p => p.destacado === 1)
             .sort((a, b) => (ordenPorPlan[a.tipo_plan] || 2) - (ordenPorPlan[b.tipo_plan] || 2));
@@ -277,7 +289,6 @@ async function cargarDestacados() {
 
 function generarTarjetaDestacada(p) {
     const whatsappLink = buildWhatsLink(p.whatsapp || p.telefono, 'Hola, vi tu perfil destacado en La Paz te Acerca');
-    const colorVar = getColorVariable(p.categoria);
     const imagenes = [p.imagen1, p.imagen2, p.imagen3, p.imagen4].filter(img => img && img.trim() !== '');
     const totalImagenes = imagenes.length;
     

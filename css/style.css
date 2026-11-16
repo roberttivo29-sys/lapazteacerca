@@ -1,10 +1,14 @@
 ﻿/* ========================================
-   LA PAZ TE ACERCA - CSS v11.1
+   LA PAZ TE ACERCA - CSS v11.2
    Regla de oro: EL NÚMERO es el héroe (somos el enlace)
    
+   Cambios v11.2:
+   - Nav en UNA sola fila ordenada (flex-wrap)
+   - Nomenclatura de planes: Básico / Destacado / Completo
+   - Badges actualizados con nueva nomenclatura
+   
    Cambios v11.1:
-   - Fix bug superposición header (.nav-row display:contents → flex)
-   - Nav en 2 filas ordenadas sin romper el grid
+   - Fix bug superposición header
    
    Cambios v11.0:
    - Hero jerarquizado con número protagonista
@@ -12,9 +16,7 @@
    - Bordes mínimos en móvil
    - Toast público funcional
    - Fix WhatsApp 591 duplicado
-   - Eliminación de código muerto (~275 líneas)
-   - Corrección bug .btn-imagen:hover
-   - Unificación de formato multi-línea
+   - Eliminación de código muerto
    ======================================== */
 
 /* ========================================
@@ -203,7 +205,7 @@ ul {
 }
 
 /* ========================================
-   HEADER DINÁMICO v11.1
+   HEADER DINÁMICO v11.2
    ======================================== */
 
 .header-dynamic {
@@ -287,35 +289,32 @@ ul {
 }
 
 /* ========================================
-   NAV v11.1 — 2 FILAS SIN SUPERPOSICIÓN
-   Fix: .nav-row ya no usa display:contents
+   NAV v11.2 — UNA SOLA FILA ORDENADA
+   display:contents en .nav-row fusiona los
+   dos grupos en una sola línea visual
    ======================================== */
 
 .nav-simetrico {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.3rem;
-    flex: 1;
-    min-width: 0;
-}
-
-.nav-row {
-    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 0.1rem;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0;
     flex-wrap: wrap;
+}
+
+.nav-row {
+    display: contents;
 }
 
 .nav-link {
     text-decoration: none;
     color: var(--gris-oscuro);
     font-weight: 600;
-    font-size: 0.82rem;
-    padding: 0.4rem 0.5rem;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.7rem;
     border-radius: var(--radio-sm);
     transition: var(--transicion-rapida);
     position: relative;
@@ -323,7 +322,7 @@ ul {
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.4rem;
     line-height: 1;
     flex-shrink: 0;
 }
@@ -357,7 +356,7 @@ ul {
 }
 
 .nav-link i {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     flex-shrink: 0;
     display: inline-block;
     width: 16px;
@@ -593,7 +592,6 @@ ul {
     font-weight: 400;
 }
 
-/* >>> NÚMERO HÉROE v11.0 (NUEVO) <<< */
 .hero-number {
     max-width: 560px;
     margin: 0 auto var(--espacio-md);
@@ -705,7 +703,6 @@ ul {
     font-weight: 500;
 }
 
-/* Banner número compacto para categorías v11.0 (NUEVO) */
 .hero-number-compact {
     display: inline-flex;
     align-items: center;
@@ -769,7 +766,6 @@ ul {
     font-size: clamp(0.9rem, 2vw, 1.2rem);
 }
 
-/* Alias para compatibilidad con categorías existentes */
 .btn-provider-link {
     display: inline-flex;
     align-items: center;
@@ -964,7 +960,6 @@ ul {
     font-size: 0.85rem;
 }
 
-/* Colores por categoría */
 .btn-salud { background: var(--color-salud); color: var(--blanco); }
 .btn-salud:hover { background: var(--color-salud-claro); box-shadow: 0 8px 20px rgba(13, 148, 136, 0.4); }
 .btn-hogar { background: var(--color-hogar); color: var(--blanco); }
@@ -1755,7 +1750,7 @@ section + section {
 }
 
 /* ========================================
-   TOAST v11.0 (NUEVO - público)
+   TOAST PÚBLICO
    ======================================== */
 
 .toast-container {
@@ -1831,7 +1826,7 @@ section + section {
 @keyframes slideOutRight { to { opacity: 0; transform: translateX(100%); } }
 
 /* ========================================
-   BADGES
+   BADGES v11.2 — NUEVA NOMENCLATURA
    ======================================== */
 
 .badge-nivel {
@@ -1847,8 +1842,22 @@ section + section {
     margin-bottom: 0.5rem;
 }
 
-.nivel-premium { background: var(--gradiente-azul); color: var(--blanco); border: 1px solid var(--azul-confianza); }
-.nivel-ultra {
+/* Paquete Básico */
+.nivel-basico {
+    background: #E2E8F0;
+    color: #475569;
+    border: 1px solid #CBD5E1;
+}
+
+/* Paquete Destacado */
+.nivel-destacado {
+    background: var(--gradiente-azul);
+    color: var(--blanco);
+    border: 1px solid var(--azul-confianza);
+}
+
+/* Paquete Completo */
+.nivel-completo {
     background: var(--gradiente-ocre);
     color: var(--blanco);
     border: 1px solid var(--ocre-oscuro);
@@ -1886,14 +1895,15 @@ section + section {
     font-weight: 500;
 }
 
-.card-ultra-premium {
+/* Card Paquete Completo (antes ultra-premium) */
+.card-completo {
     border: 2px solid var(--ocre-calidad);
     box-shadow: 0 0 20px rgba(217, 119, 6, 0.2);
     position: relative;
     overflow: hidden;
 }
 
-.card-ultra-premium::after {
+.card-completo::after {
     content: '';
     position: absolute;
     top: -50%;
@@ -2175,14 +2185,14 @@ section + section {
     }
     
     .nav-link {
-        font-size: 0.75rem;
-        padding: 0.35rem 0.4rem;
+        font-size: 0.78rem;
+        padding: 0.4rem 0.5rem;
     }
     
     .nav-link i {
         display: inline-block;
         width: 14px;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -2200,7 +2210,7 @@ section + section {
         display: none;
     }
     
-    /* >>> DRAWER COMPACTO v11.0 (NUEVO) <<< */
+    /* >>> DRAWER COMPACTO (no tapa pantalla) <<< */
     .nav-simetrico {
         position: fixed;
         top: 0;
@@ -2218,6 +2228,7 @@ section + section {
         align-items: stretch;
         gap: 0.2rem;
         border-radius: 0 0 0 var(--radio-md);
+        flex-wrap: nowrap;
     }
     
     .nav-simetrico.active {
@@ -2311,7 +2322,6 @@ section + section {
         font-size: 0.52rem;
     }
     
-    /* >>> BORDES MÍNIMOS v11.0 (NUEVO) <<< */
     .hero {
         padding: 1.25rem 0.9rem;
         border-radius: 12px;
@@ -2437,10 +2447,6 @@ section + section {
     }
 }
 
-/* ========================================
-   MOBILE PEQUEÑO
-   ======================================== */
-
 @media (max-width: 360px) {
     .hero-title {
         font-size: 1.3rem;
@@ -2458,10 +2464,6 @@ section + section {
         font-size: 0.52rem;
     }
 }
-
-/* ========================================
-   DESKTOP GRANDE
-   ======================================== */
 
 @media (min-width: 1400px) {
     .categories-grid {
