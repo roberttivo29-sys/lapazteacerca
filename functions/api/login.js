@@ -1,6 +1,6 @@
 // ========================================
-// LA PAZ TE ACERCA - Worker de Autenticación
-// Valida usuario/contraseña contra Cloudflare Secrets
+// LA PAZ TE ACERCA - Worker de Autenticación v11.0
+// Valida usuario/contraseña con HMAC (fix crítico de seguridad)
 // ========================================
 
 export async function onRequestPost(context) {
@@ -37,8 +37,8 @@ export async function onRequestPost(context) {
     }
 
     if (username === validUser && password === validPass) {
-      // Generar token de sesión simple (en producción usar JWT)
-      const token = generateSessionToken(username);
+      // Generar token HMAC seguro (fix v11.0)
+      const token = await generateSessionToken(username, env.SESSION_SECRET || 'default-secret-change-me');
       
       return new Response(
         JSON.stringify({
@@ -69,27 +69,48 @@ export async function onRequestPost(context) {
   }
 }
 
-// Generar token simple (en producción usar JWT con firma)
-function generateSessionToken(username) {
-  const timestamp = Date.now();
-  const random = Math.random().toString(36).substring(2, 15);
-  return btoa(`${username}:${timestamp}:${random}`);
+// Generar token HMAC seguro (fix v11.0)
+async function generateSessionToken(username, secret) {
+  const exp = Date.now() + (2 * 60 * 60 * 1000); // 2 horas
+  const payload = `${username}:${exp}`;
+  const sig = await signHMAC(payload, secret);
+  return btoa(`${payload}:${sig}`);
 }
 
-// Validar token (para usar en otros Workers)
-export function validateToken(token) {
+// Firmar con HMAC-SHA256
+async function signHMAC(payload, secret) {
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'HMAC',
+    encoder.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(payload));
+  return Array.from(new Uint8Array(signature))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+// Validar token HMAC (para usar en otros Workers)
+export async function validateToken(token, secret) {
   if (!token) return false;
   try {
     const decoded = atob(token);
     const parts = decoded.split(':');
     if (parts.length !== 3) return false;
     
-    const timestamp = parseInt(parts[1]);
+    const [user, exp, sig] = parts;
+    const timestamp = parseInt(exp);
     const now = Date.now();
     const twoHours = 2 * 60 * 60 * 1000;
     
-    // Token válido si tiene menos de 2 horas
-    return (now - timestamp) < twoHours;
+    // Token válido si tiene menos de 2 horas y la firma coincide
+    if ((now - timestamp) > twoHours) return false;
+    
+    const expectedSig = await signHMAC(`${user}:${exp}`, secret);
+    return expectedSig === sig;
   } catch {
     return false;
   }

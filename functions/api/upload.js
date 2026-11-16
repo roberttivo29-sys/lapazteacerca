@@ -1,5 +1,5 @@
 // ========================================
-// LA PAZ TE ACERCA - Worker de Subida de Imágenes
+// LA PAZ TE ACERCA - Worker de Subida de Imágenes v11.0
 // Sube imágenes a ImgBB usando la API key secreta
 // ========================================
 
@@ -33,7 +33,9 @@ export async function onRequestPost(context) {
   }
 
   const token = authHeader.substring(7);
-  if (!validateToken(token)) {
+  const secret = env.SESSION_SECRET || 'default-secret-change-me';
+  
+  if (!await validateToken(token, secret)) {
     return new Response(
       JSON.stringify({ error: true, message: 'Token inválido o expirado' }),
       { status: 401, headers: corsHeaders }

@@ -1,12 +1,17 @@
 ﻿/* ========================================
-   LA PAZ TE ACERCA - CSS v10.4 (CORREGIDO)
-   (base íntegra v9.2 + ediciones quirúrgicas)
-   Header dinámico + Nav 1 fila con íconos + CTA independiente
-   Regla de oro: el proveedor es el héroe
-   Ediciones: logo dominante · nav 1 fila homogéneo · chips 4+4 notorios · móvil compacto estético · sin buscador/contador/badges/ticker/stats
+   LA PAZ TE ACERCA - CSS v11.0
+   Regla de oro: EL NÚMERO es el héroe (somos el enlace)
+   
+   Cambios v11.0:
+   - Hero jerarquizado con número protagonista
+   - Drawer móvil compacto (no tapa pantalla)
+   - Bordes mínimos en móvil
+   - Toast público funcional
+   - Fix WhatsApp 591 duplicado
+   - Eliminación de código muerto (~275 líneas)
+   - Corrección bug .btn-imagen:hover
+   - Unificación de formato multi-línea
    ======================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ========================================
    RESET Y VARIABLES
@@ -32,6 +37,8 @@
     --verde-accion: #10B981;
     --verde-oscuro: #059669;
     --rojo-alerta: #EF4444;
+    --whatsapp: #25D366;
+    --whatsapp-hover: #20BA5A;
     
     --gris-suave: #FDFBF7;
     --gris-medio: #64748B;
@@ -88,6 +95,7 @@
     --sombra-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
     --sombra-glow-azul: 0 0 40px rgba(30, 64, 175, 0.3);
     --sombra-glow-ocre: 0 0 40px rgba(217, 119, 6, 0.3);
+    --sombra-glow-wa: 0 12px 35px rgba(37, 211, 102, 0.55);
     
     --radio-sm: 8px;
     --radio-md: 12px;
@@ -109,10 +117,12 @@
     --espacio-2xl: 4rem;
     
     --z-header: 1000;
+    --z-toggle: 1002;
+    --z-overlay: 999;
+    --z-drawer: 1001;
     --z-modal: 9999;
     --z-toast: 9999;
     --z-float: 990;
-    --z-overlay: 999;
 }
 
 /* ========================================
@@ -189,7 +199,7 @@ ul {
 }
 
 /* ========================================
-   HEADER DINÁMICO v10.4
+   HEADER DINÁMICO v11.0
    ======================================== */
 
 .header-dynamic {
@@ -221,7 +231,6 @@ ul {
     padding: 0 var(--espacio-md);
 }
 
-/* Logo con mayor presencia */
 .logo-link {
     text-decoration: none;
     display: flex;
@@ -240,7 +249,7 @@ ul {
 
 .logo h1 {
     font-family: var(--fuente-titulos);
-    font-size: clamp(1.35rem, 3vw, 2.05rem);
+    font-size: clamp(1.3rem, 3vw, 1.95rem);
     font-weight: 900;
     background: var(--gradiente-azul);
     -webkit-background-clip: text;
@@ -258,12 +267,12 @@ ul {
 .logo h1 i {
     color: var(--ocre-calidad);
     -webkit-text-fill-color: var(--ocre-calidad);
-    font-size: clamp(1.25rem, 3vw, 1.9rem);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
     flex-shrink: 0;
 }
 
 .tagline {
-    font-size: clamp(0.58rem, 1.3vw, 0.74rem);
+    font-size: clamp(0.56rem, 1.3vw, 0.72rem);
     color: var(--ocre-oscuro);
     font-weight: 600;
     text-transform: uppercase;
@@ -417,7 +426,7 @@ ul {
     border: none;
     cursor: pointer;
     padding: 8px;
-    z-index: 1001;
+    z-index: var(--z-toggle);
     min-width: 44px;
     min-height: 44px;
     border-radius: var(--radio-sm);
@@ -451,7 +460,7 @@ ul {
 }
 
 /* ========================================
-   OVERLAY OSCURO (CORREGIDO para transición suave)
+   OVERLAY OSCURO
    ======================================== */
 
 .nav-overlay {
@@ -462,7 +471,7 @@ ul {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
-    z-index: 999;
+    z-index: var(--z-overlay);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -476,14 +485,14 @@ ul {
 }
 
 /* ========================================
-   HERO (original - páginas de categoría)
+   HERO v11.0 — EL NÚMERO ES EL HÉROE
    ======================================== */
 
 .hero {
     background: var(--gradiente-hero);
     color: var(--blanco);
-    padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
-    border-radius: var(--radio-xl);
+    padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+    border-radius: var(--radio-lg);
     margin-bottom: var(--espacio-xl);
     position: relative;
     overflow: hidden;
@@ -552,9 +561,9 @@ ul {
 
 .hero-title {
     font-family: var(--fuente-titulos);
-    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    font-size: clamp(1.5rem, 4.5vw, 2.4rem);
     font-weight: 900;
-    margin-bottom: var(--espacio-md);
+    margin-bottom: var(--espacio-sm);
     letter-spacing: -1px;
     line-height: 1.15;
     animation: fadeInUp 0.8s ease-out;
@@ -566,32 +575,162 @@ ul {
 }
 
 .hero-subtitle {
-    font-size: clamp(1rem, 2.2vw, 1.2rem);
-    max-width: 750px;
-    margin: 0 auto var(--espacio-xl);
+    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+    max-width: 620px;
+    margin: 0 auto var(--espacio-lg);
     opacity: 0.95;
     line-height: 1.6;
     animation: fadeInUp 1s ease-out;
     font-weight: 400;
 }
 
-/* ========================================
-   HERO COMPACTO (Home)
-   ======================================== */
-
-.hero-compact {
-    padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.hero-compact .hero-title {
-    font-size: clamp(1.6rem, 4vw, 2.5rem);
-    margin-bottom: var(--espacio-sm);
-}
-
-.hero-compact .hero-subtitle {
-    max-width: 600px;
+/* >>> NÚMERO HÉROE v11.0 (NUEVO) <<< */
+.hero-number {
+    max-width: 560px;
     margin: 0 auto var(--espacio-md);
-    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.28);
+    border-radius: var(--radio-lg);
+    padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1rem, 3vw, 1.5rem);
+    animation: fadeInUp 1.1s ease-out;
+}
+
+.hero-number-label {
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.hero-number-tel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--blanco);
+    font-family: var(--fuente-titulos);
+    font-weight: 900;
+    font-size: clamp(2.2rem, 9vw, 3.6rem);
+    letter-spacing: 1px;
+    line-height: 1;
+    text-decoration: none;
+    transition: color 0.3s;
+    margin-bottom: 1rem;
+}
+
+.hero-number-tel:hover {
+    color: var(--ocre-calidad);
+}
+
+.hero-number-tel i {
+    color: var(--ocre-calidad);
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    animation: pulse-phone 2s infinite;
+}
+
+@keyframes pulse-phone {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.hero-number-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-wa-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--whatsapp);
+    color: var(--blanco);
+    font-weight: 800;
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    padding: 0.9rem 1.75rem;
+    border-radius: var(--radio-full);
+    text-decoration: none;
+    box-shadow: var(--sombra-glow-wa);
+    transition: var(--transicion-normal);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-wa-hero:hover {
+    background: var(--whatsapp-hover);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(37, 211, 102, 0.65);
+}
+
+.btn-wa-hero i {
+    font-size: 1.5rem;
+}
+
+.btn-call-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--blanco);
+    font-weight: 700;
+    font-size: clamp(0.95rem, 3vw, 1.15rem);
+    padding: 0.9rem 1.5rem;
+    border-radius: var(--radio-full);
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    transition: var(--transicion-normal);
+}
+
+.btn-call-hero:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-3px);
+}
+
+.hero-number-note {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-top: 0.75rem;
+    font-weight: 500;
+}
+
+/* Banner número compacto para categorías v11.0 (NUEVO) */
+.hero-number-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 auto var(--espacio-md);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radio-full);
+    padding: 0.65rem 1.4rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-number-compact i {
+    color: var(--ocre-calidad);
+    font-size: 1.3rem;
+}
+
+.hero-number-compact a {
+    color: var(--blanco);
+    font-family: var(--fuente-titulos);
+    font-weight: 900;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    letter-spacing: 1px;
+}
+
+.hero-number-compact a:hover {
+    color: var(--ocre-calidad);
+}
+
+.hero-number-compact span {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
 /* ========================================
@@ -602,9 +741,9 @@ ul {
     display: flex;
     justify-content: center;
     gap: var(--espacio-lg);
-    margin-bottom: var(--espacio-lg);
+    margin: var(--espacio-md) 0 var(--espacio-lg);
     flex-wrap: wrap;
-    animation: fadeInUp 1.4s ease-out;
+    animation: fadeInUp 1.2s ease-out;
 }
 
 .hero-feature {
@@ -621,113 +760,35 @@ ul {
     font-size: clamp(0.9rem, 2vw, 1.2rem);
 }
 
+/* Alias para compatibilidad con categorías existentes */
 .btn-provider-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(217, 119, 6, 0.2);
-    border: 2px solid var(--ocre-calidad);
-    color: var(--ocre-calidad);
-    padding: 0.875rem 1.75rem;
-    border-radius: var(--radio-md);
+    gap: 0.75rem;
+    background: var(--whatsapp);
+    color: var(--blanco);
+    font-weight: 800;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    padding: 0.9rem 1.75rem;
+    border-radius: var(--radio-full);
     text-decoration: none;
-    font-weight: 700;
+    box-shadow: var(--sombra-glow-wa);
     transition: var(--transicion-normal);
-    animation: fadeInUp 1.6s ease-out;
-    font-family: var(--fuente-cuerpo);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .btn-provider-link:hover {
-    background: var(--ocre-calidad);
-    color: var(--blanco);
-    transform: translateY(-2px);
-    box-shadow: var(--sombra-glow-ocre);
-}
-
-/* ========================================
-   MOSTRADOR DEL NÚMERO
-   ======================================== */
-
-.hero-showcase {
-    max-width: 600px;
-    margin: var(--espacio-md) auto;
-    text-align: center;
-}
-
-.showcase-number {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radio-full);
-    padding: 1rem 2rem;
-    margin-bottom: 1rem;
-}
-
-.showcase-icon {
-    color: var(--ocre-calidad);
-    font-size: 1.5rem;
-    animation: pulse-phone 2s infinite;
-}
-
-@keyframes pulse-phone {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.showcase-tel {
-    color: var(--blanco);
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    font-weight: 900;
-    font-family: var(--fuente-titulos);
-    text-decoration: none;
-    letter-spacing: 2px;
-    transition: color 0.3s;
-}
-
-.showcase-tel:hover {
-    color: var(--ocre-calidad);
-}
-
-.btn-whatsapp-showcase {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: #25D366;
-    color: var(--blanco);
-    padding: 1rem 2rem;
-    border-radius: var(--radio-full);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    font-family: var(--fuente-cuerpo);
-}
-
-.btn-whatsapp-showcase:hover {
-    background: #20BA5A;
+    background: var(--whatsapp-hover);
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+    box-shadow: 0 16px 40px rgba(37, 211, 102, 0.65);
 }
 
-.btn-whatsapp-showcase i {
+.btn-provider-link i {
     font-size: 1.5rem;
 }
 
-.showcase-sub {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    margin-top: 0.75rem;
-    font-weight: 500;
-}
-
 /* ========================================
-   CHIPS DE CATEGORÍA (4+4 notorios)
+   CHIPS DE CATEGORÍA (4+4)
    ======================================== */
 
 .hero-chips {
@@ -737,6 +798,7 @@ ul {
     gap: 0.8rem;
     max-width: 820px;
     margin: var(--espacio-lg) auto 0;
+    animation: fadeInUp 1.4s ease-out;
 }
 
 .chip {
@@ -755,7 +817,6 @@ ul {
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: var(--transicion-normal);
-    font-family: var(--fuente-cuerpo);
     width: 100%;
     max-width: 190px;
 }
@@ -844,12 +905,12 @@ ul {
 }
 
 .btn-whatsapp {
-    background: #25D366;
+    background: var(--whatsapp);
     color: var(--blanco);
 }
 
 .btn-whatsapp:hover {
-    background: #20BA5A;
+    background: var(--whatsapp-hover);
     box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
 }
 
@@ -894,6 +955,7 @@ ul {
     font-size: 0.85rem;
 }
 
+/* Colores por categoría */
 .btn-salud { background: var(--color-salud); color: var(--blanco); }
 .btn-salud:hover { background: var(--color-salud-claro); box-shadow: 0 8px 20px rgba(13, 148, 136, 0.4); }
 .btn-hogar { background: var(--color-hogar); color: var(--blanco); }
@@ -909,7 +971,7 @@ ul {
 .btn-eventos { background: var(--color-eventos); color: var(--blanco); }
 .btn-eventos:hover { background: var(--color-eventos-claro); box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4); }
 .btn-imagen { background: var(--color-imagen); color: var(--blanco); }
-.btn-imagen:hover { background: var(--color-imagen-claro); box-shadow: var(--sombra-glow-ocre); }
+.btn-imagen:hover { background: var(--color-imagen-claro); box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4); }
 
 /* ========================================
    SECCIONES Y TÍTULOS
@@ -925,7 +987,7 @@ section + section {
 
 .section-title {
     font-family: var(--fuente-titulos);
-    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
     font-weight: 800;
     color: var(--azul-profundo);
     text-align: center;
@@ -997,14 +1059,14 @@ section + section {
 }
 
 .category-icon {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto var(--espacio-md);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     transition: var(--transicion-normal);
     flex-shrink: 0;
 }
@@ -1013,26 +1075,26 @@ section + section {
     transform: scale(1.1) rotate(5deg);
 }
 
-.category-salud::before { background: linear-gradient(135deg, var(--color-salud), var(--color-salud-claro)); }
+.category-salud::before { background: var(--color-salud); }
 .category-salud .category-icon { background: var(--bg-salud); color: var(--color-salud); }
-.category-hogar::before { background: linear-gradient(135deg, var(--color-hogar), var(--color-hogar-claro)); }
+.category-hogar::before { background: var(--color-hogar); }
 .category-hogar .category-icon { background: var(--bg-hogar); color: var(--color-hogar); }
-.category-construccion::before { background: var(--gradiente-construccion); }
+.category-construccion::before { background: var(--color-construccion); }
 .category-construccion .category-icon { background: var(--bg-construccion); color: var(--color-construccion); }
-.category-auto::before { background: linear-gradient(135deg, var(--color-auto), var(--color-auto-claro)); }
+.category-auto::before { background: var(--color-auto); }
 .category-auto .category-icon { background: var(--bg-auto); color: var(--color-auto); }
-.category-tecnologia::before { background: linear-gradient(135deg, var(--color-tecnologia), var(--color-tecnologia-claro)); }
+.category-tecnologia::before { background: var(--color-tecnologia); }
 .category-tecnologia .category-icon { background: var(--bg-tecnologia); color: var(--color-tecnologia); }
-.category-funeraria::before { background: var(--gradiente-funeraria); }
+.category-funeraria::before { background: var(--color-funeraria); }
 .category-funeraria .category-icon { background: var(--bg-funeraria); color: var(--color-funeraria); }
-.category-eventos::before { background: var(--gradiente-eventos); }
+.category-eventos::before { background: var(--color-eventos); }
 .category-eventos .category-icon { background: var(--bg-eventos); color: var(--color-eventos); }
-.category-imagen::before { background: var(--gradiente-imagen); }
+.category-imagen::before { background: var(--color-imagen); }
 .category-imagen .category-icon { background: var(--bg-imagen); color: var(--color-imagen); }
 
 .category-card h3 {
     font-family: var(--fuente-titulos);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: var(--azul-profundo);
     text-align: center;
@@ -1135,10 +1197,9 @@ section + section {
 
 .galeria-2 .img-galeria:last-child { border-right: none; }
 
-.galeria-3, .galeria-4 { flex-direction: column; }
+.galeria-3 { flex-direction: column; }
 
-.galeria-3 .img-principal,
-.galeria-4 .img-principal {
+.galeria-3 .img-principal {
     width: 100%;
     aspect-ratio: 16 / 9;
     border-radius: 10px 10px 0 0;
@@ -1281,67 +1342,7 @@ section + section {
 @keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 /* ========================================
-   WHY US
-   ======================================== */
-
-.why-us-section { margin-bottom: var(--espacio-xl); }
-
-.why-us-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--espacio-lg);
-}
-
-.why-card {
-    background: var(--blanco);
-    padding: var(--espacio-lg);
-    border-radius: var(--radio-lg);
-    text-align: center;
-    box-shadow: var(--sombra-md);
-    transition: var(--transicion-normal);
-    border: 1px solid var(--gris-borde);
-}
-
-.why-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--sombra-lg);
-}
-
-.why-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: var(--gradiente-ocre);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--espacio-md);
-    font-size: 2rem;
-    color: var(--blanco);
-    transition: var(--transicion-normal);
-}
-
-.why-card:hover .why-icon {
-    transform: rotate(360deg) scale(1.1);
-}
-
-.why-card h3 {
-    font-family: var(--fuente-titulos);
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--azul-profundo);
-    margin-bottom: var(--espacio-sm);
-    line-height: 1.3;
-}
-
-.why-card p {
-    color: var(--gris-medio);
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-/* ========================================
-   FEATURED
+   FEATURED / CTA FINAL
    ======================================== */
 
 .featured-section {
@@ -1511,36 +1512,6 @@ section + section {
     margin-bottom: var(--espacio-md);
     font-size: 0.95rem;
     line-height: 1.6;
-}
-
-.popular-list li {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--gris-borde);
-    transition: var(--transicion-rapida);
-}
-
-.popular-list li:last-child { border-bottom: none; }
-
-.popular-list li:hover { padding-left: 0.5rem; }
-
-.popular-list a {
-    color: var(--gris-oscuro);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.92rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: var(--transicion-rapida);
-    line-height: 1.4;
-}
-
-.popular-list a:hover { color: var(--azul-confianza); }
-
-.popular-list a i {
-    color: var(--ocre-calidad);
-    font-size: 0.85rem;
-    flex-shrink: 0;
 }
 
 .provider-benefits li {
@@ -1737,7 +1708,7 @@ section + section {
 .copyright i { color: var(--rojo-alerta); }
 
 /* ========================================
-   BOTONES FLOTANTES
+   BOTÓN VOLVER ARRIBA
    ======================================== */
 
 .back-to-top {
@@ -1775,7 +1746,7 @@ section + section {
 }
 
 /* ========================================
-   TOAST
+   TOAST v11.0 (NUEVO - público)
    ======================================== */
 
 .toast-container {
@@ -1867,8 +1838,6 @@ section + section {
     margin-bottom: 0.5rem;
 }
 
-.nivel-basico { background: #E2E8F0; color: #475569; border: 1px solid #CBD5E1; }
-.nivel-verificado { background: #DBEAFE; color: #1E40AF; border: 1px solid #93C5FD; }
 .nivel-premium { background: var(--gradiente-azul); color: var(--blanco); border: 1px solid var(--azul-confianza); }
 .nivel-ultra {
     background: var(--gradiente-ocre);
@@ -1933,99 +1902,7 @@ section + section {
 }
 
 /* ========================================
-   SMART CONTACT
-   ======================================== */
-
-.smart-contact-buttons {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: var(--z-float);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-end;
-}
-
-.contact-button-wrapper {
-    position: relative;
-    transform: translateX(150%);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.contact-button-wrapper.visible {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-.contact-btn {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-    position: relative;
-    text-decoration: none;
-}
-
-.contact-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-
-.contact-btn.whatsapp { background: #25D366; }
-.contact-btn.telegram { background: #0088cc; }
-.contact-btn.email { background: #EA4335; }
-
-.contact-btn.primary {
-    width: 64px;
-    height: 64px;
-    font-size: 2rem;
-    animation: pulse-whatsapp 2s infinite;
-}
-
-@keyframes pulse-whatsapp {
-    0%, 100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); }
-    50% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.7); }
-}
-
-.btn-tooltip {
-    position: absolute;
-    right: 70px;
-    background: rgba(0,0,0,0.8);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-}
-
-.contact-btn:hover .btn-tooltip { opacity: 1; }
-
-.telegram-subtle-invite {
-    background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
-    color: white;
-    padding: 16px;
-    border-radius: 12px;
-    margin-top: 16px;
-    text-align: center;
-}
-
-.telegram-subtle-invite p { margin: 0 0 12px 0; font-size: 0.9rem; font-weight: 500; }
-.telegram-subtle-invite a { color: white; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: gap 0.3s; }
-.telegram-subtle-invite a:hover { gap: 12px; }
-
-/* ========================================
-   TRUST BAR COMPACTA
+   TRUST BAR
    ======================================== */
 
 .trust-bar {
@@ -2223,7 +2100,7 @@ section + section {
 }
 
 .mobile-showcase-wa {
-    background: #25D366;
+    background: var(--whatsapp);
     color: var(--blanco);
 }
 
@@ -2250,26 +2127,7 @@ section + section {
     display: block;
 }
 
-.rango-estimado-texto {
-    font-size: 0.9rem;
-    color: var(--gris-medio);
-    font-style: italic;
-    margin: 1rem 0 1.5rem;
-    text-align: center;
-    display: block;
-    line-height: 1.5;
-}
-
-.aviso-directorio {
-    max-width: 720px;
-    margin: 1rem auto;
-    padding: 0.75rem 1rem;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 10px;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.85);
+.text-center {
     text-align: center;
 }
 
@@ -2289,7 +2147,7 @@ section + section {
 }
 
 /* ========================================
-   RESPONSIVE - TABLET
+   RESPONSIVE — TABLET
    ======================================== */
 
 @media (max-width: 1200px) {
@@ -2333,24 +2191,24 @@ section + section {
         display: none;
     }
     
-    /* MENÚ MÓVIL COMPACTO Y ESTÉTICO (CORREGIDO) */
+    /* >>> DRAWER COMPACTO v11.0 (NUEVO) <<< */
     .nav-simetrico {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 75%;
-        max-width: 280px;
-        height: 100vh; /* CAMBIO: de auto a 100vh para evitar desplazamientos raros */
+        width: min(80vw, 300px);
+        height: auto;
+        max-height: 100vh;
         background: var(--blanco);
         flex-direction: column;
-        padding: 4.5rem 1.2rem 1.5rem; /* CAMBIO: un poco más de espacio arriba */
-        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+        padding: 4.25rem 1rem 1.25rem;
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.18);
         transition: right 0.3s ease;
-        z-index: 1001; /* CAMBIO: de var(--z-header) a 1001 para quedar encima del overlay (999) */
+        z-index: var(--z-drawer);
         overflow-y: auto;
         align-items: stretch;
         gap: 0.2rem;
-        border-radius: 0 0 0 12px;
+        border-radius: 0 0 0 var(--radio-md);
     }
     
     .nav-simetrico.active {
@@ -2370,7 +2228,7 @@ section + section {
         padding: 0.65rem 0.8rem;
         font-size: 0.9rem;
         justify-content: flex-start;
-        border-radius: 8px;
+        border-radius: var(--radio-sm);
     }
     
     .nav-link i {
@@ -2380,37 +2238,17 @@ section + section {
         margin-right: 0.4rem;
     }
     
-    .nav-simetrico .cta-proveedor-mobile {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        background: var(--gradiente-ocre);
-        color: var(--blanco);
-        font-weight: 700;
-        font-size: 0.95rem;
-        padding: 0.85rem;
-        border-radius: var(--radio-md);
-        text-decoration: none;
-        margin-top: var(--espacio-sm);
-        width: 100%;
-    }
-    
     .hero-title {
-        font-size: clamp(1.6rem, 5vw, 2.3rem);
+        font-size: clamp(1.4rem, 5vw, 2rem);
     }
     
     .section-title {
-        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-size: clamp(1.4rem, 4vw, 1.9rem);
     }
     
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--espacio-md);
-    }
-    
-    .why-us-grid {
-        grid-template-columns: 1fr;
     }
     
     .sidebar {
@@ -2434,12 +2272,12 @@ section + section {
 }
 
 /* ========================================
-   RESPONSIVE - MOBILE
+   RESPONSIVE — MÓVIL (BORDES MÍNIMOS)
    ======================================== */
 
 @media (max-width: 767px) {
     .container {
-        padding: 0 var(--espacio-sm);
+        padding: 0 0.85rem;
     }
     
     .header-dynamic {
@@ -2447,75 +2285,52 @@ section + section {
     }
     
     .header-content {
+        padding: 0 0.85rem;
         gap: var(--espacio-sm);
     }
     
     .logo h1 {
-        font-size: clamp(1rem, 4vw, 1.4rem);
+        font-size: clamp(1rem, 4.5vw, 1.3rem);
     }
     
     .logo h1 i {
-        font-size: clamp(1rem, 4vw, 1.3rem);
+        font-size: clamp(1rem, 4.5vw, 1.3rem);
     }
     
     .tagline {
-        font-size: 0.55rem;
+        font-size: 0.52rem;
     }
     
+    /* >>> BORDES MÍNIMOS v11.0 (NUEVO) <<< */
     .hero {
-        padding: clamp(1.5rem, 5vw, 2rem) clamp(1rem, 3vw, 1.5rem);
-        border-radius: var(--radio-lg);
+        padding: 1.25rem 0.9rem;
+        border-radius: 12px;
         margin-bottom: var(--espacio-lg);
     }
     
-    .hero-compact {
-        padding: 1.5rem 1rem;
+    .hero-number {
+        border-radius: 12px;
+        padding: 1.1rem 0.9rem;
     }
     
-    .hero-buttons {
-        grid-template-columns: 1fr;
-        gap: var(--espacio-sm);
+    .category-card,
+    .destacado-card,
+    .sidebar-section,
+    .featured-section,
+    .trust-bar,
+    .acordeon-info {
+        border-radius: 12px;
     }
     
-    .hero-buttons .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .hero-features {
-        flex-direction: column;
-        gap: var(--espacio-xs);
-        align-items: center;
-    }
-    
-    .whatsapp-contact-box {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-    
-    /* Chips 2 columnas en móvil (4 filas de 2 = equilibrado) */
     .hero-chips {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.6rem;
+        gap: 0.55rem;
     }
     
     .chip {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.85rem;
+        padding: 0.6rem 0.7rem;
+        font-size: 0.82rem;
         max-width: none;
-    }
-    
-    .showcase-number {
-        padding: 0.75rem 1.5rem;
-    }
-    
-    .showcase-tel {
-        font-size: 1.8rem;
-    }
-    
-    .btn-whatsapp-showcase {
-        padding: 0.875rem 1.5rem;
-        font-size: 1rem;
     }
     
     .categories-grid {
@@ -2537,7 +2352,9 @@ section + section {
         font-size: 1.2rem;
     }
     
-    .testimonials-grid {
+    .testimonials-grid,
+    .destacados-grid,
+    .proveedores-grid {
         grid-template-columns: 1fr;
     }
     
@@ -2545,28 +2362,10 @@ section + section {
         padding: var(--espacio-md);
     }
     
-    .why-us-grid {
-        gap: var(--espacio-md);
-    }
-    
-    .why-card {
-        padding: var(--espacio-md);
-    }
-    
     .featured-section {
         padding: var(--espacio-md);
         border-left-width: 4px;
         margin: var(--espacio-lg) 0;
-    }
-    
-    .destacados-grid {
-        grid-template-columns: 1fr;
-        gap: var(--espacio-md);
-    }
-    
-    .proveedores-grid {
-        grid-template-columns: 1fr;
-        gap: var(--espacio-md);
     }
     
     .footer {
@@ -2580,26 +2379,6 @@ section + section {
     
     .footer-legal p {
         font-size: 0.78rem;
-    }
-    
-    .smart-contact-buttons {
-        bottom: 12px;
-        right: 12px;
-    }
-    
-    .contact-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.3rem;
-    }
-    
-    .contact-btn.primary {
-        width: 56px;
-        height: 56px;
-    }
-    
-    .btn-tooltip {
-        display: none;
     }
     
     .back-to-top {
@@ -2654,28 +2433,19 @@ section + section {
 
 @media (max-width: 360px) {
     .hero-title {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
     
-    .hero-subtitle {
-        font-size: 0.9rem;
-    }
-    
-    .whatsapp-number {
-        font-size: 1.1rem;
-    }
-    
-    .btn-whatsapp-directo {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.85rem;
+    .hero-number-tel {
+        font-size: 2rem;
     }
     
     .logo h1 {
-        font-size: 1.15rem;
+        font-size: 1.05rem;
     }
     
     .tagline {
-        font-size: 0.55rem;
+        font-size: 0.52rem;
     }
 }
 
@@ -2687,10 +2457,6 @@ section + section {
     .categories-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: var(--espacio-md);
-    }
-    
-    .hero-buttons {
-        grid-template-columns: repeat(3, 1fr);
     }
     
     .proveedores-grid {

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="La Paz te Acerca - Directorio de confianza con servicios seleccionados cuidadosamente en La Paz y El Alto. Encuentra profesionales recomendados por la comunidad.">
-    <meta property="og:title" content="La Paz te Acerca | Conectamos vecinos con servicios de confianza">
-    <meta property="og:description" content="Olvídate de buscar a ciegas. Encuentra profesionales y negocios recomendados por la comunidad en La Paz y El Alto.">
+    <meta name="description" content="La Paz te Acerca - Somos tu enlace directo con servicios de confianza en La Paz y El Alto. Llama o escribe al 76536286 y conéctate sin intermediarios.">
+    <meta property="og:title" content="La Paz te Acerca | Tu enlace con servicios de confianza">
+    <meta property="og:description" content="Olvídate de buscar a ciegas. Conecta directo con profesionales recomendados en La Paz y El Alto.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lapazteacerca.com">
     <meta property="og:image" content="img/og-image.jpg">
@@ -15,7 +15,7 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0F172A">
     <link rel="canonical" href="https://lapazteacerca.com">
-    <title>La Paz te Acerca | Conectamos vecinos con servicios de confianza</title>
+    <title>La Paz te Acerca | Tu enlace con servicios de confianza</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +35,9 @@
 </head>
 <body>
 
-    <!-- HEADER DINÁMICO v10.2 -->
+    <!-- ========================================
+         HEADER DINÁMICO v11.0
+         ======================================== -->
     <header class="header header-dynamic" id="header" role="banner">
         <div class="container header-content">
             <a href="index.html" class="logo-link">
@@ -46,7 +48,9 @@
             </a>
             
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
-                <span></span><span></span><span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
             
             <nav class="nav nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
@@ -66,7 +70,8 @@
                 </div>
             </nav>
             
-            <a href="contacto.html" class="cta-proveedor" target="_blank" rel="noopener noreferrer">
+            <!-- Navegación interna: sin target="_blank" -->
+            <a href="contacto.html" class="cta-proveedor">
                 <i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor
             </a>
         </div>
@@ -76,64 +81,119 @@
         <div class="container content-grid">
             <div class="content-main">
 
-                <!-- HERO COMPACTO -->
+                <!-- ========================================
+                     HERO v11.0 — EL NÚMERO ES EL HÉROE
+                     ======================================== -->
                 <section class="hero hero-compact" aria-labelledby="hero-title">
                     <div class="hero-content">
-                        <div class="hero-badge fade-in"><i class="fas fa-check-circle" aria-hidden="true"></i> Tu red de confianza local</div>
-                        <h2 class="hero-title fade-in" id="hero-title">Encuentra servicios de confianza en La Paz y El Alto</h2>
-                        <p class="hero-subtitle fade-in">Profesionales verificados, sin intermediarios. Conecta directo.</p>
+                        <div class="hero-badge fade-in">
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            Tu red de confianza local
+                        </div>
+                        
+                        <h2 class="hero-title fade-in" id="hero-title">
+                            ¿Necesitas un servicio de confianza en La Paz o El Alto?
+                        </h2>
+                        
+                        <p class="hero-subtitle fade-in">
+                            Somos tu enlace directo con profesionales verificados. Sin intermediarios que cobren comisión: tú hablas con quien hace el trabajo.
+                        </p>
 
-                        <!-- MOSTRADOR DEL NÚMERO -->
-                        <div class="hero-showcase fade-in">
-                            <div class="showcase-number">
-                                <i class="fas fa-phone-alt showcase-icon"></i>
-                                <a href="tel:+59176536286" class="showcase-tel">76536286</a>
-                            </div>
-                            <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio%20en%20La%20Paz" 
-                               class="btn-whatsapp-showcase" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>Escríbenos ahora</span>
+                        <!-- >>> NÚMERO HÉROE v11.0 (NUEVO) <<< -->
+                        <div class="hero-number fade-in">
+                            <p class="hero-number-label">Llámanos o escríbenos ahora</p>
+                            <a href="tel:+59176536286" class="hero-number-tel">
+                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                76536286
                             </a>
-                            <p class="showcase-sub">Respuesta en menos de 2 horas · Lunes a Domingo</p>
+                            <div class="hero-number-actions">
+                                <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio%20en%20La%20Paz" 
+                                   class="btn-wa-hero" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
+                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                    Escríbenos por WhatsApp
+                                </a>
+                                <a href="tel:+59176536286" class="btn-call-hero">
+                                    <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                    Llamar
+                                </a>
+                            </div>
+                            <p class="hero-number-note">Respuesta en menos de 2 horas · Lunes a Domingo</p>
                         </div>
 
                         <!-- CHIPS DE CATEGORÍA (4+4) -->
                         <div class="hero-chips fade-in" id="heroChips">
-                            <a href="salud.html" class="chip chip-salud"><i class="fas fa-heartbeat"></i> Salud</a>
-                            <a href="hogar.html" class="chip chip-hogar"><i class="fas fa-tools"></i> Hogar</a>
-                            <a href="construccion.html" class="chip chip-construccion"><i class="fas fa-cubes"></i> Construcción</a>
-                            <a href="automotriz.html" class="chip chip-auto"><i class="fas fa-car"></i> Auto</a>
-                            <a href="tecnologia.html" class="chip chip-tecnologia"><i class="fas fa-laptop-code"></i> Tecnología</a>
-                            <a href="funerarias.html" class="chip chip-funeraria"><i class="fas fa-dove"></i> Despedida</a>
-                            <a href="eventos.html" class="chip chip-eventos"><i class="fas fa-calendar-alt"></i> Eventos</a>
-                            <a href="imagen.html" class="chip chip-imagen"><i class="fas fa-spa"></i> Imagen</a>
+                            <a href="salud.html" class="chip"><i class="fas fa-heartbeat"></i> Salud</a>
+                            <a href="hogar.html" class="chip"><i class="fas fa-tools"></i> Hogar</a>
+                            <a href="construccion.html" class="chip"><i class="fas fa-cubes"></i> Construcción</a>
+                            <a href="automotriz.html" class="chip"><i class="fas fa-car"></i> Auto</a>
+                            <a href="tecnologia.html" class="chip"><i class="fas fa-laptop-code"></i> Tecnología</a>
+                            <a href="funerarias.html" class="chip"><i class="fas fa-dove"></i> Despedida</a>
+                            <a href="eventos.html" class="chip"><i class="fas fa-calendar-alt"></i> Eventos</a>
+                            <a href="imagen.html" class="chip"><i class="fas fa-spa"></i> Imagen</a>
                         </div>
                     </div>
                 </section>
 
-                <!-- NEGOCIOS RECOMENDADOS -->
+                <!-- ========================================
+                     NEGOCIOS RECOMENDADOS
+                     ======================================== -->
                 <section class="featured-section fade-in" aria-labelledby="destacados-title">
-                    <h2 class="section-title" id="destacados-title"><i class="fas fa-fire" aria-hidden="true"></i> NEGOCIOS RECOMENDADOS</h2>
-                    <p class="section-description">Profesionales que han demostrado excelencia y compromiso en su servicio</p>
+                    <h2 class="section-title" id="destacados-title">
+                        <i class="fas fa-fire" aria-hidden="true"></i>
+                        NEGOCIOS RECOMENDADOS
+                    </h2>
+                    <p class="section-description">
+                        Profesionales que han demostrado excelencia y compromiso en su servicio
+                    </p>
                     <div id="destacados-container" class="destacados-grid">
-                        <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-button"></div></div>
-                        <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-button"></div></div>
-                        <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-button"></div></div>
+                        <div class="skeleton-card">
+                            <div class="skeleton-badge"></div>
+                            <div class="skeleton-title"></div>
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-text short"></div>
+                            <div class="skeleton-button"></div>
+                        </div>
+                        <div class="skeleton-card">
+                            <div class="skeleton-badge"></div>
+                            <div class="skeleton-title"></div>
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-text short"></div>
+                            <div class="skeleton-button"></div>
+                        </div>
+                        <div class="skeleton-card">
+                            <div class="skeleton-badge"></div>
+                            <div class="skeleton-title"></div>
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-text short"></div>
+                            <div class="skeleton-button"></div>
+                        </div>
                     </div>
                 </section>
 
-                <!-- CATEGORÍAS -->
+                <!-- ========================================
+                     CATEGORÍAS
+                     ======================================== -->
                 <section class="categories-section" id="categorias" aria-labelledby="categorias-title">
-                    <h2 class="section-title fade-in" id="categorias-title"><i class="fas fa-th-large" aria-hidden="true"></i> EXPLORA POR CATEGORÍA</h2>
-                    <p class="section-description fade-in">Ocho áreas esenciales donde conectamos a la gente con soluciones reales</p>
+                    <h2 class="section-title fade-in" id="categorias-title">
+                        <i class="fas fa-th-large" aria-hidden="true"></i>
+                        EXPLORA POR CATEGORÍA
+                    </h2>
+                    <p class="section-description fade-in">
+                        Ocho áreas esenciales donde conectamos a la gente con soluciones reales
+                    </p>
                     <div class="categories-grid" id="categoriesGrid">
+                        
                         <article class="category-card category-salud fade-in">
                             <div class="category-icon"><i class="fas fa-heartbeat" aria-hidden="true"></i></div>
                             <h3>Salud y Bienestar</h3>
                             <p class="category-subtitle">Humana y Animal</p>
                             <p>Clínicas, consultorios, veterinarias y laboratorios con horarios reales.</p>
                             <div class="category-actions">
-                                <a href="salud.html" class="btn btn-outline btn-salud">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="salud.html" class="btn btn-salud">
+                                    Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </article>
 
@@ -143,7 +203,9 @@
                             <p class="category-subtitle">Reparaciones Domiciliarias</p>
                             <p>Técnicos seleccionados para plomería, electricidad, albañilería y más.</p>
                             <div class="category-actions">
-                                <a href="hogar.html" class="btn btn-outline btn-hogar">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="hogar.html" class="btn btn-hogar">
+                                    Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </article>
 
@@ -153,7 +215,9 @@
                             <p class="category-subtitle">Distribuidores y Obra Gruesa</p>
                             <p>Cemento, áridos, ladrillos, madera y alquiler de maquinaria.</p>
                             <div class="category-actions">
-                                <a href="construccion.html" class="btn btn-outline btn-construccion">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="construccion.html" class="btn btn-construccion">
+                                    Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </article>
 
@@ -163,7 +227,9 @@
                             <p class="category-subtitle">Mecánica y Grúas</p>
                             <p>Talleres mecánicos y grúas con cotizaciones claras antes de tocar tu auto.</p>
                             <div class="category-actions">
-                                <a href="automotriz.html" class="btn btn-outline btn-auto">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="automotriz.html" class="btn btn-auto">
+                                    Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </article>
 
@@ -173,7 +239,9 @@
                             <p class="category-subtitle">Reparaciones y Soporte</p>
                             <p>Técnicos en celulares, laptops, cámaras y soporte a domicilio.</p>
                             <div class="category-actions">
-                                <a href="tecnologia.html" class="btn btn-outline btn-tecnologia">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="tecnologia.html" class="btn btn-tecnologia">
+                                    Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </article>
 
@@ -183,7 +251,9 @@
                             <p class="category-subtitle">Respeto y Transparencia</p>
                             <p>Servicios funerarios con precios transparentes y trato humano.</p>
                             <div class="category-actions">
-                                <a href="funerarias.html" class="btn btn-outline btn-funeraria">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="funerarias.html" class="btn btn-funeraria">
+                                    Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </article>
 
@@ -193,7 +263,9 @@
                             <p class="category-subtitle">Filmación, Sonido y Locales</p>
                             <p>Todo lo que necesitas para que tu evento sea inolvidable.</p>
                             <div class="category-actions">
-                                <a href="eventos.html" class="btn btn-outline btn-eventos">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="eventos.html" class="btn btn-eventos">
+                                    Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </article>
 
@@ -203,15 +275,23 @@
                             <p class="category-subtitle">Barberías, Salones y Estética</p>
                             <p>Barberías, salones de belleza, maquillaje profesional y spas.</p>
                             <div class="category-actions">
-                                <a href="imagen.html" class="btn btn-outline btn-imagen">Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                <a href="imagen.html" class="btn btn-imagen">
+                                    Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </article>
+
                     </div>
                 </section>
 
-                <!-- TRUST BAR COMPACTA -->
+                <!-- ========================================
+                     TRUST BAR COMPACTA
+                     ======================================== -->
                 <section class="trust-bar fade-in" aria-labelledby="trust-title">
-                    <h2 class="section-title" id="trust-title" style="font-size: 1.5rem;"><i class="fas fa-shield-alt" aria-hidden="true"></i> POR QUÉ CONFIAR</h2>
+                    <h2 class="section-title" id="trust-title" style="font-size: 1.5rem;">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        POR QUÉ CONFIAR
+                    </h2>
                     <div class="trust-grid">
                         <div class="trust-item">
                             <i class="fas fa-search" aria-hidden="true"></i>
@@ -232,66 +312,106 @@
                     </div>
                 </section>
 
-                <!-- CTA FINAL -->
+                <!-- ========================================
+                     CTA FINAL
+                     ======================================== -->
                 <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
-                    <div class="featured-badge"><i class="fas fa-phone-alt" aria-hidden="true"></i> ¿NECESITAS UN SERVICIO?</div>
+                    <div class="featured-badge">
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                        ¿NECESITAS UN SERVICIO?
+                    </div>
                     <h3 id="cta-title">Conecta directo con el profesional ideal</h3>
                     <p>Cotización gratis y sin compromiso. Respuesta en menos de 2 horas.</p>
-                    <div class="showcase-number" style="margin: 1.5rem 0;">
-                        <i class="fas fa-phone-alt showcase-icon"></i>
-                        <a href="tel:+59176536286" class="showcase-tel">76536286</a>
-                    </div>
-                    <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp directo
+                    <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio" 
+                       class="btn btn-whatsapp" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        WhatsApp directo: 76536286
                     </a>
                 </section>
 
             </div>
 
-            <!-- SIDEBAR -->
+            <!-- ========================================
+                 SIDEBAR
+                 ======================================== -->
             <aside class="sidebar sidebar-compact" role="complementary">
+                
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-comments" aria-hidden="true"></i> ¿Dudas?</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Escríbenos y te respondemos en menos de 2 horas.</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">
+                        Escríbenos y te respondemos en menos de 2 horas.
+                    </p>
                     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer">
+                        <a href="https://wa.me/59176536286" 
+                           class="btn btn-whatsapp btn-sm" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
                             <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
                         </a>
-                        <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-sm" target="_blank" rel="noopener noreferrer">
+                        <a href="https://t.me/verificalapaz" 
+                           class="btn btn-telegram btn-sm" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
                             <i class="fab fa-telegram" aria-hidden="true"></i> Canal
                         </a>
                     </div>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-sm btn-block" style="margin-top: 0.5rem;">
+                    <a href="mailto:contactoverificalapaz@gmail.com" 
+                       class="btn btn-outline btn-sm btn-block" 
+                       style="margin-top: 0.5rem;">
                         <i class="fas fa-envelope" aria-hidden="true"></i> Email
                     </a>
                 </div>
+
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿Eres proveedor?</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Únete al directorio y aumenta tu visibilidad.</p>
-                    <a href="contacto.html" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener noreferrer">
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">
+                        Únete al directorio y aumenta tu visibilidad.
+                    </p>
+                    <!-- Navegación interna: sin target="_blank" -->
+                    <a href="contacto.html" class="btn btn-primary btn-sm btn-block">
                         <i class="fas fa-store" aria-hidden="true"></i> Quiero aparecer aquí
                     </a>
                 </div>
+
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> Síguenos</h3>
                     <div class="social-grid">
-                        <a href="https://facebook.com/ContactoverificaLaPaz" class="social-link facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i><span>Facebook</span></a>
-                        <a href="https://tiktok.com/@verifica_la_paz" class="social-link tiktok" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok" aria-hidden="true"></i><span>TikTok</span></a>
+                        <a href="https://facebook.com/ContactoverificaLaPaz" 
+                           class="social-link facebook" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://tiktok.com/@verifica_la_paz" 
+                           class="social-link tiktok" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            <i class="fab fa-tiktok" aria-hidden="true"></i>
+                            <span>TikTok</span>
+                        </a>
                     </div>
                 </div>
+
             </aside>
         </div>
     </main>
 
-    <!-- FOOTER -->
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
+                
                 <div class="footer-section">
                     <h3><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h3>
                     <p class="footer-tagline">Conectamos vecinos con servicios de confianza.</p>
                     <p>Tu aliado para resolver lo que importa en La Paz y El Alto, con transparencia y calidez.</p>
                 </div>
+
                 <div class="footer-section">
                     <h4>Categorías</h4>
                     <ul>
@@ -305,15 +425,14 @@
                         <li><a href="imagen.html"><i class="fas fa-spa" aria-hidden="true"></i> Imagen y Cuidado Personal</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
                     <h4>Información</h4>
                     <ul>
-                        <li><a href="#">Sobre Nosotros</a></li>
-                        <li><a href="#">Cómo Funciona</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
                         <li><a href="contacto.html">Contacto</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
                     <h4>Contacto</h4>
                     <ul class="contact-info">
@@ -323,33 +442,76 @@
                         <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> La Paz, Bolivia</li>
                     </ul>
                     <div class="footer-social">
-                        <a href="https://facebook.com/ContactoverificaLaPaz" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://tiktok.com/@verifica_la_paz" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/59176536286" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                        <a href="https://t.me/verificalapaz" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i></a>
+                        <a href="https://facebook.com/ContactoverificaLaPaz" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="fab fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://tiktok.com/@verifica_la_paz" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                            <i class="fab fa-tiktok" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://wa.me/59176536286" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://t.me/verificalapaz" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                            <i class="fab fa-telegram" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
+
             </div>
+
             <div class="footer-bottom">
                 <div class="footer-legal">
-                    <p><strong>NOTA LEGAL:</strong> La Paz te Acerca es un directorio independiente que conecta a la comunidad con proveedores de servicios. Nos limitamos a revisar la existencia y datos de contacto de los negocios listados. No nos hacemos responsables por la calidad final del servicio prestado por terceros. Exige siempre una cotización por escrito antes de cualquier trabajo.</p>
+                    <p>
+                        <strong>NOTA LEGAL:</strong> La Paz te Acerca es un directorio independiente que conecta a la comunidad con proveedores de servicios. Nos limitamos a revisar la existencia y datos de contacto de los negocios listados. No nos hacemos responsables por la calidad final del servicio prestado por terceros. Exige siempre una cotización por escrito antes de cualquier trabajo.
+                    </p>
                 </div>
-                <p class="copyright">© 2026 La Paz te Acerca. Todos los derechos reservados. | Hecho con <i class="fas fa-heart" aria-hidden="true"></i> en Bolivia</p>
+                <p class="copyright">
+                    © <span id="current-year"></span> La Paz te Acerca. Todos los derechos reservados. | Hecho con <i class="fas fa-heart" aria-hidden="true"></i> en Bolivia
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- BARRA FIJA MOBILE -->
+    <!-- ========================================
+         BARRA FIJA MOBILE
+         ======================================== -->
     <div class="mobile-showcase" id="mobileShowcase">
-        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
-        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="tel:+59176536286" class="mobile-showcase-call">
+            <i class="fas fa-phone-alt"></i> Llamar
+        </a>
+        <a href="https://wa.me/59176536286" 
+           class="mobile-showcase-wa" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
     </div>
 
+    <!-- ========================================
+         TOAST CONTAINER (v11.0 - público)
+         ======================================== -->
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
-    <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <script src="js/main.js"></script>
+    <!-- ========================================
+         BOTÓN VOLVER ARRIBA
+         ======================================== -->
+    <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ========================================
+         OVERLAY DEL MENÚ MÓVIL
+         ======================================== -->
     <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- ========================================
+         SCRIPTS
+         ======================================== -->
+    <script src="js/main.js"></script>
+    <script>
+        // Año dinámico en el footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
 </body>
 </html>
-

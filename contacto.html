@@ -26,6 +26,9 @@
 </head>
 <body>
 
+    <!-- ========================================
+         HEADER DINÁMICO v11.0
+         ======================================== -->
     <header class="header header-dynamic" id="header" role="banner">
         <div class="container header-content">
             <a href="index.html" class="logo-link">
@@ -34,9 +37,11 @@
                     <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
                 </div>
             </a>
+            
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
+            
             <nav class="nav nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
                 <div class="nav-row">
                     <a href="index.html" class="nav-link"><i class="fas fa-house" aria-hidden="true"></i> Inicio</a>
@@ -53,7 +58,9 @@
                     <a href="contacto.html" class="nav-link active" aria-current="page"><i class="fas fa-envelope" aria-hidden="true"></i> Contacto</a>
                 </div>
             </nav>
-            <a href="contacto.html" class="cta-proveedor" target="_blank" rel="noopener noreferrer">
+            
+            <!-- Navegación interna: sin target="_blank" -->
+            <a href="contacto.html" class="cta-proveedor">
                 <i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor
             </a>
         </div>
@@ -63,12 +70,47 @@
         <div class="container content-grid">
             <div class="content-main">
 
+                <!-- ========================================
+                     HERO DE CONTACTO v11.0 — NÚMERO HÉROE
+                     ======================================== -->
                 <section class="hero hero-compact" aria-labelledby="hero-title">
                     <div class="hero-content">
-                        <div class="hero-badge fade-in"><i class="fas fa-comments" aria-hidden="true"></i> Hablemos</div>
-                        <h2 class="hero-title fade-in" id="hero-title">¿Tienes dudas, sugerencias o quieres que verifiquemos un nuevo servicio?</h2>
-                        <p class="hero-subtitle fade-in">Estamos aquí para ayudarte. Contáctanos por el canal que prefieras y te responderemos en menos de 2 horas.</p>
+                        <div class="hero-badge fade-in">
+                            <i class="fas fa-comments" aria-hidden="true"></i>
+                            Hablemos
+                        </div>
                         
+                        <h2 class="hero-title fade-in" id="hero-title">
+                            ¿Tienes dudas, sugerencias o quieres que verifiquemos un nuevo servicio?
+                        </h2>
+                        
+                        <p class="hero-subtitle fade-in">
+                            Estamos aquí para ayudarte. Contáctanos por el canal que prefieras y te responderemos en menos de 2 horas.
+                        </p>
+
+                        <!-- >>> NÚMERO HÉROE v11.0 <<< -->
+                        <div class="hero-number fade-in">
+                            <p class="hero-number-label">Llámanos o escríbenos ahora</p>
+                            <a href="tel:+59176536286" class="hero-number-tel">
+                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                76536286
+                            </a>
+                            <div class="hero-number-actions">
+                                <a href="https://wa.me/59176536286?text=Hola,%20tengo%20una%20consulta" 
+                                   class="btn-wa-hero" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
+                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                    Escríbenos por WhatsApp
+                                </a>
+                                <a href="tel:+59176536286" class="btn-call-hero">
+                                    <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                    Llamar
+                                </a>
+                            </div>
+                            <p class="hero-number-note">Respuesta en menos de 2 horas · Lunes a Domingo</p>
+                        </div>
+
                         <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-bolt" aria-hidden="true"></i><span>Respuesta Rápida</span></div>
                             <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>100% Confidencial</span></div>
@@ -77,18 +119,30 @@
                     </div>
                 </section>
 
+                <!-- ========================================
+                     CANALES DE ATENCIÓN DIRECTA
+                     ======================================== -->
                 <section class="fade-in" aria-labelledby="canales-title">
-                    <h2 class="section-title" id="canales-title"><i class="fas fa-phone-alt" aria-hidden="true"></i> CANALES DE ATENCIÓN DIRECTA</h2>
-                    <p class="section-description">Elige el canal que más te convenga. Todos son gratuitos y confidenciales.</p>
+                    <h2 class="section-title" id="canales-title">
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                        CANALES DE ATENCIÓN DIRECTA
+                    </h2>
+                    <p class="section-description">
+                        Elige el canal que más te convenga. Todos son gratuitos y confidenciales.
+                    </p>
 
                     <div class="categories-grid">
+                        
                         <div class="category-card category-salud">
                             <div class="category-icon"><i class="fas fa-mobile-alt" aria-hidden="true"></i></div>
                             <h3>WhatsApp: Atención Ciudadana</h3>
                             <p class="category-subtitle">Para consultas de salud, hogar, tecnología y más</p>
                             <p>Respondemos en menos de 2 horas en horario de oficina. Ideal para encontrar proveedores al instante.</p>
                             <div class="category-actions">
-                                <a href="https://wa.me/59176536286?text=Hola,%20necesito%20información%20sobre%20un%20servicio" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer">
+                                <a href="https://wa.me/59176536286?text=Hola,%20necesito%20información%20sobre%20un%20servicio" 
+                                   class="btn btn-whatsapp btn-block" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
                                     <i class="fab fa-whatsapp" aria-hidden="true"></i> Chatear: 76536286
                                 </a>
                             </div>
@@ -100,7 +154,10 @@
                             <p class="category-subtitle">Para negocios que quieren aparecer en el directorio</p>
                             <p>Atención personalizada para dueños de clínicas, talleres, tiendas de tecnología y comercios que buscan mayor visibilidad.</p>
                             <div class="category-actions">
-                                <a href="https://wa.me/59178835306?text=Hola,%20soy%20empresa%20y%20quiero%20más%20información" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer">
+                                <a href="https://wa.me/59178835306?text=Hola,%20soy%20empresa%20y%20quiero%20más%20información" 
+                                   class="btn btn-whatsapp btn-block" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer">
                                     <i class="fab fa-whatsapp" aria-hidden="true"></i> Chatear: 78835306
                                 </a>
                             </div>
@@ -112,16 +169,29 @@
                             <p class="category-subtitle">Canales alternativos y formales</p>
                             <p>Únete a nuestro canal de Telegram para actualizaciones o envíanos un correo electrónico para consultas formales.</p>
                             <div class="category-actions">
-                                <a href="https://t.me/verificalapaz" class="btn btn-telegram" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal</a>
-                                <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                                <a href="https://t.me/verificalapaz" class="btn btn-telegram" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-telegram" aria-hidden="true"></i> Canal
+                                </a>
+                                <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i> Email
+                                </a>
                             </div>
                         </div>
+
                     </div>
                 </section>
 
+                <!-- ========================================
+                     FORMULARIO DE CONTACTO
+                     ======================================== -->
                 <section id="formulario" class="fade-in" style="margin-top: 3rem;" aria-labelledby="form-title">
-                    <h2 class="section-title" id="form-title"><i class="fas fa-envelope-open-text" aria-hidden="true"></i> ENVÍANOS UN MENSAJE DIRECTO</h2>
-                    <p class="section-description">Llena este formulario y tu mensaje llegará directamente a nuestro correo. También puedes enviarlo por WhatsApp.</p>
+                    <h2 class="section-title" id="form-title">
+                        <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
+                        ENVÍANOS UN MENSAJE DIRECTO
+                    </h2>
+                    <p class="section-description">
+                        Llena este formulario y tu mensaje llegará directamente a nuestro correo. También puedes enviarlo por WhatsApp.
+                    </p>
 
                     <div class="featured-section">
                         <form action="https://formsubmit.co/contactoverificalapaz@gmail.com" method="POST">
@@ -129,7 +199,7 @@
                             <input type="hidden" name="_captcha" value="false">
                             <input type="hidden" name="_next" value="https://lapazteacerca.com/contacto.html?exito=1">
                             
-                            <div class="row g-3" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
                                 <div>
                                     <label class="form-label fw-bold" for="nombre">Tu Nombre *</label>
                                     <input type="text" class="form-control" name="nombre" required placeholder="Ej: Juan Pérez" style="width:100%; padding:0.75rem; border:1px solid var(--gris-borde); border-radius:var(--radio-md); font-family:var(--fuente-cuerpo);">
@@ -161,7 +231,7 @@
                             </div>
                             
                             <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1.5rem; flex-wrap:wrap;">
-                                <button type="button" class="btn btn-success" onclick="enviarWhatsAppDirecto()" style="background:#25D366; color:white; border:none; padding:0.875rem 1.5rem; border-radius:var(--radio-md); font-weight:700; cursor:pointer; font-family:var(--fuente-cuerpo);">
+                                <button type="button" class="btn btn-success" onclick="enviarWhatsAppDirecto()" style="background:var(--whatsapp); color:white; border:none; padding:0.875rem 1.5rem; border-radius:var(--radio-md); font-weight:700; cursor:pointer; font-family:var(--fuente-cuerpo);">
                                     <i class="fab fa-whatsapp" aria-hidden="true"></i> Enviar por WhatsApp (Inmediato)
                                 </button>
                                 <button type="submit" class="btn-submit">
@@ -172,6 +242,9 @@
                     </div>
                 </section>
 
+                <!-- ========================================
+                     PREGUNTAS FRECUENTES (ACORDEÓN)
+                     ======================================== -->
                 <section class="fade-in" style="margin-top: 3rem;">
                     <div class="acordeon-info">
                         <div class="acordeon-header" onclick="toggleAcordeon(this)">
@@ -189,18 +262,31 @@
                     </div>
                 </section>
 
+                <!-- ========================================
+                     CTA FINAL
+                     ======================================== -->
                 <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
-                    <div class="featured-badge"><i class="fas fa-search" aria-hidden="true"></i> ¿NO ENCONTRASTE LO QUE BUSCABAS?</div>
+                    <div class="featured-badge">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        ¿NO ENCONTRASTE LO QUE BUSCABAS?
+                    </div>
                     <h3 id="cta-title">Si el servicio que necesitas no está, dínoslo</h3>
                     <p>Lo verificamos personalmente para ti y lo agregamos al directorio.</p>
-                    <a href="https://wa.me/59176536286?text=Hola,%20busco%20un%20servicio%20que%20no%20está%20en%20la%20web" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/59176536286?text=Hola,%20busco%20un%20servicio%20que%20no%20está%20en%20la%20web" 
+                       class="btn btn-whatsapp" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
                         <i class="fas fa-search" aria-hidden="true"></i> Solicitar verificación personalizada
                     </a>
                 </section>
 
             </div>
 
+            <!-- ========================================
+                 SIDEBAR
+                 ======================================== -->
             <aside class="sidebar" role="complementary">
+                
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-clock" aria-hidden="true"></i> HORARIOS DE ATENCIÓN</h3>
                     <ul class="contact-info" style="color: var(--gris-oscuro);">
@@ -210,6 +296,7 @@
                         <li><i class="fas fa-bolt" aria-hidden="true"></i> WhatsApp 24h para emergencias</li>
                     </ul>
                 </div>
+
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿ERES PROVEEDOR?</h3>
                     <p>Únete a nuestro directorio y aumenta tu visibilidad.</p>
@@ -218,27 +305,43 @@
                         <li><i class="fas fa-check" aria-hidden="true"></i> Sin comisión por cliente</li>
                         <li><i class="fas fa-check" aria-hidden="true"></i> Mayor visibilidad online</li>
                     </ul>
-                    <a href="https://wa.me/59178835306?text=Hola,%20soy%20proveedor%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
+                    <a href="https://wa.me/59178835306?text=Hola,%20soy%20proveedor%20y%20quiero%20aparecer%20en%20el%20directorio" 
+                       class="btn btn-primary btn-block" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fas fa-store" aria-hidden="true"></i> Unirme ahora
+                    </a>
                 </div>
+
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
                     <div class="social-grid">
-                        <a href="https://facebook.com/ContactoverificaLaPaz" class="social-link facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i><span>Facebook</span></a>
-                        <a href="https://tiktok.com/@verifica_la_paz" class="social-link tiktok" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok" aria-hidden="true"></i><span>TikTok</span></a>
+                        <a href="https://facebook.com/ContactoverificaLaPaz" class="social-link facebook" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i><span>Facebook</span>
+                        </a>
+                        <a href="https://tiktok.com/@verifica_la_paz" class="social-link tiktok" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-tiktok" aria-hidden="true"></i><span>TikTok</span>
+                        </a>
                     </div>
                 </div>
+
             </aside>
         </div>
     </main>
 
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
+                
                 <div class="footer-section">
                     <h3><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h3>
                     <p class="footer-tagline">Conectamos vecinos con servicios de confianza.</p>
                     <p>Tu aliado para resolver lo que importa en La Paz y El Alto, con transparencia y calidez.</p>
                 </div>
+
                 <div class="footer-section">
                     <h4>Categorías</h4>
                     <ul>
@@ -252,15 +355,14 @@
                         <li><a href="imagen.html"><i class="fas fa-spa" aria-hidden="true"></i> Imagen y Cuidado Personal</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
                     <h4>Información</h4>
                     <ul>
-                        <li><a href="#">Sobre Nosotros</a></li>
-                        <li><a href="#">Cómo Funciona</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
                         <li><a href="contacto.html">Contacto</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
                     <h4>Contacto</h4>
                     <ul class="contact-info">
@@ -270,32 +372,53 @@
                         <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> La Paz, Bolivia</li>
                     </ul>
                     <div class="footer-social">
-                        <a href="https://facebook.com/ContactoverificaLaPaz" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://tiktok.com/@verifica_la_paz" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/59176536286" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                        <a href="https://t.me/verificalapaz" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i></a>
+                        <a href="https://facebook.com/ContactoverificaLaPaz" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://tiktok.com/@verifica_la_paz" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/59176536286" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                        <a href="https://t.me/verificalapaz" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a>
                     </div>
                 </div>
+
             </div>
+
             <div class="footer-bottom">
                 <div class="footer-legal">
-                    <p><strong>NOTA LEGAL:</strong> La Paz te Acerca se limita a verificar la existencia, horarios y datos de contacto de los proveedores listados. No nos hacemos responsables por la calidad del servicio prestado por terceros.</p>
+                    <p>
+                        <strong>NOTA LEGAL:</strong> La Paz te Acerca se limita a verificar la existencia, horarios y datos de contacto de los proveedores listados. No nos hacemos responsables por la calidad del servicio prestado por terceros.
+                    </p>
                 </div>
-                <p class="copyright">© 2026 La Paz te Acerca. Todos los derechos reservados. | Hecho con <i class="fas fa-heart" aria-hidden="true"></i> en Bolivia</p>
+                <p class="copyright">
+                    © <span id="current-year"></span> La Paz te Acerca. Todos los derechos reservados. | Hecho con <i class="fas fa-heart" aria-hidden="true"></i> en Bolivia
+                </p>
             </div>
         </div>
     </footer>
 
+    <!-- ========================================
+         BARRA FIJA MOBILE
+         ======================================== -->
     <div class="mobile-showcase" id="mobileShowcase">
-        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
-        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="tel:+59176536286" class="mobile-showcase-call">
+            <i class="fas fa-phone-alt"></i> Llamar
+        </a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
     </div>
 
+    <!-- ========================================
+         TOAST & BACK TO TOP & OVERLAY
+         ======================================== -->
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+    <div class="nav-overlay" id="navOverlay"></div>
 
+    <!-- ========================================
+         SCRIPTS
+         ======================================== -->
     <script src="js/main.js"></script>
     <script>
+        // Función para enviar el formulario por WhatsApp directamente
         function enviarWhatsAppDirecto() {
             const nombre = document.querySelector('input[name="nombre"]').value.trim() || 'Ciudadano';
             const tipo = document.querySelector('select[name="tipo"]').value || 'Consulta general';
@@ -305,12 +428,9 @@
             window.open(`https://wa.me/59176536286?text=${encodeURIComponent(texto)}`, '_blank');
         }
 
-        function toggleAcordeon(header) {
-            header.classList.toggle('active');
-            header.nextElementSibling.classList.toggle('open');
-        }
+        // Año dinámico en el footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
-    <div class="nav-overlay" id="navOverlay"></div>
+
 </body>
 </html>
-

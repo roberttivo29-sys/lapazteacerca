@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex">
-  <title>Panel de Administración - La Paz te Acerca</title>
+  <title>Panel de Administración | La Paz te Acerca</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
@@ -49,42 +49,13 @@
     
     .results-counter { background: #EFF6FF; padding: 10px 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9rem; color: #1E40AF; font-weight: 600; }
 
-    .security-badge {
-      background: #10B981;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 15px;
-    }
-    .session-timer {
-      font-size: 0.8rem;
-      color: #64748b;
-      margin-left: 10px;
-    }
+    .security-badge { background: #10B981; color: white; padding: 6px 12px; border-radius: 50px; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 15px; }
+    .session-timer { font-size: 0.8rem; color: #64748b; margin-left: 10px; }
     
-    .upload-progress {
-      height: 4px;
-      background: #e2e8f0;
-      border-radius: 2px;
-      overflow: hidden;
-      margin-top: 5px;
-    }
-    .upload-progress-bar {
-      height: 100%;
-      background: #D97706;
-      width: 0%;
-      transition: width 0.3s;
-    }
+    .upload-progress { height: 4px; background: #e2e8f0; border-radius: 2px; overflow: hidden; margin-top: 5px; }
+    .upload-progress-bar { height: 100%; background: #D97706; width: 0%; transition: width 0.3s; }
     
-    .upload-status {
-      font-size: 0.75rem;
-      margin-top: 3px;
-      color: #64748b;
-    }
+    .upload-status { font-size: 0.75rem; margin-top: 3px; color: #64748b; }
     .upload-status.success { color: #10B981; }
     .upload-status.error { color: #EF4444; }
 
@@ -99,9 +70,7 @@
   <!-- LOGIN -->
   <div id="loginSection" class="login-container">
     <div class="text-center mb-4">
-      <div class="security-badge">
-        <i class="fas fa-lock"></i> Conexión Segura
-      </div>
+      <div class="security-badge"><i class="fas fa-lock"></i> Conexión Segura</div>
       <h3 class="mb-1"><i class="fas fa-hands-helping text-primary"></i> Admin La Paz te Acerca</h3>
       <p class="text-muted small">Panel de Administración del Directorio</p>
     </div>
@@ -111,26 +80,16 @@
         <label class="form-label fw-bold">Usuario Administrador</label>
         <input type="text" id="adminUser" class="form-control" placeholder="admin" required autocomplete="username">
       </div>
-      
       <div class="mb-3">
         <label class="form-label fw-bold">Contraseña</label>
         <div class="input-group">
           <input type="password" id="adminPass" class="form-control" placeholder="••••••••" required autocomplete="current-password">
-          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
-            <i class="fas fa-eye" id="toggleIcon"></i>
-          </button>
+          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()"><i class="fas fa-eye" id="toggleIcon"></i></button>
         </div>
       </div>
-      
-      <button type="submit" class="btn btn-primary w-100 py-2" id="loginBtn">
-        <i class="fas fa-lock-open me-2"></i> Ingresar al Panel
-      </button>
-      
+      <button type="submit" class="btn btn-primary w-100 py-2" id="loginBtn"><i class="fas fa-lock-open me-2"></i> Ingresar al Panel</button>
       <div id="loginError" class="alert alert-danger mt-3 hidden small"></div>
-      
-      <div class="text-center mt-3">
-        <small class="text-muted"><i class="fas fa-info-circle"></i> La sesión expira en 2 horas o al cerrar la pestaña.</small>
-      </div>
+      <div class="text-center mt-3"><small class="text-muted"><i class="fas fa-info-circle"></i> La sesión expira en 2 horas o al cerrar la pestaña.</small></div>
     </form>
   </div>
 
@@ -143,20 +102,14 @@
       </div>
       <div>
         <span class="badge bg-light text-dark border me-2" id="userDisplay"><i class="fas fa-user"></i> Admin</span>
-        <button onclick="logout()" class="btn btn-outline-danger btn-sm">
-          <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-        </button>
+        <button onclick="logout()" class="btn btn-outline-danger btn-sm"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
       </div>
     </div>
 
     <!-- TABS -->
     <div class="admin-tabs">
-      <div class="admin-tab active" onclick="cambiarTab('gestion')">
-        <i class="fas fa-cogs"></i> Gestión del Directorio
-      </div>
-      <div class="admin-tab" onclick="cambiarTab('consulta')">
-        <i class="fas fa-search"></i> Consulta Rápida
-      </div>
+      <div class="admin-tab active" onclick="cambiarTab('gestion')"><i class="fas fa-cogs"></i> Gestión del Directorio</div>
+      <div class="admin-tab" onclick="cambiarTab('consulta')"><i class="fas fa-search"></i> Consulta Rápida</div>
     </div>
 
     <!-- GESTIÓN -->
@@ -172,21 +125,14 @@
         <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-2">
           <h5 class="card-title mb-0">Gestión de Proveedores</h5>
           <div>
-            <button onclick="addProvider()" class="btn btn-success">
-              <i class="fas fa-plus"></i> Agregar Negocio
-            </button>
-            <button onclick="loadProviders()" class="btn btn-primary ms-2">
-              <i class="fas fa-sync"></i> Recargar
-            </button>
+            <button onclick="addProvider()" class="btn btn-success"><i class="fas fa-plus"></i> Agregar Negocio</button>
+            <button onclick="loadProviders()" class="btn btn-primary ms-2"><i class="fas fa-sync"></i> Recargar</button>
           </div>
         </div>
       </div>
 
       <div id="providersList"></div>
-      <div id="loading" class="text-center py-5 hidden">
-        <i class="fas fa-spinner fa-spin fa-3x text-primary"></i>
-        <p class="mt-3">Cargando directorio...</p>
-      </div>
+      <div id="loading" class="text-center py-5 hidden"><i class="fas fa-spinner fa-spin fa-3x text-primary"></i><p class="mt-3">Cargando directorio...</p></div>
     </div>
 
     <!-- CONSULTA RÁPIDA -->
@@ -194,7 +140,6 @@
       <div class="quick-search-container">
         <h5 class="mb-3"><i class="fas fa-search text-primary"></i> Consulta Rápida</h5>
         <p class="text-muted mb-3">Busca negocios rápidamente para responder consultas por WhatsApp.</p>
-        
         <div class="row g-3">
           <div class="col-md-4">
             <label class="form-label fw-bold">Categoría</label>
@@ -212,19 +157,15 @@
           </div>
           <div class="col-md-4">
             <label class="form-label fw-bold">Subcategoría</label>
-            <select id="filtroSubcategoria" class="form-select" onchange="filtrarConsultaRapida()">
-              <option value="">Todas las subcategorías</option>
-            </select>
+            <select id="filtroSubcategoria" class="form-select" onchange="filtrarConsultaRapida()"><option value="">Todas las subcategorías</option></select>
           </div>
           <div class="col-md-4">
             <label class="form-label fw-bold">Buscar por texto</label>
             <input type="text" id="filtroTexto" class="form-control" placeholder="Nombre, dirección, teléfono..." oninput="filtrarConsultaRapida()">
           </div>
         </div>
-        
         <div id="resultsCounter" class="results-counter hidden" style="margin-top: 15px;"></div>
       </div>
-
       <div id="consultaRapidaList"></div>
     </div>
   </div>
@@ -244,13 +185,12 @@
               <div class="col-md-6">
                 <label class="form-label">ID (Número único) *</label>
                 <input type="number" id="f_id" class="form-control" required>
-                <small class="text-muted">Se genera automáticamente. No modificar.</small>
+                <small class="text-muted">Se genera automáticamente. No modificar al editar.</small>
               </div>
               <div class="col-md-6">
                 <label class="form-label">Nombre del Negocio *</label>
                 <input type="text" id="f_nombre" class="form-control" required>
               </div>
-              
               <div class="col-md-6">
                 <label class="form-label">Categoría *</label>
                 <select id="f_categoria" class="form-select" required onchange="actualizarSubcategorias()">
@@ -266,36 +206,16 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label">Subcategoría *</label>
-                <select id="f_subcategoria_select" class="form-select" required onchange="toggleOtroInput()">
-                </select>
+                <select id="f_subcategoria_select" class="form-select" required onchange="toggleOtroInput()"></select>
                 <input type="text" id="f_subcategoria_otro" class="form-control mt-2 hidden" placeholder="Escribe la subcategoría específica">
                 <input type="hidden" id="f_subcategoria">
               </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Dirección</label>
-                <input type="text" id="f_direccion" class="form-control">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Teléfono</label>
-                <input type="text" id="f_telefono" class="form-control">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">WhatsApp (solo números)</label>
-                <input type="text" id="f_whatsapp" class="form-control">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Horario</label>
-                <input type="text" id="f_horario" class="form-control">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Rango de Precios</label>
-                <input type="text" id="f_precios" class="form-control">
-              </div>
-              <div class="col-12">
-                <label class="form-label">Descripción</label>
-                <textarea id="f_descripcion" class="form-control" rows="2"></textarea>
-              </div>
+              <div class="col-md-6"><label class="form-label">Dirección</label><input type="text" id="f_direccion" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Teléfono</label><input type="text" id="f_telefono" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">WhatsApp (solo números)</label><input type="text" id="f_whatsapp" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Horario</label><input type="text" id="f_horario" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Rango de Precios</label><input type="text" id="f_precios" class="form-control"></div>
+              <div class="col-12"><label class="form-label">Descripción</label><textarea id="f_descripcion" class="form-control" rows="2"></textarea></div>
 
               <!-- IMÁGENES -->
               <div class="col-12">
@@ -304,9 +224,7 @@
                 
                 <div class="image-upload-container">
                   <input type="text" id="f_imagen1" class="form-control" placeholder="URL de Imagen 1" readonly>
-                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput1').click()">
-                    <i class="fas fa-camera"></i> Subir
-                  </button>
+                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput1').click()"><i class="fas fa-camera"></i> Subir</button>
                   <input type="file" id="fileInput1" style="display:none" accept="image/*" onchange="handleFileSelect(1, this)">
                 </div>
                 <div class="upload-progress hidden" id="progress1"><div class="upload-progress-bar"></div></div>
@@ -315,9 +233,7 @@
 
                 <div class="image-upload-container">
                   <input type="text" id="f_imagen2" class="form-control" placeholder="URL de Imagen 2" readonly>
-                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput2').click()">
-                    <i class="fas fa-camera"></i> Subir
-                  </button>
+                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput2').click()"><i class="fas fa-camera"></i> Subir</button>
                   <input type="file" id="fileInput2" style="display:none" accept="image/*" onchange="handleFileSelect(2, this)">
                 </div>
                 <div class="upload-progress hidden" id="progress2"><div class="upload-progress-bar"></div></div>
@@ -326,9 +242,7 @@
 
                 <div class="image-upload-container ultra-premium-only hidden">
                   <input type="text" id="f_imagen3" class="form-control" placeholder="URL de Imagen 3" readonly>
-                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput3').click()">
-                    <i class="fas fa-camera"></i> Subir
-                  </button>
+                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput3').click()"><i class="fas fa-camera"></i> Subir</button>
                   <input type="file" id="fileInput3" style="display:none" accept="image/*" onchange="handleFileSelect(3, this)">
                 </div>
                 <div class="upload-progress hidden" id="progress3"><div class="upload-progress-bar"></div></div>
@@ -337,9 +251,7 @@
 
                 <div class="image-upload-container ultra-premium-only hidden">
                   <input type="text" id="f_imagen4" class="form-control" placeholder="URL de Imagen 4" readonly>
-                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput4').click()">
-                    <i class="fas fa-camera"></i> Subir
-                  </button>
+                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput4').click()"><i class="fas fa-camera"></i> Subir</button>
                   <input type="file" id="fileInput4" style="display:none" accept="image/*" onchange="handleFileSelect(4, this)">
                 </div>
                 <div class="upload-progress hidden" id="progress4"><div class="upload-progress-bar"></div></div>
@@ -359,32 +271,23 @@
                 <label class="form-label">¿Destacar en Portada?</label>
                 <div class="form-check form-switch mt-2">
                   <input class="form-check-input" type="checkbox" id="f_destacado_switch">
-                  <label class="form-check-label" for="f_destacado_switch">
-                    Mostrar en "Recomendados"
-                  </label>
+                  <label class="form-check-label" for="f_destacado_switch">Mostrar en "Recomendados"</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <label class="form-label">¿Atención 24h?</label>
                 <div class="form-check form-switch mt-2">
                   <input class="form-check-input" type="checkbox" id="f_24horas_switch">
-                  <label class="form-check-label" for="f_24horas_switch">
-                    Nocturno/Festivos
-                  </label>
+                  <label class="form-check-label" for="f_24horas_switch">Nocturno/Festivos</label>
                 </div>
               </div>
-              <div class="col-12">
-                <label class="form-label">Audio URL (opcional)</label>
-                <input type="text" id="f_audio_url" class="form-control" placeholder="https://...">
-              </div>
+              <div class="col-12"><label class="form-label">Audio URL (opcional)</label><input type="text" id="f_audio_url" class="form-control" placeholder="https://..."></div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" onclick="saveProvider()" class="btn btn-primary" id="saveBtn">
-            <i class="fas fa-save"></i> Guardar Cambios
-          </button>
+          <button type="button" onclick="saveProvider()" class="btn btn-primary" id="saveBtn"><i class="fas fa-save"></i> Guardar Cambios</button>
         </div>
       </div>
     </div>
@@ -395,13 +298,7 @@
     // ==========================================
     // CONFIGURACIÓN
     // ==========================================
-    const CONFIG = {
-      API_BASE: '/api',
-      SESSION_TIMEOUT: 7200000,
-      MAX_FILE_SIZE: 5 * 1024 * 1024,
-      ALLOWED_TYPES: ['image/jpeg', 'image/png', 'image/webp']
-    };
-
+    const CONFIG = { API_BASE: '/api', SESSION_TIMEOUT: 7200000, MAX_FILE_SIZE: 5 * 1024 * 1024, ALLOWED_TYPES: ['image/jpeg', 'image/png', 'image/webp'] };
     const subcategoriasPorCategoria = {
       "Salud y Bienestar": ["Clínicas y Urgencias", "Consultorios y Especialistas", "Odontología", "Laboratorios y Análisis", "Veterinaria y Mascotas", "Óptica y Audición", "Ambulancias y Traslados", "Fisioterapia y Rehabilitación", "Otros Servicios de Salud"],
       "Mantenimiento del Hogar": ["Plomería", "Electricidad", "Albañilería y Reparaciones", "Pintura y Acabados", "Cerrajería", "Carpintería", "Limpieza y Fumigación", "Jardinería y Paisajismo", "Instalación y Mantenimiento de Gas", "Otros Oficios del Hogar"],
@@ -418,134 +315,77 @@
     let sessionTimerInterval;
 
     // ==========================================
+    // UTILIDADES (Fix XSS v11.0)
+    // ==========================================
+    function escaparHTML(v) {
+      if (v === null || v === undefined) return '';
+      return String(v).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+    }
+
+    // ==========================================
     // LOGIN
     // ==========================================
     function togglePassword() {
       const input = document.getElementById('adminPass');
       const icon = document.getElementById('toggleIcon');
-      if (input.type === 'password') {
-        input.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        input.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
+      if (input.type === 'password') { input.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+      else { input.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
     }
 
     async function handleLogin(event) {
       event.preventDefault();
-      
       const user = document.getElementById('adminUser').value.trim();
       const pass = document.getElementById('adminPass').value;
       const loginBtn = document.getElementById('loginBtn');
-      
-      if (!user || !pass) {
-        showError('Por favor completa todos los campos');
-        return;
-      }
+      if (!user || !pass) { showError('Por favor completa todos los campos'); return; }
       
       loginBtn.disabled = true;
       loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Verificando...';
       
       try {
-        const response = await fetch(`${CONFIG.API_BASE}/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: user, password: pass })
-        });
-        
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.message || 'Credenciales inválidas');
-        }
-        
+        const response = await fetch(`${CONFIG.API_BASE}/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: user, password: pass }) });
+        if (!response.ok) { const error = await response.json(); throw new Error(error.message || 'Credenciales inválidas'); }
         const data = await response.json();
-        
         sessionToken = data.token;
         sessionStorage.setItem('lp_session_token', sessionToken);
         sessionStorage.setItem('lp_session_user', user);
         sessionStorage.setItem('lp_session_time', Date.now().toString());
-        
         document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${user}`;
         document.getElementById('loginSection').classList.add('hidden');
         document.getElementById('adminSection').classList.remove('hidden');
-        
         startSessionTimer();
         loadProviders();
-        
         showToast('Bienvenido', `Hola ${user}, sesión iniciada correctamente`, 'success');
-      } catch (e) {
-        showError('Error de autenticación: ' + e.message);
-      } finally {
-        loginBtn.disabled = false;
-        loginBtn.innerHTML = '<i class="fas fa-lock-open me-2"></i> Ingresar al Panel';
-      }
+      } catch (e) { showError('Error de autenticación: ' + e.message); }
+      finally { loginBtn.disabled = false; loginBtn.innerHTML = '<i class="fas fa-lock-open me-2"></i> Ingresar al Panel'; }
     }
 
-    function logout() {
-      sessionStorage.clear();
-      clearInterval(sessionTimerInterval);
-      location.reload();
-    }
+    function logout() { sessionStorage.clear(); clearInterval(sessionTimerInterval); location.reload(); }
 
     function startSessionTimer() {
       const updateTimer = () => {
         const loginTime = parseInt(sessionStorage.getItem('lp_session_time'));
-        const elapsed = Date.now() - loginTime;
-        const remaining = CONFIG.SESSION_TIMEOUT - elapsed;
-        
-        if (remaining <= 0) {
-          alert('Tu sesión ha expirado por seguridad. Por favor inicia sesión nuevamente.');
-          logout();
-          return;
-        }
-        
+        const remaining = CONFIG.SESSION_TIMEOUT - (Date.now() - loginTime);
+        if (remaining <= 0) { alert('Tu sesión ha expirado por seguridad.'); logout(); return; }
         const minutes = Math.floor(remaining / 60000);
         const seconds = Math.floor((remaining % 60000) / 1000);
         document.getElementById('sessionTimer').innerHTML = `<i class="fas fa-clock"></i> Sesión expira en: ${minutes}m ${seconds}s`;
       };
-      
       updateTimer();
       sessionTimerInterval = setInterval(updateTimer, 1000);
     }
 
-    function showError(msg) {
-      const el = document.getElementById('loginError');
-      el.textContent = msg;
-      el.classList.remove('hidden');
-    }
+    function showError(msg) { const el = document.getElementById('loginError'); el.textContent = msg; el.classList.remove('hidden'); }
 
     // ==========================================
     // API
     // ==========================================
     async function apiRequest(endpoint, method = 'GET', body = null) {
-      const options = {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${sessionToken}`
-        }
-      };
-      
-      if (body) {
-        options.body = JSON.stringify(body);
-      }
-      
+      const options = { method, headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionToken}` } };
+      if (body) options.body = JSON.stringify(body);
       const response = await fetch(`${CONFIG.API_BASE}${endpoint}`, options);
-      
-      if (response.status === 401) {
-        alert('Tu sesión ha expirado. Por favor inicia sesión nuevamente.');
-        logout();
-        throw new Error('Sesión expirada');
-      }
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Error en la petición');
-      }
-      
+      if (response.status === 401) { alert('Tu sesión ha expirado.'); logout(); throw new Error('Sesión expirada'); }
+      if (!response.ok) { const error = await response.json(); throw new Error(error.message || 'Error en la petición'); }
       return response.json();
     }
 
@@ -554,37 +394,16 @@
     // ==========================================
     function cambiarTab(tab) {
       document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-      if (tab === 'gestion') {
-        document.querySelectorAll('.admin-tab')[0].classList.add('active');
-        document.getElementById('tabGestion').classList.remove('hidden');
-        document.getElementById('tabConsulta').classList.add('hidden');
-      } else {
-        document.querySelectorAll('.admin-tab')[1].classList.add('active');
-        document.getElementById('tabGestion').classList.add('hidden');
-        document.getElementById('tabConsulta').classList.remove('hidden');
-        filtrarConsultaRapida();
-      }
+      if (tab === 'gestion') { document.querySelectorAll('.admin-tab')[0].classList.add('active'); document.getElementById('tabGestion').classList.remove('hidden'); document.getElementById('tabConsulta').classList.add('hidden'); }
+      else { document.querySelectorAll('.admin-tab')[1].classList.add('active'); document.getElementById('tabGestion').classList.add('hidden'); document.getElementById('tabConsulta').classList.remove('hidden'); filtrarConsultaRapida(); }
     }
 
     function actualizarSubcategorias() {
       const categoria = document.getElementById('f_categoria').value;
       const subSelect = document.getElementById('f_subcategoria_select');
       subSelect.innerHTML = '';
-      
-      if (subcategoriasPorCategoria[categoria]) {
-        subcategoriasPorCategoria[categoria].forEach(sub => {
-          const option = document.createElement('option');
-          option.value = sub;
-          option.textContent = sub;
-          subSelect.appendChild(option);
-        });
-      }
-
-      const optOtro = document.createElement('option');
-      optOtro.value = 'Otro';
-      optOtro.textContent = 'Otro (escribir manualmente)';
-      subSelect.appendChild(optOtro);
-
+      if (subcategoriasPorCategoria[categoria]) { subcategoriasPorCategoria[categoria].forEach(sub => { const option = document.createElement('option'); option.value = sub; option.textContent = sub; subSelect.appendChild(option); }); }
+      const optOtro = document.createElement('option'); optOtro.value = 'Otro'; optOtro.textContent = 'Otro (escribir manualmente)'; subSelect.appendChild(optOtro);
       toggleOtroInput();
     }
 
@@ -592,15 +411,7 @@
       const categoria = document.getElementById('filtroCategoria').value;
       const subSelect = document.getElementById('filtroSubcategoria');
       subSelect.innerHTML = '<option value="">Todas las subcategorías</option>';
-      
-      if (categoria && subcategoriasPorCategoria[categoria]) {
-        subcategoriasPorCategoria[categoria].forEach(sub => {
-          const option = document.createElement('option');
-          option.value = sub;
-          option.textContent = sub;
-          subSelect.appendChild(option);
-        });
-      }
+      if (categoria && subcategoriasPorCategoria[categoria]) { subcategoriasPorCategoria[categoria].forEach(sub => { const option = document.createElement('option'); option.value = sub; option.textContent = sub; subSelect.appendChild(option); }); }
       filtrarConsultaRapida();
     }
 
@@ -608,137 +419,49 @@
       const subSelect = document.getElementById('f_subcategoria_select');
       const otroInput = document.getElementById('f_subcategoria_otro');
       const hiddenInput = document.getElementById('f_subcategoria');
-
-      if (subSelect.value === 'Otro') {
-        otroInput.classList.remove('hidden');
-        otroInput.required = true;
-        hiddenInput.value = otroInput.value;
-      } else {
-        otroInput.classList.add('hidden');
-        otroInput.required = false;
-        hiddenInput.value = subSelect.value;
-      }
+      if (subSelect.value === 'Otro') { otroInput.classList.remove('hidden'); otroInput.required = true; hiddenInput.value = otroInput.value; }
+      else { otroInput.classList.add('hidden'); otroInput.required = false; hiddenInput.value = subSelect.value; }
     }
-
-    document.getElementById('f_subcategoria_otro').addEventListener('input', function() {
-      document.getElementById('f_subcategoria').value = this.value;
-    });
+    document.getElementById('f_subcategoria_otro').addEventListener('input', function() { document.getElementById('f_subcategoria').value = this.value; });
 
     // ==========================================
     // SUBIDA DE IMÁGENES
     // ==========================================
     function handleFileSelect(numero, input) {
-      const file = input.files[0];
-      if (!file) return;
-
-      if (!CONFIG.ALLOWED_TYPES.includes(file.type)) {
-        showToast('Error', 'Solo se permiten imágenes JPG, PNG o WebP', 'error');
-        input.value = '';
-        return;
-      }
-
-      if (file.size > CONFIG.MAX_FILE_SIZE) {
-        showToast('Error', 'La imagen no puede superar los 5MB', 'error');
-        input.value = '';
-        return;
-      }
-
-      const preview = document.getElementById(`preview${numero}`);
-      const progress = document.getElementById(`progress${numero}`);
-      const progressBar = progress.querySelector('.upload-progress-bar');
-      const status = document.getElementById(`status${numero}`);
-
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-
-      progress.classList.remove('hidden');
-      status.textContent = 'Subiendo imagen...';
-      status.className = 'upload-status';
-      progressBar.style.width = '30%';
-
+      const file = input.files[0]; if (!file) return;
+      if (!CONFIG.ALLOWED_TYPES.includes(file.type)) { showToast('Error', 'Solo se permiten imágenes JPG, PNG o WebP', 'error'); input.value = ''; return; }
+      if (file.size > CONFIG.MAX_FILE_SIZE) { showToast('Error', 'La imagen no puede superar los 5MB', 'error'); input.value = ''; return; }
+      const preview = document.getElementById(`preview${numero}`); const progress = document.getElementById(`progress${numero}`); const progressBar = progress.querySelector('.upload-progress-bar'); const status = document.getElementById(`status${numero}`);
+      preview.src = URL.createObjectURL(file); preview.classList.remove('hidden'); progress.classList.remove('hidden'); status.textContent = 'Subiendo imagen...'; status.className = 'upload-status'; progressBar.style.width = '30%';
       subirImagenSegura(numero, file);
     }
 
     async function subirImagenSegura(numero, file) {
-      const progress = document.getElementById(`progress${numero}`);
-      const progressBar = progress.querySelector('.upload-progress-bar');
-      const status = document.getElementById(`status${numero}`);
-
+      const progress = document.getElementById(`progress${numero}`); const progressBar = progress.querySelector('.upload-progress-bar'); const status = document.getElementById(`status${numero}`);
       try {
-        const formData = new FormData();
-        formData.append('image', file);
-        formData.append('numero', numero);
-
-        progressBar.style.width = '60%';
-
-        const response = await fetch(`${CONFIG.API_BASE}/upload`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${sessionToken}`
-          },
-          body: formData
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.message || 'Error al subir imagen');
-        }
-
-        const data = await response.json();
-        
-        progressBar.style.width = '100%';
-        status.textContent = '✓ Imagen cargada correctamente';
-        status.className = 'upload-status success';
-        
-        document.getElementById(`f_imagen${numero}`).value = data.url;
-        
-        showToast('¡Listo!', `Imagen ${numero} cargada correctamente`, 'success');
-        
-        setTimeout(() => {
-          progress.classList.add('hidden');
-          progressBar.style.width = '0%';
-        }, 2000);
-        
-      } catch (error) {
-        progressBar.style.width = '0%';
-        status.textContent = '✗ Error: ' + error.message;
-        status.className = 'upload-status error';
-        showToast('Error', `No se pudo subir imagen ${numero}: ${error.message}`, 'error');
-      }
+        const formData = new FormData(); formData.append('image', file); formData.append('numero', numero); progressBar.style.width = '60%';
+        const response = await fetch(`${CONFIG.API_BASE}/upload`, { method: 'POST', headers: { 'Authorization': `Bearer ${sessionToken}` }, body: formData });
+        if (!response.ok) { const error = await response.json(); throw new Error(error.message || 'Error al subir imagen'); }
+        const data = await response.json(); progressBar.style.width = '100%'; status.textContent = '✓ Imagen cargada correctamente'; status.className = 'upload-status success';
+        document.getElementById(`f_imagen${numero}`).value = data.url; showToast('¡Listo!', `Imagen ${numero} cargada correctamente`, 'success');
+        setTimeout(() => { progress.classList.add('hidden'); progressBar.style.width = '0%'; }, 2000);
+      } catch (error) { progressBar.style.width = '0%'; status.textContent = '✗ Error: ' + error.message; status.className = 'upload-status error'; showToast('Error', `No se pudo subir imagen ${numero}: ${error.message}`, 'error'); }
     }
 
     function toggleUltraPremiumFields() {
-      const plan = document.getElementById('f_tipo_plan').value;
-      const ultraFields = document.querySelectorAll('.ultra-premium-only');
-      
-      if (plan === 'ultra_premium') {
-        ultraFields.forEach(field => field.classList.remove('hidden'));
-      } else {
-        ultraFields.forEach(field => field.classList.add('hidden'));
-        document.getElementById('f_imagen3').value = '';
-        document.getElementById('f_imagen4').value = '';
-        document.getElementById('preview3').classList.add('hidden');
-        document.getElementById('preview4').classList.add('hidden');
-      }
+      const plan = document.getElementById('f_tipo_plan').value; const ultraFields = document.querySelectorAll('.ultra-premium-only');
+      if (plan === 'ultra_premium') { ultraFields.forEach(field => field.classList.remove('hidden')); }
+      else { ultraFields.forEach(field => field.classList.add('hidden')); document.getElementById('f_imagen3').value = ''; document.getElementById('f_imagen4').value = ''; document.getElementById('preview3').classList.add('hidden'); document.getElementById('preview4').classList.add('hidden'); }
     }
 
     // ==========================================
     // CRUD
     // ==========================================
     async function loadProviders() {
-      document.getElementById('loading').classList.remove('hidden');
-      document.getElementById('providersList').innerHTML = '';
-      
-      try {
-        const data = await apiRequest('/proveedores');
-        providers = data.proveedores || [];
-        updateStats();
-        renderProviders();
-      } catch (e) {
-        document.getElementById('providersList').innerHTML = `<div class="alert alert-danger">Error: ${e.message}</div>`;
-      } finally {
-        document.getElementById('loading').classList.add('hidden');
-      }
+      document.getElementById('loading').classList.remove('hidden'); document.getElementById('providersList').innerHTML = '';
+      try { const data = await apiRequest('/proveedores'); providers = data.proveedores || []; updateStats(); renderProviders(); }
+      catch (e) { document.getElementById('providersList').innerHTML = `<div class="alert alert-danger">Error: ${escaparHTML(e.message)}</div>`; }
+      finally { document.getElementById('loading').classList.add('hidden'); }
     }
 
     function updateStats() {
@@ -748,35 +471,18 @@
       document.getElementById('stat24h').textContent = providers.filter(p => p['24horas']).length;
     }
 
-    function getPlanLabel(plan) {
-      if (plan === 'ultra_premium') return 'RECOMENDADO';
-      if (plan === 'premium') return 'DESTACADO';
-      return 'BÁSICO';
-    }
-
-    function getPlanClass(plan) {
-      if (plan === 'ultra_premium') return 'badge-recomendado';
-      if (plan === 'premium') return 'badge-destacado-plan';
-      return 'badge-basico';
-    }
+    function getPlanLabel(plan) { if (plan === 'ultra_premium') return 'RECOMENDADO'; if (plan === 'premium') return 'DESTACADO'; return 'BÁSICO'; }
+    function getPlanClass(plan) { if (plan === 'ultra_premium') return 'badge-recomendado'; if (plan === 'premium') return 'badge-destacado-plan'; return 'badge-basico'; }
 
     function renderProviders() {
       const html = providers.map((p, i) => `
         <div class="provider-card">
           <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
             <div style="flex: 1; min-width: 250px;">
-              <h5 class="mb-1">
-                ${p.nombre}
-                ${p.destacado == 1 ? '<span class="badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
-                ${p['24horas'] ? '<span class="badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
-                <span class="badge-plan ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span>
-              </h5>
-              <p class="text-muted mb-1"><strong>${p.categoria}</strong> > ${p.subcategoria || 'Sin subcategoría'}</p>
-              <p class="mb-1"><i class="fas fa-map-marker-alt text-danger"></i> ${p.direccion || 'Sin dirección'}</p>
-              <p class="mb-0">
-                <i class="fas fa-phone text-primary"></i> ${p.telefono || 'Sin teléfono'} | 
-                <i class="fab fa-whatsapp text-success"></i> ${p.whatsapp || 'Sin WhatsApp'}
-              </p>
+              <h5 class="mb-1">${escaparHTML(p.nombre)} ${p.destacado == 1 ? '<span class="badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''} ${p['24horas'] ? '<span class="badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''} <span class="badge-plan ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span></h5>
+              <p class="text-muted mb-1"><strong>${escaparHTML(p.categoria)}</strong> > ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
+              <p class="mb-1"><i class="fas fa-map-marker-alt text-danger"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
+              <p class="mb-0"><i class="fas fa-phone text-primary"></i> ${escaparHTML(p.telefono || 'Sin teléfono')} | <i class="fab fa-whatsapp text-success"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
             </div>
             <div class="d-flex flex-column gap-2">
               <button onclick="editProvider(${i})" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Editar</button>
@@ -789,261 +495,91 @@
     }
 
     function filtrarConsultaRapida() {
-      const categoria = document.getElementById('filtroCategoria').value;
-      const subcategoria = document.getElementById('filtroSubcategoria').value;
-      const texto = document.getElementById('filtroTexto').value.toLowerCase().trim();
-
+      const categoria = document.getElementById('filtroCategoria').value; const subcategoria = document.getElementById('filtroSubcategoria').value; const texto = document.getElementById('filtroTexto').value.toLowerCase().trim();
       let filtrados = providers.filter(p => {
-        const matchCategoria = !categoria || p.categoria === categoria;
-        const matchSubcategoria = !subcategoria || p.subcategoria === subcategoria;
-        const matchTexto = !texto || 
-          (p.nombre || '').toLowerCase().includes(texto) ||
-          (p.direccion || '').toLowerCase().includes(texto) ||
-          (p.telefono || '').toLowerCase().includes(texto) ||
-          (p.whatsapp || '').toLowerCase().includes(texto) ||
-          (p.descripcion || '').toLowerCase().includes(texto) ||
-          (p.subcategoria || '').toLowerCase().includes(texto);
-        
+        const matchCategoria = !categoria || p.categoria === categoria; const matchSubcategoria = !subcategoria || p.subcategoria === subcategoria;
+        const matchTexto = !texto || (p.nombre || '').toLowerCase().includes(texto) || (p.direccion || '').toLowerCase().includes(texto) || (p.telefono || '').toLowerCase().includes(texto) || (p.whatsapp || '').toLowerCase().includes(texto) || (p.descripcion || '').toLowerCase().includes(texto) || (p.subcategoria || '').toLowerCase().includes(texto);
         return matchCategoria && matchSubcategoria && matchTexto;
       });
-
       const counter = document.getElementById('resultsCounter');
-      if (filtrados.length > 0) {
-        counter.textContent = `📊 ${filtrados.length} negocio${filtrados.length !== 1 ? 's' : ''} encontrado${filtrados.length !== 1 ? 's' : ''}`;
-        counter.classList.remove('hidden');
-      } else {
-        counter.classList.add('hidden');
-      }
-
+      if (filtrados.length > 0) { counter.textContent = `📊 ${filtrados.length} negocio${filtrados.length !== 1 ? 's' : ''} encontrado${filtrados.length !== 1 ? 's' : ''}`; counter.classList.remove('hidden'); } else { counter.classList.add('hidden'); }
       renderConsultaRapida(filtrados);
     }
 
     function renderConsultaRapida(lista) {
       const container = document.getElementById('consultaRapidaList');
-      
-      if (lista.length === 0) {
-        container.innerHTML = `
-          <div class="no-results">
-            <i class="fas fa-search"></i>
-            <p>No se encontraron negocios con esos filtros</p>
-            <small class="text-muted">Intenta cambiar la categoría o el texto de búsqueda</small>
-          </div>
-        `;
-        return;
-      }
-
+      if (lista.length === 0) { container.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><p>No se encontraron negocios con esos filtros</p></div>`; return; }
       const html = lista.map(p => {
         const whatsappNum = (p.whatsapp || p.telefono || '').replace(/\D/g, '');
-        const whatsappLink = whatsappNum ? `https://wa.me/591${whatsappNum}` : '#';
-        const textoCopiar = `${p.nombre}\n${p.categoria} > ${p.subcategoria}\n📍 ${p.direccion || 'Sin dirección'}\n📞 ${p.telefono || 'Sin teléfono'}\n💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}\n ${p.horario || 'Sin horario'}`;
-        
+        const whatsappLink = whatsappNum ? `https://wa.me/591${whatsappNum.startsWith('591') ? whatsappNum : '591'+whatsappNum}` : '#';
+        const textoCopiar = `${p.nombre}\n${p.categoria} > ${p.subcategoria}\n📍 ${p.direccion || 'Sin dirección'}\n📞 ${p.telefono || 'Sin teléfono'}\n💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}\n🕒 ${p.horario || 'Sin horario'}`;
         return `
           <div class="quick-provider-row">
             <div class="quick-provider-info">
-              <h6>
-                ${p.nombre}
-                ${p.destacado == 1 ? '<span class="badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
-                ${p['24horas'] ? '<span class="badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
-              </h6>
-              <p><strong>${p.categoria}</strong> > ${p.subcategoria || 'Sin subcategoría'}</p>
-              <p><i class="fas fa-map-marker-alt text-danger"></i> ${p.direccion || 'Sin dirección'}</p>
-              <p><i class="fas fa-phone text-primary"></i> ${p.telefono || 'Sin teléfono'} | <i class="fab fa-whatsapp text-success"></i> ${p.whatsapp || 'Sin WhatsApp'}</p>
-              <p><i class="fas fa-clock text-warning"></i> ${p.horario || 'Sin horario'}</p>
+              <h6>${escaparHTML(p.nombre)} ${p.destacado == 1 ? '<span class="badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''} ${p['24horas'] ? '<span class="badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}</h6>
+              <p><strong>${escaparHTML(p.categoria)}</strong> > ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
+              <p><i class="fas fa-map-marker-alt text-danger"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
+              <p><i class="fas fa-phone text-primary"></i> ${escaparHTML(p.telefono || 'Sin teléfono')} | <i class="fab fa-whatsapp text-success"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
+              <p><i class="fas fa-clock text-warning"></i> ${escaparHTML(p.horario || 'Sin horario')}</p>
             </div>
             <div class="quick-provider-actions">
-              ${whatsappNum ? `
-                <button class="btn-copy" onclick="copiarDatos(\`${textoCopiar.replace(/`/g, '\\`')}\`)" title="Copiar datos para WhatsApp">
-                  <i class="fas fa-copy"></i> Copiar
-                </button>
-                <button class="btn-copy" onclick="copiarNumero('${whatsappNum}')" title="Copiar solo el número">
-                  <i class="fas fa-phone"></i> ${whatsappNum}
-                </button>
-                <a href="${whatsappLink}?text=${encodeURIComponent('Hola, vi tu perfil en La Paz te Acerca')}" target="_blank" class="btn-whatsapp-direct" title="Abrir WhatsApp directo">
-                  <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-              ` : '<span class="text-muted">Sin contacto</span>'}
+              ${whatsappNum ? `<button class="btn-copy" onclick="copiarDatos(\`${textoCopiar.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)"><i class="fas fa-copy"></i> Copiar</button><button class="btn-copy" onclick="copiarNumero('${whatsappNum}')"><i class="fas fa-phone"></i> ${whatsappNum}</button><a href="${whatsappLink}?text=${encodeURIComponent('Hola, vi tu perfil en La Paz te Acerca')}" target="_blank" class="btn-whatsapp-direct"><i class="fab fa-whatsapp"></i> WhatsApp</a>` : '<span class="text-muted">Sin contacto</span>'}
             </div>
           </div>
         `;
       }).join('');
-      
       container.innerHTML = html;
     }
 
-    function copiarDatos(texto) {
-      navigator.clipboard.writeText(texto).then(() => {
-        showToast('¡Copiado!', 'Datos listos para pegar en WhatsApp', 'success', 2000);
-      }).catch(err => {
-        showToast('Error', 'No se pudo copiar: ' + err, 'error');
-      });
-    }
-
-    function copiarNumero(numero) {
-      navigator.clipboard.writeText(numero).then(() => {
-        showToast('¡Copiado!', `Número ${numero} copiado`, 'success', 2000);
-      }).catch(err => {
-        showToast('Error', 'No se pudo copiar: ' + err, 'error');
-      });
-    }
+    function copiarDatos(texto) { navigator.clipboard.writeText(texto).then(() => showToast('¡Copiado!', 'Datos listos para pegar en WhatsApp', 'success', 2000)).catch(err => showToast('Error', 'No se pudo copiar: ' + err, 'error')); }
+    function copiarNumero(numero) { navigator.clipboard.writeText(numero).then(() => showToast('¡Copiado!', `Número ${numero} copiado`, 'success', 2000)).catch(err => showToast('Error', 'No se pudo copiar: ' + err, 'error')); }
 
     function addProvider() {
-      document.getElementById('modalTitle').textContent = 'Agregar Nuevo Negocio';
-      document.getElementById('editIndex').value = '-1';
-      document.getElementById('providerForm').reset();
-      
-      const maxId = providers.length > 0 
-        ? Math.max(...providers.map(p => p.id || 0)) 
-        : 0;
-      document.getElementById('f_id').value = maxId + 1;
-      
-      document.getElementById('f_categoria').value = 'Salud y Bienestar';
-      actualizarSubcategorias();
-      toggleUltraPremiumFields();
-      
-      for (let i = 1; i <= 4; i++) {
-        document.getElementById(`preview${i}`).classList.add('hidden');
-        document.getElementById(`preview${i}`).src = '';
-        document.getElementById(`f_imagen${i}`).value = '';
-      }
-      
+      document.getElementById('modalTitle').textContent = 'Agregar Nuevo Negocio'; document.getElementById('editIndex').value = '-1'; document.getElementById('providerForm').reset();
+      const maxId = providers.length > 0 ? Math.max(...providers.map(p => p.id || 0)) : 0; document.getElementById('f_id').value = maxId + 1;
+      document.getElementById('f_id').readOnly = false; // Permitir editar ID solo al crear (aunque no recomendado)
+      document.getElementById('f_categoria').value = 'Salud y Bienestar'; actualizarSubcategorias(); toggleUltraPremiumFields();
+      for (let i = 1; i <= 4; i++) { document.getElementById(`preview${i}`).classList.add('hidden'); document.getElementById(`preview${i}`).src = ''; document.getElementById(`f_imagen${i}`).value = ''; }
       new bootstrap.Modal(document.getElementById('editModal')).show();
     }
 
     function editProvider(index) {
-      const p = providers[index];
-      document.getElementById('modalTitle').textContent = 'Editar Negocio';
-      document.getElementById('editIndex').value = index;
-      
-      document.getElementById('f_id').value = p.id;
-      document.getElementById('f_nombre').value = p.nombre;
-      document.getElementById('f_categoria').value = p.categoria;
-      
-      actualizarSubcategorias();
-      const subSelect = document.getElementById('f_subcategoria_select');
-      const otroInput = document.getElementById('f_subcategoria_otro');
-      
+      const p = providers[index]; document.getElementById('modalTitle').textContent = 'Editar Negocio'; document.getElementById('editIndex').value = index;
+      document.getElementById('f_id').value = p.id; document.getElementById('f_id').readOnly = true; // Fix v11.0: Bloquear ID al editar
+      document.getElementById('f_nombre').value = p.nombre; document.getElementById('f_categoria').value = p.categoria;
+      actualizarSubcategorias(); const subSelect = document.getElementById('f_subcategoria_select'); const otroInput = document.getElementById('f_subcategoria_otro');
       const validSubs = subcategoriasPorCategoria[p.categoria] || [];
-      if (validSubs.includes(p.subcategoria)) {
-        subSelect.value = p.subcategoria;
-        otroInput.classList.add('hidden');
-        document.getElementById('f_subcategoria').value = p.subcategoria;
-      } else {
-        subSelect.value = 'Otro';
-        otroInput.classList.remove('hidden');
-        otroInput.value = p.subcategoria || '';
-        document.getElementById('f_subcategoria').value = p.subcategoria || '';
-      }
-
-      document.getElementById('f_direccion').value = p.direccion || '';
-      document.getElementById('f_telefono').value = p.telefono || '';
-      document.getElementById('f_whatsapp').value = p.whatsapp || '';
-      document.getElementById('f_horario').value = p.horario || '';
-      document.getElementById('f_precios').value = p.precios || '';
-      document.getElementById('f_descripcion').value = p.descripcion || '';
-      document.getElementById('f_tipo_plan').value = p.tipo_plan || 'gratuito';
-      document.getElementById('f_destacado_switch').checked = p.destacado == 1;
-      document.getElementById('f_24horas_switch').checked = p['24horas'] || false;
-      document.getElementById('f_audio_url').value = p.audio_url || '';
-
-      for (let i = 1; i <= 4; i++) {
-        const imgField = document.getElementById(`f_imagen${i}`);
-        const preview = document.getElementById(`preview${i}`);
-        imgField.value = p[`imagen${i}`] || '';
-        if (p[`imagen${i}`]) {
-          preview.src = p[`imagen${i}`];
-          preview.classList.remove('hidden');
-        } else {
-          preview.classList.add('hidden');
-        }
-      }
-
-      toggleUltraPremiumFields();
-      
-      new bootstrap.Modal(document.getElementById('editModal')).show();
+      if (validSubs.includes(p.subcategoria)) { subSelect.value = p.subcategoria; otroInput.classList.add('hidden'); document.getElementById('f_subcategoria').value = p.subcategoria; }
+      else { subSelect.value = 'Otro'; otroInput.classList.remove('hidden'); otroInput.value = p.subcategoria || ''; document.getElementById('f_subcategoria').value = p.subcategoria || ''; }
+      document.getElementById('f_direccion').value = p.direccion || ''; document.getElementById('f_telefono').value = p.telefono || ''; document.getElementById('f_whatsapp').value = p.whatsapp || '';
+      document.getElementById('f_horario').value = p.horario || ''; document.getElementById('f_precios').value = p.precios || ''; document.getElementById('f_descripcion').value = p.descripcion || '';
+      document.getElementById('f_tipo_plan').value = p.tipo_plan || 'gratuito'; document.getElementById('f_destacado_switch').checked = p.destacado == 1; document.getElementById('f_24horas_switch').checked = p['24horas'] || false; document.getElementById('f_audio_url').value = p.audio_url || '';
+      for (let i = 1; i <= 4; i++) { const imgField = document.getElementById(`f_imagen${i}`); const preview = document.getElementById(`preview${i}`); imgField.value = p[`imagen${i}`] || ''; if (p[`imagen${i}`]) { preview.src = p[`imagen${i}`]; preview.classList.remove('hidden'); } else { preview.classList.add('hidden'); } }
+      toggleUltraPremiumFields(); new bootstrap.Modal(document.getElementById('editModal')).show();
     }
 
     async function saveProvider() {
-      const index = parseInt(document.getElementById('editIndex').value);
-      const saveBtn = document.getElementById('saveBtn');
-      
-      toggleOtroInput(); 
-      
+      const index = parseInt(document.getElementById('editIndex').value); const saveBtn = document.getElementById('saveBtn'); toggleOtroInput();
       const nuevoId = parseInt(document.getElementById('f_id').value);
+      if (isNaN(nuevoId) || nuevoId <= 0) { showToast('Error', 'El ID debe ser un número positivo.', 'error'); return; }
+      if (index === -1) { if (providers.find(p => p.id === nuevoId)) { showToast('Error', `El ID ${nuevoId} ya existe.`, 'error'); return; } }
+      else { if (providers.find((p, i) => p.id === nuevoId && i !== index)) { showToast('Error', `El ID ${nuevoId} ya está en uso.`, 'error'); return; } }
       
-      if (index === -1) {
-        const idDuplicado = providers.find(p => p.id === nuevoId);
-        if (idDuplicado) {
-          showToast('Error', `El ID ${nuevoId} ya existe (negocio: ${idDuplicado.nombre}). Usa otro ID.`, 'error');
-          return;
-        }
-      } else {
-        const idDuplicado = providers.find((p, i) => p.id === nuevoId && i !== index);
-        if (idDuplicado) {
-          showToast('Error', `El ID ${nuevoId} ya está en uso por "${idDuplicado.nombre}".`, 'error');
-          return;
-        }
-      }
-      
-      if (isNaN(nuevoId) || nuevoId <= 0) {
-        showToast('Error', 'El ID debe ser un número positivo.', 'error');
-        return;
-      }
-      
-      const newProvider = {
-        id: nuevoId,
-        nombre: document.getElementById('f_nombre').value,
-        categoria: document.getElementById('f_categoria').value,
-        subcategoria: document.getElementById('f_subcategoria').value,
-        direccion: document.getElementById('f_direccion').value,
-        telefono: document.getElementById('f_telefono').value,
-        whatsapp: document.getElementById('f_whatsapp').value,
-        horario: document.getElementById('f_horario').value,
-        precios: document.getElementById('f_precios').value,
-        descripcion: document.getElementById('f_descripcion').value,
-        tipo_plan: document.getElementById('f_tipo_plan').value,
-        destacado: document.getElementById('f_destacado_switch').checked ? 1 : 0,
-        '24horas': document.getElementById('f_24horas_switch').checked,
-        imagen1: document.getElementById('f_imagen1').value,
-        imagen2: document.getElementById('f_imagen2').value,
-        imagen3: document.getElementById('f_imagen3').value,
-        imagen4: document.getElementById('f_imagen4').value,
-        audio_url: document.getElementById('f_audio_url').value
-      };
-
-      saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
-
+      const newProvider = { id: nuevoId, nombre: document.getElementById('f_nombre').value, categoria: document.getElementById('f_categoria').value, subcategoria: document.getElementById('f_subcategoria').value, direccion: document.getElementById('f_direccion').value, telefono: document.getElementById('f_telefono').value, whatsapp: document.getElementById('f_whatsapp').value, horario: document.getElementById('f_horario').value, precios: document.getElementById('f_precios').value, descripcion: document.getElementById('f_descripcion').value, tipo_plan: document.getElementById('f_tipo_plan').value, destacado: document.getElementById('f_destacado_switch').checked ? 1 : 0, '24horas': document.getElementById('f_24horas_switch').checked, imagen1: document.getElementById('f_imagen1').value, imagen2: document.getElementById('f_imagen2').value, imagen3: document.getElementById('f_imagen3').value, imagen4: document.getElementById('f_imagen4').value, audio_url: document.getElementById('f_audio_url').value };
+      saveBtn.disabled = true; saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
       try {
-        if (index === -1) {
-          await apiRequest('/proveedores', 'POST', newProvider);
-          showToast('¡Éxito!', 'Negocio agregado correctamente', 'success');
-        } else {
-          await apiRequest(`/proveedores/${nuevoId}`, 'PUT', newProvider);
-          showToast('¡Éxito!', 'Negocio actualizado correctamente', 'success');
-        }
-        
-        bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
-        loadProviders();
-      } catch (e) {
-        showToast('Error', 'No se pudo guardar: ' + e.message, 'error');
-      } finally {
-        saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Cambios';
-      }
+        if (index === -1) { await apiRequest('/proveedores', 'POST', newProvider); showToast('¡Éxito!', 'Negocio agregado correctamente', 'success'); }
+        else { await apiRequest(`/proveedores/${nuevoId}`, 'PUT', newProvider); showToast('¡Éxito!', 'Negocio actualizado correctamente', 'success'); }
+        bootstrap.Modal.getInstance(document.getElementById('editModal')).hide(); loadProviders();
+      } catch (e) { showToast('Error', 'No se pudo guardar: ' + e.message, 'error'); }
+      finally { saveBtn.disabled = false; saveBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Cambios'; }
     }
 
     async function deleteProvider(index) {
       if (!confirm('¿Estás seguro de eliminar este negocio? Esta acción no se puede deshacer.')) return;
-      
       const provider = providers[index];
-      
-      try {
-        await apiRequest(`/proveedores/${provider.id}`, 'DELETE');
-        showToast('¡Eliminado!', 'Negocio eliminado correctamente', 'success');
-        loadProviders();
-      } catch (e) {
-        showToast('Error', 'No se pudo eliminar: ' + e.message, 'error');
-      }
+      try { await apiRequest(`/proveedores/${provider.id}`, 'DELETE'); showToast('¡Eliminado!', 'Negocio eliminado correctamente', 'success'); loadProviders(); }
+      catch (e) { showToast('Error', 'No se pudo eliminar: ' + e.message, 'error'); }
     }
 
     // ==========================================
@@ -1051,64 +587,20 @@
     // ==========================================
     function showToast(title, message, type = 'info', duration = 5000) {
       const container = document.getElementById('toastContainer') || createToastContainer();
-      const icons = { 
-        success: 'fa-check-circle', 
-        error: 'fa-exclamation-circle', 
-        warning: 'fa-exclamation-triangle', 
-        info: 'fa-info-circle' 
-      };
-      const bgColors = {
-        success: 'bg-success',
-        error: 'bg-danger',
-        warning: 'bg-warning text-dark',
-        info: 'bg-primary'
-      };
-      
-      const toast = document.createElement('div');
-      toast.className = `toast align-items-center text-white ${bgColors[type]} border-0 mb-2`;
-      toast.setAttribute('role', 'alert');
-      toast.style.minWidth = '300px';
-      toast.innerHTML = `
-        <div class="d-flex">
-          <div class="toast-body">
-            <i class="fas ${icons[type]} me-2"></i>
-            <strong>${title}:</strong> ${message}
-          </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>
-      `;
-      
-      container.appendChild(toast);
-      const bsToast = new bootstrap.Toast(toast, { delay: duration });
-      bsToast.show();
-      
-      toast.addEventListener('hidden.bs.toast', () => toast.remove());
+      const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', warning: 'fa-exclamation-triangle', info: 'fa-info-circle' };
+      const bgColors = { success: 'bg-success', error: 'bg-danger', warning: 'bg-warning text-dark', info: 'bg-primary' };
+      const toast = document.createElement('div'); toast.className = `toast align-items-center text-white ${bgColors[type]} border-0 mb-2`; toast.setAttribute('role', 'alert'); toast.style.minWidth = '300px';
+      toast.innerHTML = `<div class="d-flex"><div class="toast-body"><i class="fas ${icons[type]} me-2"></i><strong>${escaparHTML(title)}:</strong> ${escaparHTML(message)}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
+      container.appendChild(toast); const bsToast = new bootstrap.Toast(toast, { delay: duration }); bsToast.show(); toast.addEventListener('hidden.bs.toast', () => toast.remove());
     }
-
-    function createToastContainer() {
-      const container = document.createElement('div');
-      container.id = 'toastContainer';
-      container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999;';
-      document.body.appendChild(container);
-      return container;
-    }
+    function createToastContainer() { const container = document.createElement('div'); container.id = 'toastContainer'; container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999;'; document.body.appendChild(container); return container; }
 
     // ==========================================
     // INICIALIZACIÓN
     // ==========================================
     window.addEventListener('load', () => {
-      const savedToken = sessionStorage.getItem('lp_session_token');
-      const loginTime = sessionStorage.getItem('lp_session_time');
-      const savedUser = sessionStorage.getItem('lp_session_user');
-      
-      if (savedToken && loginTime && (Date.now() - parseInt(loginTime) < CONFIG.SESSION_TIMEOUT)) {
-        sessionToken = savedToken;
-        document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${savedUser || 'Admin'}`;
-        document.getElementById('loginSection').classList.add('hidden');
-        document.getElementById('adminSection').classList.remove('hidden');
-        startSessionTimer();
-        loadProviders();
-      }
+      const savedToken = sessionStorage.getItem('lp_session_token'); const loginTime = sessionStorage.getItem('lp_session_time'); const savedUser = sessionStorage.getItem('lp_session_user');
+      if (savedToken && loginTime && (Date.now() - parseInt(loginTime) < CONFIG.SESSION_TIMEOUT)) { sessionToken = savedToken; document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${savedUser || 'Admin'}`; document.getElementById('loginSection').classList.add('hidden'); document.getElementById('adminSection').classList.remove('hidden'); startSessionTimer(); loadProviders(); }
     });
   </script>
 </body>

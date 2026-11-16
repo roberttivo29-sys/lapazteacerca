@@ -1,11 +1,16 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA - Service Worker v2.0
+// LA PAZ TE ACERCA - Service Worker v11.0
 // Estrategia dual: Cache-First (estáticos) + Network-First (datos)
+// 
+// Cambios v11.0:
+// - NO cachear /api/ (fix crítico de seguridad)
+// - Eliminación de código muerto
+// - Unificación de formato y comentarios
 // ========================================
 
-const CACHE_NAME = 'lapazteacerca-v2';  // ← bump de versión para forzar limpieza de caché corrupta
-const STATIC_CACHE = 'lapazteacerca-static-v2';
-const DATA_CACHE = 'lapazteacerca-data-v2';
+const CACHE_NAME = 'lapazteacerca-v11';
+const STATIC_CACHE = 'lapazteacerca-static-v11';
+const DATA_CACHE = 'lapazteacerca-data-v11';
 
 // Archivos estáticos que se cachean en la instalación
 const urlsToCache = [
@@ -60,11 +65,11 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
     
-    // 1) ARCHIVOS DE DATOS → Network-First (red primero, caché como respaldo)
-    // Esto evita que el JSON de proveedores se quede obsoleto
-    if (url.pathname.includes('/data/proveedores.json') || 
-        url.pathname.includes('/api/')) {
-        event.respondWith(networkFirst(event.request));
+    // 1) API Y DATOS → Network-First SIN caché
+    // Fix crítico: nunca cachear respuestas autenticadas o datos sensibles
+    if (url.pathname.startsWith('/api/') || 
+        url.pathname.includes('/data/proveedores.json')) {
+        event.respondWith(networkFirstNoCache(event.request));
         return;
     }
     
@@ -87,7 +92,22 @@ self.addEventListener('fetch', event => {
 });
 
 // ========================================
-// ESTRATEGIA: Network-First
+// ESTRATEGIA: Network-First SIN caché (para API)
+// ========================================
+async function networkFirstNoCache(request) {
+    try {
+        const response = await fetch(request, { cache: 'no-cache' });
+        return response;
+    } catch (error) {
+        return new Response('Sin conexión y sin caché disponible', {
+            status: 503,
+            statusText: 'Service Unavailable'
+        });
+    }
+}
+
+// ========================================
+// ESTRATEGIA: Network-First (para navegación)
 // ========================================
 async function networkFirst(request) {
     try {
@@ -114,7 +134,7 @@ async function networkFirst(request) {
 }
 
 // ========================================
-// ESTRATEGIA: Cache-First
+// ESTRATEGIA: Cache-First (para estáticos)
 // ========================================
 async function cacheFirst(request) {
     const cachedResponse = await caches.match(request);

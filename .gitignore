@@ -1,4 +1,111 @@
-﻿.wrangler/
+﻿# ========================================
+# LA PAZ TE ACERCA - .gitignore v11.0
+# Configuración para Cloudflare Workers + Node.js
+# ========================================
+
+# ========================================
+# CLOUDFLARE WRANGLER
+# ========================================
+.wrangler/
+.wrangler/state/
+.wrangler/tmp/
+.dev.vars
+.dev.vars.*
+
+# ========================================
+# NODE.JS
+# ========================================
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# ========================================
+# VARIABLES DE ENTORNO (CRÍTICO)
+# ========================================
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# ========================================
+# LOGS
+# ========================================
 *.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========================================
+# ARCHIVOS DE SISTEMA
+# ========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ========================================
+# EDITORES DE CÓDIGO
+# ========================================
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ========================================
+# BUILD / DIST
+# ========================================
+dist/
+build/
+out/
+public/build/
+
+# ========================================
+# COBERTURA DE TESTS
+# ========================================
+coverage/
+.nyc_output/
+
+# ========================================
+# ARCHIVOS TEMPORALES
+# ========================================
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+
+# ========================================
+# CLOUDFLARE PAGES (si usas Pages)
+# ========================================
+.pages/
+.pages/tmp/
+
+# ========================================
+# NOTAS IMPORTANTES
+# ========================================
+# ⚠️ NUNCA subas estos archivos al repositorio:
+# - .env (contiene tokens de GitHub, ImgBB, SESSION_SECRET)
+# - node_modules/ (se instala con npm install)
+# - .wrangler/ (configuración local de Wrangler)
+#
+# ✅ SÍ debes subir:
+# - data/proveedores.json (base de datos pública)
+# - functions/api/*.js (Workers)
+# - css/, js/, img/ (frontend público)
+# - *.html (páginas públicas)
