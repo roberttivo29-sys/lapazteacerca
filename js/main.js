@@ -1,22 +1,21 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA - JavaScript v11.2
+// LA PAZ TE ACERCA - JavaScript v11.3
 // Regla de oro: el NÚMERO es el héroe
 // 
-// Cambios v11.2:
-// - Nomenclatura de planes: basico / destacado / completo
-// - getPlanBadge() actualizada
+// Cambios v11.3:
+// - Nomenclatura: gratuito / basico / completo
 // - ordenPorPlan actualizado
-// - Card "completo" reemplaza a "ultra-premium"
+// 
+// Cambios v11.2:
+// - Nav ordenado (flex-wrap)
 // 
 // Cambios v11.0:
-// - Toast público funcional (reutiliza CSS)
-// - Fix WhatsApp 591 duplicado
-// - Eliminación de código muerto
-// - Unificación de formato y comentarios
+// - Toast público
+// - Fix WhatsApp 591
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Verifica La Paz - JavaScript v11.2 cargado');
+    console.log('✅ Verifica La Paz - JavaScript v11.3 cargado');
     
     initHeader();
     initMenuHamburguesa();
@@ -89,19 +88,19 @@ function getColorVariable(categoria) {
 }
 
 // ========================================
-// BADGES DE PLAN v11.2
+// BADGES DE PLAN v11.3
 // ========================================
 
 function getPlanBadge(tipo_plan) {
     const badges = {
-        'basico': '<span class="badge-nivel nivel-basico"><i class="fas fa-list"></i> Básico</span>',
-        'destacado': '<span class="badge-nivel nivel-destacado"><i class="fas fa-star"></i> Destacado</span>',
+        'gratuito': '<span class="badge-nivel nivel-gratuito"><i class="fas fa-circle"></i> Gratuito</span>',
+        'basico': '<span class="badge-nivel nivel-basico"><i class="fas fa-star"></i> Básico</span>',
         'completo': '<span class="badge-nivel nivel-completo"><i class="fas fa-crown"></i> Completo</span>'
     };
     return badges[tipo_plan] || '';
 }
 
-// Fix WhatsApp 591 duplicado (NUEVO v11.0)
+// Fix WhatsApp 591 duplicado
 function buildWhatsLink(raw, msg) {
     const n = String(raw || '').replace(/\D/g, '');
     if (n.length < 8) return '#';
@@ -110,7 +109,7 @@ function buildWhatsLink(raw, msg) {
 }
 
 // ========================================
-// GESTIÓN DE DATOS (CACHÉ)
+// CACHÉ DE DATOS
 // ========================================
 
 const cacheProveedores = { datos: null, tiempo: 0 };
@@ -152,8 +151,8 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
     try {
         const todos = await obtenerProveedores();
         
-        // v11.2: nuevo orden de prioridad
-        const ordenPorPlan = { 'completo': 0, 'destacado': 1, 'basico': 2 };
+        // v11.3: orden de prioridad
+        const ordenPorPlan = { 'completo': 0, 'basico': 1, 'gratuito': 2 };
         todos.sort((a, b) => (ordenPorPlan[a.tipo_plan] || 2) - (ordenPorPlan[b.tipo_plan] || 2));
         
         const catNormal = normalizarTexto(categoria);
@@ -271,8 +270,8 @@ async function cargarDestacados() {
     
     try {
         const proveedores = await obtenerProveedores();
-        // v11.2: nuevo orden de prioridad
-        const ordenPorPlan = { 'completo': 0, 'destacado': 1, 'basico': 2 };
+        // v11.3: orden de prioridad
+        const ordenPorPlan = { 'completo': 0, 'basico': 1, 'gratuito': 2 };
         const destacados = proveedores
             .filter(p => p.destacado === 1)
             .sort((a, b) => (ordenPorPlan[a.tipo_plan] || 2) - (ordenPorPlan[b.tipo_plan] || 2));
@@ -305,16 +304,14 @@ function generarTarjetaDestacada(p) {
             <p class="destacado-subtitle">${p.categoria} > ${p.subcategoria}</p>
             <p class="destacado-info"><i class="fas fa-map-marker-alt"></i> ${p.direccion || 'Sin dirección'}</p>
             <p class="destacado-info"><i class="fas fa-phone"></i> ${p.telefono || 'Sin teléfono'}</p>
-            ${p.descripcion ? `<p style="font-size: 0.85rem; color: #64748b; margin: 0.5rem 0; line-height: 1.4;">${p.descripcion}</p>` : ''}
-            <div style="margin-top: 0.75rem;">
-                ${p.whatsapp || p.telefono ? `<a href="${whatsappLink}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center;"><i class="fab fa-whatsapp"></i> Contactar</a>` : ''}
-            </div>
+            ${p.descripcion ? `<p style="font-size:0.85rem;color:#64748b;margin:0.5rem 0;line-height:1.4;">${p.descripcion}</p>` : ''}
+            ${p.whatsapp || p.telefono ? `<div style="margin-top:0.75rem;"><a href="${whatsappLink}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" style="width:100%;"><i class="fab fa-whatsapp"></i> Contactar</a></div>` : ''}
         </div>
     `;
 }
 
 // ========================================
-// FILTROS EN VIVO (con delegación de eventos)
+// FILTROS EN VIVO
 // ========================================
 
 function initFiltrosEnVivo() {
@@ -346,7 +343,7 @@ function initFiltrosEnVivo() {
 }
 
 // ========================================
-// TOAST PÚBLICO (NUEVO v11.0)
+// TOAST PÚBLICO
 // ========================================
 
 function showToast(title, message, type = 'info', duration = 5000) {
