@@ -1,5 +1,5 @@
-/* ========================================
-   LA PAZ TE ACERCA - CSS v10.4
+﻿/* ========================================
+   LA PAZ TE ACERCA - CSS v10.4 (CORREGIDO)
    (base íntegra v9.2 + ediciones quirúrgicas)
    Header dinámico + Nav 1 fila con íconos + CTA independiente
    Regla de oro: el proveedor es el héroe
@@ -451,11 +451,10 @@ ul {
 }
 
 /* ========================================
-   OVERLAY OSCURO (para cuando el menú móvil está abierto)
+   OVERLAY OSCURO (CORREGIDO para transición suave)
    ======================================== */
 
 .nav-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -463,14 +462,17 @@ ul {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
-    z-index: var(--z-overlay);
+    z-index: 999;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
 }
 
 .nav-overlay.active {
-    display: block;
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 /* ========================================
@@ -2331,21 +2333,20 @@ section + section {
         display: none;
     }
     
-    /* MENÚ MÓVIL COMPACTO Y ESTÉTICO */
+    /* MENÚ MÓVIL COMPACTO Y ESTÉTICO (CORREGIDO) */
     .nav-simetrico {
         position: fixed;
         top: 0;
         right: -100%;
         width: 75%;
         max-width: 280px;
-        height: auto;
-        max-height: 80vh;
+        height: 100vh; /* CAMBIO: de auto a 100vh para evitar desplazamientos raros */
         background: var(--blanco);
         flex-direction: column;
-        padding: 3.5rem 1.2rem 1.2rem;
+        padding: 4.5rem 1.2rem 1.5rem; /* CAMBIO: un poco más de espacio arriba */
         box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
         transition: right 0.3s ease;
-        z-index: var(--z-header);
+        z-index: 1001; /* CAMBIO: de var(--z-header) a 1001 para quedar encima del overlay (999) */
         overflow-y: auto;
         align-items: stretch;
         gap: 0.2rem;
