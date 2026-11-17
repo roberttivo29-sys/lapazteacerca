@@ -1,5 +1,5 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA — JavaScript v12.1
+// LA PAZ TE ACERCA — JavaScript v12.2
 // ========================================
 // Doctrina: rescatar lo operativo, reinventar lo estético.
 // Nomenclatura blindada: GRATUITO / BÁSICO / COMPLETO.
@@ -15,10 +15,15 @@
 // - Chips del hero hacen scroll + activan filtro.
 // - Servicios rotativos en sidebar (cada 3s).
 // - Profesionales destacados cargados desde JSON.
+//
+// Novedades v12.2:
+// - Servicios rotativos con COLOR de categoría (leído del badge).
+// - Rotación real (solo el activo visible) + puntos de progreso.
+// - Ícono del título "Servicios disponibles" se colorea por categoría.
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ La Paz te Acerca - JS v12.1 cargado');
+    console.log('✅ La Paz te Acerca - JS v12.2 cargado');
 
     // Inicializadores base
     initHeader();
@@ -33,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFiltrosEnVivo();
     initToastDeExito();
 
-    // Inicializadores v12.1
+    // Inicializadores v12.1 / v12.2
     initHeroChips();
     initServiciosRotativos();
 
@@ -100,12 +105,12 @@ function getColorVariable(categoria) {
         'Servicios para Eventos': 'var(--c-eventos, #8B5CF6)',
         'Imagen y Cuidado Personal': 'var(--c-imagen, #7C3AED)'
     };
-    return colors[categoria] || '#2563EB';
+    return colors[categoria] || 'var(--ocre-calidad, #D97706)';
 }
 
 
 // ========================================
-// BADGES DE PLAN v12.1 (nomenclatura blindada)
+// BADGES DE PLAN (nomenclatura blindada)
 // ========================================
 
 function getPlanBadge(tipo_plan) {
@@ -570,10 +575,9 @@ function toggleAcordeon(header) {
 
 
 // ========================================
-// NOVEDADES v12.1
+// CHIPS DEL HERO → SCROLL + FILTRO v12.1
 // ========================================
 
-// Chips del hero → scroll a filtros + activar filtro correspondiente
 function initHeroChips() {
     document.querySelectorAll('.chip[data-jump]').forEach(chip => {
         chip.addEventListener('click', function(e) {
@@ -590,7 +594,11 @@ function initHeroChips() {
     });
 }
 
-// Servicios rotativos en sidebar (cambia cada 3s)
+
+// ========================================
+// SERVICIOS ROTATIVOS (SIDEBAR) v12.2 — CON VIDA Y COLOR
+// ========================================
+
 function initServiciosRotativos() {
     const contenedor = document.getElementById('serviciosRotativos');
     if (!contenedor) return;
@@ -598,15 +606,50 @@ function initServiciosRotativos() {
     const items = contenedor.querySelectorAll('.servicio-item');
     if (items.length === 0) return;
 
+    // 1) Leer la categoría del badge del hero y aplicar su color al contenedor
+    const badge = document.querySelector('.hero-badge');
+    if (badge) {
+        const categoria = badge.textContent.trim();
+        const colorCat = getColorVariable(categoria);
+        contenedor.style.setProperty('--color-cat', colorCat);
+
+        // Colorear también el ícono del título "SERVICIOS DISPONIBLES"
+        const titulo = contenedor.parentElement.querySelector('h3 i');
+        if (titulo) titulo.style.color = colorCat;
+    }
+
+    // 2) Crear puntos de progreso (dots) una sola vez
+    let dotsWrap = contenedor.parentElement.querySelector('.servicios-dots');
+    if (!dotsWrap) {
+        dotsWrap = document.createElement('div');
+        dotsWrap.className = 'servicios-dots';
+        items.forEach((_, i) => {
+            const d = document.createElement('span');
+            d.className = 'dot' + (i === 0 ? ' active' : '');
+            dotsWrap.appendChild(d);
+        });
+        contenedor.insertAdjacentElement('afterend', dotsWrap);
+    }
+    const dots = dotsWrap.querySelectorAll('.dot');
+
+    // 3) Rotación: solo el item .active es visible (el resto oculto por CSS)
     let indice = 0;
     setInterval(() => {
         items[indice].classList.remove('active');
+        if (dots[indice]) dots[indice].classList.remove('active');
+
         indice = (indice + 1) % items.length;
+
         items[indice].classList.add('active');
-    }, 3000);
+        if (dots[indice]) dots[indice].classList.add('active');
+    }, 3500);
 }
 
-// Profesionales destacados en sidebar (cargados desde JSON)
+
+// ========================================
+// PROFESIONALES DESTACADOS (SIDEBAR) v12.1
+// ========================================
+
 async function cargarProfesionalesDestacados() {
     const contenedor = document.getElementById('profesionalesDestacados');
     if (!contenedor) return;
