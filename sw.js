@@ -1,20 +1,21 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA - Service Worker v12.0
+// LA PAZ TE ACERCA - Service Worker v12.2.1
 // Estrategia dual: Cache-First (estáticos) + Network-First (datos)
 // 
-// Fix v12.0:
+// Fix v12.2.1:
+// - Cache busting: Actualizado nombre de caché y URLs con ?v=12.2.1
 // - Eliminado CACHE_NAME (código muerto)
 // - Unificado event.waitUntil en activate
 // - NO cachear /api/ ni /data/proveedores.json
 // ========================================
 
-const STATIC_CACHE = 'lapazteacerca-static-v12';
-const DATA_CACHE = 'lapazteacerca-data-v12';
+const STATIC_CACHE = 'lapazteacerca-static-v12.2.1';
+const DATA_CACHE = 'lapazteacerca-data-v12.2.1';
 
 const urlsToCache = [
     '/',
     '/index.html',
-    '/css/style.css',
+    '/css/style.css?v=12.2.1',
     '/js/main.js',
     '/404.html'
 ];
