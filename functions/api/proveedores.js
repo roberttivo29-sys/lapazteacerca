@@ -1,80 +1,123 @@
 // ========================================
-// LA PAZ TE ACERCA - API de Proveedores v12.2.4
-// Fix: usa el origen dinámico de la request (sin hardcodear dominio)
+// LA PAZ TE ACERCA - API de Proveedores v12.2.6
+// Lee directamente de GitHub API (sin loops)
 // ========================================
 
 import { validateToken } from './login.js';
 
-// Helper: obtener el origen actual (funciona en preview, production y custom domain)
-function getOrigin(request) {
-  const url = new URL(request.url);
-  return url.origin;
-}
+const GITHUB_OWNER = 'roberttivo29-sys';
+const GITHUB_REPO = 'lapazteacerca';
+const GITHUB_PATH = 'data/proveedores.json';
+const GITHUB_BRANCH = 'main';
 
-// Helper: leer el JSON del propio sitio
-async function readProveedores(request) {
-  const origin = getOrigin(request);
-  const response = await fetch(`${origin}/data/proveedores.json`, {
-    headers: { 'Cache-Control': 'no-cache' },
-    cf: { cacheTtl: 0 }
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} al leer /data/proveedores.json`);
-  }
-  const data = await response.json();
-  return Array.isArray(data) ? data : (data.proveedores || []);
-}
-
-// Helper: escribir en GitHub
-async function writeProveedores(request, env, proveedores, message) {
-  const githubToken = env.GITHUB_TOKEN;
-  if (!githubToken) throw new Error('GITHUB_TOKEN no configurado');
-
-  const owner = 'roberttivo29-sys';
-  const repo = 'lapazteacerca';
-  const path = 'data/proveedores.json';
-
-  // Obtener SHA actual
-  const shaRes = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=main`,
-    { headers: { 'Authorization': `token ${githubToken}`, 'User-Agent': 'lapazteacerca' } }
-  );
-  if (!shaRes.ok) throw new Error(`No se pudo obtener SHA: ${shaRes.status}`);
-  const shaData = await shaRes.json();
-
-  // Codificar nuevo contenido
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(proveedores, null, 2))));
-
-  const updateRes = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
-    {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${githubToken}`,
-        'Content-Type': 'application/json',
-        'User-Agent': 'lapazteacerca'
-      },
-      body: JSON.stringify({
-        message,
-        content,
-        sha: shaData.sha,
-        branch: 'main'
-      })
+// ========================================
+// Helper: Leer proveedores desde GitHub
+// ========================================
+async function readProveedoresFromGitHub(githubToken) {
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}?ref=${GITHUB_BRANCH}`;
+  
+  const response = await fetch(url, {
+    headers: {
+      'Authorization': `token ${githubToken}`,
+      'User-Agent': 'lapazteacerca-admin',
+      'Accept': 'application/vnd.github.v3+json'
     }
-  );
+  });
 
-  if (!updateRes.ok) {
-    const err = await updateRes.json().catch(() => ({}));
-    throw new Error(err.message || `Error GitHub: ${updateRes.status}`);
+  if (!response.ok) {
+    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
   }
-  return updateRes.json();
+
+  const data = await response.json();
+  
+  // GitHub devuelve el contenido en base64
+  const content = atob(data.content);
+  const proveedores = JSON.parse(content);
+  
+  return Array.isArray(proveedores) ? proveedores : [];
 }
 
 // ========================================
-// GET
+// Helper: Guardar proveedores en GitHub
+// ========================================
+async function writeProveedoresToGitHub(githubToken, proveedores, message) {
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+  
+  // Obtener SHA actual
+  const shaResponse = await fetch(
+    `${url}?ref=${GITHUB_BRANCH}`,
+    {
+      headers: {
+        'Authorization': `token ${githubToken}`,
+        'User-Agent': 'lapazteacerca-admin',
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    }
+  );
+  
+  if (!shaResponse.ok) {
+    throw new Error(`No se pudo obtener SHA: ${shaResponse.status}`);
+  }
+  
+  const shaData = await shaResponse.json();
+  
+  // Codificar contenido en base64
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(proveedores, null, 2))));
+  
+  // Actualizar archivo
+  const updateResponse = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${githubToken}`,
+      'Content-Type': 'application/json',
+      'User-Agent': 'lapazteacerca-admin'
+    },
+    body: JSON.stringify({
+      message: message,
+      content: content,
+      sha: shaData.sha,
+      branch: GITHUB_BRANCH
+    })
+  });
+  
+  if (!updateResponse.ok) {
+    const err = await updateResponse.json().catch(() => ({}));
+    throw new Error(err.message || `Error al guardar: ${updateResponse.status}`);
+  }
+  
+  return updateResponse.json();
+}
+
+// ========================================
+// Helper: Validar autenticación
+// ========================================
+async function validateAuth(request, env) {
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return { valid: false, error: 'Token de autenticación requerido', status: 401 };
+  }
+  
+  const token = authHeader.split(' ')[1];
+  const secret = env.SESSION_SECRET;
+  
+  if (!secret) {
+    return { valid: false, error: 'SESSION_SECRET no configurado', status: 500 };
+  }
+  
+  const valid = await validateToken(token, secret);
+  if (!valid) {
+    return { valid: false, error: 'Token inválido o expirado', status: 401 };
+  }
+  
+  return { valid: true };
+}
+
+// ========================================
+// GET: Listar proveedores
 // ========================================
 export async function onRequestGet(context) {
   const { request, env } = context;
+  
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -82,35 +125,48 @@ export async function onRequestGet(context) {
     'Content-Type': 'application/json'
   };
 
-  if (request.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders });
+  }
 
-  const authHeader = request.headers.get('Authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return new Response(JSON.stringify({ error: true, message: 'No autorizado' }), { status: 401, headers: corsHeaders });
+  // Validar auth
+  const auth = await validateAuth(request, env);
+  if (!auth.valid) {
+    return new Response(
+      JSON.stringify({ error: true, message: auth.error }),
+      { status: auth.status, headers: corsHeaders }
+    );
   }
-  const token = authHeader.split(' ')[1];
-  const secret = env.SESSION_SECRET;
-  if (!secret) {
-    return new Response(JSON.stringify({ error: true, message: 'SESSION_SECRET no configurado' }), { status: 500, headers: corsHeaders });
-  }
-  const valid = await validateToken(token, secret);
-  if (!valid) {
-    return new Response(JSON.stringify({ error: true, message: 'Token inválido' }), { status: 401, headers: corsHeaders });
+
+  const githubToken = env.GITHUB_TOKEN;
+  if (!githubToken) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'GITHUB_TOKEN no configurado' }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 
   try {
-    const proveedores = await readProveedores(request);
-    return new Response(JSON.stringify({ proveedores }), { status: 200, headers: corsHeaders });
+    const proveedores = await readProveedoresFromGitHub(githubToken);
+    return new Response(
+      JSON.stringify({ proveedores }),
+      { status: 200, headers: corsHeaders }
+    );
   } catch (error) {
-    return new Response(JSON.stringify({ error: true, message: error.message }), { status: 500, headers: corsHeaders });
+    console.error('Error reading proveedores:', error);
+    return new Response(
+      JSON.stringify({ error: true, message: error.message }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 }
 
 // ========================================
-// POST
+// POST: Agregar proveedor
 // ========================================
 export async function onRequestPost(context) {
   const { request, env } = context;
+  
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -118,39 +174,56 @@ export async function onRequestPost(context) {
     'Content-Type': 'application/json'
   };
 
-  const authHeader = request.headers.get('Authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return new Response(JSON.stringify({ error: true, message: 'No autorizado' }), { status: 401, headers: corsHeaders });
+  const auth = await validateAuth(request, env);
+  if (!auth.valid) {
+    return new Response(
+      JSON.stringify({ error: true, message: auth.error }),
+      { status: auth.status, headers: corsHeaders }
+    );
   }
-  const token = authHeader.split(' ')[1];
-  const secret = env.SESSION_SECRET;
-  const valid = await validateToken(token, secret);
-  if (!valid) {
-    return new Response(JSON.stringify({ error: true, message: 'Token inválido' }), { status: 401, headers: corsHeaders });
+
+  const githubToken = env.GITHUB_TOKEN;
+  if (!githubToken) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'GITHUB_TOKEN no configurado' }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 
   try {
     const newProvider = await request.json();
-    const proveedores = await readProveedores(request);
+    const proveedores = await readProveedoresFromGitHub(githubToken);
 
+    // Verificar ID único
     if (proveedores.some(p => p.id === newProvider.id)) {
-      return new Response(JSON.stringify({ error: true, message: `El ID ${newProvider.id} ya existe` }), { status: 409, headers: corsHeaders });
+      return new Response(
+        JSON.stringify({ error: true, message: `El ID ${newProvider.id} ya existe` }),
+        { status: 409, headers: corsHeaders }
+      );
     }
 
     proveedores.push(newProvider);
-    await writeProveedores(request, env, proveedores, `Agregar proveedor: ${newProvider.nombre}`);
+    await writeProveedoresToGitHub(githubToken, proveedores, `Agregar proveedor: ${newProvider.nombre}`);
 
-    return new Response(JSON.stringify({ success: true, message: 'Proveedor agregado' }), { status: 200, headers: corsHeaders });
+    return new Response(
+      JSON.stringify({ success: true, message: 'Proveedor agregado correctamente' }),
+      { status: 200, headers: corsHeaders }
+    );
   } catch (error) {
-    return new Response(JSON.stringify({ error: true, message: error.message }), { status: 500, headers: corsHeaders });
+    console.error('Error adding provider:', error);
+    return new Response(
+      JSON.stringify({ error: true, message: error.message }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 }
 
 // ========================================
-// PUT
+// PUT: Actualizar proveedor
 // ========================================
 export async function onRequestPut(context) {
   const { request, env, params } = context;
+  
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -158,41 +231,57 @@ export async function onRequestPut(context) {
     'Content-Type': 'application/json'
   };
 
-  const authHeader = request.headers.get('Authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return new Response(JSON.stringify({ error: true, message: 'No autorizado' }), { status: 401, headers: corsHeaders });
+  const auth = await validateAuth(request, env);
+  if (!auth.valid) {
+    return new Response(
+      JSON.stringify({ error: true, message: auth.error }),
+      { status: auth.status, headers: corsHeaders }
+    );
   }
-  const token = authHeader.split(' ')[1];
-  const secret = env.SESSION_SECRET;
-  const valid = await validateToken(token, secret);
-  if (!valid) {
-    return new Response(JSON.stringify({ error: true, message: 'Token inválido' }), { status: 401, headers: corsHeaders });
+
+  const githubToken = env.GITHUB_TOKEN;
+  if (!githubToken) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'GITHUB_TOKEN no configurado' }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 
   try {
     const updatedProvider = await request.json();
     const providerId = parseInt(params.id);
-    const proveedores = await readProveedores(request);
+    const proveedores = await readProveedoresFromGitHub(githubToken);
 
     const index = proveedores.findIndex(p => p.id === providerId);
     if (index === -1) {
-      return new Response(JSON.stringify({ error: true, message: `Proveedor ${providerId} no encontrado` }), { status: 404, headers: corsHeaders });
+      return new Response(
+        JSON.stringify({ error: true, message: `Proveedor con ID ${providerId} no encontrado` }),
+        { status: 404, headers: corsHeaders }
+      );
     }
 
     proveedores[index] = { ...proveedores[index], ...updatedProvider, id: providerId };
-    await writeProveedores(request, env, proveedores, `Actualizar proveedor: ${updatedProvider.nombre}`);
+    await writeProveedoresToGitHub(githubToken, proveedores, `Actualizar proveedor: ${updatedProvider.nombre}`);
 
-    return new Response(JSON.stringify({ success: true, message: 'Proveedor actualizado' }), { status: 200, headers: corsHeaders });
+    return new Response(
+      JSON.stringify({ success: true, message: 'Proveedor actualizado correctamente' }),
+      { status: 200, headers: corsHeaders }
+    );
   } catch (error) {
-    return new Response(JSON.stringify({ error: true, message: error.message }), { status: 500, headers: corsHeaders });
+    console.error('Error updating provider:', error);
+    return new Response(
+      JSON.stringify({ error: true, message: error.message }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 }
 
 // ========================================
-// DELETE
+// DELETE: Eliminar proveedor
 // ========================================
 export async function onRequestDelete(context) {
   const { request, env, params } = context;
+  
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -200,30 +289,45 @@ export async function onRequestDelete(context) {
     'Content-Type': 'application/json'
   };
 
-  const authHeader = request.headers.get('Authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return new Response(JSON.stringify({ error: true, message: 'No autorizado' }), { status: 401, headers: corsHeaders });
+  const auth = await validateAuth(request, env);
+  if (!auth.valid) {
+    return new Response(
+      JSON.stringify({ error: true, message: auth.error }),
+      { status: auth.status, headers: corsHeaders }
+    );
   }
-  const token = authHeader.split(' ')[1];
-  const secret = env.SESSION_SECRET;
-  const valid = await validateToken(token, secret);
-  if (!valid) {
-    return new Response(JSON.stringify({ error: true, message: 'Token inválido' }), { status: 401, headers: corsHeaders });
+
+  const githubToken = env.GITHUB_TOKEN;
+  if (!githubToken) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'GITHUB_TOKEN no configurado' }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 
   try {
     const providerId = parseInt(params.id);
-    const proveedores = await readProveedores(request);
+    const proveedores = await readProveedoresFromGitHub(githubToken);
     const filtered = proveedores.filter(p => p.id !== providerId);
 
     if (filtered.length === proveedores.length) {
-      return new Response(JSON.stringify({ error: true, message: 'Proveedor no encontrado' }), { status: 404, headers: corsHeaders });
+      return new Response(
+        JSON.stringify({ error: true, message: 'Proveedor no encontrado' }),
+        { status: 404, headers: corsHeaders }
+      );
     }
 
-    await writeProveedores(request, env, filtered, `Eliminar proveedor ID ${providerId}`);
+    await writeProveedoresToGitHub(githubToken, filtered, `Eliminar proveedor ID ${providerId}`);
 
-    return new Response(JSON.stringify({ success: true, message: 'Proveedor eliminado' }), { status: 200, headers: corsHeaders });
+    return new Response(
+      JSON.stringify({ success: true, message: 'Proveedor eliminado correctamente' }),
+      { status: 200, headers: corsHeaders }
+    );
   } catch (error) {
-    return new Response(JSON.stringify({ error: true, message: error.message }), { status: 500, headers: corsHeaders });
+    console.error('Error deleting provider:', error);
+    return new Response(
+      JSON.stringify({ error: true, message: error.message }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 }
