@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex">
+    <meta name="description" content="La página que buscas no existe o fue movida. Vuelve al inicio de La Paz te Acerca.">
+    <meta name="author" content="La Paz te Acerca">
+    <meta name="theme-color" content="#0F172A">
     <title>Página no encontrada | La Paz te Acerca</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,30 +15,101 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
     <style>
-        body.error-page{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:var(--fondo)}
-        .error-container{text-align:center;padding:2rem;max-width:500px}
-        .error-code{font-size:clamp(6rem,15vw,10rem);font-weight:900;color:var(--azul-confianza);margin:0;font-family:var(--f-titulo);line-height:1;letter-spacing:-5px}
-        .error-message{font-size:clamp(1.2rem,3vw,1.5rem);color:var(--gris-oscuro);margin:1rem 0 2rem;line-height:1.4}
-        .error-submessage{font-size:1rem;color:var(--gris-medio);margin-bottom:2rem;line-height:1.5}
-        .error-contact{margin-top:2rem;padding-top:2rem;border-top:1px solid var(--gris-borde)}
-        .error-contact p{font-size:.9rem;color:var(--gris-medio);margin-bottom:1rem}
-        .error-contact a{color:var(--azul-confianza);text-decoration:none;font-weight:600;transition:var(--t-fast)}
-        .error-contact a:hover{color:var(--ocre-calidad)}
+        /* ========================================
+           404 - ESTILOS ESPECÍFICOS v12.0
+           ======================================== */
+        body.error-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: var(--f-cuerpo, 'Inter', sans-serif);
+            background: var(--fondo, #FDFBF7);
+        }
+
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 500px;
+        }
+
+        .error-code {
+            font-size: clamp(6rem, 15vw, 10rem);
+            font-weight: 900;
+            color: var(--azul-confianza, #1E40AF);
+            margin: 0;
+            font-family: var(--f-titulo, 'Poppins', sans-serif);
+            line-height: 1;
+            letter-spacing: -5px;
+        }
+
+        .error-message {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--gris-oscuro, #334155);
+            margin: 1rem 0 2rem;
+            line-height: 1.4;
+        }
+
+        .error-submessage {
+            font-size: 1rem;
+            color: var(--gris-medio, #64748B);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .error-contact {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gris-borde, #E2E8F0);
+        }
+
+        .error-contact p {
+            font-size: 0.9rem;
+            color: var(--gris-medio, #64748B);
+            margin-bottom: 1rem;
+        }
+
+        .error-contact a {
+            color: var(--azul-confianza, #1E40AF);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--t-fast);
+        }
+
+        .error-contact a:hover {
+            color: var(--ocre-calidad, #D97706);
+        }
+
+        @media (max-width: 767px) {
+            .error-container {
+                padding: 1.5rem;
+            }
+            
+            .error-code {
+                letter-spacing: -3px;
+            }
+        }
     </style>
 </head>
 <body class="error-page">
     <div class="error-container">
         <h1 class="error-code">404</h1>
         <p class="error-message">La página que buscas no existe o fue movida</p>
-        <p class="error-submessage">Puede que el enlace esté desactualizado o que la página haya cambiado de ubicación.</p>
-        <a href="index.html" class="btn btn-primary"><i class="fas fa-home" aria-hidden="true"></i> Volver al inicio</a>
+        <p class="error-submessage">
+            Puede que el enlace esté desactualizado o que la página haya cambiado de ubicación.
+        </p>
+        <a href="index.html" class="btn btn-primary">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            Volver al inicio
+        </a>
         
         <div class="error-contact">
             <p>¿Necesitas ayuda? Contáctanos directamente:</p>
             <p>
-                <a href="tel:+59176536286"><i class="fas fa-phone" aria-hidden="true"></i> 76536286</a> · 
-                <a href="https://wa.me/59176536286" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+                <a href="https://wa.me/59176536286" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
             </p>
         </div>
     </div>
