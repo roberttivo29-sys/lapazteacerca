@@ -27,7 +27,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.0
+         HEADER DINÁMICO v12.1
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -45,7 +45,6 @@
             </button>
 
             <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
-                <!-- Cabecera del drawer móvil -->
                 <div class="drawer-header">
                     <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
                     <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
@@ -82,7 +81,7 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO DE CATEGORÍA v12.0
+                     HERO DE CATEGORÍA v12.1
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
@@ -99,36 +98,34 @@
                             Mecánicos con experiencia, especialistas en frenos, muñonería, chapistería y grúas 24h. Cotizaciones por escrito antes de tocar tu vehículo.
                         </p>
 
-                        <div class="hero-number fade-in">
-                            <p class="hero-number-label">Escríbenos ahora</p>
-                            <a href="https://wa.me/59176536286" class="hero-number-tel" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                76536286
-                            </a>
-                            <div class="hero-number-actions">
-                                <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio%20automotriz" 
-                                   class="btn-wa-hero" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer">
-                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                    Escríbenos por WhatsApp
-                                </a>
+                        <!-- CHIPS DE SUBSECCIONES -->
+                        <div class="hero-chips-wrapper fade-in">
+                            <p class="hero-chips-title">
+                                <i class="fas fa-th-large" aria-hidden="true"></i> Filtra por tipo de servicio
+                            </p>
+                            <div class="hero-chips" id="heroChips">
+                                <a href="#filtrosVivos" class="chip" data-jump="taller"><i class="fas fa-wrench"></i> Taller Mecánico</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="freno"><i class="fas fa-circle-notch"></i> Frenos</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="muñon"><i class="fas fa-sync-alt"></i> Muñonería</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="chapist"><i class="fas fa-spray-can"></i> Chapista</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="eléctric"><i class="fas fa-bolt"></i> Eléctrico</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="grúa"><i class="fas fa-truck-pickup"></i> Grúas</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="lavado"><i class="fas fa-shower"></i> Lavado</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="repuest"><i class="fas fa-cogs"></i> Repuestos</a>
                             </div>
-                            <p class="hero-number-note">Respuesta en menos de 2 horas · Lunes a Domingo</p>
                         </div>
 
+                        <!-- BENEFICIOS ESPECÍFICOS -->
                         <div class="hero-features fade-in">
-                            <div class="hero-feature"><i class="fas fa-user-cog" aria-hidden="true"></i><span>Mecánicos con Experiencia</span></div>
-                            <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Cotización por Escrito</span></div>
-                            <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Garantía de Trabajo</span></div>
+                            <div class="hero-feature"><i class="fas fa-user-cog" aria-hidden="true"></i><span>Mecánicos con experiencia</span></div>
+                            <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Cotización por escrito</span></div>
+                            <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Garantía de trabajo</span></div>
                         </div>
-                        
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20un%20servicio%20automotriz" 
-                           class="btn-provider-link fade-in" 
-                           target="_blank" 
-                           rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                            Consultar: 76536286
+
+                        <!-- CTA: scroll al listado -->
+                        <a href="#contenedor-principal" class="btn-provider-link fade-in">
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                            Ver proveedores de Automotriz
                         </a>
                     </div>
                 </section>
@@ -197,18 +194,72 @@
             </div>
 
             <!-- ========================================
-                 SIDEBAR
+                 SIDEBAR v12.1
                  ======================================== -->
             <aside class="sidebar" role="complementary">
                 
+                <!-- SERVICIOS ROTATIVOS -->
                 <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
-                    <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
-                    <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal de Telegram</a>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-block"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                    <h3><i class="fas fa-car" aria-hidden="true"></i> SERVICIOS DISPONIBLES</h3>
+                    <p>Lo que puedes encontrar en esta categoría:</p>
+                    <div class="servicios-rotativos" id="serviciosRotativos">
+                        <div class="servicio-item active">
+                            <i class="fas fa-wrench"></i>
+                            <div>
+                                <strong>Taller Mecánico</strong>
+                                <span>Diagnóstico, motor, transmisión</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-circle-notch"></i>
+                            <div>
+                                <strong>Frenos y Suspensión</strong>
+                                <span>Pastillas, discos, amortiguadores</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-sync-alt"></i>
+                            <div>
+                                <strong>Muñonería</strong>
+                                <span>Alineación, balanceo, dirección</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-spray-can"></i>
+                            <div>
+                                <strong>Chapistería y Pintura</strong>
+                                <span>Cabina, enderezado, pulido</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-truck-pickup"></i>
+                            <div>
+                                <strong>Grúas y Auxilio Vial</strong>
+                                <span>24h, cobertura La Paz y El Alto</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-shower"></i>
+                            <div>
+                                <strong>Lavado y Detallado</strong>
+                                <span>Exterior, interior, encerado</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- PROFESIONALES DESTACADOS -->
+                <div class="sidebar-section fade-in">
+                    <h3><i class="fas fa-crown" aria-hidden="true"></i> TALLERES DESTACADOS</h3>
+                    <p>Talleres con paquete Completo o Básico:</p>
+                    <div id="profesionalesDestacados" class="profesionales-list">
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                    </div>
+                </div>
+
+                <!-- CTA PROVEEDOR -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿ERES TALLER O GRÚA?</h3>
                     <p>Únete a nuestro directorio y aumenta tu visibilidad.</p>
@@ -220,6 +271,7 @@
                     <a href="https://wa.me/59178835306?text=Hola,%20soy%20taller%20o%20grúa%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
                 </div>
 
+                <!-- SÍGUENOS -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
                     <div class="social-grid">
@@ -301,9 +353,6 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ==========================================
-            // CAMBIAR: Configuración específica de la categoría
-            // ==========================================
             const secciones = [
                 { categoria: 'Talleres Automotrices', keyword: null, label: 'Todos', icono: 'fa-th-large' },
                 { categoria: 'Talleres Automotrices', keyword: 'taller', label: 'Taller Mecánico', icono: 'fa-wrench' },

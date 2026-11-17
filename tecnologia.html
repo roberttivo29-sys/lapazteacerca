@@ -27,7 +27,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.0
+         HEADER DINÁMICO v12.1
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -45,7 +45,6 @@
             </button>
 
             <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
-                <!-- Cabecera del drawer móvil -->
                 <div class="drawer-header">
                     <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
                     <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
@@ -82,7 +81,7 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO DE CATEGORÍA v12.0
+                     HERO DE CATEGORÍA v12.1
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
@@ -99,36 +98,32 @@
                             Técnicos con experiencia, repuestos de calidad y garantía por escrito. Sin estafas, sin sorpresas.
                         </p>
 
-                        <div class="hero-number fade-in">
-                            <p class="hero-number-label">Escríbenos ahora</p>
-                            <a href="https://wa.me/59176536286" class="hero-number-tel" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                76536286
-                            </a>
-                            <div class="hero-number-actions">
-                                <a href="https://wa.me/59176536286?text=Hola,%20necesito%20reparar%20mi%20equipo%20tecnológico" 
-                                   class="btn-wa-hero" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer">
-                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                    Escríbenos por WhatsApp
-                                </a>
+                        <!-- CHIPS DE SUBSECCIONES -->
+                        <div class="hero-chips-wrapper fade-in">
+                            <p class="hero-chips-title">
+                                <i class="fas fa-th-large" aria-hidden="true"></i> Filtra por tipo de servicio
+                            </p>
+                            <div class="hero-chips" id="heroChips">
+                                <a href="#filtrosVivos" class="chip" data-jump="pc"><i class="fas fa-laptop"></i> PC/Laptops</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="celular"><i class="fas fa-mobile-alt"></i> Celulares</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="camara"><i class="fas fa-video"></i> Cámaras</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="red"><i class="fas fa-wifi"></i> Redes</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="soporte"><i class="fas fa-headset"></i> Soporte</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="impresora"><i class="fas fa-print"></i> Impresoras</a>
                             </div>
-                            <p class="hero-number-note">Respuesta en menos de 2 horas · Lunes a Domingo</p>
                         </div>
 
+                        <!-- BENEFICIOS ESPECÍFICOS -->
                         <div class="hero-features fade-in">
-                            <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Repuestos de Calidad</span></div>
-                            <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Garantía Escrita</span></div>
-                            <div class="hero-feature"><i class="fas fa-user-check" aria-hidden="true"></i><span>Técnicos con Experiencia</span></div>
+                            <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Repuestos de calidad</span></div>
+                            <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Garantía escrita</span></div>
+                            <div class="hero-feature"><i class="fas fa-user-check" aria-hidden="true"></i><span>Técnicos con experiencia</span></div>
                         </div>
-                        
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20reparar%20mi%20equipo%20tecnológico" 
-                           class="btn-provider-link fade-in" 
-                           target="_blank" 
-                           rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                            Consultar: 76536286
+
+                        <!-- CTA: scroll al listado -->
+                        <a href="#contenedor-principal" class="btn-provider-link fade-in">
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                            Ver proveedores de Tecnología
                         </a>
                     </div>
                 </section>
@@ -197,18 +192,72 @@
             </div>
 
             <!-- ========================================
-                 SIDEBAR
+                 SIDEBAR v12.1
                  ======================================== -->
             <aside class="sidebar" role="complementary">
                 
+                <!-- SERVICIOS ROTATIVOS -->
                 <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
-                    <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
-                    <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal de Telegram</a>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-block"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                    <h3><i class="fas fa-laptop-code" aria-hidden="true"></i> SERVICIOS DISPONIBLES</h3>
+                    <p>Lo que puedes encontrar en esta categoría:</p>
+                    <div class="servicios-rotativos" id="serviciosRotativos">
+                        <div class="servicio-item active">
+                            <i class="fas fa-laptop"></i>
+                            <div>
+                                <strong>PC y Laptops</strong>
+                                <span>Formateo, cambio de pantalla, recuperación de datos</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>
+                                <strong>Celulares y Tablets</strong>
+                                <span>Cambio de display, baterías, software</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-video"></i>
+                            <div>
+                                <strong>Cámaras de Seguridad</strong>
+                                <span>Instalación CCTV, monitoreo remoto, Hikvision, Dahua</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-wifi"></i>
+                            <div>
+                                <strong>Redes e Internet</strong>
+                                <span>Cableado, routers, configuración de oficinas</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-headset"></i>
+                            <div>
+                                <strong>Soporte a Domicilio</strong>
+                                <span>Atención en tu casa u oficina</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-print"></i>
+                            <div>
+                                <strong>Impresoras</strong>
+                                <span>Mantenimiento, recarga de tóner, suministros</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- PROFESIONALES DESTACADOS -->
+                <div class="sidebar-section fade-in">
+                    <h3><i class="fas fa-crown" aria-hidden="true"></i> TÉCNICOS DESTACADOS</h3>
+                    <p>Profesionales con paquete Completo o Básico:</p>
+                    <div id="profesionalesDestacados" class="profesionales-list">
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                    </div>
+                </div>
+
+                <!-- CTA PROVEEDOR -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿ERES TÉCNICO?</h3>
                     <p>Únete a nuestro directorio y aumenta tu visibilidad.</p>
@@ -220,6 +269,7 @@
                     <a href="https://wa.me/59178835306?text=Hola,%20soy%20técnico%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
                 </div>
 
+                <!-- SÍGUENOS -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
                     <div class="social-grid">
@@ -301,9 +351,6 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ==========================================
-            // CAMBIAR: Configuración específica de la categoría
-            // ==========================================
             const secciones = [
                 { categoria: 'Tecnología y Redes', keyword: null, label: 'Todos', icono: 'fa-th-large' },
                 { categoria: 'Tecnología y Redes', keyword: 'pc', label: 'PC/Laptops', icono: 'fa-laptop' },

@@ -27,7 +27,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.0
+         HEADER DINÁMICO v12.1
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -45,7 +45,6 @@
             </button>
 
             <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
-                <!-- Cabecera del drawer móvil -->
                 <div class="drawer-header">
                     <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
                     <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
@@ -82,7 +81,7 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO DE CATEGORÍA v12.0
+                     HERO DE CATEGORÍA v12.1
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
@@ -99,36 +98,32 @@
                             Todo lo que necesitas para que tu celebración sea inolvidable. Verificamos cada proveedor para que tú solo te preocupes por disfrutar.
                         </p>
 
-                        <div class="hero-number fade-in">
-                            <p class="hero-number-label">Escríbenos ahora</p>
-                            <a href="https://wa.me/59176536286" class="hero-number-tel" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                76536286
-                            </a>
-                            <div class="hero-number-actions">
-                                <a href="https://wa.me/59176536286?text=Hola,%20necesito%20servicios%20para%20un%20evento" 
-                                   class="btn-wa-hero" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer">
-                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                    Escríbenos por WhatsApp
-                                </a>
+                        <!-- CHIPS DE SUBSECCIONES -->
+                        <div class="hero-chips-wrapper fade-in">
+                            <p class="hero-chips-title">
+                                <i class="fas fa-th-large" aria-hidden="true"></i> Filtra por tipo de servicio
+                            </p>
+                            <div class="hero-chips" id="heroChips">
+                                <a href="#filtrosVivos" class="chip" data-jump="filmacion"><i class="fas fa-video"></i> Filmación</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="sonido"><i class="fas fa-music"></i> Sonido</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="banda"><i class="fas fa-guitar"></i> Bandas</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="local"><i class="fas fa-building"></i> Locales</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="decoracion"><i class="fas fa-palette"></i> Decoración</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="animacion"><i class="fas fa-microphone"></i> Animación</a>
                             </div>
-                            <p class="hero-number-note">Respuesta en menos de 2 horas · Lunes a Domingo</p>
                         </div>
 
+                        <!-- BENEFICIOS ESPECÍFICOS -->
                         <div class="hero-features fade-in">
-                            <div class="hero-feature"><i class="fas fa-star" aria-hidden="true"></i><span>Profesionales Verificados</span></div>
-                            <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Presupuestos Claros</span></div>
-                            <div class="hero-feature"><i class="fas fa-heart" aria-hidden="true"></i><span>Eventos Inolvidables</span></div>
+                            <div class="hero-feature"><i class="fas fa-star" aria-hidden="true"></i><span>Profesionales verificados</span></div>
+                            <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Presupuestos claros</span></div>
+                            <div class="hero-feature"><i class="fas fa-heart" aria-hidden="true"></i><span>Eventos inolvidables</span></div>
                         </div>
-                        
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20servicios%20para%20un%20evento" 
-                           class="btn-provider-link fade-in" 
-                           target="_blank" 
-                           rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                            Consultar: 76536286
+
+                        <!-- CTA: scroll al listado -->
+                        <a href="#contenedor-principal" class="btn-provider-link fade-in">
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                            Ver proveedores de Eventos
                         </a>
                     </div>
                 </section>
@@ -196,18 +191,72 @@
             </div>
 
             <!-- ========================================
-                 SIDEBAR
+                 SIDEBAR v12.1
                  ======================================== -->
             <aside class="sidebar" role="complementary">
                 
+                <!-- SERVICIOS ROTATIVOS -->
                 <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
-                    <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
-                    <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal de Telegram</a>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-block"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                    <h3><i class="fas fa-calendar-alt" aria-hidden="true"></i> SERVICIOS DISPONIBLES</h3>
+                    <p>Lo que puedes encontrar en esta categoría:</p>
+                    <div class="servicios-rotativos" id="serviciosRotativos">
+                        <div class="servicio-item active">
+                            <i class="fas fa-video"></i>
+                            <div>
+                                <strong>Filmación y Fotografía</strong>
+                                <span>4K, drones, cobertura completa</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-music"></i>
+                            <div>
+                                <strong>Sonido e Iluminación</strong>
+                                <span>Equipos profesionales, luces LED</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-guitar"></i>
+                            <div>
+                                <strong>Bandas en Vivo</strong>
+                                <span>Cumbia, folklore, música en vivo</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-building"></i>
+                            <div>
+                                <strong>Locales y Salones</strong>
+                                <span>Capacidad, mobiliario, estacionamiento</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-palette"></i>
+                            <div>
+                                <strong>Decoración</strong>
+                                <span>Flores, mobiliario temático, globos</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-microphone"></i>
+                            <div>
+                                <strong>Animación</strong>
+                                <span>DJs, maestros de ceremonia, shows</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- PROFESIONALES DESTACADOS -->
+                <div class="sidebar-section fade-in">
+                    <h3><i class="fas fa-crown" aria-hidden="true"></i> PROFESIONALES DESTACADOS</h3>
+                    <p>Profesionales con paquete Completo o Básico:</p>
+                    <div id="profesionalesDestacados" class="profesionales-list">
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                    </div>
+                </div>
+
+                <!-- CTA PROVEEDOR -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿ERES PROFESIONAL DE EVENTOS?</h3>
                     <p>Únete a nuestro directorio y aumenta tu visibilidad.</p>
@@ -219,6 +268,7 @@
                     <a href="https://wa.me/59178835306?text=Hola,%20soy%20profesional%20de%20eventos%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
                 </div>
 
+                <!-- SÍGUENOS -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
                     <div class="social-grid">
@@ -300,9 +350,6 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ==========================================
-            // CAMBIAR: Configuración específica de la categoría
-            // ==========================================
             const secciones = [
                 { categoria: 'Servicios para Eventos', keyword: null, label: 'Todos', icono: 'fa-th-large' },
                 { categoria: 'Servicios para Eventos', keyword: 'filmacion', label: 'Filmación', icono: 'fa-video' },

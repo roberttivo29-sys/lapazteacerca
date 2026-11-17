@@ -8,6 +8,7 @@
     <meta property="og:description" content="Barberías, salones, centros de estética, maquillaje y spas verificados en La Paz y El Alto.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lapazteacerca.com/imagen.html">
+    <meta property="og:image" content="img/og-imagen.jpg">
     <meta property="og:locale" content="es_BO">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="author" content="La Paz te Acerca">
@@ -26,7 +27,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.0
+         HEADER DINÁMICO v12.1
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -38,11 +39,12 @@
             </a>
 
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
-                <span></span><span></span><span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
 
             <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
-                <!-- Cabecera del drawer móvil -->
                 <div class="drawer-header">
                     <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
                     <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
@@ -79,7 +81,7 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO DE CATEGORÍA v12.0
+                     HERO DE CATEGORÍA v12.1
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
@@ -96,24 +98,32 @@
                             Encuentra barberías, salones de belleza, centros de estética, maquillaje profesional, spas y servicios a domicilio. Reserva con confianza.
                         </p>
 
-                        <div class="hero-number-compact fade-in">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i>
-                            <a href="tel:+59176536286">76536286</a>
-                            <span>· tu enlace directo</span>
+                        <!-- CHIPS DE SUBSECCIONES -->
+                        <div class="hero-chips-wrapper fade-in">
+                            <p class="hero-chips-title">
+                                <i class="fas fa-th-large" aria-hidden="true"></i> Filtra por tipo de servicio
+                            </p>
+                            <div class="hero-chips" id="heroChips">
+                                <a href="#filtrosVivos" class="chip" data-jump="barber"><i class="fas fa-cut"></i> Barberías</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="salon"><i class="fas fa-magic"></i> Salones</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="estetica"><i class="fas fa-leaf"></i> Estética</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="maquillaje"><i class="fas fa-paint-brush"></i> Maquillaje</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="spa"><i class="fas fa-hot-tub"></i> Spas</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="domicilio"><i class="fas fa-home"></i> A Domicilio</a>
+                            </div>
                         </div>
 
+                        <!-- BENEFICIOS ESPECÍFICOS -->
                         <div class="hero-features fade-in">
-                            <div class="hero-feature"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Locales Verificados</span></div>
-                            <div class="hero-feature"><i class="fas fa-comments" aria-hidden="true"></i><span>Contacto Directo</span></div>
-                            <div class="hero-feature"><i class="fas fa-calendar-check" aria-hidden="true"></i><span>Reserva Fácil</span></div>
+                            <div class="hero-feature"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Locales verificados</span></div>
+                            <div class="hero-feature"><i class="fas fa-comments" aria-hidden="true"></i><span>Contacto directo</span></div>
+                            <div class="hero-feature"><i class="fas fa-calendar-check" aria-hidden="true"></i><span>Reserva fácil</span></div>
                         </div>
-                        
-                        <a href="https://wa.me/59176536286?text=Hola,%20busco%20un%20servicio%20de%20imagen%20y%20cuidado%20personal" 
-                           class="btn-provider-link fade-in" 
-                           target="_blank" 
-                           rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                            Consultar: 76536286
+
+                        <!-- CTA: scroll al listado -->
+                        <a href="#contenedor-principal" class="btn-provider-link fade-in">
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                            Ver proveedores de Imagen
                         </a>
                     </div>
                 </section>
@@ -180,18 +190,72 @@
             </div>
 
             <!-- ========================================
-                 SIDEBAR
+                 SIDEBAR v12.1
                  ======================================== -->
             <aside class="sidebar" role="complementary">
                 
+                <!-- SERVICIOS ROTATIVOS -->
                 <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
-                    <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
-                    <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal de Telegram</a>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-block"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                    <h3><i class="fas fa-spa" aria-hidden="true"></i> SERVICIOS DISPONIBLES</h3>
+                    <p>Lo que puedes encontrar en esta categoría:</p>
+                    <div class="servicios-rotativos" id="serviciosRotativos">
+                        <div class="servicio-item active">
+                            <i class="fas fa-cut"></i>
+                            <div>
+                                <strong>Barberías</strong>
+                                <span>Corte clásico, degradado, barba</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-magic"></i>
+                            <div>
+                                <strong>Salones Unisex</strong>
+                                <span>Cortes, tintes, tratamientos capilares</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-leaf"></i>
+                            <div>
+                                <strong>Centros de Estética</strong>
+                                <span>Limpieza facial, depilación láser</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <div>
+                                <strong>Maquillaje Profesional</strong>
+                                <span>Novias, quinceañeros, sesiones</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-hot-tub"></i>
+                            <div>
+                                <strong>Spas y Masajes</strong>
+                                <span>Relajantes, descontracturantes, piedras calientes</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-home"></i>
+                            <div>
+                                <strong>Servicios a Domicilio</strong>
+                                <span>Atención en la comodidad de tu hogar</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- PROFESIONALES DESTACADOS -->
+                <div class="sidebar-section fade-in">
+                    <h3><i class="fas fa-crown" aria-hidden="true"></i> PROFESIONALES DESTACADOS</h3>
+                    <p>Profesionales con paquete Completo o Básico:</p>
+                    <div id="profesionalesDestacados" class="profesionales-list">
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                    </div>
+                </div>
+
+                <!-- CTA PROVEEDOR -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿ERES PROVEEDOR?</h3>
                     <p>Únete a nuestro directorio y aumenta tu visibilidad.</p>
@@ -203,6 +267,7 @@
                     <a href="https://wa.me/59178835306?text=Hola,%20soy%20proveedor%20de%20servicios%20de%20imagen%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
                 </div>
 
+                <!-- SÍGUENOS -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
                     <div class="social-grid">
@@ -246,10 +311,10 @@
                 <div class="footer-section">
                     <h4>Contacto</h4>
                     <ul class="contact-info">
-                        <li><i class="fas fa-phone"></i> Ciudadanos: 76536286</li>
-                        <li><i class="fas fa-phone"></i> Proveedores: 78835306</li>
-                        <li><i class="fas fa-envelope"></i> contactoverificalapaz@gmail.com</li>
-                        <li><i class="fas fa-map-marker-alt"></i> La Paz, Bolivia</li>
+                        <li><i class="fab fa-whatsapp" aria-hidden="true"></i> Ciudadanos: 76536286</li>
+                        <li><i class="fab fa-whatsapp" aria-hidden="true"></i> Proveedores: 78835306</li>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> contactoverificalapaz@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> La Paz, Bolivia</li>
                     </ul>
                     <div class="footer-social">
                         <a href="https://facebook.com/ContactoverificaLaPaz" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
@@ -271,9 +336,8 @@
     <!-- ========================================
          BARRA FIJA MÓVIL / TOAST / BACK TO TOP / OVERLAY
          ======================================== -->
-    <div class="mobile-showcase" id="mobileShowcase">
-        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
-        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <div class="mobile-showcase" id="mobileShowcase" style="justify-content:center;">
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer" style="max-width:400px;"><i class="fab fa-whatsapp"></i> WhatsApp: 76536286</a>
     </div>
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
@@ -285,9 +349,6 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ==========================================
-            // CAMBIAR: Configuración específica de la categoría
-            // ==========================================
             const secciones = [
                 { categoria: 'Imagen y Cuidado Personal', keyword: null, label: 'Todos', icono: 'fa-th-large' },
                 { categoria: 'Imagen y Cuidado Personal', keyword: 'barber', label: 'Barberías', icono: 'fa-cut' },

@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
     <style>
+        /* Estilos nativos para el formulario (sin Bootstrap) */
         .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
         .form-grid .full-width{grid-column:1/-1}
         .form-label-custom{display:block;font-weight:600;font-size:.9rem;margin-bottom:.5rem;color:var(--gris-oscuro)}
@@ -36,7 +37,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.0
+         HEADER DINÁMICO v12.1
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -54,7 +55,6 @@
             </button>
 
             <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
-                <!-- Cabecera del drawer móvil -->
                 <div class="drawer-header">
                     <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
                     <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
@@ -91,7 +91,7 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO DE CONTACTO v12.0
+                     HERO DE CONTACTO v12.1
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
@@ -198,7 +198,7 @@
                 </section>
 
                 <!-- ========================================
-                     FORMULARIO DE CONTACTO
+                     FORMULARIO DE CONTACTO (nativo, sin Bootstrap)
                      ======================================== -->
                 <section id="formulario" class="fade-in" style="margin-top:3rem;" aria-labelledby="form-title">
                     <h2 class="section-title" id="form-title">

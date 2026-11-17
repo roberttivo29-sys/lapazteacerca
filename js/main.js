@@ -1,22 +1,26 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA - JavaScript v11.3
-// Regla de oro: el NÚMERO es el héroe
-// 
-// Cambios v11.3:
-// - Nomenclatura: gratuito / basico / completo
-// - ordenPorPlan actualizado
-// 
-// Cambios v11.2:
-// - Nav ordenado (flex-wrap)
-// 
-// Cambios v11.0:
-// - Toast público
-// - Fix WhatsApp 591
+// LA PAZ TE ACERCA — JavaScript v12.1
+// ========================================
+// Doctrina: rescatar lo operativo, reinventar lo estético.
+// Nomenclatura blindada: GRATUITO / BÁSICO / COMPLETO.
+//
+// Principios de esta versión:
+// 1. Separación clara de responsabilidades (utilidades, UI, datos).
+// 2. Caché de proveedores con TTL de 60 segundos.
+// 3. Prevención de XSS con escaparHTML en todo output dinámico.
+// 4. Filtros en vivo sin recarga de página.
+// 5. Toasts accesibles con aria-live.
+//
+// Novedades v12.1:
+// - Chips del hero hacen scroll + activan filtro.
+// - Servicios rotativos en sidebar (cada 3s).
+// - Profesionales destacados cargados desde JSON.
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Verifica La Paz - JavaScript v11.3 cargado');
-    
+    console.log('✅ La Paz te Acerca - JS v12.1 cargado');
+
+    // Inicializadores base
     initHeader();
     initMenuHamburguesa();
     initFadeInAnimations();
@@ -28,15 +32,24 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileShowcase();
     initFiltrosEnVivo();
     initToastDeExito();
+
+    // Inicializadores v12.1
+    initHeroChips();
+    initServiciosRotativos();
+
+    // Carga de datos
     cargarDestacados();
-    
+    cargarProfesionalesDestacados();
+
     console.log('✅ Todos los módulos inicializados');
 });
+
 
 // ========================================
 // UTILIDADES
 // ========================================
 
+// Normaliza texto para búsquedas (quita acentos, minúsculas, espacios extra)
 function normalizarTexto(texto) {
     if (!texto) return '';
     return String(texto)
@@ -48,6 +61,7 @@ function normalizarTexto(texto) {
         .trim();
 }
 
+// Escapa HTML para prevenir XSS en contenido dinámico
 function escaparHTML(valor) {
     if (valor === null || valor === undefined) return '';
     return String(valor).replace(/[&<>"']/g, s => ({
@@ -59,6 +73,7 @@ function escaparHTML(valor) {
     }[s]));
 }
 
+// Devuelve la clase CSS de color según la categoría
 function getCategoriaClass(categoria) {
     const classes = {
         'Salud y Bienestar': 'category-salud',
@@ -73,22 +88,24 @@ function getCategoriaClass(categoria) {
     return classes[categoria] || '';
 }
 
+// Devuelve la variable CSS de color según la categoría
 function getColorVariable(categoria) {
     const colors = {
-        'Salud y Bienestar': 'var(--color-salud, #0D9488)',
-        'Mantenimiento del Hogar': 'var(--color-hogar, #EA580C)',
-        'Materiales de Construcción': 'var(--color-construccion, #C2410C)',
-        'Talleres Automotrices': 'var(--color-auto, #1D4ED8)',
-        'Tecnología y Redes': 'var(--color-tecnologia, #0891B2)',
-        'Servicios de Despedida': 'var(--color-funeraria, #475569)',
-        'Servicios para Eventos': 'var(--color-eventos, #8B5CF6)',
-        'Imagen y Cuidado Personal': 'var(--color-imagen, #7C3AED)'
+        'Salud y Bienestar': 'var(--c-salud, #0D9488)',
+        'Mantenimiento del Hogar': 'var(--c-hogar, #EA580C)',
+        'Materiales de Construcción': 'var(--c-construccion, #C2410C)',
+        'Talleres Automotrices': 'var(--c-auto, #1D4ED8)',
+        'Tecnología y Redes': 'var(--c-tecnologia, #0891B2)',
+        'Servicios de Despedida': 'var(--c-funeraria, #475569)',
+        'Servicios para Eventos': 'var(--c-eventos, #8B5CF6)',
+        'Imagen y Cuidado Personal': 'var(--c-imagen, #7C3AED)'
     };
     return colors[categoria] || '#2563EB';
 }
 
+
 // ========================================
-// BADGES DE PLAN v11.3
+// BADGES DE PLAN v12.1 (nomenclatura blindada)
 // ========================================
 
 function getPlanBadge(tipo_plan) {
@@ -100,7 +117,11 @@ function getPlanBadge(tipo_plan) {
     return badges[tipo_plan] || '';
 }
 
-// Fix WhatsApp 591 duplicado
+
+// ========================================
+// WHATSAPP (fix: evita duplicar 591)
+// ========================================
+
 function buildWhatsLink(raw, msg) {
     const n = String(raw || '').replace(/\D/g, '');
     if (n.length < 8) return '#';
@@ -108,8 +129,9 @@ function buildWhatsLink(raw, msg) {
     return `https://wa.me/${full}?text=${encodeURIComponent(msg)}`;
 }
 
+
 // ========================================
-// CACHÉ DE DATOS
+// CACHÉ DE DATOS (TTL 60s)
 // ========================================
 
 const cacheProveedores = { datos: null, tiempo: 0 };
@@ -119,14 +141,11 @@ async function obtenerProveedores() {
     if (cacheProveedores.datos && ahora - cacheProveedores.tiempo < 60000) {
         return cacheProveedores.datos;
     }
-
     try {
         const response = await fetch('data/proveedores.json', { cache: 'no-cache' });
         if (!response.ok) throw new Error('No se pudo cargar el archivo de datos');
-
         const raw = await response.json();
         const lista = Array.isArray(raw) ? raw : (raw.proveedores || []);
-
         cacheProveedores.datos = lista.map(p =>
             Object.fromEntries(
                 Object.entries(p).map(([k, v]) => [k, typeof v === 'string' ? escaparHTML(v) : v])
@@ -140,6 +159,7 @@ async function obtenerProveedores() {
     }
 }
 
+
 // ========================================
 // CARGAR PROVEEDORES EN CONTENEDOR
 // ========================================
@@ -147,24 +167,20 @@ async function obtenerProveedores() {
 async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraClave = null) {
     const container = document.getElementById(contenedorId);
     if (!container) return;
-    
+
     try {
         const todos = await obtenerProveedores();
-        
-        // v11.3: orden de prioridad
         const ordenPorPlan = { 'completo': 0, 'basico': 1, 'gratuito': 2 };
         todos.sort((a, b) => (ordenPorPlan[a.tipo_plan] || 2) - (ordenPorPlan[b.tipo_plan] || 2));
-        
+
         const catNormal = normalizarTexto(categoria);
         let filtrados = todos.filter(p => normalizarTexto(p.categoria) === catNormal);
-        
+
         if (palabraClave) {
             const clave = normalizarTexto(palabraClave);
-            
             let porSubcategoria = filtrados.filter(p =>
                 normalizarTexto(p.subcategoria).includes(clave)
             );
-            
             if (porSubcategoria.length > 0) {
                 filtrados = porSubcategoria;
             } else {
@@ -174,44 +190,49 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
                 });
             }
         }
-        
+
         if (filtrados.length === 0) {
             container.innerHTML = `
-                <div class="no-data fade-in visible" style="text-align:center; padding: 2rem; color: #666; grid-column: 1/-1;">
-                    <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem; display: block; color: #cbd5e1;"></i>
+                <div class="no-data fade-in visible">
+                    <i class="fas fa-info-circle"></i>
                     <p>Próximamente agregaremos más proveedores de esta sección.</p>
-                    <a href="${buildWhatsLink('76536286', 'Hola, estoy buscando un proveedor')}" 
-                       class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" style="margin-top:0.5rem;">
+                    <a href="${buildWhatsLink('76536286', 'Hola, estoy buscando un proveedor')}"
+                       class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" style="margin-top:1rem;">
                        <i class="fab fa-whatsapp"></i> Consultar por WhatsApp</a>
                 </div>`;
             return;
         }
-        
+
         container.innerHTML = filtrados.map(p => generarTarjetaProveedor(p)).join('');
-        
+
         if (window.fadeObserver) {
             container.querySelectorAll('.fade-in').forEach(el => window.fadeObserver.observe(el));
         }
     } catch (error) {
         console.error(`Error cargando proveedores en ${contenedorId}:`, error);
         container.innerHTML = `
-            <div class="no-data fade-in visible" style="text-align:center; padding: 2rem; color: #ef4444; grid-column: 1/-1;">
+            <div class="no-data fade-in visible">
                 <i class="fas fa-exclamation-triangle"></i>
-                <p>Error al cargar los proveedores. <button onclick="location.reload()" class="btn btn-outline btn-sm" style="margin-top:0.5rem;">Reintentar</button></p>
+                <p>Error al cargar los proveedores. <button onclick="location.reload()" class="btn btn-outline btn-sm" style="margin-top:.5rem;">Reintentar</button></p>
             </div>`;
     }
 }
+
+
+// ========================================
+// GENERAR TARJETA DE PROVEEDOR
+// ========================================
 
 function generarTarjetaProveedor(p) {
     const whatsappLink = buildWhatsLink(p.whatsapp || p.telefono, 'Hola, vi tu perfil en La Paz te Acerca y me interesa tu servicio');
     const categoriaClass = getCategoriaClass(p.categoria);
     const colorVar = getColorVariable(p.categoria);
     const planBadge = getPlanBadge(p.tipo_plan);
-    
+
     const imagenes = [p.imagen1, p.imagen2, p.imagen3, p.imagen4].filter(img => img && img.trim() !== '');
     const totalImagenes = imagenes.length;
     const esCompleto = p.tipo_plan === 'completo';
-    
+
     let htmlImagenes = '';
     if (totalImagenes === 1) {
         htmlImagenes = `<div class="galeria-proveedor galeria-1"><img src="${imagenes[0]}" alt="${p.nombre}" class="img-galeria" loading="lazy"></div>`;
@@ -220,95 +241,102 @@ function generarTarjetaProveedor(p) {
     } else if (totalImagenes >= 3) {
         htmlImagenes = `<div class="galeria-proveedor galeria-3"><img src="${imagenes[0]}" alt="${p.nombre} 1" class="img-galeria img-principal" loading="lazy"><div class="galeria-secundarias"><img src="${imagenes[1]}" alt="${p.nombre} 2" class="img-galeria" loading="lazy"><img src="${imagenes[2]}" alt="${p.nombre} 3" class="img-galeria" loading="lazy"></div></div>`;
     }
-    
+
     let html24h = '';
     if (p['24horas']) {
         html24h = `<span class="badge-24horas badge-24h-pulse"><i class="fas fa-moon"></i> Atención 24h</span><p class="aviso-24horas">⚠️ Te sugerimos llamar para confirmar disponibilidad en horarios nocturnos o festivos.</p>`;
     }
-    
+
     let zonaBadge = '';
     if (p.direccion) {
         const dirLower = p.direccion.toLowerCase();
-        if (dirLower.includes('el alto')) zonaBadge = '<span style="font-size:0.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 El Alto</span>';
-        else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:0.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 La Paz</span>';
+        if (dirLower.includes('el alto')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 El Alto</span>';
+        else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 La Paz</span>';
     }
 
     return `
-        <article class="category-card ${categoriaClass} ${esCompleto ? 'card-completo' : ''} fade-in" style="position: relative; border-left: 4px solid ${colorVar};">
+        <article class="category-card ${categoriaClass} ${esCompleto ? 'card-completo' : ''} fade-in" style="border-left: 4px solid ${colorVar};">
             ${p.destacado == 1 ? '<div class="featured-badge" style="position:absolute; top:10px; right:10px; z-index:2;"><i class="fas fa-crown"></i> DESTACADO</div>' : ''}
             ${planBadge ? `<div style="position:absolute; top:10px; left:10px; z-index:2;">${planBadge}</div>` : ''}
-            
+
             ${htmlImagenes}
-            
+
             <div class="card-content-wrapper">
-                <h3 style="margin-top: 0;">${p.nombre || 'Proveedor Verificado'} ${zonaBadge}</h3>
-                <p class="category-subtitle" style="color: ${colorVar}; font-weight: 600;">${p.subcategoria || ''}</p>
-                ${p.descripcion ? `<p style="color: #475569; font-size: 0.9rem; margin-bottom: 0.5rem; line-height: 1.4;">${p.descripcion}</p>` : ''}
-                
+                <h3 style="margin-top:0;">${p.nombre || 'Proveedor Verificado'} ${zonaBadge}</h3>
+                <p class="category-subtitle" style="color: ${colorVar}; font-weight:600;">${p.subcategoria || ''}</p>
+                ${p.descripcion ? `<p style="color:#475569; font-size:.9rem; margin-bottom:.5rem; line-height:1.4;">${p.descripcion}</p>` : ''}
+
                 ${html24h}
-                
-                <ul class="category-services" style="list-style: none; padding: 0; margin: 0 0 1rem 0; font-size: 0.85rem; color: #64748b;">
-                    ${p.direccion ? `<li style="margin-bottom: 0.3rem;"><i class="fas fa-map-marker-alt" style="width: 16px; color: #ef4444;"></i> ${p.direccion}</li>` : ''}
-                    ${p.horario ? `<li style="margin-bottom: 0.3rem;"><i class="fas fa-clock" style="width: 16px; color: #3b82f6;"></i> ${p.horario}</li>` : ''}
-                    ${p.precios ? `<li style="margin-bottom: 0.3rem;"><i class="fas fa-dollar-sign" style="width: 16px; color: #10b981;"></i> ${p.precios}</li>` : ''}
+
+                <ul class="category-services">
+                    ${p.direccion ? `<li><i class="fas fa-map-marker-alt" style="width:16px; color:#ef4444;"></i> ${p.direccion}</li>` : ''}
+                    ${p.horario ? `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${p.horario}</li>` : ''}
+                    ${p.precios ? `<li><i class="fas fa-dollar-sign" style="width:16px; color:#10b981;"></i> ${p.precios}</li>` : ''}
                 </ul>
-                
-                ${p.audio_url ? `<div style="margin: 0.5rem 0;"><audio controls preload="metadata" style="width: 100%; height: 32px;"><source src="${p.audio_url}" type="audio/mpeg"></audio></div>` : ''}
-                
-                <div class="category-actions" style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
-                    ${p.whatsapp || p.telefono ? `<a href="${whatsappLink}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" style="flex: 1; text-align: center;"><i class="fab fa-whatsapp"></i> Contactar</a>` : ''}
-                    ${p.telefono && !p.whatsapp ? `<a href="tel:${p.telefono}" class="btn btn-outline btn-sm" style="flex: 1; text-align: center; border-color: ${colorVar}; color: ${colorVar};"><i class="fas fa-phone"></i> Llamar</a>` : ''}
+
+                ${p.audio_url ? `<div style="margin:.5rem 0;"><audio controls preload="metadata" style="width:100%; height:32px;"><source src="${p.audio_url}" type="audio/mpeg"></audio></div>` : ''}
+
+                <div class="category-actions">
+                    ${p.whatsapp || p.telefono ? `<a href="${whatsappLink}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" style="flex:1; text-align:center;"><i class="fab fa-whatsapp"></i> Contactar</a>` : ''}
+                    ${p.telefono && !p.whatsapp ? `<a href="tel:${p.telefono}" class="btn btn-outline btn-sm" style="flex:1; text-align:center; border-color:${colorVar}; color:${colorVar};"><i class="fas fa-phone"></i> Llamar</a>` : ''}
                 </div>
             </div>
         </article>
     `;
 }
 
+
+// ========================================
+// CARGAR DESTACADOS (index.html)
+// ========================================
+
 async function cargarDestacados() {
     const container = document.getElementById('destacados-container');
     if (!container) return;
-    
+
     try {
         const proveedores = await obtenerProveedores();
-        // v11.3: orden de prioridad
         const ordenPorPlan = { 'completo': 0, 'basico': 1, 'gratuito': 2 };
         const destacados = proveedores
             .filter(p => p.destacado === 1)
             .sort((a, b) => (ordenPorPlan[a.tipo_plan] || 2) - (ordenPorPlan[b.tipo_plan] || 2));
-        
+
         if (destacados.length === 0) {
-            container.innerHTML = `<div class="no-data fade-in visible" style="text-align:center; padding: 2rem; color: #666; grid-column: 1/-1;"><i class="fas fa-star" style="font-size: 2rem; margin-bottom: 1rem; display: block; color: #cbd5e1;"></i><p>Próximamente agregaremos proveedores destacados.</p></div>`;
+            container.innerHTML = `<div class="no-data fade-in visible"><i class="fas fa-star"></i><p>Próximamente agregaremos proveedores destacados.</p></div>`;
             return;
         }
-        
+
         container.innerHTML = destacados.map(p => generarTarjetaDestacada(p)).join('');
         if (window.fadeObserver) container.querySelectorAll('.fade-in').forEach(el => window.fadeObserver.observe(el));
-    } catch (error) { console.error('Error cargando destacados:', error); }
+    } catch (error) {
+        console.error('Error cargando destacados:', error);
+    }
 }
 
 function generarTarjetaDestacada(p) {
     const whatsappLink = buildWhatsLink(p.whatsapp || p.telefono, 'Hola, vi tu perfil destacado en La Paz te Acerca');
     const imagenes = [p.imagen1, p.imagen2, p.imagen3, p.imagen4].filter(img => img && img.trim() !== '');
     const totalImagenes = imagenes.length;
-    
+
     let htmlImagen = '';
     if (totalImagenes === 1) htmlImagen = `<div class="galeria-proveedor galeria-1"><img src="${imagenes[0]}" alt="${p.nombre}" class="img-galeria" loading="lazy"></div>`;
     else if (totalImagenes === 2) htmlImagen = `<div class="galeria-proveedor galeria-2"><img src="${imagenes[0]}" alt="${p.nombre} 1" class="img-galeria" loading="lazy"><img src="${imagenes[1]}" alt="${p.nombre} 2" class="img-galeria" loading="lazy"></div>`;
     else if (totalImagenes >= 3) htmlImagen = `<div class="galeria-proveedor galeria-3"><img src="${imagenes[0]}" alt="${p.nombre} 1" class="img-galeria img-principal" loading="lazy"><div class="galeria-secundarias">${imagenes.slice(1, 4).map((img, idx) => `<img src="${img}" alt="${p.nombre} ${idx + 2}" class="img-galeria" loading="lazy">`).join('')}</div></div>`;
-    
+
     return `
         <div class="destacado-card ${getCategoriaClass(p.categoria)} fade-in">
             <div class="destacado-badge"><i class="fas fa-crown"></i> DESTACADO</div>
             ${htmlImagen}
             <h4>${p.nombre}</h4>
-            <p class="destacado-subtitle">${p.categoria} > ${p.subcategoria}</p>
+            <p class="destacado-subtitle">${p.categoria} &gt; ${p.subcategoria}</p>
             <p class="destacado-info"><i class="fas fa-map-marker-alt"></i> ${p.direccion || 'Sin dirección'}</p>
             <p class="destacado-info"><i class="fas fa-phone"></i> ${p.telefono || 'Sin teléfono'}</p>
-            ${p.descripcion ? `<p style="font-size:0.85rem;color:#64748b;margin:0.5rem 0;line-height:1.4;">${p.descripcion}</p>` : ''}
-            ${p.whatsapp || p.telefono ? `<div style="margin-top:0.75rem;"><a href="${whatsappLink}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" style="width:100%;"><i class="fab fa-whatsapp"></i> Contactar</a></div>` : ''}
+            ${p.descripcion ? `<p style="font-size:.85rem;color:#64748b;margin:.5rem 0;line-height:1.4;">${p.descripcion}</p>` : ''}
+            ${p.whatsapp || p.telefono ? `<div style="margin-top:.75rem;"><a href="${whatsappLink}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener noreferrer" style="width:100%;"><i class="fab fa-whatsapp"></i> Contactar</a></div>` : ''}
         </div>
     `;
 }
+
 
 // ========================================
 // FILTROS EN VIVO
@@ -318,32 +346,31 @@ function initFiltrosEnVivo() {
     document.addEventListener('click', async function(e) {
         const chip = e.target.closest('.filtro-chip');
         if (!chip) return;
-        
         e.preventDefault();
-        
+
         const parent = chip.parentElement;
         if (parent) {
             parent.querySelectorAll('.filtro-chip').forEach(c => c.classList.remove('active'));
         }
         chip.classList.add('active');
-        
+
         const contenedorId = chip.getAttribute('data-contenedor');
         const categoria = chip.getAttribute('data-categoria');
         const keyword = chip.getAttribute('data-keyword');
-        
+
         const container = document.getElementById(contenedorId);
         if (!container) return;
-        
-        container.innerHTML = '<p class="text-center" style="padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Filtrando...</p>';
-        
+
+        container.innerHTML = '<p class="text-center" style="padding:2rem;"><i class="fas fa-spinner fa-spin"></i> Filtrando...</p>';
+
         await cargarProveedoresEnContenedor(contenedorId, categoria, keyword || null);
-        
         container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 }
 
+
 // ========================================
-// TOAST PÚBLICO
+// TOAST PÚBLICO (accesible con aria-live)
 // ========================================
 
 function showToast(title, message, type = 'info', duration = 5000) {
@@ -356,14 +383,14 @@ function showToast(title, message, type = 'info', duration = 5000) {
         container.setAttribute('aria-atomic', 'true');
         document.body.appendChild(container);
     }
-    
+
     const icons = {
         success: 'fa-check-circle',
         error: 'fa-exclamation-circle',
         warning: 'fa-exclamation-triangle',
         info: 'fa-info-circle'
     };
-    
+
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `
@@ -375,14 +402,14 @@ function showToast(title, message, type = 'info', duration = 5000) {
         <button class="toast-close" aria-label="Cerrar"><i class="fas fa-times"></i></button>
         <div class="toast-progress" style="animation-duration:${duration}ms"></div>
     `;
-    
+
     container.appendChild(toast);
-    
+
     const cerrar = () => {
         toast.classList.add('hiding');
         setTimeout(() => toast.remove(), 300);
     };
-    
+
     toast.querySelector('.toast-close').addEventListener('click', cerrar);
     setTimeout(cerrar, duration);
 }
@@ -395,14 +422,14 @@ function initToastDeExito() {
     }
 }
 
+
 // ========================================
-// INICIALIZADORES
+// INICIALIZADORES DE UI
 // ========================================
 
 function initHeader() {
     const header = document.getElementById('header');
     if (!header) return;
-    
     window.addEventListener('scroll', () => {
         header.classList.toggle('scrolled', window.pageYOffset > 50);
     }, { passive: true });
@@ -412,9 +439,10 @@ function initMenuHamburguesa() {
     const menuToggle = document.getElementById('menuToggle');
     const nav = document.getElementById('nav');
     const overlay = document.getElementById('navOverlay');
-    
+    const closeBtn = document.getElementById('drawerClose');
+
     if (!menuToggle || !nav) return;
-    
+
     const toggleMenu = () => {
         const isActive = nav.classList.toggle('active');
         menuToggle.classList.toggle('active');
@@ -422,16 +450,17 @@ function initMenuHamburguesa() {
         if (overlay) overlay.classList.toggle('active', isActive);
         document.body.style.overflow = isActive ? 'hidden' : '';
     };
-    
+
     menuToggle.addEventListener('click', toggleMenu);
     if (overlay) overlay.addEventListener('click', toggleMenu);
-    
+    if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+
     nav.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             if (nav.classList.contains('active')) toggleMenu();
         });
     });
-    
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && nav.classList.contains('active')) toggleMenu();
     });
@@ -440,7 +469,7 @@ function initMenuHamburguesa() {
 function initFadeInAnimations() {
     const fadeElements = document.querySelectorAll('.fade-in');
     if (!fadeElements.length) return;
-    
+
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -449,7 +478,7 @@ function initFadeInAnimations() {
             }
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    
+
     fadeElements.forEach(el => fadeObserver.observe(el));
     window.fadeObserver = fadeObserver;
 }
@@ -469,7 +498,6 @@ function initSmoothScroll() {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             if (href === '#' || href.length < 2) return;
-            
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
@@ -484,7 +512,6 @@ function initSmoothScroll() {
 
 function initLazyLoading() {
     if (!('IntersectionObserver' in window)) return;
-    
     const lazyImages = document.querySelectorAll('img[data-src]');
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -496,7 +523,6 @@ function initLazyLoading() {
             }
         });
     });
-    
     lazyImages.forEach(img => imageObserver.observe(img));
 }
 
@@ -516,38 +542,120 @@ function initPrevencionClicksDobles() {
 function initBackToTop() {
     const backToTopBtn = document.getElementById('backToTop');
     if (!backToTopBtn) return;
-    
     window.addEventListener('scroll', () => {
         backToTopBtn.classList.toggle('visible', window.pageYOffset > 300);
     }, { passive: true });
-    
     backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
 function initMobileShowcase() {
     const showcase = document.getElementById('mobileShowcase');
     if (!showcase) return;
-    
     window.addEventListener('scroll', () => {
         showcase.classList.toggle('visible', window.pageYOffset > 400);
     }, { passive: true });
 }
 
+
 // ========================================
-// ACORDEÓN (única definición global)
+// ACORDEÓN
 // ========================================
 
 function toggleAcordeon(header) {
     if (!header) return;
     header.classList.toggle('active');
     const content = header.nextElementSibling;
-    if (content) {
-        content.classList.toggle('open');
+    if (content) content.classList.toggle('open');
+}
+
+
+// ========================================
+// NOVEDADES v12.1
+// ========================================
+
+// Chips del hero → scroll a filtros + activar filtro correspondiente
+function initHeroChips() {
+    document.querySelectorAll('.chip[data-jump]').forEach(chip => {
+        chip.addEventListener('click', function(e) {
+            e.preventDefault();
+            const keyword = this.dataset.jump;
+            const filtros = document.getElementById('filtrosVivos');
+            if (filtros) filtros.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            setTimeout(() => {
+                const btn = document.querySelector(`.filtro-chip[data-keyword="${keyword}"]`);
+                if (btn) btn.click();
+            }, 500);
+        });
+    });
+}
+
+// Servicios rotativos en sidebar (cambia cada 3s)
+function initServiciosRotativos() {
+    const contenedor = document.getElementById('serviciosRotativos');
+    if (!contenedor) return;
+
+    const items = contenedor.querySelectorAll('.servicio-item');
+    if (items.length === 0) return;
+
+    let indice = 0;
+    setInterval(() => {
+        items[indice].classList.remove('active');
+        indice = (indice + 1) % items.length;
+        items[indice].classList.add('active');
+    }, 3000);
+}
+
+// Profesionales destacados en sidebar (cargados desde JSON)
+async function cargarProfesionalesDestacados() {
+    const contenedor = document.getElementById('profesionalesDestacados');
+    if (!contenedor) return;
+
+    const badge = document.querySelector('.hero-badge');
+    if (!badge) return;
+
+    const categoria = badge.textContent.trim();
+
+    try {
+        const todos = await obtenerProveedores();
+        const catNormal = normalizarTexto(categoria);
+
+        const filtrados = todos
+            .filter(p => normalizarTexto(p.categoria) === catNormal)
+            .sort((a, b) => {
+                const orden = { 'completo': 0, 'basico': 1, 'gratuito': 2 };
+                return (orden[a.tipo_plan] || 2) - (orden[b.tipo_plan] || 2);
+            })
+            .slice(0, 4);
+
+        if (filtrados.length === 0) {
+            contenedor.innerHTML = '<p style="font-size:.85rem;color:var(--gris-medio);text-align:center;padding:1rem;">Aún no hay profesionales destacados en esta categoría.</p>';
+            return;
+        }
+
+        contenedor.innerHTML = filtrados.map(p => {
+            const inicial = (p.nombre || '?').charAt(0).toUpperCase();
+            const sub = p.subcategoria || p.categoria;
+            const plan = p.tipo_plan === 'completo' ? '★ Completo' : (p.tipo_plan === 'basico' ? '◆ Básico' : '');
+            return `
+                <a href="#contenedor-principal" class="profe-item">
+                    <div class="profe-avatar">${escaparHTML(inicial)}</div>
+                    <div class="profe-info">
+                        <strong>${escaparHTML(p.nombre)}</strong>
+                        <span>${escaparHTML(sub)}</span>
+                        ${plan ? `<span class="profe-badge">${plan}</span>` : ''}
+                    </div>
+                </a>
+            `;
+        }).join('');
+    } catch (e) {
+        contenedor.innerHTML = '<p style="font-size:.85rem;color:var(--gris-medio);">Error al cargar profesionales.</p>';
     }
 }
 
+
 // ========================================
-// LISTENERS GLOBALES
+// LISTENERS GLOBALES (debug)
 // ========================================
 
 window.addEventListener('error', (e) => console.error('Error global:', e.error));

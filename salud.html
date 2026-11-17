@@ -27,7 +27,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.0
+         HEADER DINÁMICO v12.1
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -82,7 +82,7 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO DE CATEGORÍA v12.0
+                     HERO DE CATEGORÍA v12.1
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
@@ -96,39 +96,37 @@
                         </h2>
                         
                         <p class="hero-subtitle fade-in">
-                            Horarios reales, trato humano y transparencia en costos. Verificamos personalmente cada centro de salud.
+                            Horarios reales, trato humano y transparencia en costos. Verificamos personalmente cada centro de salud en La Paz y El Alto antes de mostrarlo aquí.
                         </p>
 
-                        <div class="hero-number fade-in">
-                            <p class="hero-number-label">Escríbenos ahora</p>
-                            <a href="https://wa.me/59176536286" class="hero-number-tel" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                76536286
-                            </a>
-                            <div class="hero-number-actions">
-                                <a href="https://wa.me/59176536286?text=Hola,%20necesito%20información%20sobre%20un%20servicio%20de%20salud" 
-                                   class="btn-wa-hero" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer">
-                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                    Escríbenos por WhatsApp
-                                </a>
+                        <!-- CHIPS DE SUBSECCIONES (clicables) -->
+                        <div class="hero-chips-wrapper fade-in">
+                            <p class="hero-chips-title">
+                                <i class="fas fa-th-large" aria-hidden="true"></i> Filtra por tipo de servicio
+                            </p>
+                            <div class="hero-chips" id="heroChips">
+                                <a href="#filtrosVivos" class="chip" data-jump="clinica"><i class="fas fa-hospital"></i> Clínicas</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="consultorio"><i class="fas fa-user-md"></i> Consultorios</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="odont"><i class="fas fa-tooth"></i> Odontología</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="laboratorio"><i class="fas fa-flask"></i> Laboratorios</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="veterinaria"><i class="fas fa-paw"></i> Veterinaria</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="optica"><i class="fas fa-glasses"></i> Óptica</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="ambulancia"><i class="fas fa-ambulance"></i> Ambulancias</a>
+                                <a href="#filtrosVivos" class="chip" data-jump="fisio"><i class="fas fa-running"></i> Fisioterapia</a>
                             </div>
-                            <p class="hero-number-note">Respuesta en menos de 2 horas · Lunes a Domingo</p>
                         </div>
 
+                        <!-- BENEFICIOS ESPECÍFICOS -->
                         <div class="hero-features fade-in">
-                            <div class="hero-feature"><i class="fas fa-user-md" aria-hidden="true"></i><span>Personal con Experiencia</span></div>
-                            <div class="hero-feature"><i class="fas fa-clock" aria-hidden="true"></i><span>Horarios Verificados</span></div>
-                            <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Referencias Reales</span></div>
+                            <div class="hero-feature"><i class="fas fa-user-md" aria-hidden="true"></i><span>Personal con experiencia</span></div>
+                            <div class="hero-feature"><i class="fas fa-clock" aria-hidden="true"></i><span>Horarios verificados</span></div>
+                            <div class="hero-feature"><i class="fas fa-shield-alt" aria-hidden="true"></i><span>Referencias reales</span></div>
                         </div>
-                        
-                        <a href="https://wa.me/59176536286?text=Hola,%20necesito%20información%20sobre%20un%20servicio%20de%20salud" 
-                           class="btn-provider-link fade-in" 
-                           target="_blank" 
-                           rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                            Consultar: 76536286
+
+                        <!-- CTA: scroll al listado -->
+                        <a href="#contenedor-principal" class="btn-provider-link fade-in">
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                            Ver proveedores de Salud
                         </a>
                     </div>
                 </section>
@@ -195,18 +193,72 @@
             </div>
 
             <!-- ========================================
-                 SIDEBAR
+                 SIDEBAR v12.1
                  ======================================== -->
             <aside class="sidebar" role="complementary">
                 
+                <!-- SERVICIOS ROTATIVOS -->
                 <div class="sidebar-section fade-in">
-                    <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
-                    <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
-                    <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
-                    <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal de Telegram</a>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-block"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+                    <h3><i class="fas fa-stethoscope" aria-hidden="true"></i> SERVICIOS DISPONIBLES</h3>
+                    <p>Lo que puedes encontrar en esta categoría:</p>
+                    <div class="servicios-rotativos" id="serviciosRotativos">
+                        <div class="servicio-item active">
+                            <i class="fas fa-hospital"></i>
+                            <div>
+                                <strong>Clínicas y Urgencias</strong>
+                                <span>Atención 24h, emergencias, hospitalización</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-user-md"></i>
+                            <div>
+                                <strong>Consultorios Especializados</strong>
+                                <span>Medicina general, pediatría, ginecología</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-tooth"></i>
+                            <div>
+                                <strong>Odontología Integral</strong>
+                                <span>Limpieza, ortodoncia, implantes</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-flask"></i>
+                            <div>
+                                <strong>Laboratorios Clínicos</strong>
+                                <span>Análisis de sangre, orina, hormonales</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-paw"></i>
+                            <div>
+                                <strong>Veterinaria y Mascotas</strong>
+                                <span>Vacunas, esterilización, emergencias</span>
+                            </div>
+                        </div>
+                        <div class="servicio-item">
+                            <i class="fas fa-glasses"></i>
+                            <div>
+                                <strong>Óptica y Audición</strong>
+                                <span>Lentes graduados, exámenes visuales</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- PROFESIONALES DESTACADOS -->
+                <div class="sidebar-section fade-in">
+                    <h3><i class="fas fa-crown" aria-hidden="true"></i> PROFESIONALES DESTACADOS</h3>
+                    <p>Centros de salud con paquete Completo o Básico:</p>
+                    <div id="profesionalesDestacados" class="profesionales-list">
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                        <div class="skeleton-mini"></div>
+                    </div>
+                </div>
+
+                <!-- CTA PROVEEDOR -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿ERES CENTRO DE SALUD?</h3>
                     <p>Únete a nuestro directorio y genera confianza en los pacientes.</p>
@@ -218,6 +270,7 @@
                     <a href="https://wa.me/59178835306?text=Hola,%20soy%20centro%20de%20salud%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
                 </div>
 
+                <!-- SÍGUENOS -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
                     <div class="social-grid">
@@ -299,9 +352,6 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ==========================================
-            // CAMBIAR: Configuración específica de la categoría
-            // ==========================================
             const secciones = [
                 { categoria: 'Salud y Bienestar', keyword: null, label: 'Todos', icono: 'fa-th-large' },
                 { categoria: 'Salud y Bienestar', keyword: 'clinica', label: 'Clínicas', icono: 'fa-hospital' },
