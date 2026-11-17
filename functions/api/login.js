@@ -1,7 +1,7 @@
 // ========================================
-// LA PAZ TE ACERCA - Worker de Autenticación v12.0
+// LA PAZ TE ACERCA - Worker de Autenticación v12.2.2
 // Valida usuario/contraseña con HMAC-SHA256
-// Fix v12.0: SESSION_SECRET obligatorio + exp real 2h
+// Fix v12.2.2: importKey usa formato 'raw' (no 'HMAC')
 // ========================================
 
 export async function onRequestPost(context) {
@@ -24,7 +24,7 @@ export async function onRequestPost(context) {
     const validUser = env.ADMIN_USER || 'admin';
     const validPass = env.ADMIN_PASS;
 
-    // SESSION_SECRET obligatorio (fix v12.0)
+    // SESSION_SECRET obligatorio
     const secret = env.SESSION_SECRET;
     if (!secret) {
       return new Response(
@@ -41,7 +41,6 @@ export async function onRequestPost(context) {
     }
 
     if (username === validUser && password === validPass) {
-      // Token con exp real: login + 2h
       const token = await generateSessionToken(username, secret);
       
       return new Response(
@@ -76,12 +75,13 @@ async function generateSessionToken(username, secret) {
 }
 
 // Firmar con HMAC-SHA256
+// FIX v12.2.2: primer argumento = 'raw' (formato de clave), no 'HMAC'
 async function signHMAC(payload, secret) {
   const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
-    'HMAC',
+    'raw',                                          // ← FIX: formato de la clave
     encoder.encode(secret),
-    { name: 'HMAC', hash: 'SHA-256' },
+    { name: 'HMAC', hash: 'SHA-256' },              // ← algoritmo
     false,
     ['sign']
   );
@@ -91,7 +91,7 @@ async function signHMAC(payload, secret) {
     .join('');
 }
 
-// Validar token HMAC (fix v12.0: exp real)
+// Validar token HMAC (exp real)
 export async function validateToken(token, secret) {
   if (!token) return false;
   try {
@@ -103,7 +103,6 @@ export async function validateToken(token, secret) {
     const timestamp = parseInt(exp);
     const now = Date.now();
     
-    // Fix v12.0: comparar contra la fecha de expiración real
     if (now > timestamp) return false;
     
     const expectedSig = await signHMAC(`${user}:${exp}`, secret);
