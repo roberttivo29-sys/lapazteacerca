@@ -13,118 +13,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* ========================================
-           404 - ESTILOS ESPECÍFICOS
-           ======================================== */
-        body.error-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: var(--fuente-cuerpo, 'Inter', sans-serif);
-            background: var(--gris-suave, #FDFBF7);
-        }
-
-        .error-container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 500px;
-        }
-
-        .error-code {
-            font-size: clamp(6rem, 15vw, 10rem);
-            font-weight: 900;
-            color: var(--azul-confianza, #1E40AF);
-            margin: 0;
-            font-family: var(--fuente-titulos, 'Poppins', sans-serif);
-            line-height: 1;
-            letter-spacing: -5px;
-        }
-
-        .error-message {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--gris-oscuro, #334155);
-            margin: 1rem 0 2rem;
-            line-height: 1.4;
-        }
-
-        .error-submessage {
-            font-size: 1rem;
-            color: var(--gris-medio, #64748B);
-            margin-bottom: 2rem;
-            line-height: 1.5;
-        }
-
-        .error-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: var(--gradiente-ocre, linear-gradient(135deg, #D97706, #B45309));
-            color: white;
-            text-decoration: none;
-            border-radius: var(--radio-md, 12px);
-            font-weight: 700;
-            font-size: 1rem;
-            transition: var(--transicion-normal, all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
-            box-shadow: var(--sombra-md, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
-        }
-
-        .error-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--sombra-glow-ocre, 0 0 40px rgba(217, 119, 6, 0.3));
-        }
-
-        .error-btn i {
-            font-size: 1.1rem;
-        }
-
-        .error-contact {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--gris-borde, #E2E8F0);
-        }
-
-        .error-contact p {
-            font-size: 0.9rem;
-            color: var(--gris-medio, #64748B);
-            margin-bottom: 1rem;
-        }
-
-        .error-contact a {
-            color: var(--azul-confianza, #1E40AF);
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transicion-rapida);
-        }
-
-        .error-contact a:hover {
-            color: var(--ocre-calidad, #D97706);
-        }
-
-        @media (max-width: 767px) {
-            .error-container {
-                padding: 1.5rem;
-            }
-            
-            .error-code {
-                letter-spacing: -3px;
-            }
-        }
+        body.error-page{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:var(--fondo)}
+        .error-container{text-align:center;padding:2rem;max-width:500px}
+        .error-code{font-size:clamp(6rem,15vw,10rem);font-weight:900;color:var(--azul-confianza);margin:0;font-family:var(--f-titulo);line-height:1;letter-spacing:-5px}
+        .error-message{font-size:clamp(1.2rem,3vw,1.5rem);color:var(--gris-oscuro);margin:1rem 0 2rem;line-height:1.4}
+        .error-submessage{font-size:1rem;color:var(--gris-medio);margin-bottom:2rem;line-height:1.5}
+        .error-contact{margin-top:2rem;padding-top:2rem;border-top:1px solid var(--gris-borde)}
+        .error-contact p{font-size:.9rem;color:var(--gris-medio);margin-bottom:1rem}
+        .error-contact a{color:var(--azul-confianza);text-decoration:none;font-weight:600;transition:var(--t-fast)}
+        .error-contact a:hover{color:var(--ocre-calidad)}
     </style>
 </head>
 <body class="error-page">
     <div class="error-container">
         <h1 class="error-code">404</h1>
         <p class="error-message">La página que buscas no existe o fue movida</p>
-        <p class="error-submessage">
-            Puede que el enlace esté desactualizado o que la página haya cambiado de ubicación.
-        </p>
-        <a href="index.html" class="error-btn">
-            <i class="fas fa-home" aria-hidden="true"></i>
-            Volver al inicio
-        </a>
+        <p class="error-submessage">Puede que el enlace esté desactualizado o que la página haya cambiado de ubicación.</p>
+        <a href="index.html" class="btn btn-primary"><i class="fas fa-home" aria-hidden="true"></i> Volver al inicio</a>
         
         <div class="error-contact">
             <p>¿Necesitas ayuda? Contáctanos directamente:</p>

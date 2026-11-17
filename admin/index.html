@@ -1,1096 +1,1148 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="googlebot" content="noindex">
-  <title>Panel de Administración - La Paz te Acerca</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    body { background: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
-    .login-container { max-width: 420px; margin: 80px auto; padding: 35px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-    .admin-container { max-width: 1400px; margin: 20px auto; padding: 20px; }
-    .hidden { display: none !important; }
-    .provider-card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: transform 0.2s; }
-    .provider-card:hover { transform: translateY(-2px); }
-    .btn-primary { background: #1E40AF; border: none; }
-    .btn-primary:hover { background: #0F172A; }
-    .image-upload-container { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
-    .image-upload-container input[type="text"] { flex: 1; }
-    .image-preview { max-width: 100px; max-height: 100px; border-radius: 8px; margin-top: 5px; }
-    
-    .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-    .admin-tab { padding: 10px 20px; background: white; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
-    .admin-tab:hover { border-color: #D97706; color: #D97706; }
-    .admin-tab.active { background: #D97706; color: white; border-color: #D97706; }
-    
-    .quick-search-container { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    .quick-provider-row { background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #1E40AF; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-    .quick-provider-info { flex: 1; min-width: 250px; }
-    .quick-provider-info h6 { margin: 0 0 5px 0; font-weight: 700; }
-    .quick-provider-info p { margin: 2px 0; font-size: 0.9rem; color: #64748b; }
-    .quick-provider-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .btn-copy { background: #10B981; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; }
-    .btn-copy:hover { background: #059669; color: white; }
-    .btn-whatsapp-direct { background: #25D366; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
-    .btn-whatsapp-direct:hover { background: #20BA5A; color: white; }
-    
-    .badge-destacado { background: #F59E0B; color: #1F2937; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
-    .badge-24h { background: #1F2937; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
-    .badge-plan { padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
-    .badge-gratuito { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
-    .badge-basico { background: #DBEAFE; color: #1E40AF; }
-    .badge-completo { background: linear-gradient(135deg, #D97706, #B45309); color: white; }
-    
-    .no-results { text-align: center; padding: 40px; color: #94A3B8; }
-    .no-results i { font-size: 3rem; margin-bottom: 10px; }
-    
-    .results-counter { background: #EFF6FF; padding: 10px 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.9rem; color: #1E40AF; font-weight: 600; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex">
+    <title>Panel de Administración | La Paz te Acerca</title>
+    <link rel="icon" type="image/png" href="../img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ========================================
+           ADMIN v12.0 — SISTEMA DE DISEÑO PROPIO
+           Coherencia total con el frontend
+           ======================================== */
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --azul-profundo:#0F172A;--azul-confianza:#1E40AF;--azul-claro:#3B82F6;
+            --ocre-calidad:#D97706;--ocre-oscuro:#B45309;--ocre-claro:#F59E0B;
+            --verde-accion:#10B981;--verde-oscuro:#059669;--rojo-alerta:#EF4444;
+            --whatsapp:#25D366;--whatsapp-hover:#20BA5A;
+            --fondo:#FDFBF7;--gris-suave:#F8FAFC;--gris-medio:#64748B;--gris-claro:#94A3B8;
+            --gris-borde:#E2E8F0;--gris-oscuro:#334155;--blanco:#FFFFFF;
+            --grad-azul:linear-gradient(135deg,#1E40AF,#0F172A);
+            --grad-ocre:linear-gradient(135deg,#D97706,#B45309);
+            --sh-1:0 1px 2px rgba(0,0,0,.05);--sh-2:0 4px 10px -2px rgba(0,0,0,.08);
+            --sh-3:0 12px 24px -6px rgba(0,0,0,.12);--sh-4:0 24px 48px -12px rgba(0,0,0,.20);
+            --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:22px;--r-full:9999px;
+            --f-titulo:'Poppins',sans-serif;--f-cuerpo:'Inter',sans-serif;
+            --sp-1:.5rem;--sp-2:1rem;--sp-3:1.5rem;--sp-4:2rem;--sp-5:3rem;
+        }
+        body{font-family:var(--f-cuerpo);background:var(--gris-suave);color:var(--gris-oscuro);line-height:1.6}
+        .hidden{display:none!important}
 
-    .security-badge { background: #10B981; color: white; padding: 6px 12px; border-radius: 50px; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 15px; }
-    .session-timer { font-size: 0.8rem; color: #64748b; margin-left: 10px; }
-    
-    .upload-progress { height: 4px; background: #e2e8f0; border-radius: 2px; overflow: hidden; margin-top: 5px; }
-    .upload-progress-bar { height: 100%; background: #D97706; width: 0%; transition: width 0.3s; }
-    
-    .upload-status { font-size: 0.75rem; margin-top: 3px; color: #64748b; }
-    .upload-status.success { color: #10B981; }
-    .upload-status.error { color: #EF4444; }
+        /* LOGIN */
+        .login-wrapper{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:var(--sp-3);background:var(--grad-azul)}
+        .login-container{max-width:420px;width:100%;padding:var(--sp-5);background:var(--blanco);border-radius:var(--r-lg);box-shadow:var(--sh-4)}
+        .login-header{text-align:center;margin-bottom:var(--sp-4)}
+        .login-header h2{font-family:var(--f-titulo);font-size:1.5rem;font-weight:800;color:var(--azul-profundo);margin-bottom:.5rem}
+        .login-header h2 i{color:var(--ocre-calidad);margin-right:.5rem}
+        .login-header p{color:var(--gris-medio);font-size:.9rem}
+        .security-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--verde-accion);color:#fff;padding:.4rem 1rem;border-radius:var(--r-full);font-size:.75rem;font-weight:600;margin-bottom:var(--sp-3)}
+        .form-group{margin-bottom:var(--sp-3)}
+        .form-label{display:block;font-weight:600;font-size:.9rem;margin-bottom:.5rem;color:var(--gris-oscuro)}
+        .form-control{width:100%;padding:.75rem 1rem;border:2px solid var(--gris-borde);border-radius:var(--r-md);font-family:var(--f-cuerpo);font-size:1rem;transition:all .2s}
+        .form-control:focus{outline:none;border-color:var(--azul-confianza);box-shadow:0 0 0 3px rgba(30,64,175,.1)}
+        .input-group{display:flex;gap:.5rem}
+        .input-group .form-control{flex:1}
+        .btn-toggle-pass{background:var(--gris-suave);border:2px solid var(--gris-borde);border-radius:var(--r-md);padding:.75rem 1rem;cursor:pointer;transition:all .2s}
+        .btn-toggle-pass:hover{background:var(--gris-borde)}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.75rem;border-radius:var(--r-md);font-weight:700;font-size:.95rem;cursor:pointer;transition:all .2s;border:2px solid transparent;font-family:var(--f-cuerpo)}
+        .btn:hover{transform:translateY(-2px);box-shadow:var(--sh-3)}
+        .btn-primary{background:var(--grad-azul);color:#fff}
+        .btn-primary:hover{box-shadow:0 0 30px rgba(30,64,175,.3)}
+        .btn-success{background:var(--verde-accion);color:#fff}
+        .btn-success:hover{background:var(--verde-oscuro)}
+        .btn-danger{background:var(--rojo-alerta);color:#fff}
+        .btn-danger:hover{background:#DC2626}
+        .btn-secondary{background:var(--gris-borde);color:var(--gris-oscuro)}
+        .btn-secondary:hover{background:var(--gris-claro)}
+        .btn-outline{background:transparent;border-color:var(--azul-confianza);color:var(--azul-confianza)}
+        .btn-outline:hover{background:var(--azul-confianza);color:#fff}
+        .btn-block{width:100%}
+        .btn-sm{padding:.5rem 1rem;font-size:.85rem}
+        .login-error{background:#FEE2E2;color:#991B1B;padding:1rem;border-radius:var(--r-md);font-size:.9rem;margin-top:var(--sp-3);border-left:4px solid var(--rojo-alerta)}
 
-    .stats-bar { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .stats-bar .stat-box { background: white; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); flex: 1; min-width: 150px; }
-    .stats-bar .stat-box strong { display: block; font-size: 1.5rem; color: #1E40AF; }
-    .stats-bar .stat-box span { font-size: 0.85rem; color: #64748b; }
-  </style>
+        /* ADMIN PANEL */
+        .admin-wrapper{max-width:1400px;margin:0 auto;padding:var(--sp-4)}
+        .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-4);flex-wrap:wrap;gap:var(--sp-2)}
+        .admin-header h1{font-family:var(--f-titulo);font-size:1.5rem;font-weight:800;color:var(--azul-profundo)}
+        .admin-header h1 i{color:var(--ocre-calidad);margin-right:.5rem}
+        .session-info{display:flex;align-items:center;gap:var(--sp-2)}
+        .user-badge{background:var(--blanco);padding:.5rem 1rem;border-radius:var(--r-md);font-size:.9rem;font-weight:600;box-shadow:var(--sh-1)}
+        .session-timer{font-size:.85rem;color:var(--gris-medio)}
+        .session-timer i{color:var(--ocre-calidad);margin-right:.3rem}
+
+        /* TABS */
+        .admin-tabs{display:flex;gap:.5rem;margin-bottom:var(--sp-4);border-bottom:2px solid var(--gris-borde);padding-bottom:var(--sp-2)}
+        .admin-tab{padding:.75rem 1.5rem;background:var(--blanco);border:2px solid var(--gris-borde);border-radius:var(--r-md);cursor:pointer;font-weight:600;font-size:.9rem;transition:all .2s;display:flex;align-items:center;gap:.5rem}
+        .admin-tab:hover{border-color:var(--ocre-calidad);color:var(--ocre-calidad)}
+        .admin-tab.active{background:var(--grad-ocre);color:#fff;border-color:var(--ocre-oscuro)}
+        .admin-tab i{font-size:1rem}
+
+        /* STATS BAR */
+        .stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--sp-2);margin-bottom:var(--sp-4)}
+        .stat-box{background:var(--blanco);padding:var(--sp-3);border-radius:var(--r-md);box-shadow:var(--sh-2);text-align:center}
+        .stat-box strong{display:block;font-size:1.8rem;font-weight:800;color:var(--azul-confianza);font-family:var(--f-titulo)}
+        .stat-box span{font-size:.85rem;color:var(--gris-medio);font-weight:500}
+
+        /* CARDS */
+        .card{background:var(--blanco);border-radius:var(--r-md);box-shadow:var(--sh-2);margin-bottom:var(--sp-3)}
+        .card-body{padding:var(--sp-3)}
+        .card-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-2)}
+        .card-title{font-family:var(--f-titulo);font-size:1.2rem;font-weight:700;color:var(--azul-profundo)}
+
+        /* PROVIDER CARDS */
+        .provider-card{background:var(--blanco);padding:var(--sp-3);border-radius:var(--r-md);margin-bottom:var(--sp-2);box-shadow:var(--sh-1);transition:all .2s;border-left:4px solid var(--azul-confianza)}
+        .provider-card:hover{transform:translateX(4px);box-shadow:var(--sh-2)}
+        .provider-info{flex:1;min-width:250px}
+        .provider-info h4{font-family:var(--f-titulo);font-size:1.1rem;font-weight:700;color:var(--azul-profundo);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+        .provider-info p{font-size:.9rem;color:var(--gris-medio);margin-bottom:.3rem}
+        .provider-info p strong{color:var(--gris-oscuro)}
+        .provider-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+
+        /* BADGES */
+        .badge{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .75rem;border-radius:var(--r-full);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+        .badge-destacado{background:var(--ocre-claro);color:#1F2937}
+        .badge-24h{background:var(--azul-profundo);color:#fff}
+        .badge-gratuito{background:#F1F5F9;color:#475569;border:1px solid #CBD5E1}
+        .badge-basico{background:var(--grad-azul);color:#fff}
+        .badge-completo{background:var(--grad-ocre);color:#fff;box-shadow:0 0 10px rgba(217,119,6,.5)}
+
+        /* QUICK SEARCH */
+        .quick-search-container{background:var(--blanco);padding:var(--sp-3);border-radius:var(--r-md);margin-bottom:var(--sp-3);box-shadow:var(--sh-2)}
+        .quick-search-container h3{font-family:var(--f-titulo);font-size:1.2rem;font-weight:700;color:var(--azul-profundo);margin-bottom:var(--sp-2)}
+        .quick-search-container h3 i{color:var(--ocre-calidad);margin-right:.5rem}
+        .search-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--sp-2);margin-bottom:var(--sp-3)}
+        .results-counter{background:#EFF6FF;padding:.75rem 1rem;border-radius:var(--r-md);font-size:.9rem;color:var(--azul-confianza);font-weight:600;margin-bottom:var(--sp-3)}
+
+        .quick-provider-row{background:var(--blanco);padding:var(--sp-3);border-radius:var(--r-md);margin-bottom:var(--sp-2);border-left:4px solid var(--azul-confianza);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-2);box-shadow:var(--sh-1)}
+        .quick-provider-info{flex:1;min-width:250px}
+        .quick-provider-info h5{font-family:var(--f-titulo);font-size:1rem;font-weight:700;color:var(--azul-profundo);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+        .quick-provider-info p{font-size:.85rem;color:var(--gris-medio);margin-bottom:.2rem}
+        .quick-provider-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+        .btn-copy{background:var(--verde-accion);color:#fff;border:none;padding:.5rem 1rem;border-radius:var(--r-sm);font-size:.85rem;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.3rem}
+        .btn-copy:hover{background:var(--verde-oscuro);transform:translateY(-2px)}
+        .btn-whatsapp-direct{background:var(--whatsapp);color:#fff;border:none;padding:.5rem 1rem;border-radius:var(--r-sm);font-size:.85rem;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.3rem;text-decoration:none}
+        .btn-whatsapp-direct:hover{background:var(--whatsapp-hover);transform:translateY(-2px)}
+
+        .no-results{text-align:center;padding:var(--sp-5);color:var(--gris-claro)}
+        .no-results i{font-size:3rem;margin-bottom:var(--sp-2);display:block}
+
+        /* MODAL */
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:var(--sp-3);opacity:0;visibility:hidden;transition:all .3s}
+        .modal-overlay.active{opacity:1;visibility:visible}
+        .modal-content{background:var(--blanco);border-radius:var(--r-lg);max-width:800px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--sh-4);transform:scale(.95);transition:transform .3s}
+        .modal-overlay.active .modal-content{transform:scale(1)}
+        .modal-header{padding:var(--sp-3);border-bottom:2px solid var(--gris-borde);display:flex;justify-content:space-between;align-items:center}
+        .modal-header h3{font-family:var(--f-titulo);font-size:1.3rem;font-weight:700;color:var(--azul-profundo)}
+        .modal-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--gris-medio);transition:color .2s}
+        .modal-close:hover{color:var(--rojo-alerta)}
+        .modal-body{padding:var(--sp-3)}
+        .modal-footer{padding:var(--sp-3);border-top:2px solid var(--gris-borde);display:flex;justify-content:flex-end;gap:var(--sp-2)}
+        .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-2)}
+        .form-grid .full-width{grid-column:1/-1}
+        .form-check{display:flex;align-items:center;gap:.5rem}
+        .form-check input[type="checkbox"]{width:18px;height:18px;cursor:pointer}
+
+        /* IMAGE UPLOAD */
+        .image-upload-container{display:flex;gap:.5rem;align-items:center;margin-bottom:var(--sp-1)}
+        .image-upload-container input[type="text"]{flex:1}
+        .image-preview{max-width:100px;max-height:100px;border-radius:var(--r-sm);margin-top:.5rem}
+        .upload-progress{height:4px;background:var(--gris-borde);border-radius:2px;overflow:hidden;margin-top:.5rem}
+        .upload-progress-bar{height:100%;background:var(--ocre-calidad);width:0%;transition:width .3s}
+        .upload-status{font-size:.75rem;margin-top:.3rem;color:var(--gris-medio)}
+        .upload-status.success{color:var(--verde-accion)}
+        .upload-status.error{color:var(--rojo-alerta)}
+
+        /* TOAST */
+        .toast-container{position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:var(--sp-2);max-width:400px}
+        .toast{background:var(--blanco);border-radius:var(--r-md);box-shadow:var(--sh-4);padding:var(--sp-3);display:flex;align-items:flex-start;gap:var(--sp-2);border-left:4px solid var(--azul-confianza);animation:slideInRight .3s ease-out}
+        .toast-success{border-left-color:var(--verde-accion)}
+        .toast-error{border-left-color:var(--rojo-alerta)}
+        .toast-warning{border-left-color:var(--ocre-calidad)}
+        .toast-icon{font-size:1.5rem;flex-shrink:0}
+        .toast-success .toast-icon{color:var(--verde-accion)}
+        .toast-error .toast-icon{color:var(--rojo-alerta)}
+        .toast-warning .toast-icon{color:var(--ocre-calidad)}
+        .toast-content{flex:1}
+        .toast-title{font-weight:700;color:var(--azul-profundo);margin-bottom:.2rem;font-size:.95rem}
+        .toast-message{color:var(--gris-medio);font-size:.85rem}
+        .toast-close{background:none;border:none;color:var(--gris-claro);cursor:pointer;font-size:1rem}
+        @keyframes slideInRight{from{opacity:0;transform:translateX(100%)}to{opacity:1;transform:translateX(0)}}
+
+        /* RESPONSIVE */
+        @media(max-width:767px){
+            .form-grid{grid-template-columns:1fr}
+            .stats-bar{grid-template-columns:repeat(2,1fr)}
+            .provider-card{flex-direction:column}
+            .provider-actions{width:100%;justify-content:flex-start}
+            .quick-provider-row{flex-direction:column;align-items:flex-start}
+            .quick-provider-actions{width:100%}
+        }
+    </style>
 </head>
 <body>
 
-  <!-- LOGIN -->
-  <div id="loginSection" class="login-container">
-    <div class="text-center mb-4">
-      <div class="security-badge"><i class="fas fa-lock"></i> Conexión Segura</div>
-      <h3 class="mb-1"><i class="fas fa-hands-helping text-primary"></i> Admin La Paz te Acerca</h3>
-      <p class="text-muted small">Panel de Administración del Directorio</p>
-    </div>
-    
-    <form id="loginForm" onsubmit="handleLogin(event)">
-      <div class="mb-3">
-        <label class="form-label fw-bold">Usuario Administrador</label>
-        <input type="text" id="adminUser" class="form-control" placeholder="admin" required autocomplete="username">
-      </div>
-      
-      <div class="mb-3">
-        <label class="form-label fw-bold">Contraseña</label>
-        <div class="input-group">
-          <input type="password" id="adminPass" class="form-control" placeholder="••••••••" required autocomplete="current-password">
-          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
-            <i class="fas fa-eye" id="toggleIcon"></i>
-          </button>
-        </div>
-      </div>
-      
-      <button type="submit" class="btn btn-primary w-100 py-2" id="loginBtn">
-        <i class="fas fa-lock-open me-2"></i> Ingresar al Panel
-      </button>
-      
-      <div id="loginError" class="alert alert-danger mt-3 hidden small"></div>
-      
-      <div class="text-center mt-3">
-        <small class="text-muted"><i class="fas fa-info-circle"></i> La sesión expira en 2 horas o al cerrar la pestaña.</small>
-      </div>
-    </form>
-  </div>
-
-  <!-- ADMIN PANEL -->
-  <div id="adminSection" class="admin-container hidden">
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-      <div class="d-flex align-items-center">
-        <h3 class="mb-0"><i class="fas fa-hands-helping text-primary"></i> Panel de Administración</h3>
-        <span class="session-timer" id="sessionTimer"><i class="fas fa-clock"></i> Sesión activa</span>
-      </div>
-      <div>
-        <span class="badge bg-light text-dark border me-2" id="userDisplay"><i class="fas fa-user"></i> Admin</span>
-        <button onclick="logout()" class="btn btn-outline-danger btn-sm">
-          <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-        </button>
-      </div>
-    </div>
-
-    <!-- TABS -->
-    <div class="admin-tabs">
-      <div class="admin-tab active" onclick="cambiarTab('gestion')">
-        <i class="fas fa-cogs"></i> Gestión del Directorio
-      </div>
-      <div class="admin-tab" onclick="cambiarTab('consulta')">
-        <i class="fas fa-search"></i> Consulta Rápida
-      </div>
-    </div>
-
-    <!-- GESTIÓN -->
-    <div id="tabGestion">
-      <div class="stats-bar" id="statsBar">
-        <div class="stat-box"><strong id="statTotal">0</strong><span>Proveedores</span></div>
-        <div class="stat-box"><strong id="statCompletos">0</strong><span>Completos</span></div>
-        <div class="stat-box"><strong id="statBasicos">0</strong><span>Básicos</span></div>
-        <div class="stat-box"><strong id="stat24h">0</strong><span>Atención 24h</span></div>
-      </div>
-
-      <div class="card mb-4">
-        <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-2">
-          <h5 class="card-title mb-0">Gestión de Proveedores</h5>
-          <div>
-            <button onclick="addProvider()" class="btn btn-success">
-              <i class="fas fa-plus"></i> Agregar Negocio
-            </button>
-            <button onclick="loadProviders()" class="btn btn-primary ms-2">
-              <i class="fas fa-sync"></i> Recargar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="providersList"></div>
-      <div id="loading" class="text-center py-5 hidden">
-        <i class="fas fa-spinner fa-spin fa-3x text-primary"></i>
-        <p class="mt-3">Cargando directorio...</p>
-      </div>
-    </div>
-
-    <!-- CONSULTA RÁPIDA -->
-    <div id="tabConsulta" class="hidden">
-      <div class="quick-search-container">
-        <h5 class="mb-3"><i class="fas fa-search text-primary"></i> Consulta Rápida</h5>
-        <p class="text-muted mb-3">Busca negocios rápidamente para responder consultas por WhatsApp.</p>
-        
-        <div class="row g-3">
-          <div class="col-md-4">
-            <label class="form-label fw-bold">Categoría</label>
-            <select id="filtroCategoria" class="form-select" onchange="actualizarFiltroSubcategoria()">
-              <option value="">Todas las categorías</option>
-              <option value="Salud y Bienestar">Salud y Bienestar</option>
-              <option value="Mantenimiento del Hogar">Mantenimiento del Hogar</option>
-              <option value="Materiales de Construcción">Materiales de Construcción</option>
-              <option value="Talleres Automotrices">Talleres Automotrices</option>
-              <option value="Tecnología y Redes">Tecnología y Redes</option>
-              <option value="Servicios de Despedida">Servicios de Despedida</option>
-              <option value="Servicios para Eventos">Servicios para Eventos</option>
-              <option value="Imagen y Cuidado Personal">Imagen y Cuidado Personal</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label fw-bold">Subcategoría</label>
-            <select id="filtroSubcategoria" class="form-select" onchange="filtrarConsultaRapida()">
-              <option value="">Todas las subcategorías</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label fw-bold">Buscar por texto</label>
-            <input type="text" id="filtroTexto" class="form-control" placeholder="Nombre, dirección, teléfono..." oninput="filtrarConsultaRapida()">
-          </div>
-        </div>
-        
-        <div id="resultsCounter" class="results-counter hidden" style="margin-top: 15px;"></div>
-      </div>
-
-      <div id="consultaRapidaList"></div>
-    </div>
-  </div>
-
-  <!-- MODAL EDITAR/AGREGAR -->
-  <div class="modal fade" id="editModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle">Negocio en el Directorio</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="providerForm">
-            <input type="hidden" id="editIndex">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">ID (Número único) *</label>
-                <input type="number" id="f_id" class="form-control" required>
-                <small class="text-muted">Se genera automáticamente. No modificar.</small>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Nombre del Negocio *</label>
-                <input type="text" id="f_nombre" class="form-control" required>
-              </div>
-              
-              <div class="col-md-6">
-                <label class="form-label">Categoría *</label>
-                <select id="f_categoria" class="form-select" required onchange="actualizarSubcategorias()">
-                  <option value="Salud y Bienestar">Salud y Bienestar</option>
-                  <option value="Mantenimiento del Hogar">Mantenimiento del Hogar</option>
-                  <option value="Materiales de Construcción">Materiales de Construcción</option>
-                  <option value="Talleres Automotrices">Talleres Automotrices</option>
-                  <option value="Tecnología y Redes">Tecnología y Redes</option>
-                  <option value="Servicios de Despedida">Servicios de Despedida</option>
-                  <option value="Servicios para Eventos">Servicios para Eventos</option>
-                  <option value="Imagen y Cuidado Personal">Imagen y Cuidado Personal</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Subcategoría *</label>
-                <select id="f_subcategoria_select" class="form-select" required onchange="toggleOtroInput()">
-                </select>
-                <input type="text" id="f_subcategoria_otro" class="form-control mt-2 hidden" placeholder="Escribe la subcategoría específica">
-                <input type="hidden" id="f_subcategoria">
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Dirección</label>
-                <input type="text" id="f_direccion" class="form-control">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Teléfono</label>
-                <input type="text" id="f_telefono" class="form-control">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">WhatsApp (solo números)</label>
-                <input type="text" id="f_whatsapp" class="form-control">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Horario</label>
-                <input type="text" id="f_horario" class="form-control">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Rango de Precios</label>
-                <input type="text" id="f_precios" class="form-control">
-              </div>
-              <div class="col-12">
-                <label class="form-label">Descripción</label>
-                <textarea id="f_descripcion" class="form-control" rows="2"></textarea>
-              </div>
-
-              <!-- IMÁGENES -->
-              <div class="col-12">
-                <label class="form-label fw-bold">Imágenes del Negocio</label>
-                <small class="text-muted d-block mb-2">Gratuito: sin imágenes | Básico: 2 imágenes | Completo: 4 imágenes</small>
-                
-                <div class="image-upload-container">
-                  <input type="text" id="f_imagen1" class="form-control" placeholder="URL de Imagen 1" readonly>
-                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput1').click()">
-                    <i class="fas fa-camera"></i> Subir
-                  </button>
-                  <input type="file" id="fileInput1" style="display:none" accept="image/*" onchange="handleFileSelect(1, this)">
-                </div>
-                <div class="upload-progress hidden" id="progress1"><div class="upload-progress-bar"></div></div>
-                <div class="upload-status" id="status1"></div>
-                <img id="preview1" class="image-preview hidden" src="" alt="Preview 1">
-
-                <div class="image-upload-container">
-                  <input type="text" id="f_imagen2" class="form-control" placeholder="URL de Imagen 2" readonly>
-                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput2').click()">
-                    <i class="fas fa-camera"></i> Subir
-                  </button>
-                  <input type="file" id="fileInput2" style="display:none" accept="image/*" onchange="handleFileSelect(2, this)">
-                </div>
-                <div class="upload-progress hidden" id="progress2"><div class="upload-progress-bar"></div></div>
-                <div class="upload-status" id="status2"></div>
-                <img id="preview2" class="image-preview hidden" src="" alt="Preview 2">
-
-                <div class="image-upload-container completo-only hidden">
-                  <input type="text" id="f_imagen3" class="form-control" placeholder="URL de Imagen 3" readonly>
-                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput3').click()">
-                    <i class="fas fa-camera"></i> Subir
-                  </button>
-                  <input type="file" id="fileInput3" style="display:none" accept="image/*" onchange="handleFileSelect(3, this)">
-                </div>
-                <div class="upload-progress hidden" id="progress3"><div class="upload-progress-bar"></div></div>
-                <div class="upload-status" id="status3"></div>
-                <img id="preview3" class="image-preview hidden" src="" alt="Preview 3">
-
-                <div class="image-upload-container completo-only hidden">
-                  <input type="text" id="f_imagen4" class="form-control" placeholder="URL de Imagen 4" readonly>
-                  <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('fileInput4').click()">
-                    <i class="fas fa-camera"></i> Subir
-                  </button>
-                  <input type="file" id="fileInput4" style="display:none" accept="image/*" onchange="handleFileSelect(4, this)">
-                </div>
-                <div class="upload-progress hidden" id="progress4"><div class="upload-progress-bar"></div></div>
-                <div class="upload-status" id="status4"></div>
-                <img id="preview4" class="image-preview hidden" src="" alt="Preview 4">
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label">Paquete de Visibilidad</label>
-                <select id="f_tipo_plan" class="form-select" onchange="toggleCompletoFields()">
-                  <option value="gratuito">Gratuito (Listado básico)</option>
-                  <option value="basico">Paquete Básico</option>
-                  <option value="completo">Paquete Completo (Máxima visibilidad)</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">¿Destacar en Portada?</label>
-                <div class="form-check form-switch mt-2">
-                  <input class="form-check-input" type="checkbox" id="f_destacado_switch">
-                  <label class="form-check-label" for="f_destacado_switch">
-                    Mostrar en "Recomendados"
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">¿Atención 24h?</label>
-                <div class="form-check form-switch mt-2">
-                  <input class="form-check-input" type="checkbox" id="f_24horas_switch">
-                  <label class="form-check-label" for="f_24horas_switch">
-                    Nocturno/Festivos
-                  </label>
-                </div>
-              </div>
-              <div class="col-12">
-                <label class="form-label">Audio URL (opcional)</label>
-                <input type="text" id="f_audio_url" class="form-control" placeholder="https://...">
-              </div>
+    <!-- LOGIN -->
+    <div id="loginSection" class="login-wrapper">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="security-badge"><i class="fas fa-lock"></i> Conexión Segura</div>
+                <h2><i class="fas fa-hands-helping"></i> Admin La Paz te Acerca</h2>
+                <p>Panel de Administración del Directorio</p>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" onclick="saveProvider()" class="btn btn-primary" id="saveBtn">
-            <i class="fas fa-save"></i> Guardar Cambios
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // ==========================================
-    // CONFIGURACIÓN
-    // ==========================================
-    const CONFIG = {
-      API_BASE: '/api',
-      SESSION_TIMEOUT: 7200000,
-      MAX_FILE_SIZE: 5 * 1024 * 1024,
-      ALLOWED_TYPES: ['image/jpeg', 'image/png', 'image/webp']
-    };
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="adminUser">Usuario Administrador</label>
+                    <input type="text" id="adminUser" class="form-control" placeholder="admin" required autocomplete="username">
+                </div>
 
-    const subcategoriasPorCategoria = {
-      "Salud y Bienestar": ["Clínicas y Urgencias", "Consultorios y Especialistas", "Odontología", "Laboratorios y Análisis", "Veterinaria y Mascotas", "Óptica y Audición", "Ambulancias y Traslados", "Fisioterapia y Rehabilitación", "Otros Servicios de Salud"],
-      "Mantenimiento del Hogar": ["Plomería", "Electricidad", "Albañilería y Reparaciones", "Pintura y Acabados", "Cerrajería", "Carpintería", "Limpieza y Fumigación", "Jardinería y Paisajismo", "Instalación y Mantenimiento de Gas", "Otros Oficios del Hogar"],
-      "Materiales de Construcción": ["Cemento, Estuco y Yeso", "Áridos: Arena, Grava y Piedra", "Ladrillos, Bloques y Prefabricados", "Barracas de Madera y Cubiertas", "Alquiler de Equipos y Maquinaria"],
-      "Talleres Automotrices": ["Taller Mecánico General", "Frenos y Suspensión", "Muñonería (Alineación y Balanceo)", "Chapistería y Pintura", "Electricidad y Electromecánica", "Grúas y Auxilio Vial", "Lavado y Detallado", "Repuestos y Accesorios", "Lubricentros y Cambio de Aceite", "Otros Servicios Automotrices"],
-      "Tecnología y Redes": ["Reparación de PC y Laptops", "Reparación de Celulares y Tablets", "Cámaras de Seguridad y CCTV", "Redes e Internet", "Soporte Técnico a Domicilio", "Impresoras y Suministros de Oficina", "Videojuegos y Consolas", "Otros Servicios Tecnológicos"],
-      "Servicios de Despedida": ["Funerarias y Velatorios", "Cremación y Urnas", "Floristerías y Homenajes", "Trámites y Gestoría Funeraria"],
-      "Servicios para Eventos": ["Filmación y Fotografía", "Sonido e Iluminación", "Bandas y Música en Vivo", "Locales y Salones de Eventos", "Decoración y Mobiliario", "Catering y Banquetes", "Animación y Espectáculos", "Alquiler de Vestuario y Trajes", "Otros Servicios para Eventos"],
-      "Imagen y Cuidado Personal": ["Barberías", "Salones de Belleza Unisex", "Centros de Estética", "Maquillaje Profesional", "Spas y Masajes", "Servicios a Domicilio"]
-    };
+                <div class="form-group">
+                    <label class="form-label" for="adminPass">Contraseña</label>
+                    <div class="input-group">
+                        <input type="password" id="adminPass" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+                        <button type="button" class="btn-toggle-pass" onclick="togglePassword()"><i class="fas fa-eye" id="toggleIcon"></i></button>
+                    </div>
+                </div>
 
-    let sessionToken = '';
-    let providers = [];
-    let sessionTimerInterval;
-
-    // ==========================================
-    // UTILIDADES (Fix XSS v11.2)
-    // ==========================================
-    function escaparHTML(v) {
-      if (v === null || v === undefined) return '';
-      return String(v).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
-    }
-
-    // ==========================================
-    // LOGIN
-    // ==========================================
-    function togglePassword() {
-      const input = document.getElementById('adminPass');
-      const icon = document.getElementById('toggleIcon');
-      if (input.type === 'password') {
-        input.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        input.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
-    }
-
-    async function handleLogin(event) {
-      event.preventDefault();
-      const user = document.getElementById('adminUser').value.trim();
-      const pass = document.getElementById('adminPass').value;
-      const loginBtn = document.getElementById('loginBtn');
-      
-      if (!user || !pass) {
-        showError('Por favor completa todos los campos');
-        return;
-      }
-      
-      loginBtn.disabled = true;
-      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Verificando...';
-      
-      try {
-        const response = await fetch(`${CONFIG.API_BASE}/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: user, password: pass })
-        });
-        
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.message || 'Credenciales inválidas');
-        }
-        
-        const data = await response.json();
-        sessionToken = data.token;
-        sessionStorage.setItem('lp_session_token', sessionToken);
-        sessionStorage.setItem('lp_session_user', user);
-        sessionStorage.setItem('lp_session_time', Date.now().toString());
-        
-        document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${user}`;
-        document.getElementById('loginSection').classList.add('hidden');
-        document.getElementById('adminSection').classList.remove('hidden');
-        
-        startSessionTimer();
-        loadProviders();
-        
-        showToast('Bienvenido', `Hola ${user}, sesión iniciada correctamente`, 'success');
-      } catch (e) {
-        showError('Error de autenticación: ' + e.message);
-      } finally {
-        loginBtn.disabled = false;
-        loginBtn.innerHTML = '<i class="fas fa-lock-open me-2"></i> Ingresar al Panel';
-      }
-    }
-
-    function logout() {
-      sessionStorage.clear();
-      clearInterval(sessionTimerInterval);
-      location.reload();
-    }
-
-    function startSessionTimer() {
-      const updateTimer = () => {
-        const loginTime = parseInt(sessionStorage.getItem('lp_session_time'));
-        const remaining = CONFIG.SESSION_TIMEOUT - (Date.now() - loginTime);
-        
-        if (remaining <= 0) {
-          alert('Tu sesión ha expirado por seguridad. Por favor inicia sesión nuevamente.');
-          logout();
-          return;
-        }
-        
-        const minutes = Math.floor(remaining / 60000);
-        const seconds = Math.floor((remaining % 60000) / 1000);
-        document.getElementById('sessionTimer').innerHTML = `<i class="fas fa-clock"></i> Sesión expira en: ${minutes}m ${seconds}s`;
-      };
-      
-      updateTimer();
-      sessionTimerInterval = setInterval(updateTimer, 1000);
-    }
-
-    function showError(msg) {
-      const el = document.getElementById('loginError');
-      el.textContent = msg;
-      el.classList.remove('hidden');
-    }
-
-    // ==========================================
-    // API
-    // ==========================================
-    async function apiRequest(endpoint, method = 'GET', body = null) {
-      const options = {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${sessionToken}`
-        }
-      };
-      
-      if (body) {
-        options.body = JSON.stringify(body);
-      }
-      
-      const response = await fetch(`${CONFIG.API_BASE}${endpoint}`, options);
-      
-      if (response.status === 401) {
-        alert('Tu sesión ha expirado. Por favor inicia sesión nuevamente.');
-        logout();
-        throw new Error('Sesión expirada');
-      }
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Error en la petición');
-      }
-      
-      return response.json();
-    }
-
-    // ==========================================
-    // NAVEGACIÓN
-    // ==========================================
-    function cambiarTab(tab) {
-      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-      if (tab === 'gestion') {
-        document.querySelectorAll('.admin-tab')[0].classList.add('active');
-        document.getElementById('tabGestion').classList.remove('hidden');
-        document.getElementById('tabConsulta').classList.add('hidden');
-      } else {
-        document.querySelectorAll('.admin-tab')[1].classList.add('active');
-        document.getElementById('tabGestion').classList.add('hidden');
-        document.getElementById('tabConsulta').classList.remove('hidden');
-        filtrarConsultaRapida();
-      }
-    }
-
-    function actualizarSubcategorias() {
-      const categoria = document.getElementById('f_categoria').value;
-      const subSelect = document.getElementById('f_subcategoria_select');
-      subSelect.innerHTML = '';
-      
-      if (subcategoriasPorCategoria[categoria]) {
-        subcategoriasPorCategoria[categoria].forEach(sub => {
-          const option = document.createElement('option');
-          option.value = sub;
-          option.textContent = sub;
-          subSelect.appendChild(option);
-        });
-      }
-
-      const optOtro = document.createElement('option');
-      optOtro.value = 'Otro';
-      optOtro.textContent = 'Otro (escribir manualmente)';
-      subSelect.appendChild(optOtro);
-
-      toggleOtroInput();
-    }
-
-    function actualizarFiltroSubcategoria() {
-      const categoria = document.getElementById('filtroCategoria').value;
-      const subSelect = document.getElementById('filtroSubcategoria');
-      subSelect.innerHTML = '<option value="">Todas las subcategorías</option>';
-      
-      if (categoria && subcategoriasPorCategoria[categoria]) {
-        subcategoriasPorCategoria[categoria].forEach(sub => {
-          const option = document.createElement('option');
-          option.value = sub;
-          option.textContent = sub;
-          subSelect.appendChild(option);
-        });
-      }
-      filtrarConsultaRapida();
-    }
-
-    function toggleOtroInput() {
-      const subSelect = document.getElementById('f_subcategoria_select');
-      const otroInput = document.getElementById('f_subcategoria_otro');
-      const hiddenInput = document.getElementById('f_subcategoria');
-
-      if (subSelect.value === 'Otro') {
-        otroInput.classList.remove('hidden');
-        otroInput.required = true;
-        hiddenInput.value = otroInput.value;
-      } else {
-        otroInput.classList.add('hidden');
-        otroInput.required = false;
-        hiddenInput.value = subSelect.value;
-      }
-    }
-
-    document.getElementById('f_subcategoria_otro').addEventListener('input', function() {
-      document.getElementById('f_subcategoria').value = this.value;
-    });
-
-    // ==========================================
-    // SUBIDA DE IMÁGENES
-    // ==========================================
-    function handleFileSelect(numero, input) {
-      const file = input.files[0];
-      if (!file) return;
-
-      if (!CONFIG.ALLOWED_TYPES.includes(file.type)) {
-        showToast('Error', 'Solo se permiten imágenes JPG, PNG o WebP', 'error');
-        input.value = '';
-        return;
-      }
-
-      if (file.size > CONFIG.MAX_FILE_SIZE) {
-        showToast('Error', 'La imagen no puede superar los 5MB', 'error');
-        input.value = '';
-        return;
-      }
-
-      const preview = document.getElementById(`preview${numero}`);
-      const progress = document.getElementById(`progress${numero}`);
-      const progressBar = progress.querySelector('.upload-progress-bar');
-      const status = document.getElementById(`status${numero}`);
-
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-
-      progress.classList.remove('hidden');
-      status.textContent = 'Subiendo imagen...';
-      status.className = 'upload-status';
-      progressBar.style.width = '30%';
-
-      subirImagenSegura(numero, file);
-    }
-
-    async function subirImagenSegura(numero, file) {
-      const progress = document.getElementById(`progress${numero}`);
-      const progressBar = progress.querySelector('.upload-progress-bar');
-      const status = document.getElementById(`status${numero}`);
-
-      try {
-        const formData = new FormData();
-        formData.append('image', file);
-        formData.append('numero', numero);
-
-        progressBar.style.width = '60%';
-
-        const response = await fetch(`${CONFIG.API_BASE}/upload`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${sessionToken}`
-          },
-          body: formData
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.message || 'Error al subir imagen');
-        }
-
-        const data = await response.json();
-        
-        progressBar.style.width = '100%';
-        status.textContent = '✓ Imagen cargada correctamente';
-        status.className = 'upload-status success';
-        
-        document.getElementById(`f_imagen${numero}`).value = data.url;
-        
-        showToast('¡Listo!', `Imagen ${numero} cargada correctamente`, 'success');
-        
-        setTimeout(() => {
-          progress.classList.add('hidden');
-          progressBar.style.width = '0%';
-        }, 2000);
-        
-      } catch (error) {
-        progressBar.style.width = '0%';
-        status.textContent = '✗ Error: ' + error.message;
-        status.className = 'upload-status error';
-        showToast('Error', `No se pudo subir imagen ${numero}: ${error.message}`, 'error');
-      }
-    }
-
-    // ==========================================
-    // CAMBIO DE NOMENCLATURA v11.3
-    // ==========================================
-    function toggleCompletoFields() {
-      const plan = document.getElementById('f_tipo_plan').value;
-      const completoFields = document.querySelectorAll('.completo-only');
-      
-      if (plan === 'completo') {
-        completoFields.forEach(field => field.classList.remove('hidden'));
-      } else {
-        completoFields.forEach(field => field.classList.add('hidden'));
-        document.getElementById('f_imagen3').value = '';
-        document.getElementById('f_imagen4').value = '';
-        document.getElementById('preview3').classList.add('hidden');
-        document.getElementById('preview4').classList.add('hidden');
-      }
-    }
-
-    // ==========================================
-    // CRUD
-    // ==========================================
-    async function loadProviders() {
-      document.getElementById('loading').classList.remove('hidden');
-      document.getElementById('providersList').innerHTML = '';
-      
-      try {
-        const data = await apiRequest('/proveedores');
-        providers = data.proveedores || [];
-        updateStats();
-        renderProviders();
-      } catch (e) {
-        document.getElementById('providersList').innerHTML = `<div class="alert alert-danger">Error: ${escaparHTML(e.message)}</div>`;
-      } finally {
-        document.getElementById('loading').classList.add('hidden');
-      }
-    }
-
-    function updateStats() {
-      document.getElementById('statTotal').textContent = providers.length;
-      document.getElementById('statCompletos').textContent = providers.filter(p => p.tipo_plan === 'completo').length;
-      document.getElementById('statBasicos').textContent = providers.filter(p => p.tipo_plan === 'basico').length;
-      document.getElementById('stat24h').textContent = providers.filter(p => p['24horas']).length;
-    }
-
-    function getPlanLabel(plan) {
-      if (plan === 'completo') return 'COMPLETO';
-      if (plan === 'basico') return 'BÁSICO';
-      return 'GRATUITO';
-    }
-
-    function getPlanClass(plan) {
-      if (plan === 'completo') return 'badge-completo';
-      if (plan === 'basico') return 'badge-basico';
-      return 'badge-gratuito';
-    }
-
-    function renderProviders() {
-      const html = providers.map((p, i) => `
-        <div class="provider-card">
-          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-            <div style="flex: 1; min-width: 250px;">
-              <h5 class="mb-1">
-                ${escaparHTML(p.nombre)}
-                ${p.destacado == 1 ? '<span class="badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
-                ${p['24horas'] ? '<span class="badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
-                <span class="badge-plan ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span>
-              </h5>
-              <p class="text-muted mb-1"><strong>${escaparHTML(p.categoria)}</strong> > ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
-              <p class="mb-1"><i class="fas fa-map-marker-alt text-danger"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
-              <p class="mb-0">
-                <i class="fas fa-phone text-primary"></i> ${escaparHTML(p.telefono || 'Sin teléfono')} | 
-                <i class="fab fa-whatsapp text-success"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}
-              </p>
-            </div>
-            <div class="d-flex flex-column gap-2">
-              <button onclick="editProvider(${i})" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Editar</button>
-              <button onclick="deleteProvider(${i})" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-      document.getElementById('providersList').innerHTML = html || '<p class="text-center text-muted py-4">No hay negocios registrados aún.</p>';
-    }
-
-    function filtrarConsultaRapida() {
-      const categoria = document.getElementById('filtroCategoria').value;
-      const subcategoria = document.getElementById('filtroSubcategoria').value;
-      const texto = document.getElementById('filtroTexto').value.toLowerCase().trim();
-
-      let filtrados = providers.filter(p => {
-        const matchCategoria = !categoria || p.categoria === categoria;
-        const matchSubcategoria = !subcategoria || p.subcategoria === subcategoria;
-        const matchTexto = !texto || 
-          (p.nombre || '').toLowerCase().includes(texto) ||
-          (p.direccion || '').toLowerCase().includes(texto) ||
-          (p.telefono || '').toLowerCase().includes(texto) ||
-          (p.whatsapp || '').toLowerCase().includes(texto) ||
-          (p.descripcion || '').toLowerCase().includes(texto) ||
-          (p.subcategoria || '').toLowerCase().includes(texto);
-        
-        return matchCategoria && matchSubcategoria && matchTexto;
-      });
-
-      const counter = document.getElementById('resultsCounter');
-      if (filtrados.length > 0) {
-        counter.textContent = `📊 ${filtrados.length} negocio${filtrados.length !== 1 ? 's' : ''} encontrado${filtrados.length !== 1 ? 's' : ''}`;
-        counter.classList.remove('hidden');
-      } else {
-        counter.classList.add('hidden');
-      }
-
-      renderConsultaRapida(filtrados);
-    }
-
-    function renderConsultaRapida(lista) {
-      const container = document.getElementById('consultaRapidaList');
-      
-      if (lista.length === 0) {
-        container.innerHTML = `
-          <div class="no-results">
-            <i class="fas fa-search"></i>
-            <p>No se encontraron negocios con esos filtros</p>
-            <small class="text-muted">Intenta cambiar la categoría o el texto de búsqueda</small>
-          </div>
-        `;
-        return;
-      }
-
-      const html = lista.map(p => {
-        const whatsappNum = (p.whatsapp || p.telefono || '').replace(/\D/g, '');
-        const fullNum = whatsappNum.startsWith('591') ? whatsappNum : '591' + whatsappNum;
-        const whatsappLink = whatsappNum ? `https://wa.me/${fullNum}` : '#';
-        const textoCopiar = `${p.nombre}\n${p.categoria} > ${p.subcategoria}\n📍 ${p.direccion || 'Sin dirección'}\n📞 ${p.telefono || 'Sin teléfono'}\n💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}\n🕒 ${p.horario || 'Sin horario'}`;
-        
-        return `
-          <div class="quick-provider-row">
-            <div class="quick-provider-info">
-              <h6>
-                ${escaparHTML(p.nombre)}
-                ${p.destacado == 1 ? '<span class="badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
-                ${p['24horas'] ? '<span class="badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
-                <span class="badge-plan ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span>
-              </h6>
-              <p><strong>${escaparHTML(p.categoria)}</strong> > ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
-              <p><i class="fas fa-map-marker-alt text-danger"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
-              <p><i class="fas fa-phone text-primary"></i> ${escaparHTML(p.telefono || 'Sin teléfono')} | <i class="fab fa-whatsapp text-success"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
-              <p><i class="fas fa-clock text-warning"></i> ${escaparHTML(p.horario || 'Sin horario')}</p>
-            </div>
-            <div class="quick-provider-actions">
-              ${whatsappNum ? `
-                <button class="btn-copy" onclick="copiarDatos(\`${textoCopiar.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)" title="Copiar datos para WhatsApp">
-                  <i class="fas fa-copy"></i> Copiar
+                <button type="submit" class="btn btn-primary btn-block" id="loginBtn">
+                    <i class="fas fa-lock-open"></i> Ingresar al Panel
                 </button>
-                <button class="btn-copy" onclick="copiarNumero('${whatsappNum}')" title="Copiar solo el número">
-                  <i class="fas fa-phone"></i> ${whatsappNum}
-                </button>
-                <a href="${whatsappLink}?text=${encodeURIComponent('Hola, vi tu perfil en La Paz te Acerca')}" target="_blank" class="btn-whatsapp-direct" title="Abrir WhatsApp directo">
-                  <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-              ` : '<span class="text-muted">Sin contacto</span>'}
-            </div>
-          </div>
-        `;
-      }).join('');
-      
-      container.innerHTML = html;
-    }
 
-    function copiarDatos(texto) {
-      navigator.clipboard.writeText(texto).then(() => {
-        showToast('¡Copiado!', 'Datos listos para pegar en WhatsApp', 'success', 2000);
-      }).catch(err => {
-        showToast('Error', 'No se pudo copiar: ' + err, 'error');
-      });
-    }
+                <div id="loginError" class="login-error hidden"></div>
 
-    function copiarNumero(numero) {
-      navigator.clipboard.writeText(numero).then(() => {
-        showToast('¡Copiado!', `Número ${numero} copiado`, 'success', 2000);
-      }).catch(err => {
-        showToast('Error', 'No se pudo copiar: ' + err, 'error');
-      });
-    }
-
-    function addProvider() {
-      document.getElementById('modalTitle').textContent = 'Agregar Nuevo Negocio';
-      document.getElementById('editIndex').value = '-1';
-      document.getElementById('providerForm').reset();
-      
-      const maxId = providers.length > 0 
-        ? Math.max(...providers.map(p => p.id || 0)) 
-        : 0;
-      document.getElementById('f_id').value = maxId + 1;
-      document.getElementById('f_id').readOnly = false;
-      
-      document.getElementById('f_categoria').value = 'Salud y Bienestar';
-      actualizarSubcategorias();
-      toggleCompletoFields();
-      
-      for (let i = 1; i <= 4; i++) {
-        document.getElementById(`preview${i}`).classList.add('hidden');
-        document.getElementById(`preview${i}`).src = '';
-        document.getElementById(`f_imagen${i}`).value = '';
-      }
-      
-      new bootstrap.Modal(document.getElementById('editModal')).show();
-    }
-
-    function editProvider(index) {
-      const p = providers[index];
-      document.getElementById('modalTitle').textContent = 'Editar Negocio';
-      document.getElementById('editIndex').value = index;
-      
-      document.getElementById('f_id').value = p.id;
-      document.getElementById('f_id').readOnly = true;
-      
-      document.getElementById('f_nombre').value = p.nombre;
-      document.getElementById('f_categoria').value = p.categoria;
-      
-      actualizarSubcategorias();
-      const subSelect = document.getElementById('f_subcategoria_select');
-      const otroInput = document.getElementById('f_subcategoria_otro');
-      
-      const validSubs = subcategoriasPorCategoria[p.categoria] || [];
-      if (validSubs.includes(p.subcategoria)) {
-        subSelect.value = p.subcategoria;
-        otroInput.classList.add('hidden');
-        document.getElementById('f_subcategoria').value = p.subcategoria;
-      } else {
-        subSelect.value = 'Otro';
-        otroInput.classList.remove('hidden');
-        otroInput.value = p.subcategoria || '';
-        document.getElementById('f_subcategoria').value = p.subcategoria || '';
-      }
-
-      document.getElementById('f_direccion').value = p.direccion || '';
-      document.getElementById('f_telefono').value = p.telefono || '';
-      document.getElementById('f_whatsapp').value = p.whatsapp || '';
-      document.getElementById('f_horario').value = p.horario || '';
-      document.getElementById('f_precios').value = p.precios || '';
-      document.getElementById('f_descripcion').value = p.descripcion || '';
-      document.getElementById('f_tipo_plan').value = p.tipo_plan || 'gratuito';
-      document.getElementById('f_destacado_switch').checked = p.destacado == 1;
-      document.getElementById('f_24horas_switch').checked = p['24horas'] || false;
-      document.getElementById('f_audio_url').value = p.audio_url || '';
-
-      for (let i = 1; i <= 4; i++) {
-        const imgField = document.getElementById(`f_imagen${i}`);
-        const preview = document.getElementById(`preview${i}`);
-        imgField.value = p[`imagen${i}`] || '';
-        if (p[`imagen${i}`]) {
-          preview.src = p[`imagen${i}`];
-          preview.classList.remove('hidden');
-        } else {
-          preview.classList.add('hidden');
-        }
-      }
-
-      toggleCompletoFields();
-      new bootstrap.Modal(document.getElementById('editModal')).show();
-    }
-
-    async function saveProvider() {
-      const index = parseInt(document.getElementById('editIndex').value);
-      const saveBtn = document.getElementById('saveBtn');
-      
-      toggleOtroInput(); 
-      
-      const nuevoId = parseInt(document.getElementById('f_id').value);
-      
-      if (isNaN(nuevoId) || nuevoId <= 0) {
-        showToast('Error', 'El ID debe ser un número positivo.', 'error');
-        return;
-      }
-      
-      if (index === -1) {
-        const idDuplicado = providers.find(p => p.id === nuevoId);
-        if (idDuplicado) {
-          showToast('Error', `El ID ${nuevoId} ya existe.`, 'error');
-          return;
-        }
-      } else {
-        const idDuplicado = providers.find((p, i) => p.id === nuevoId && i !== index);
-        if (idDuplicado) {
-          showToast('Error', `El ID ${nuevoId} ya está en uso.`, 'error');
-          return;
-        }
-      }
-      
-      const newProvider = {
-        id: nuevoId,
-        nombre: document.getElementById('f_nombre').value,
-        categoria: document.getElementById('f_categoria').value,
-        subcategoria: document.getElementById('f_subcategoria').value,
-        direccion: document.getElementById('f_direccion').value,
-        telefono: document.getElementById('f_telefono').value,
-        whatsapp: document.getElementById('f_whatsapp').value,
-        horario: document.getElementById('f_horario').value,
-        precios: document.getElementById('f_precios').value,
-        descripcion: document.getElementById('f_descripcion').value,
-        tipo_plan: document.getElementById('f_tipo_plan').value,
-        destacado: document.getElementById('f_destacado_switch').checked ? 1 : 0,
-        '24horas': document.getElementById('f_24horas_switch').checked,
-        imagen1: document.getElementById('f_imagen1').value,
-        imagen2: document.getElementById('f_imagen2').value,
-        imagen3: document.getElementById('f_imagen3').value,
-        imagen4: document.getElementById('f_imagen4').value,
-        audio_url: document.getElementById('f_audio_url').value
-      };
-
-      saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
-
-      try {
-        if (index === -1) {
-          await apiRequest('/proveedores', 'POST', newProvider);
-          showToast('¡Éxito!', 'Negocio agregado correctamente', 'success');
-        } else {
-          await apiRequest(`/proveedores/${nuevoId}`, 'PUT', newProvider);
-          showToast('¡Éxito!', 'Negocio actualizado correctamente', 'success');
-        }
-        
-        bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
-        loadProviders();
-      } catch (e) {
-        showToast('Error', 'No se pudo guardar: ' + e.message, 'error');
-      } finally {
-        saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Cambios';
-      }
-    }
-
-    async function deleteProvider(index) {
-      if (!confirm('¿Estás seguro de eliminar este negocio? Esta acción no se puede deshacer.')) return;
-      
-      const provider = providers[index];
-      
-      try {
-        await apiRequest(`/proveedores/${provider.id}`, 'DELETE');
-        showToast('¡Eliminado!', 'Negocio eliminado correctamente', 'success');
-        loadProviders();
-      } catch (e) {
-        showToast('Error', 'No se pudo eliminar: ' + e.message, 'error');
-      }
-    }
-
-    // ==========================================
-    // TOASTS
-    // ==========================================
-    function showToast(title, message, type = 'info', duration = 5000) {
-      const container = document.getElementById('toastContainer') || createToastContainer();
-      const icons = { 
-        success: 'fa-check-circle', 
-        error: 'fa-exclamation-circle', 
-        warning: 'fa-exclamation-triangle', 
-        info: 'fa-info-circle' 
-      };
-      const bgColors = {
-        success: 'bg-success',
-        error: 'bg-danger',
-        warning: 'bg-warning text-dark',
-        info: 'bg-primary'
-      };
-      
-      const toast = document.createElement('div');
-      toast.className = `toast align-items-center text-white ${bgColors[type]} border-0 mb-2`;
-      toast.setAttribute('role', 'alert');
-      toast.style.minWidth = '300px';
-      toast.innerHTML = `
-        <div class="d-flex">
-          <div class="toast-body">
-            <i class="fas ${icons[type]} me-2"></i>
-            <strong>${escaparHTML(title)}:</strong> ${escaparHTML(message)}
-          </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                <p style="text-align:center;margin-top:var(--sp-3);font-size:.85rem;color:var(--gris-medio)">
+                    <i class="fas fa-info-circle"></i> La sesión expira en 2 horas o al cerrar la pestaña.
+                </p>
+            </form>
         </div>
-      `;
-      
-      container.appendChild(toast);
-      const bsToast = new bootstrap.Toast(toast, { delay: duration });
-      bsToast.show();
-      
-      toast.addEventListener('hidden.bs.toast', () => toast.remove());
-    }
+    </div>
 
-    function createToastContainer() {
-      const container = document.createElement('div');
-      container.id = 'toastContainer';
-      container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999;';
-      document.body.appendChild(container);
-      return container;
-    }
+    <!-- ADMIN PANEL -->
+    <div id="adminSection" class="admin-wrapper hidden">
+        <div class="admin-header">
+            <h1><i class="fas fa-hands-helping"></i> Panel de Administración</h1>
+            <div class="session-info">
+                <span class="user-badge" id="userDisplay"><i class="fas fa-user"></i> Admin</span>
+                <span class="session-timer" id="sessionTimer"><i class="fas fa-clock"></i> Sesión activa</span>
+                <button onclick="logout()" class="btn btn-danger btn-sm"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            </div>
+        </div>
 
-    // ==========================================
-    // INICIALIZACIÓN
-    // ==========================================
-    window.addEventListener('load', () => {
-      const savedToken = sessionStorage.getItem('lp_session_token');
-      const loginTime = sessionStorage.getItem('lp_session_time');
-      const savedUser = sessionStorage.getItem('lp_session_user');
-      
-      if (savedToken && loginTime && (Date.now() - parseInt(loginTime) < CONFIG.SESSION_TIMEOUT)) {
-        sessionToken = savedToken;
-        document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${savedUser || 'Admin'}`;
-        document.getElementById('loginSection').classList.add('hidden');
-        document.getElementById('adminSection').classList.remove('hidden');
-        startSessionTimer();
-        loadProviders();
-      }
-    });
-  </script>
+        <!-- TABS -->
+        <div class="admin-tabs">
+            <div class="admin-tab active" onclick="cambiarTab('gestion')"><i class="fas fa-cogs"></i> Gestión del Directorio</div>
+            <div class="admin-tab" onclick="cambiarTab('consulta')"><i class="fas fa-search"></i> Consulta Rápida</div>
+        </div>
+
+        <!-- GESTIÓN -->
+        <div id="tabGestion">
+            <div class="stats-bar" id="statsBar">
+                <div class="stat-box"><strong id="statTotal">0</strong><span>Proveedores</span></div>
+                <div class="stat-box"><strong id="statCompletos">0</strong><span>Completos</span></div>
+                <div class="stat-box"><strong id="statBasicos">0</strong><span>Básicos</span></div>
+                <div class="stat-box"><strong id="stat24h">0</strong><span>Atención 24h</span></div>
+            </div>
+
+            <div class="card">
+                <div class="card-body card-header">
+                    <h3 class="card-title">Gestión de Proveedores</h3>
+                    <div>
+                        <button onclick="addProvider()" class="btn btn-success"><i class="fas fa-plus"></i> Agregar Negocio</button>
+                        <button onclick="loadProviders()" class="btn btn-primary" style="margin-left:.5rem"><i class="fas fa-sync"></i> Recargar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="providersList"></div>
+            <div id="loading" class="text-center hidden" style="padding:var(--sp-5)">
+                <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--azul-confianza)"></i>
+                <p style="margin-top:var(--sp-2);color:var(--gris-medio)">Cargando directorio...</p>
+            </div>
+        </div>
+
+        <!-- CONSULTA RÁPIDA -->
+        <div id="tabConsulta" class="hidden">
+            <div class="quick-search-container">
+                <h3><i class="fas fa-search"></i> Consulta Rápida</h3>
+                <p style="color:var(--gris-medio);margin-bottom:var(--sp-3)">Busca negocios rápidamente para responder consultas por WhatsApp.</p>
+
+                <div class="search-grid">
+                    <div>
+                        <label class="form-label">Categoría</label>
+                        <select id="filtroCategoria" class="form-control" onchange="actualizarFiltroSubcategoria()">
+                            <option value="">Todas las categorías</option>
+                            <option value="Salud y Bienestar">Salud y Bienestar</option>
+                            <option value="Mantenimiento del Hogar">Mantenimiento del Hogar</option>
+                            <option value="Materiales de Construcción">Materiales de Construcción</option>
+                            <option value="Talleres Automotrices">Talleres Automotrices</option>
+                            <option value="Tecnología y Redes">Tecnología y Redes</option>
+                            <option value="Servicios de Despedida">Servicios de Despedida</option>
+                            <option value="Servicios para Eventos">Servicios para Eventos</option>
+                            <option value="Imagen y Cuidado Personal">Imagen y Cuidado Personal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Subcategoría</label>
+                        <select id="filtroSubcategoria" class="form-control" onchange="filtrarConsultaRapida()">
+                            <option value="">Todas las subcategorías</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Buscar por texto</label>
+                        <input type="text" id="filtroTexto" class="form-control" placeholder="Nombre, dirección, teléfono..." oninput="filtrarConsultaRapida()">
+                    </div>
+                </div>
+
+                <div id="resultsCounter" class="results-counter hidden"></div>
+            </div>
+
+            <div id="consultaRapidaList"></div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR/AGREGAR -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Negocio en el Directorio</h3>
+                <button class="modal-close" onclick="cerrarModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="providerForm">
+                    <input type="hidden" id="editIndex">
+                    <div class="form-grid">
+                        <div>
+                            <label class="form-label">ID (Número único) *</label>
+                            <input type="number" id="f_id" class="form-control" required>
+                            <small style="color:var(--gris-medio);font-size:.8rem">Se genera automáticamente. No modificar.</small>
+                        </div>
+                        <div>
+                            <label class="form-label">Nombre del Negocio *</label>
+                            <input type="text" id="f_nombre" class="form-control" required>
+                        </div>
+
+                        <div>
+                            <label class="form-label">Categoría *</label>
+                            <select id="f_categoria" class="form-control" required onchange="actualizarSubcategorias()">
+                                <option value="Salud y Bienestar">Salud y Bienestar</option>
+                                <option value="Mantenimiento del Hogar">Mantenimiento del Hogar</option>
+                                <option value="Materiales de Construcción">Materiales de Construcción</option>
+                                <option value="Talleres Automotrices">Talleres Automotrices</option>
+                                <option value="Tecnología y Redes">Tecnología y Redes</option>
+                                <option value="Servicios de Despedida">Servicios de Despedida</option>
+                                <option value="Servicios para Eventos">Servicios para Eventos</option>
+                                <option value="Imagen y Cuidado Personal">Imagen y Cuidado Personal</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Subcategoría *</label>
+                            <select id="f_subcategoria_select" class="form-control" required onchange="toggleOtroInput()"></select>
+                            <input type="text" id="f_subcategoria_otro" class="form-control hidden" placeholder="Escribe la subcategoría específica" style="margin-top:.5rem">
+                            <input type="hidden" id="f_subcategoria">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Dirección</label>
+                            <input type="text" id="f_direccion" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" id="f_telefono" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label">WhatsApp (solo números)</label>
+                            <input type="text" id="f_whatsapp" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label">Horario</label>
+                            <input type="text" id="f_horario" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label">Rango de Precios</label>
+                            <input type="text" id="f_precios" class="form-control">
+                        </div>
+                        <div class="full-width">
+                            <label class="form-label">Descripción</label>
+                            <textarea id="f_descripcion" class="form-control" rows="2"></textarea>
+                        </div>
+
+                        <!-- IMÁGENES -->
+                        <div class="full-width">
+                            <label class="form-label">Imágenes del Negocio</label>
+                            <small style="color:var(--gris-medio);font-size:.8rem;display:block;margin-bottom:var(--sp-2)">Gratuito: sin imágenes | Básico: 2 imágenes | Completo: 4 imágenes</small>
+
+                            <div class="image-upload-container">
+                                <input type="text" id="f_imagen1" class="form-control" placeholder="URL de Imagen 1" readonly>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput1').click()"><i class="fas fa-camera"></i> Subir</button>
+                                <input type="file" id="fileInput1" style="display:none" accept="image/*" onchange="handleFileSelect(1, this)">
+                            </div>
+                            <div class="upload-progress hidden" id="progress1"><div class="upload-progress-bar"></div></div>
+                            <div class="upload-status" id="status1"></div>
+                            <img id="preview1" class="image-preview hidden" src="" alt="Preview 1">
+
+                            <div class="image-upload-container">
+                                <input type="text" id="f_imagen2" class="form-control" placeholder="URL de Imagen 2" readonly>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput2').click()"><i class="fas fa-camera"></i> Subir</button>
+                                <input type="file" id="fileInput2" style="display:none" accept="image/*" onchange="handleFileSelect(2, this)">
+                            </div>
+                            <div class="upload-progress hidden" id="progress2"><div class="upload-progress-bar"></div></div>
+                            <div class="upload-status" id="status2"></div>
+                            <img id="preview2" class="image-preview hidden" src="" alt="Preview 2">
+
+                            <div class="image-upload-container completo-only hidden">
+                                <input type="text" id="f_imagen3" class="form-control" placeholder="URL de Imagen 3" readonly>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput3').click()"><i class="fas fa-camera"></i> Subir</button>
+                                <input type="file" id="fileInput3" style="display:none" accept="image/*" onchange="handleFileSelect(3, this)">
+                            </div>
+                            <div class="upload-progress hidden" id="progress3"><div class="upload-progress-bar"></div></div>
+                            <div class="upload-status" id="status3"></div>
+                            <img id="preview3" class="image-preview hidden" src="" alt="Preview 3">
+
+                            <div class="image-upload-container completo-only hidden">
+                                <input type="text" id="f_imagen4" class="form-control" placeholder="URL de Imagen 4" readonly>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput4').click()"><i class="fas fa-camera"></i> Subir</button>
+                                <input type="file" id="fileInput4" style="display:none" accept="image/*" onchange="handleFileSelect(4, this)">
+                            </div>
+                            <div class="upload-progress hidden" id="progress4"><div class="upload-progress-bar"></div></div>
+                            <div class="upload-status" id="status4"></div>
+                            <img id="preview4" class="image-preview hidden" src="" alt="Preview 4">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Paquete de Visibilidad</label>
+                            <select id="f_tipo_plan" class="form-control" onchange="toggleCompletoFields()">
+                                <option value="gratuito">Gratuito (Listado básico)</option>
+                                <option value="basico">Paquete Básico</option>
+                                <option value="completo">Paquete Completo (Máxima visibilidad)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">¿Destacar en Portada?</label>
+                            <div class="form-check" style="margin-top:.5rem">
+                                <input type="checkbox" id="f_destacado_switch">
+                                <label for="f_destacado_switch">Mostrar en "Recomendados"</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">¿Atención 24h?</label>
+                            <div class="form-check" style="margin-top:.5rem">
+                                <input type="checkbox" id="f_24horas_switch">
+                                <label for="f_24horas_switch">Nocturno/Festivos</label>
+                            </div>
+                        </div>
+                        <div class="full-width">
+                            <label class="form-label">Audio URL (opcional)</label>
+                            <input type="text" id="f_audio_url" class="form-control" placeholder="https://...">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="saveBtn" onclick="saveProvider()"><i class="fas fa-save"></i> Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script>
+        // ==========================================
+        // CONFIGURACIÓN
+        // ==========================================
+        const CONFIG = {
+            API_BASE: '/api',
+            SESSION_TIMEOUT: 7200000,
+            MAX_FILE_SIZE: 5 * 1024 * 1024,
+            ALLOWED_TYPES: ['image/jpeg', 'image/png', 'image/webp']
+        };
+
+        const subcategoriasPorCategoria = {
+            "Salud y Bienestar": ["Clínicas y Urgencias", "Consultorios y Especialistas", "Odontología", "Laboratorios y Análisis", "Veterinaria y Mascotas", "Óptica y Audición", "Ambulancias y Traslados", "Fisioterapia y Rehabilitación", "Otros Servicios de Salud"],
+            "Mantenimiento del Hogar": ["Plomería", "Electricidad", "Albañilería y Reparaciones", "Pintura y Acabados", "Cerrajería", "Carpintería", "Limpieza y Fumigación", "Jardinería y Paisajismo", "Instalación y Mantenimiento de Gas", "Otros Oficios del Hogar"],
+            "Materiales de Construcción": ["Cemento, Estuco y Yeso", "Áridos: Arena, Grava y Piedra", "Ladrillos, Bloques y Prefabricados", "Barracas de Madera y Cubiertas", "Alquiler de Equipos y Maquinaria"],
+            "Talleres Automotrices": ["Taller Mecánico General", "Frenos y Suspensión", "Muñonería (Alineación y Balanceo)", "Chapistería y Pintura", "Electricidad y Electromecánica", "Grúas y Auxilio Vial", "Lavado y Detallado", "Repuestos y Accesorios", "Lubricentros y Cambio de Aceite", "Otros Servicios Automotrices"],
+            "Tecnología y Redes": ["Reparación de PC y Laptops", "Reparación de Celulares y Tablets", "Cámaras de Seguridad y CCTV", "Redes e Internet", "Soporte Técnico a Domicilio", "Impresoras y Suministros de Oficina", "Videojuegos y Consolas", "Otros Servicios Tecnológicos"],
+            "Servicios de Despedida": ["Funerarias y Velatorios", "Cremación y Urnas", "Floristerías y Homenajes", "Trámites y Gestoría Funeraria"],
+            "Servicios para Eventos": ["Filmación y Fotografía", "Sonido e Iluminación", "Bandas y Música en Vivo", "Locales y Salones de Eventos", "Decoración y Mobiliario", "Catering y Banquetes", "Animación y Espectáculos", "Alquiler de Vestuario y Trajes", "Otros Servicios para Eventos"],
+            "Imagen y Cuidado Personal": ["Barberías", "Salones de Belleza Unisex", "Centros de Estética", "Maquillaje Profesional", "Spas y Masajes", "Servicios a Domicilio"]
+        };
+
+        let sessionToken = '';
+        let providers = [];
+        let sessionTimerInterval;
+
+        // ==========================================
+        // UTILIDADES
+        // ==========================================
+        function escaparHTML(v) {
+            if (v === null || v === undefined) return '';
+            return String(v).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+        }
+
+        // ==========================================
+        // LOGIN
+        // ==========================================
+        function togglePassword() {
+            const input = document.getElementById('adminPass');
+            const icon = document.getElementById('toggleIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value;
+            const loginBtn = document.getElementById('loginBtn');
+
+            if (!user || !pass) {
+                showError('Por favor completa todos los campos');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+
+            try {
+                const response = await fetch(`${CONFIG.API_BASE}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: user, password: pass })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Credenciales inválidas');
+                }
+
+                const data = await response.json();
+                sessionToken = data.token;
+                sessionStorage.setItem('lp_session_token', sessionToken);
+                sessionStorage.setItem('lp_session_user', user);
+                sessionStorage.setItem('lp_session_time', Date.now().toString());
+
+                document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${user}`;
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('adminSection').classList.remove('hidden');
+
+                startSessionTimer();
+                loadProviders();
+
+                showToast('Bienvenido', `Hola ${user}, sesión iniciada correctamente`, 'success');
+            } catch (e) {
+                showError('Error de autenticación: ' + e.message);
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="fas fa-lock-open"></i> Ingresar al Panel';
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            clearInterval(sessionTimerInterval);
+            location.reload();
+        }
+
+        function startSessionTimer() {
+            const updateTimer = () => {
+                const loginTime = parseInt(sessionStorage.getItem('lp_session_time'));
+                const remaining = CONFIG.SESSION_TIMEOUT - (Date.now() - loginTime);
+
+                if (remaining <= 0) {
+                    alert('Tu sesión ha expirado por seguridad. Por favor inicia sesión nuevamente.');
+                    logout();
+                    return;
+                }
+
+                const minutes = Math.floor(remaining / 60000);
+                const seconds = Math.floor((remaining % 60000) / 1000);
+                document.getElementById('sessionTimer').innerHTML = `<i class="fas fa-clock"></i> Sesión expira en: ${minutes}m ${seconds}s`;
+            };
+
+            updateTimer();
+            sessionTimerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('loginError');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+        }
+
+        // ==========================================
+        // API
+        // ==========================================
+        async function apiRequest(endpoint, method = 'GET', body = null) {
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionToken}`
+                }
+            };
+
+            if (body) options.body = JSON.stringify(body);
+
+            const response = await fetch(`${CONFIG.API_BASE}${endpoint}`, options);
+
+            if (response.status === 401) {
+                alert('Tu sesión ha expirado. Por favor inicia sesión nuevamente.');
+                logout();
+                throw new Error('Sesión expirada');
+            }
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.message || 'Error en la petición');
+            }
+
+            return response.json();
+        }
+
+        // ==========================================
+        // NAVEGACIÓN
+        // ==========================================
+        function cambiarTab(tab) {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            if (tab === 'gestion') {
+                document.querySelectorAll('.admin-tab')[0].classList.add('active');
+                document.getElementById('tabGestion').classList.remove('hidden');
+                document.getElementById('tabConsulta').classList.add('hidden');
+            } else {
+                document.querySelectorAll('.admin-tab')[1].classList.add('active');
+                document.getElementById('tabGestion').classList.add('hidden');
+                document.getElementById('tabConsulta').classList.remove('hidden');
+                filtrarConsultaRapida();
+            }
+        }
+
+        function actualizarSubcategorias() {
+            const categoria = document.getElementById('f_categoria').value;
+            const subSelect = document.getElementById('f_subcategoria_select');
+            subSelect.innerHTML = '';
+
+            if (subcategoriasPorCategoria[categoria]) {
+                subcategoriasPorCategoria[categoria].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subSelect.appendChild(option);
+                });
+            }
+
+            const optOtro = document.createElement('option');
+            optOtro.value = 'Otro';
+            optOtro.textContent = 'Otro (escribir manualmente)';
+            subSelect.appendChild(optOtro);
+
+            toggleOtroInput();
+        }
+
+        function actualizarFiltroSubcategoria() {
+            const categoria = document.getElementById('filtroCategoria').value;
+            const subSelect = document.getElementById('filtroSubcategoria');
+            subSelect.innerHTML = '<option value="">Todas las subcategorías</option>';
+
+            if (categoria && subcategoriasPorCategoria[categoria]) {
+                subcategoriasPorCategoria[categoria].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subSelect.appendChild(option);
+                });
+            }
+            filtrarConsultaRapida();
+        }
+
+        function toggleOtroInput() {
+            const subSelect = document.getElementById('f_subcategoria_select');
+            const otroInput = document.getElementById('f_subcategoria_otro');
+            const hiddenInput = document.getElementById('f_subcategoria');
+
+            if (subSelect.value === 'Otro') {
+                otroInput.classList.remove('hidden');
+                otroInput.required = true;
+                hiddenInput.value = otroInput.value;
+            } else {
+                otroInput.classList.add('hidden');
+                otroInput.required = false;
+                hiddenInput.value = subSelect.value;
+            }
+        }
+
+        document.getElementById('f_subcategoria_otro').addEventListener('input', function() {
+            document.getElementById('f_subcategoria').value = this.value;
+        });
+
+        // ==========================================
+        // SUBIDA DE IMÁGENES
+        // ==========================================
+        function handleFileSelect(numero, input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            if (!CONFIG.ALLOWED_TYPES.includes(file.type)) {
+                showToast('Error', 'Solo se permiten imágenes JPG, PNG o WebP', 'error');
+                input.value = '';
+                return;
+            }
+
+            if (file.size > CONFIG.MAX_FILE_SIZE) {
+                showToast('Error', 'La imagen no puede superar los 5MB', 'error');
+                input.value = '';
+                return;
+            }
+
+            const preview = document.getElementById(`preview${numero}`);
+            const progress = document.getElementById(`progress${numero}`);
+            const progressBar = progress.querySelector('.upload-progress-bar');
+            const status = document.getElementById(`status${numero}`);
+
+            preview.src = URL.createObjectURL(file);
+            preview.classList.remove('hidden');
+
+            progress.classList.remove('hidden');
+            status.textContent = 'Subiendo imagen...';
+            status.className = 'upload-status';
+            progressBar.style.width = '30%';
+
+            subirImagenSegura(numero, file);
+        }
+
+        async function subirImagenSegura(numero, file) {
+            const progress = document.getElementById(`progress${numero}`);
+            const progressBar = progress.querySelector('.upload-progress-bar');
+            const status = document.getElementById(`status${numero}`);
+
+            try {
+                const formData = new FormData();
+                formData.append('image', file);
+                formData.append('numero', numero);
+
+                progressBar.style.width = '60%';
+
+                const response = await fetch(`${CONFIG.API_BASE}/upload`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${sessionToken}` },
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Error al subir imagen');
+                }
+
+                const data = await response.json();
+
+                progressBar.style.width = '100%';
+                status.textContent = '✓ Imagen cargada correctamente';
+                status.className = 'upload-status success';
+
+                document.getElementById(`f_imagen${numero}`).value = data.url;
+
+                showToast('¡Listo!', `Imagen ${numero} cargada correctamente`, 'success');
+
+                setTimeout(() => {
+                    progress.classList.add('hidden');
+                    progressBar.style.width = '0%';
+                }, 2000);
+
+            } catch (error) {
+                progressBar.style.width = '0%';
+                status.textContent = '✗ Error: ' + error.message;
+                status.className = 'upload-status error';
+                showToast('Error', `No se pudo subir imagen ${numero}: ${error.message}`, 'error');
+            }
+        }
+
+        // ==========================================
+        // CAMBIO DE NOMENCLATURA v12.0
+        // ==========================================
+        function toggleCompletoFields() {
+            const plan = document.getElementById('f_tipo_plan').value;
+            const completoFields = document.querySelectorAll('.completo-only');
+
+            if (plan === 'completo') {
+                completoFields.forEach(field => field.classList.remove('hidden'));
+            } else {
+                completoFields.forEach(field => field.classList.add('hidden'));
+                document.getElementById('f_imagen3').value = '';
+                document.getElementById('f_imagen4').value = '';
+                document.getElementById('preview3').classList.add('hidden');
+                document.getElementById('preview4').classList.add('hidden');
+            }
+        }
+
+        // ==========================================
+        // CRUD
+        // ==========================================
+        async function loadProviders() {
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('providersList').innerHTML = '';
+
+            try {
+                const data = await apiRequest('/proveedores');
+                providers = data.proveedores || [];
+                updateStats();
+                renderProviders();
+            } catch (e) {
+                document.getElementById('providersList').innerHTML = `<div class="login-error">Error: ${escaparHTML(e.message)}</div>`;
+            } finally {
+                document.getElementById('loading').classList.add('hidden');
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('statTotal').textContent = providers.length;
+            document.getElementById('statCompletos').textContent = providers.filter(p => p.tipo_plan === 'completo').length;
+            document.getElementById('statBasicos').textContent = providers.filter(p => p.tipo_plan === 'basico').length;
+            document.getElementById('stat24h').textContent = providers.filter(p => p['24horas']).length;
+        }
+
+        function getPlanLabel(plan) {
+            if (plan === 'completo') return 'COMPLETO';
+            if (plan === 'basico') return 'BÁSICO';
+            return 'GRATUITO';
+        }
+
+        function getPlanClass(plan) {
+            if (plan === 'completo') return 'badge-completo';
+            if (plan === 'basico') return 'badge-basico';
+            return 'badge-gratuito';
+        }
+
+        function renderProviders() {
+            const html = providers.map((p, i) => `
+                <div class="provider-card">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:var(--sp-2)">
+                        <div class="provider-info">
+                            <h4>
+                                ${escaparHTML(p.nombre)}
+                                ${p.destacado == 1 ? '<span class="badge badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
+                                ${p['24horas'] ? '<span class="badge badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
+                                <span class="badge ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span>
+                            </h4>
+                            <p><strong>${escaparHTML(p.categoria)}</strong> &gt; ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
+                            <p><i class="fas fa-map-marker-alt" style="color:var(--rojo-alerta)"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
+                            <p><i class="fas fa-phone" style="color:var(--azul-confianza)"></i> ${escaparHTML(p.telefono || 'Sin teléfono')} | <i class="fab fa-whatsapp" style="color:var(--verde-accion)"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
+                        </div>
+                        <div class="provider-actions">
+                            <button onclick="editProvider(${i})" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</button>
+                            <button onclick="deleteProvider(${i})" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('providersList').innerHTML = html || '<p style="text-align:center;color:var(--gris-medio);padding:var(--sp-4)">No hay negocios registrados aún.</p>';
+        }
+
+        function filtrarConsultaRapida() {
+            const categoria = document.getElementById('filtroCategoria').value;
+            const subcategoria = document.getElementById('filtroSubcategoria').value;
+            const texto = document.getElementById('filtroTexto').value.toLowerCase().trim();
+
+            let filtrados = providers.filter(p => {
+                const matchCategoria = !categoria || p.categoria === categoria;
+                const matchSubcategoria = !subcategoria || p.subcategoria === subcategoria;
+                const matchTexto = !texto ||
+                    (p.nombre || '').toLowerCase().includes(texto) ||
+                    (p.direccion || '').toLowerCase().includes(texto) ||
+                    (p.telefono || '').toLowerCase().includes(texto) ||
+                    (p.whatsapp || '').toLowerCase().includes(texto) ||
+                    (p.descripcion || '').toLowerCase().includes(texto) ||
+                    (p.subcategoria || '').toLowerCase().includes(texto);
+
+                return matchCategoria && matchSubcategoria && matchTexto;
+            });
+
+            const counter = document.getElementById('resultsCounter');
+            if (filtrados.length > 0) {
+                counter.textContent = `📊 ${filtrados.length} negocio${filtrados.length !== 1 ? 's' : ''} encontrado${filtrados.length !== 1 ? 's' : ''}`;
+                counter.classList.remove('hidden');
+            } else {
+                counter.classList.add('hidden');
+            }
+
+            renderConsultaRapida(filtrados);
+        }
+
+        function renderConsultaRapida(lista) {
+            const container = document.getElementById('consultaRapidaList');
+
+            if (lista.length === 0) {
+                container.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><p>No se encontraron negocios con esos filtros</p><small style="color:var(--gris-medio)">Intenta cambiar la categoría o el texto de búsqueda</small></div>`;
+                return;
+            }
+
+            const html = lista.map(p => {
+                const whatsappNum = (p.whatsapp || p.telefono || '').replace(/\D/g, '');
+                const fullNum = whatsappNum.startsWith('591') ? whatsappNum : '591' + whatsappNum;
+                const whatsappLink = whatsappNum ? `https://wa.me/${fullNum}` : '#';
+                const textoCopiar = `${p.nombre}\n${p.categoria} &gt; ${p.subcategoria}\n📍 ${p.direccion || 'Sin dirección'}\n📞 ${p.telefono || 'Sin teléfono'}\n💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}\n🕒 ${p.horario || 'Sin horario'}`;
+
+                return `
+                    <div class="quick-provider-row">
+                        <div class="quick-provider-info">
+                            <h5>
+                                ${escaparHTML(p.nombre)}
+                                ${p.destacado == 1 ? '<span class="badge badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
+                                ${p['24horas'] ? '<span class="badge badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
+                                <span class="badge ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span>
+                            </h5>
+                            <p><strong>${escaparHTML(p.categoria)}</strong> &gt; ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
+                            <p><i class="fas fa-map-marker-alt" style="color:var(--rojo-alerta)"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
+                            <p><i class="fas fa-phone" style="color:var(--azul-confianza)"></i> ${escaparHTML(p.telefono || 'Sin teléfono')} | <i class="fab fa-whatsapp" style="color:var(--verde-accion)"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
+                            <p><i class="fas fa-clock" style="color:var(--ocre-calidad)"></i> ${escaparHTML(p.horario || 'Sin horario')}</p>
+                        </div>
+                        <div class="quick-provider-actions">
+                            ${whatsappNum ? `
+                                <button class="btn-copy" onclick="copiarDatos(\`${textoCopiar.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)"><i class="fas fa-copy"></i> Copiar</button>
+                                <button class="btn-copy" onclick="copiarNumero('${whatsappNum}')"><i class="fas fa-phone"></i> ${whatsappNum}</button>
+                                <a href="${whatsappLink}?text=${encodeURIComponent('Hola, vi tu perfil en La Paz te Acerca')}" target="_blank" class="btn-whatsapp-direct"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            ` : '<span style="color:var(--gris-medio)">Sin contacto</span>'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = html;
+        }
+
+        function copiarDatos(texto) {
+            navigator.clipboard.writeText(texto).then(() => {
+                showToast('¡Copiado!', 'Datos listos para pegar en WhatsApp', 'success', 2000);
+            }).catch(err => {
+                showToast('Error', 'No se pudo copiar: ' + err, 'error');
+            });
+        }
+
+        function copiarNumero(numero) {
+            navigator.clipboard.writeText(numero).then(() => {
+                showToast('¡Copiado!', `Número ${numero} copiado`, 'success', 2000);
+            }).catch(err => {
+                showToast('Error', 'No se pudo copiar: ' + err, 'error');
+            });
+        }
+
+        function addProvider() {
+            document.getElementById('modalTitle').textContent = 'Agregar Nuevo Negocio';
+            document.getElementById('editIndex').value = '-1';
+            document.getElementById('providerForm').reset();
+
+            const maxId = providers.length > 0 ? Math.max(...providers.map(p => p.id || 0)) : 0;
+            document.getElementById('f_id').value = maxId + 1;
+            document.getElementById('f_id').readOnly = false;
+
+            document.getElementById('f_categoria').value = 'Salud y Bienestar';
+            actualizarSubcategorias();
+            toggleCompletoFields();
+
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`preview${i}`).classList.add('hidden');
+                document.getElementById(`preview${i}`).src = '';
+                document.getElementById(`f_imagen${i}`).value = '';
+            }
+
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function editProvider(index) {
+            const p = providers[index];
+            document.getElementById('modalTitle').textContent = 'Editar Negocio';
+            document.getElementById('editIndex').value = index;
+
+            document.getElementById('f_id').value = p.id;
+            document.getElementById('f_id').readOnly = true;
+
+            document.getElementById('f_nombre').value = p.nombre;
+            document.getElementById('f_categoria').value = p.categoria;
+
+            actualizarSubcategorias();
+            const subSelect = document.getElementById('f_subcategoria_select');
+            const otroInput = document.getElementById('f_subcategoria_otro');
+
+            const validSubs = subcategoriasPorCategoria[p.categoria] || [];
+            if (validSubs.includes(p.subcategoria)) {
+                subSelect.value = p.subcategoria;
+                otroInput.classList.add('hidden');
+                document.getElementById('f_subcategoria').value = p.subcategoria;
+            } else {
+                subSelect.value = 'Otro';
+                otroInput.classList.remove('hidden');
+                otroInput.value = p.subcategoria || '';
+                document.getElementById('f_subcategoria').value = p.subcategoria || '';
+            }
+
+            document.getElementById('f_direccion').value = p.direccion || '';
+            document.getElementById('f_telefono').value = p.telefono || '';
+            document.getElementById('f_whatsapp').value = p.whatsapp || '';
+            document.getElementById('f_horario').value = p.horario || '';
+            document.getElementById('f_precios').value = p.precios || '';
+            document.getElementById('f_descripcion').value = p.descripcion || '';
+            document.getElementById('f_tipo_plan').value = p.tipo_plan || 'gratuito';
+            document.getElementById('f_destacado_switch').checked = p.destacado == 1;
+            document.getElementById('f_24horas_switch').checked = p['24horas'] || false;
+            document.getElementById('f_audio_url').value = p.audio_url || '';
+
+            for (let i = 1; i <= 4; i++) {
+                const imgField = document.getElementById(`f_imagen${i}`);
+                const preview = document.getElementById(`preview${i}`);
+                imgField.value = p[`imagen${i}`] || '';
+                if (p[`imagen${i}`]) {
+                    preview.src = p[`imagen${i}`];
+                    preview.classList.remove('hidden');
+                } else {
+                    preview.classList.add('hidden');
+                }
+            }
+
+            toggleCompletoFields();
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function cerrarModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        async function saveProvider() {
+            const index = parseInt(document.getElementById('editIndex').value);
+            const saveBtn = document.getElementById('saveBtn');
+
+            toggleOtroInput();
+
+            const nuevoId = parseInt(document.getElementById('f_id').value);
+
+            if (isNaN(nuevoId) || nuevoId <= 0) {
+                showToast('Error', 'El ID debe ser un número positivo.', 'error');
+                return;
+            }
+
+            if (index === -1) {
+                const idDuplicado = providers.find(p => p.id === nuevoId);
+                if (idDuplicado) {
+                    showToast('Error', `El ID ${nuevoId} ya existe.`, 'error');
+                    return;
+                }
+            } else {
+                const idDuplicado = providers.find((p, i) => p.id === nuevoId && i !== index);
+                if (idDuplicado) {
+                    showToast('Error', `El ID ${nuevoId} ya está en uso.`, 'error');
+                    return;
+                }
+            }
+
+            const newProvider = {
+                id: nuevoId,
+                nombre: document.getElementById('f_nombre').value,
+                categoria: document.getElementById('f_categoria').value,
+                subcategoria: document.getElementById('f_subcategoria').value,
+                direccion: document.getElementById('f_direccion').value,
+                telefono: document.getElementById('f_telefono').value,
+                whatsapp: document.getElementById('f_whatsapp').value,
+                horario: document.getElementById('f_horario').value,
+                precios: document.getElementById('f_precios').value,
+                descripcion: document.getElementById('f_descripcion').value,
+                tipo_plan: document.getElementById('f_tipo_plan').value,
+                destacado: document.getElementById('f_destacado_switch').checked ? 1 : 0,
+                '24horas': document.getElementById('f_24horas_switch').checked,
+                imagen1: document.getElementById('f_imagen1').value,
+                imagen2: document.getElementById('f_imagen2').value,
+                imagen3: document.getElementById('f_imagen3').value,
+                imagen4: document.getElementById('f_imagen4').value,
+                audio_url: document.getElementById('f_audio_url').value
+            };
+
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+            try {
+                if (index === -1) {
+                    await apiRequest('/proveedores', 'POST', newProvider);
+                    showToast('¡Éxito!', 'Negocio agregado correctamente', 'success');
+                } else {
+                    await apiRequest(`/proveedores/${nuevoId}`, 'PUT', newProvider);
+                    showToast('¡Éxito!', 'Negocio actualizado correctamente', 'success');
+                }
+
+                cerrarModal();
+                loadProviders();
+            } catch (e) {
+                showToast('Error', 'No se pudo guardar: ' + e.message, 'error');
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = '<i class="fas fa-save"></i> Guardar Cambios';
+            }
+        }
+
+        async function deleteProvider(index) {
+            if (!confirm('¿Estás seguro de eliminar este negocio? Esta acción no se puede deshacer.')) return;
+
+            const provider = providers[index];
+
+            try {
+                await apiRequest(`/proveedores/${provider.id}`, 'DELETE');
+                showToast('¡Eliminado!', 'Negocio eliminado correctamente', 'success');
+                loadProviders();
+            } catch (e) {
+                showToast('Error', 'No se pudo eliminar: ' + e.message, 'error');
+            }
+        }
+
+        // ==========================================
+        // TOASTS
+        // ==========================================
+        function showToast(title, message, type = 'info', duration = 5000) {
+            const container = document.getElementById('toastContainer');
+            const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', warning: 'fa-exclamation-triangle', info: 'fa-info-circle' };
+
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i class="fas ${icons[type]} toast-icon"></i>
+                <div class="toast-content">
+                    <div class="toast-title">${escaparHTML(title)}</div>
+                    <div class="toast-message">${escaparHTML(message)}</div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+            `;
+
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), duration);
+        }
+
+        // ==========================================
+        // INICIALIZACIÓN
+        // ==========================================
+        window.addEventListener('load', () => {
+            const savedToken = sessionStorage.getItem('lp_session_token');
+            const loginTime = sessionStorage.getItem('lp_session_time');
+            const savedUser = sessionStorage.getItem('lp_session_user');
+
+            if (savedToken && loginTime && (Date.now() - parseInt(loginTime) < CONFIG.SESSION_TIMEOUT)) {
+                sessionToken = savedToken;
+                document.getElementById('userDisplay').innerHTML = `<i class="fas fa-user"></i> ${savedUser || 'Admin'}`;
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('adminSection').classList.remove('hidden');
+                startSessionTimer();
+                loadProviders();
+            }
+        });
+    </script>
 </body>
 </html>

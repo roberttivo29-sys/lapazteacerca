@@ -8,7 +8,6 @@
     <meta property="og:description" content="Barberías, salones, centros de estética, maquillaje y spas verificados en La Paz y El Alto.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lapazteacerca.com/imagen.html">
-    <meta property="og:image" content="img/og-imagen.jpg">
     <meta property="og:locale" content="es_BO">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="author" content="La Paz te Acerca">
@@ -27,9 +26,9 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v11.0
+         HEADER DINÁMICO v12.0
          ======================================== -->
-    <header class="header header-dynamic" id="header" role="banner">
+    <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
             <a href="index.html" class="logo-link">
                 <div class="logo">
@@ -37,12 +36,18 @@
                     <p class="tagline">Conectamos vecinos con servicios de confianza.</p>
                 </div>
             </a>
-            
+
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
-            
-            <nav class="nav nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
+
+            <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
+                <!-- Cabecera del drawer móvil -->
+                <div class="drawer-header">
+                    <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
+                    <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
+                </div>
+
                 <div class="nav-row">
                     <a href="index.html" class="nav-link"><i class="fas fa-house" aria-hidden="true"></i> Inicio</a>
                     <a href="salud.html" class="nav-link"><i class="fas fa-heartbeat" aria-hidden="true"></i> Salud</a>
@@ -57,8 +62,12 @@
                     <a href="imagen.html" class="nav-link active" aria-current="page"><i class="fas fa-spa" aria-hidden="true"></i> Imagen</a>
                     <a href="contacto.html" class="nav-link"><i class="fas fa-envelope" aria-hidden="true"></i> Contacto</a>
                 </div>
+
+                <a href="contacto.html" class="cta-proveedor drawer-cta">
+                    <i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor
+                </a>
             </nav>
-            
+
             <a href="contacto.html" class="cta-proveedor">
                 <i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor
             </a>
@@ -70,9 +79,9 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO DE CATEGORÍA v11.0
+                     HERO DE CATEGORÍA v12.0
                      ======================================== -->
-                <section class="hero hero-compact" aria-labelledby="hero-title">
+                <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
                         <div class="hero-badge fade-in">
                             <i class="fas fa-spa" aria-hidden="true"></i>
@@ -121,7 +130,7 @@
                     <div class="filtros-vivos fade-in" id="filtrosVivos"></div>
                     
                     <div id="contenedor-principal" class="proveedores-grid">
-                        <p class="text-center" style="padding: 2rem;">
+                        <p class="text-center" style="padding:2rem;">
                             <i class="fas fa-spinner fa-spin"></i> Cargando proveedores...
                         </p>
                     </div>
@@ -130,10 +139,10 @@
                 <!-- ========================================
                      ACORDEÓN INFORMATIVO
                      ======================================== -->
-                <section class="fade-in" style="margin-top: 3rem;">
+                <section class="fade-in" style="margin-top:3rem;">
                     <div class="acordeon-info">
                         <div class="acordeon-header" onclick="toggleAcordeon(this)">
-                            <span><i class="fas fa-search" style="margin-right: 0.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
+                            <span><i class="fas fa-search" style="margin-right:.5rem;"></i> ¿Qué verificamos en cada proveedor?</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="acordeon-content">
@@ -178,15 +187,9 @@
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-envelope" aria-hidden="true"></i> CONTÁCTANOS</h3>
                     <p>¿No encuentras lo que buscas? Escríbenos directamente.</p>
-                    <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286
-                    </a>
-                    <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-block" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-telegram" aria-hidden="true"></i> Canal de Telegram
-                    </a>
-                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-block">
-                        <i class="fas fa-envelope" aria-hidden="true"></i> Email
-                    </a>
+                    <a href="https://wa.me/59176536286" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp: 76536286</a>
+                    <a href="https://t.me/verificalapaz" class="btn btn-telegram btn-block" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Canal de Telegram</a>
+                    <a href="mailto:contactoverificalapaz@gmail.com" class="btn btn-outline btn-block"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
                 </div>
 
                 <div class="sidebar-section fade-in">
@@ -197,23 +200,14 @@
                         <li><i class="fas fa-check" aria-hidden="true"></i> Contacto directo con clientes</li>
                         <li><i class="fas fa-check" aria-hidden="true"></i> Sin comisión por reserva</li>
                     </ul>
-                    <a href="https://wa.me/59178835306?text=Hola,%20soy%20proveedor%20de%20servicios%20de%20imagen%20y%20quiero%20aparecer%20en%20el%20directorio" 
-                       class="btn btn-primary btn-block" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        <i class="fas fa-store" aria-hidden="true"></i> Unirme ahora
-                    </a>
+                    <a href="https://wa.me/59178835306?text=Hola,%20soy%20proveedor%20de%20servicios%20de%20imagen%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
                 </div>
 
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
                     <div class="social-grid">
-                        <a href="https://facebook.com/ContactoverificaLaPaz" class="social-link facebook" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-facebook-f" aria-hidden="true"></i><span>Facebook</span>
-                        </a>
-                        <a href="https://tiktok.com/@verifica_la_paz" class="social-link tiktok" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-tiktok" aria-hidden="true"></i><span>TikTok</span>
-                        </a>
+                        <a href="https://facebook.com/ContactoverificaLaPaz" class="social-link facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i><span>Facebook</span></a>
+                        <a href="https://tiktok.com/@verifica_la_paz" class="social-link tiktok" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok" aria-hidden="true"></i><span>TikTok</span></a>
                     </div>
                 </div>
 
@@ -227,80 +221,60 @@
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
-                
                 <div class="footer-section">
                     <h3><i class="fas fa-hands-helping" aria-hidden="true"></i> LA PAZ TE ACERCA</h3>
                     <p class="footer-tagline">Conectamos vecinos con servicios de confianza.</p>
                     <p>Tu aliado para resolver lo que importa en La Paz y El Alto, con transparencia y calidez.</p>
                 </div>
-
                 <div class="footer-section">
                     <h4>Categorías</h4>
                     <ul>
-                        <li><a href="salud.html"><i class="fas fa-heartbeat" aria-hidden="true"></i> Salud y Bienestar</a></li>
-                        <li><a href="hogar.html"><i class="fas fa-tools" aria-hidden="true"></i> Mantenimiento del Hogar</a></li>
-                        <li><a href="construccion.html"><i class="fas fa-cubes" aria-hidden="true"></i> Materiales de Construcción</a></li>
-                        <li><a href="automotriz.html"><i class="fas fa-car" aria-hidden="true"></i> Talleres Automotrices</a></li>
-                        <li><a href="tecnologia.html"><i class="fas fa-laptop-code" aria-hidden="true"></i> Tecnología y Redes</a></li>
-                        <li><a href="funerarias.html"><i class="fas fa-dove" aria-hidden="true"></i> Servicios de Despedida</a></li>
-                        <li><a href="eventos.html"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Servicios para Eventos</a></li>
-                        <li><a href="imagen.html"><i class="fas fa-spa" aria-hidden="true"></i> Imagen y Cuidado Personal</a></li>
+                        <li><a href="salud.html"><i class="fas fa-heartbeat"></i> Salud y Bienestar</a></li>
+                        <li><a href="hogar.html"><i class="fas fa-tools"></i> Mantenimiento del Hogar</a></li>
+                        <li><a href="construccion.html"><i class="fas fa-cubes"></i> Materiales de Construcción</a></li>
+                        <li><a href="automotriz.html"><i class="fas fa-car"></i> Talleres Automotrices</a></li>
+                        <li><a href="tecnologia.html"><i class="fas fa-laptop-code"></i> Tecnología y Redes</a></li>
+                        <li><a href="funerarias.html"><i class="fas fa-dove"></i> Servicios de Despedida</a></li>
+                        <li><a href="eventos.html"><i class="fas fa-calendar-alt"></i> Servicios para Eventos</a></li>
+                        <li><a href="imagen.html"><i class="fas fa-spa"></i> Imagen y Cuidado Personal</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-section">
                     <h4>Información</h4>
-                    <ul>
-                        <li><a href="contacto.html">Contacto</a></li>
-                    </ul>
+                    <ul><li><a href="contacto.html">Contacto</a></li></ul>
                 </div>
-
                 <div class="footer-section">
                     <h4>Contacto</h4>
                     <ul class="contact-info">
-                        <li><i class="fas fa-phone" aria-hidden="true"></i> Ciudadanos: 76536286</li>
-                        <li><i class="fas fa-phone" aria-hidden="true"></i> Proveedores: 78835306</li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i> contactoverificalapaz@gmail.com</li>
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> La Paz, Bolivia</li>
+                        <li><i class="fas fa-phone"></i> Ciudadanos: 76536286</li>
+                        <li><i class="fas fa-phone"></i> Proveedores: 78835306</li>
+                        <li><i class="fas fa-envelope"></i> contactoverificalapaz@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> La Paz, Bolivia</li>
                     </ul>
                     <div class="footer-social">
-                        <a href="https://facebook.com/ContactoverificaLaPaz" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://tiktok.com/@verifica_la_paz" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-                        <a href="https://wa.me/59176536286" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                        <a href="https://t.me/verificalapaz" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a>
+                        <a href="https://facebook.com/ContactoverificaLaPaz" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://tiktok.com/@verifica_la_paz" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/59176536286" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://t.me/verificalapaz" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
                     </div>
                 </div>
-
             </div>
-
             <div class="footer-bottom">
                 <div class="footer-legal">
-                    <p>
-                        <strong>NOTA LEGAL:</strong> La Paz te Acerca es un directorio informativo. No prestamos servicios de imagen ni cuidado personal directamente. Los servicios, precios, disponibilidad y calidad son responsabilidad exclusiva de cada proveedor.
-                    </p>
+                    <p><strong>NOTA LEGAL:</strong> La Paz te Acerca es un directorio informativo. No prestamos servicios de imagen ni cuidado personal directamente. Los servicios, precios, disponibilidad y calidad son responsabilidad exclusiva de cada proveedor.</p>
                 </div>
-                <p class="copyright">
-                    © <span id="current-year"></span> La Paz te Acerca. Todos los derechos reservados. | Hecho con <i class="fas fa-heart" aria-hidden="true"></i> en Bolivia
-                </p>
+                <p class="copyright">© <span id="current-year"></span> La Paz te Acerca. Todos los derechos reservados. | Hecho con <i class="fas fa-heart"></i> en Bolivia</p>
             </div>
         </div>
     </footer>
 
     <!-- ========================================
-         BARRA FIJA MOBILE
+         BARRA FIJA MÓVIL / TOAST / BACK TO TOP / OVERLAY
          ======================================== -->
     <div class="mobile-showcase" id="mobileShowcase">
-        <a href="tel:+59176536286" class="mobile-showcase-call">
-            <i class="fas fa-phone-alt"></i> Llamar
-        </a>
-        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
+        <a href="tel:+59176536286" class="mobile-showcase-call"><i class="fas fa-phone-alt"></i> Llamar</a>
+        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
     </div>
-
-    <!-- ========================================
-         TOAST & BACK TO TOP & OVERLAY
-         ======================================== -->
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
     <div class="nav-overlay" id="navOverlay"></div>
@@ -311,6 +285,9 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // ==========================================
+            // CAMBIAR: Configuración específica de la categoría
+            // ==========================================
             const secciones = [
                 { categoria: 'Imagen y Cuidado Personal', keyword: null, label: 'Todos', icono: 'fa-th-large' },
                 { categoria: 'Imagen y Cuidado Personal', keyword: 'barber', label: 'Barberías', icono: 'fa-cut' },

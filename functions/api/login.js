@@ -1,12 +1,12 @@
 // ========================================
-// LA PAZ TE ACERCA - Worker de Autenticación v11.0
-// Valida usuario/contraseña con HMAC (fix crítico de seguridad)
+// LA PAZ TE ACERCA - Worker de Autenticación v12.0
+// Valida usuario/contraseña con HMAC-SHA256
+// Fix v12.0: SESSION_SECRET obligatorio + exp real 2h
 // ========================================
 
 export async function onRequestPost(context) {
   const { request, env } = context;
   
-  // CORS headers
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -14,7 +14,6 @@ export async function onRequestPost(context) {
     'Content-Type': 'application/json'
   };
 
-  // Handle preflight
   if (request.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -22,56 +21,55 @@ export async function onRequestPost(context) {
   try {
     const { username, password } = await request.json();
 
-    // Validar contra secrets de Cloudflare
     const validUser = env.ADMIN_USER || 'admin';
     const validPass = env.ADMIN_PASS;
 
+    // SESSION_SECRET obligatorio (fix v12.0)
+    const secret = env.SESSION_SECRET;
+    if (!secret) {
+      return new Response(
+        JSON.stringify({ error: true, message: 'SESSION_SECRET no configurado en el servidor. Contacta al desarrollador.' }),
+        { status: 500, headers: corsHeaders }
+      );
+    }
+
     if (!validPass) {
       return new Response(
-        JSON.stringify({ 
-          error: true, 
-          message: 'Contraseña de administrador no configurada. Contacta al desarrollador.' 
-        }),
+        JSON.stringify({ error: true, message: 'Contraseña de administrador no configurada.' }),
         { status: 500, headers: corsHeaders }
       );
     }
 
     if (username === validUser && password === validPass) {
-      // Generar token HMAC seguro (fix v11.0)
-      const token = await generateSessionToken(username, env.SESSION_SECRET || 'default-secret-change-me');
+      // Token con exp real: login + 2h
+      const token = await generateSessionToken(username, secret);
       
       return new Response(
         JSON.stringify({
           success: true,
           token: token,
           user: username,
-          expires: Date.now() + (2 * 60 * 60 * 1000) // 2 horas
+          expires: Date.now() + (2 * 60 * 60 * 1000)
         }),
         { status: 200, headers: corsHeaders }
       );
     } else {
       return new Response(
-        JSON.stringify({ 
-          error: true, 
-          message: 'Usuario o contraseña incorrectos' 
-        }),
+        JSON.stringify({ error: true, message: 'Usuario o contraseña incorrectos' }),
         { status: 401, headers: corsHeaders }
       );
     }
   } catch (error) {
     return new Response(
-      JSON.stringify({ 
-        error: true, 
-        message: 'Error en el servidor: ' + error.message 
-      }),
+      JSON.stringify({ error: true, message: 'Error en el servidor: ' + error.message }),
       { status: 500, headers: corsHeaders }
     );
   }
 }
 
-// Generar token HMAC seguro (fix v11.0)
+// Generar token HMAC con exp real (login + 2h)
 async function generateSessionToken(username, secret) {
-  const exp = Date.now() + (2 * 60 * 60 * 1000); // 2 horas
+  const exp = Date.now() + (2 * 60 * 60 * 1000); // 2 horas reales
   const payload = `${username}:${exp}`;
   const sig = await signHMAC(payload, secret);
   return btoa(`${payload}:${sig}`);
@@ -93,7 +91,7 @@ async function signHMAC(payload, secret) {
     .join('');
 }
 
-// Validar token HMAC (para usar en otros Workers)
+// Validar token HMAC (fix v12.0: exp real)
 export async function validateToken(token, secret) {
   if (!token) return false;
   try {
@@ -104,10 +102,9 @@ export async function validateToken(token, secret) {
     const [user, exp, sig] = parts;
     const timestamp = parseInt(exp);
     const now = Date.now();
-    const twoHours = 2 * 60 * 60 * 1000;
     
-    // Token válido si tiene menos de 2 horas y la firma coincide
-    if ((now - timestamp) > twoHours) return false;
+    // Fix v12.0: comparar contra la fecha de expiración real
+    if (now > timestamp) return false;
     
     const expectedSig = await signHMAC(`${user}:${exp}`, secret);
     return expectedSig === sig;

@@ -1,5 +1,5 @@
 // ========================================
-// LA PAZ TE ACERCA - Worker de Subida de Imágenes v11.0
+// LA PAZ TE ACERCA - Worker de Subida de Imágenes v12.0
 // Sube imágenes a ImgBB usando la API key secreta
 // ========================================
 
@@ -12,18 +12,16 @@ const corsHeaders = {
   'Content-Type': 'application/json'
 };
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 export async function onRequestPost(context) {
   const { request, env } = context;
   
-  // Handle preflight
   if (request.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Validar token
   const authHeader = request.headers.get('Authorization');
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return new Response(
@@ -33,7 +31,14 @@ export async function onRequestPost(context) {
   }
 
   const token = authHeader.substring(7);
-  const secret = env.SESSION_SECRET || 'default-secret-change-me';
+  const secret = env.SESSION_SECRET;
+  
+  if (!secret) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'SESSION_SECRET no configurado' }),
+      { status: 500, headers: corsHeaders }
+    );
+  }
   
   if (!await validateToken(token, secret)) {
     return new Response(
@@ -62,7 +67,6 @@ export async function onRequestPost(context) {
       );
     }
 
-    // Validar tipo
     if (!ALLOWED_TYPES.includes(file.type)) {
       return new Response(
         JSON.stringify({ error: true, message: 'Tipo de imagen no permitido. Use JPG, PNG o WebP' }),
@@ -70,7 +74,6 @@ export async function onRequestPost(context) {
       );
     }
 
-    // Validar tamaño
     if (file.size > MAX_FILE_SIZE) {
       return new Response(
         JSON.stringify({ error: true, message: 'La imagen no puede superar los 5MB' }),
@@ -78,7 +81,6 @@ export async function onRequestPost(context) {
       );
     }
 
-    // Subir a ImgBB
     const imgbbFormData = new FormData();
     imgbbFormData.append('image', file);
     imgbbFormData.append('key', imgbbApiKey);

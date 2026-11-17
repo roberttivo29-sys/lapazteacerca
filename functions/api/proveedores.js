@@ -1,5 +1,5 @@
 // ========================================
-// LA PAZ TE ACERCA - Worker CRUD de Proveedores v11.0
+// LA PAZ TE ACERCA - Worker CRUD de Proveedores v12.0
 // Lee y escribe en GitHub con codificación UTF-8 correcta
 // ========================================
 
@@ -19,12 +19,11 @@ const corsHeaders = {
 export async function onRequest(context) {
   const { request, env } = context;
   
-  // Handle preflight
   if (request.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Validar token de autenticación
+  // Validar token
   const authHeader = request.headers.get('Authorization');
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return new Response(
@@ -34,7 +33,14 @@ export async function onRequest(context) {
   }
 
   const token = authHeader.substring(7);
-  const secret = env.SESSION_SECRET || 'default-secret-change-me';
+  const secret = env.SESSION_SECRET;
+  
+  if (!secret) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'SESSION_SECRET no configurado' }),
+      { status: 500, headers: corsHeaders }
+    );
+  }
   
   if (!await validateToken(token, secret)) {
     return new Response(
@@ -79,7 +85,6 @@ export async function onRequest(context) {
   }
 }
 
-// GET: Obtener todos los proveedores
 async function handleGet(githubToken) {
   const response = await fetch(
     `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
@@ -96,7 +101,7 @@ async function handleGet(githubToken) {
   }
 
   const data = await response.json();
-  const content = decodeBase64(data.content); // Fix UTF-8 v11.0
+  const content = decodeBase64(data.content);
   const providers = JSON.parse(content);
 
   return new Response(
@@ -105,12 +110,11 @@ async function handleGet(githubToken) {
   );
 }
 
-// POST: Agregar nuevo proveedor
 async function handlePost(request, githubToken) {
   const newProvider = await request.json();
   
   const currentFile = await getGitHubFile(githubToken);
-  const providers = JSON.parse(decodeBase64(currentFile.content)); // Fix UTF-8
+  const providers = JSON.parse(decodeBase64(currentFile.content));
   
   if (providers.find(p => p.id === newProvider.id)) {
     throw new Error(`El ID ${newProvider.id} ya existe`);
@@ -125,12 +129,11 @@ async function handlePost(request, githubToken) {
   );
 }
 
-// PUT: Actualizar proveedor existente
 async function handlePut(request, githubToken, providerId) {
   const updatedProvider = await request.json();
   
   const currentFile = await getGitHubFile(githubToken);
-  const providers = JSON.parse(decodeBase64(currentFile.content)); // Fix UTF-8
+  const providers = JSON.parse(decodeBase64(currentFile.content));
   
   const index = providers.findIndex(p => p.id === parseInt(providerId));
   if (index === -1) {
@@ -146,10 +149,9 @@ async function handlePut(request, githubToken, providerId) {
   );
 }
 
-// DELETE: Eliminar proveedor
 async function handleDelete(githubToken, providerId) {
   const currentFile = await getGitHubFile(githubToken);
-  const providers = JSON.parse(decodeBase64(currentFile.content)); // Fix UTF-8
+  const providers = JSON.parse(decodeBase64(currentFile.content));
   
   const filtered = providers.filter(p => p.id !== parseInt(providerId));
   
@@ -165,7 +167,6 @@ async function handleDelete(githubToken, providerId) {
   );
 }
 
-// Helper: Obtener archivo de GitHub
 async function getGitHubFile(githubToken) {
   const response = await fetch(
     `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
@@ -184,9 +185,8 @@ async function getGitHubFile(githubToken) {
   return response.json();
 }
 
-// Helper: Guardar archivo en GitHub
 async function saveToGitHub(githubToken, providers, sha, message) {
-  const content = encodeBase64(JSON.stringify(providers, null, 2)); // Fix UTF-8 v11.0
+  const content = encodeBase64(JSON.stringify(providers, null, 2));
   
   const response = await fetch(
     `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`,
@@ -214,14 +214,12 @@ async function saveToGitHub(githubToken, providers, sha, message) {
   return response.json();
 }
 
-// Fix UTF-8 v11.0: Decodificar Base64 correctamente
 function decodeBase64(b64) {
   const bin = atob(b64);
   const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
   return new TextDecoder().decode(bytes);
 }
 
-// Fix UTF-8 v11.0: Codificar Base64 correctamente
 function encodeBase64(str) {
   const bytes = new TextEncoder().encode(str);
   let bin = '';
