@@ -1,29 +1,18 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA — JavaScript v12.2
+// LA PAZ TE ACERCA — JavaScript v12.2.9
 // ========================================
 // Doctrina: rescatar lo operativo, reinventar lo estético.
 // Nomenclatura blindada: GRATUITO / BÁSICO / COMPLETO.
 //
-// Principios de esta versión:
-// 1. Separación clara de responsabilidades (utilidades, UI, datos).
-// 2. Caché de proveedores con TTL de 60 segundos.
-// 3. Prevención de XSS con escaparHTML en todo output dinámico.
-// 4. Filtros en vivo sin recarga de página.
-// 5. Toasts accesibles con aria-live.
-//
-// Novedades v12.1:
-// - Chips del hero hacen scroll + activan filtro.
-// - Servicios rotativos en sidebar (cada 3s).
-// - Profesionales destacados cargados desde JSON.
-//
-// Novedades v12.2:
-// - Servicios rotativos con COLOR de categoría (leído del badge).
-// - Rotación real (solo el activo visible) + puntos de progreso.
-// - Ícono del título "Servicios disponibles" se colorea por categoría.
+// Novedades v12.2.9:
+// - Las tarjetas PÚBLICAS ya NO muestran badge de plan (Gratuito/Básico/Completo).
+//   Solo se muestra DESTACADO y 24H (relevantes para el ciudadano).
+// - El plan sigue controlando internamente: nº de imágenes y prioridad.
+// - Destacado puede ser de CUALQUIER plan (incl. gratuito excepcional).
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ La Paz te Acerca - JS v12.2 cargado');
+    console.log('✅ La Paz te Acerca - JS v12.2.9 cargado');
 
     // Inicializadores base
     initHeader();
@@ -54,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // UTILIDADES
 // ========================================
 
-// Normaliza texto para búsquedas (quita acentos, minúsculas, espacios extra)
 function normalizarTexto(texto) {
     if (!texto) return '';
     return String(texto)
@@ -66,7 +54,6 @@ function normalizarTexto(texto) {
         .trim();
 }
 
-// Escapa HTML para prevenir XSS en contenido dinámico
 function escaparHTML(valor) {
     if (valor === null || valor === undefined) return '';
     return String(valor).replace(/[&<>"']/g, s => ({
@@ -78,7 +65,6 @@ function escaparHTML(valor) {
     }[s]));
 }
 
-// Devuelve la clase CSS de color según la categoría
 function getCategoriaClass(categoria) {
     const classes = {
         'Salud y Bienestar': 'category-salud',
@@ -93,7 +79,6 @@ function getCategoriaClass(categoria) {
     return classes[categoria] || '';
 }
 
-// Devuelve la variable CSS de color según la categoría
 function getColorVariable(categoria) {
     const colors = {
         'Salud y Bienestar': 'var(--c-salud, #0D9488)',
@@ -110,7 +95,8 @@ function getColorVariable(categoria) {
 
 
 // ========================================
-// BADGES DE PLAN (nomenclatura blindada)
+// BADGES DE PLAN — SOLO USO INTERNO (admin)
+// v12.2.9: ya NO se inyectan en tarjetas públicas.
 // ========================================
 
 function getPlanBadge(tipo_plan) {
@@ -225,14 +211,14 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
 
 
 // ========================================
-// GENERAR TARJETA DE PROVEEDOR
+// GENERAR TARJETA DE PROVEEDOR (pública)
+// v12.2.9: SIN badge de plan. Solo DESTACADO + 24H.
 // ========================================
 
 function generarTarjetaProveedor(p) {
     const whatsappLink = buildWhatsLink(p.whatsapp || p.telefono, 'Hola, vi tu perfil en La Paz te Acerca y me interesa tu servicio');
     const categoriaClass = getCategoriaClass(p.categoria);
     const colorVar = getColorVariable(p.categoria);
-    const planBadge = getPlanBadge(p.tipo_plan);
 
     const imagenes = [p.imagen1, p.imagen2, p.imagen3, p.imagen4].filter(img => img && img.trim() !== '');
     const totalImagenes = imagenes.length;
@@ -262,7 +248,6 @@ function generarTarjetaProveedor(p) {
     return `
         <article class="category-card ${categoriaClass} ${esCompleto ? 'card-completo' : ''} fade-in" style="border-left: 4px solid ${colorVar};">
             ${p.destacado == 1 ? '<div class="featured-badge" style="position:absolute; top:10px; right:10px; z-index:2;"><i class="fas fa-crown"></i> DESTACADO</div>' : ''}
-            ${planBadge ? `<div style="position:absolute; top:10px; left:10px; z-index:2;">${planBadge}</div>` : ''}
 
             ${htmlImagenes}
 
@@ -460,9 +445,15 @@ function initMenuHamburguesa() {
     if (overlay) overlay.addEventListener('click', toggleMenu);
     if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
 
+    // v12.2.9: cerrar menú al navegar (sin preventDefault → el link SÍ navega)
     nav.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-            if (nav.classList.contains('active')) toggleMenu();
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = '';
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+            }
         });
     });
 
@@ -596,7 +587,7 @@ function initHeroChips() {
 
 
 // ========================================
-// SERVICIOS ROTATIVOS (SIDEBAR) v12.2 — CON VIDA Y COLOR
+// SERVICIOS ROTATIVOS (SIDEBAR) v12.2
 // ========================================
 
 function initServiciosRotativos() {
@@ -606,19 +597,16 @@ function initServiciosRotativos() {
     const items = contenedor.querySelectorAll('.servicio-item');
     if (items.length === 0) return;
 
-    // 1) Leer la categoría del badge del hero y aplicar su color al contenedor
     const badge = document.querySelector('.hero-badge');
     if (badge) {
         const categoria = badge.textContent.trim();
         const colorCat = getColorVariable(categoria);
         contenedor.style.setProperty('--color-cat', colorCat);
 
-        // Colorear también el ícono del título "SERVICIOS DISPONIBLES"
         const titulo = contenedor.parentElement.querySelector('h3 i');
         if (titulo) titulo.style.color = colorCat;
     }
 
-    // 2) Crear puntos de progreso (dots) una sola vez
     let dotsWrap = contenedor.parentElement.querySelector('.servicios-dots');
     if (!dotsWrap) {
         dotsWrap = document.createElement('div');
@@ -632,7 +620,6 @@ function initServiciosRotativos() {
     }
     const dots = dotsWrap.querySelectorAll('.dot');
 
-    // 3) Rotación: solo el item .active es visible (el resto oculto por CSS)
     let indice = 0;
     setInterval(() => {
         items[indice].classList.remove('active');
@@ -679,14 +666,12 @@ async function cargarProfesionalesDestacados() {
         contenedor.innerHTML = filtrados.map(p => {
             const inicial = (p.nombre || '?').charAt(0).toUpperCase();
             const sub = p.subcategoria || p.categoria;
-            const plan = p.tipo_plan === 'completo' ? '★ Completo' : (p.tipo_plan === 'basico' ? '◆ Básico' : '');
             return `
                 <a href="#contenedor-principal" class="profe-item">
                     <div class="profe-avatar">${escaparHTML(inicial)}</div>
                     <div class="profe-info">
                         <strong>${escaparHTML(p.nombre)}</strong>
                         <span>${escaparHTML(sub)}</span>
-                        ${plan ? `<span class="profe-badge">${plan}</span>` : ''}
                     </div>
                 </a>
             `;

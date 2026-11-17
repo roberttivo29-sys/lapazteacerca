@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS v12.2.8 (COMPLETO)
+   LA PAZ TE ACERCA — CSS v12.2.9 (COMPLETO)
    Doctrina: rescatar lo operativo, reinventar lo estético.
    Nomenclatura blindada: GRATUITO / BÁSICO / COMPLETO.
    
@@ -9,8 +9,8 @@
    - v12.2: Servicios rotativos con color de categoría
    - v12.2.1: Servicios compactos + contact-info-light
    - v12.2.7: Drawer móvil estético
-   - v12.2.8: Drawer unificado (hero=secciones), márgenes mínimos,
-              sin blur, un solo X, overlay completo
+   - v12.2.8: Drawer unificado (hero=secciones), márgenes mínimos
+   - v12.2.9: FIX z-index drawer (links navegan, un solo X, fondo sólido)
    ============================================================ */
 
 /* ---------- 0. RESET ---------- */
@@ -119,12 +119,12 @@
   --sp-5:3rem;
   --sp-6:4rem;
 
-  /* Z-index */
-  --z-overlay:1001;
-  --z-header:1000;
-  --z-drawer:1002;
-  --z-toggle:1003;
+  /* Z-index — v12.2.9 REORDENADO (fix drawer) */
   --z-float:990;
+  --z-header:1000;
+  --z-toggle:1000;      /* ← antes 1003: el drawer lo cubre, ya no se ve doble X */
+  --z-overlay:1001;
+  --z-drawer:1002;
   --z-toast:9999;
   --z-modal:9999;
 
@@ -824,7 +824,8 @@ section+section{margin-top:var(--sp-6)}
 .galeria-secundarias .img-galeria:last-child{border-right:none}
 
 /* ============================================================
-   8. BADGES DE PLAN — GRATUITO / BÁSICO / COMPLETO (blindado)
+   8. BADGES DE PLAN — SOLO USO INTERNO (admin)
+   v12.2.9: los badges de plan NO se muestran en tarjetas públicas.
    ============================================================ */
 .badge-nivel{
   display:inline-flex;
@@ -1308,7 +1309,7 @@ section+section{margin-top:var(--sp-6)}
   .header-content{grid-template-columns:auto 1fr auto}
   .cta-proveedor,.btn-proveedor{display:none}
 
-  /* ===== DRAWER MÓVIL — v12.2.8 UNIFICADO ===== */
+  /* ===== DRAWER MÓVIL — v12.2.9 (links navegan, un solo X, fondo sólido) ===== */
   .nav-simetrico{
     display:flex;
     position:fixed;
@@ -1378,7 +1379,7 @@ section+section{margin-top:var(--sp-6)}
     transform:rotate(90deg);
   }
 
-  /* Links del nav */
+  /* Links del nav — clicables y navegables */
   .nav-row{
     display:flex;
     flex-direction:column;
@@ -1403,6 +1404,8 @@ section+section{margin-top:var(--sp-6)}
     border-left:3px solid transparent;
     border-bottom:1px solid var(--gris-suave);
     transition:all .2s ease;
+    cursor:pointer;
+    pointer-events:auto;
   }
   .nav-link:last-child{
     border-bottom:none;
