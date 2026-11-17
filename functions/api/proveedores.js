@@ -1,228 +1,345 @@
 // ========================================
-// LA PAZ TE ACERCA - Worker CRUD de Proveedores v12.0
-// Lee y escribe en GitHub con codificación UTF-8 correcta
+// LA PAZ TE ACERCA - API de Proveedores v12.2.3
+// Estrategia: lee el JSON directamente del sitio (sin GitHub API)
+// Fix v12.2.3: elimina dependencia del GITHUB_TOKEN para lectura
 // ========================================
 
 import { validateToken } from './login.js';
 
-const REPO = 'roberttivo29-sys/lapazteacerca';
-const BRANCH = 'main';
-const FILE_PATH = 'data/proveedores.json';
+const SITE_URL = 'https://lapazteacerca.pages.dev';
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Content-Type': 'application/json'
-};
-
-export async function onRequest(context) {
+// ========================================
+// GET: lista todos los proveedores
+// ========================================
+export async function onRequestGet(context) {
   const { request, env } = context;
   
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Content-Type': 'application/json'
+  };
+
   if (request.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Validar token
+  // Validar autenticación
   const authHeader = request.headers.get('Authorization');
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return new Response(
-      JSON.stringify({ error: true, message: 'Token de autenticación requerido' }),
+      JSON.stringify({ error: true, message: 'No autorizado' }),
       { status: 401, headers: corsHeaders }
     );
   }
 
-  const token = authHeader.substring(7);
+  const token = authHeader.split(' ')[1];
   const secret = env.SESSION_SECRET;
-  
+
   if (!secret) {
     return new Response(
       JSON.stringify({ error: true, message: 'SESSION_SECRET no configurado' }),
       { status: 500, headers: corsHeaders }
     );
   }
-  
-  if (!await validateToken(token, secret)) {
+
+  const valid = await validateToken(token, secret);
+  if (!valid) {
     return new Response(
       JSON.stringify({ error: true, message: 'Token inválido o expirado' }),
       { status: 401, headers: corsHeaders }
     );
   }
 
-  const githubToken = env.GITHUB_TOKEN;
-  if (!githubToken) {
-    return new Response(
-      JSON.stringify({ error: true, message: 'Token de GitHub no configurado' }),
-      { status: 500, headers: corsHeaders }
-    );
-  }
-
-  const url = new URL(request.url);
-  const pathParts = url.pathname.split('/');
-  const providerId = pathParts[pathParts.length - 1];
-
   try {
-    switch (request.method) {
-      case 'GET':
-        return await handleGet(githubToken);
-      case 'POST':
-        return await handlePost(request, githubToken);
-      case 'PUT':
-        return await handlePut(request, githubToken, providerId);
-      case 'DELETE':
-        return await handleDelete(githubToken, providerId);
-      default:
-        return new Response(
-          JSON.stringify({ error: true, message: 'Método no permitido' }),
-          { status: 405, headers: corsHeaders }
-        );
+    // Leer el JSON directamente del sitio (sin GitHub API)
+    const response = await fetch(`${SITE_URL}/data/proveedores.json`, {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} al leer proveedores.json`);
     }
+
+    const proveedores = await response.json();
+
+    return new Response(
+      JSON.stringify({ proveedores: Array.isArray(proveedores) ? proveedores : [] }),
+      { status: 200, headers: corsHeaders }
+    );
   } catch (error) {
     return new Response(
-      JSON.stringify({ error: true, message: error.message }),
+      JSON.stringify({ error: true, message: 'No se pudo cargar el archivo de proveedores: ' + error.message }),
       { status: 500, headers: corsHeaders }
     );
   }
 }
 
-async function handleGet(githubToken) {
-  const response = await fetch(
-    `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
-    {
-      headers: {
-        'Authorization': `token ${githubToken}`,
-        'Accept': 'application/vnd.github.v3+json'
+// ========================================
+// POST: agregar nuevo proveedor
+// ========================================
+export async function onRequestPost(context) {
+  const { request, env } = context;
+  
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Content-Type': 'application/json'
+  };
+
+  // Validar auth
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return new Response(JSON.stringify({ error: true, message: 'No autorizado' }), { status: 401, headers: corsHeaders });
+  }
+
+  const token = authHeader.split(' ')[1];
+  const secret = env.SESSION_SECRET;
+  const valid = await validateToken(token, secret);
+  if (!valid) {
+    return new Response(JSON.stringify({ error: true, message: 'Token inválido' }), { status: 401, headers: corsHeaders });
+  }
+
+  try {
+    const newProvider = await request.json();
+    
+    // Leer archivo actual
+    const currentResponse = await fetch(`${SITE_URL}/data/proveedores.json`, { cache: 'no-store' });
+    const currentData = await currentResponse.json();
+    const proveedores = Array.isArray(currentData) ? currentData : [];
+
+    // Verificar ID único
+    if (proveedores.some(p => p.id === newProvider.id)) {
+      return new Response(JSON.stringify({ error: true, message: `El ID ${newProvider.id} ya existe` }), { status: 409, headers: corsHeaders });
+    }
+
+    proveedores.push(newProvider);
+
+    // Guardar vía GitHub API (aquí sí necesitamos el token)
+    const githubToken = env.GITHUB_TOKEN;
+    if (!githubToken) {
+      return new Response(JSON.stringify({ error: true, message: 'GITHUB_TOKEN no configurado para escritura' }), { status: 500, headers: corsHeaders });
+    }
+
+    const content = btoa(JSON.stringify(proveedores, null, 2));
+    const repoPath = 'data/proveedores.json';
+
+    // Obtener SHA actual
+    const shaResponse = await fetch(
+      `https://api.github.com/repos/roberttivo29-sys/lapazteacerca/contents/${repoPath}?ref=main`,
+      { headers: { 'Authorization': `token ${githubToken}` } }
+    );
+    const shaData = await shaResponse.json();
+
+    // Actualizar archivo
+    const updateResponse = await fetch(
+      `https://api.github.com/repos/roberttivo29-sys/lapazteacerca/contents/${repoPath}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${githubToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: `Agregar proveedor: ${newProvider.nombre}`,
+          content: content,
+          sha: shaData.sha,
+          branch: 'main'
+        })
       }
+    );
+
+    if (!updateResponse.ok) {
+      const err = await updateResponse.json();
+      throw new Error(err.message || 'Error al guardar en GitHub');
     }
-  );
 
-  if (!response.ok) {
-    throw new Error('No se pudo cargar el archivo de proveedores');
+    return new Response(
+      JSON.stringify({ success: true, message: 'Proveedor agregado correctamente' }),
+      { status: 200, headers: corsHeaders }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'Error: ' + error.message }),
+      { status: 500, headers: corsHeaders }
+    );
   }
-
-  const data = await response.json();
-  const content = decodeBase64(data.content);
-  const providers = JSON.parse(content);
-
-  return new Response(
-    JSON.stringify({ proveedores: providers }),
-    { status: 200, headers: corsHeaders }
-  );
 }
 
-async function handlePost(request, githubToken) {
-  const newProvider = await request.json();
+// ========================================
+// PUT: actualizar proveedor existente
+// ========================================
+export async function onRequestPut(context) {
+  const { request, env, params } = context;
   
-  const currentFile = await getGitHubFile(githubToken);
-  const providers = JSON.parse(decodeBase64(currentFile.content));
-  
-  if (providers.find(p => p.id === newProvider.id)) {
-    throw new Error(`El ID ${newProvider.id} ya existe`);
-  }
-  
-  providers.push(newProvider);
-  await saveToGitHub(githubToken, providers, currentFile.sha, 'Agregar proveedor');
-  
-  return new Response(
-    JSON.stringify({ success: true, message: 'Proveedor agregado' }),
-    { status: 201, headers: corsHeaders }
-  );
-}
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Content-Type': 'application/json'
+  };
 
-async function handlePut(request, githubToken, providerId) {
-  const updatedProvider = await request.json();
-  
-  const currentFile = await getGitHubFile(githubToken);
-  const providers = JSON.parse(decodeBase64(currentFile.content));
-  
-  const index = providers.findIndex(p => p.id === parseInt(providerId));
-  if (index === -1) {
-    throw new Error(`Proveedor con ID ${providerId} no encontrado`);
+  // Validar auth
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return new Response(JSON.stringify({ error: true, message: 'No autorizado' }), { status: 401, headers: corsHeaders });
   }
-  
-  providers[index] = updatedProvider;
-  await saveToGitHub(githubToken, providers, currentFile.sha, 'Actualizar proveedor');
-  
-  return new Response(
-    JSON.stringify({ success: true, message: 'Proveedor actualizado' }),
-    { status: 200, headers: corsHeaders }
-  );
-}
 
-async function handleDelete(githubToken, providerId) {
-  const currentFile = await getGitHubFile(githubToken);
-  const providers = JSON.parse(decodeBase64(currentFile.content));
-  
-  const filtered = providers.filter(p => p.id !== parseInt(providerId));
-  
-  if (filtered.length === providers.length) {
-    throw new Error(`Proveedor con ID ${providerId} no encontrado`);
+  const token = authHeader.split(' ')[1];
+  const secret = env.SESSION_SECRET;
+  const valid = await validateToken(token, secret);
+  if (!valid) {
+    return new Response(JSON.stringify({ error: true, message: 'Token inválido' }), { status: 401, headers: corsHeaders });
   }
-  
-  await saveToGitHub(githubToken, filtered, currentFile.sha, 'Eliminar proveedor');
-  
-  return new Response(
-    JSON.stringify({ success: true, message: 'Proveedor eliminado' }),
-    { status: 200, headers: corsHeaders }
-  );
-}
 
-async function getGitHubFile(githubToken) {
-  const response = await fetch(
-    `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
-    {
-      headers: {
-        'Authorization': `token ${githubToken}`,
-        'Accept': 'application/vnd.github.v3+json'
+  try {
+    const updatedProvider = await request.json();
+    const providerId = parseInt(params.id);
+
+    const currentResponse = await fetch(`${SITE_URL}/data/proveedores.json`, { cache: 'no-store' });
+    const currentData = await currentResponse.json();
+    const proveedores = Array.isArray(currentData) ? currentData : [];
+
+    const index = proveedores.findIndex(p => p.id === providerId);
+    if (index === -1) {
+      return new Response(JSON.stringify({ error: true, message: `Proveedor con ID ${providerId} no encontrado` }), { status: 404, headers: corsHeaders });
+    }
+
+    proveedores[index] = { ...proveedores[index], ...updatedProvider, id: providerId };
+
+    // Guardar vía GitHub API
+    const githubToken = env.GITHUB_TOKEN;
+    if (!githubToken) {
+      return new Response(JSON.stringify({ error: true, message: 'GITHUB_TOKEN no configurado' }), { status: 500, headers: corsHeaders });
+    }
+
+    const content = btoa(JSON.stringify(proveedores, null, 2));
+    const repoPath = 'data/proveedores.json';
+
+    const shaResponse = await fetch(
+      `https://api.github.com/repos/roberttivo29-sys/lapazteacerca/contents/${repoPath}?ref=main`,
+      { headers: { 'Authorization': `token ${githubToken}` } }
+    );
+    const shaData = await shaResponse.json();
+
+    const updateResponse = await fetch(
+      `https://api.github.com/repos/roberttivo29-sys/lapazteacerca/contents/${repoPath}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${githubToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: `Actualizar proveedor: ${updatedProvider.nombre}`,
+          content: content,
+          sha: shaData.sha,
+          branch: 'main'
+        })
       }
+    );
+
+    if (!updateResponse.ok) {
+      const err = await updateResponse.json();
+      throw new Error(err.message || 'Error al actualizar');
     }
-  );
 
-  if (!response.ok) {
-    throw new Error('No se pudo cargar el archivo');
+    return new Response(
+      JSON.stringify({ success: true, message: 'Proveedor actualizado' }),
+      { status: 200, headers: corsHeaders }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'Error: ' + error.message }),
+      { status: 500, headers: corsHeaders }
+    );
   }
-
-  return response.json();
 }
 
-async function saveToGitHub(githubToken, providers, sha, message) {
-  const content = encodeBase64(JSON.stringify(providers, null, 2));
+// ========================================
+// DELETE: eliminar proveedor
+// ========================================
+export async function onRequestDelete(context) {
+  const { request, env, params } = context;
   
-  const response = await fetch(
-    `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`,
-    {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${githubToken}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: message,
-        content: content,
-        sha: sha,
-        branch: BRANCH
-      })
-    }
-  );
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Content-Type': 'application/json'
+  };
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Error al guardar en GitHub');
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return new Response(JSON.stringify({ error: true, message: 'No autorizado' }), { status: 401, headers: corsHeaders });
   }
 
-  return response.json();
-}
+  const token = authHeader.split(' ')[1];
+  const secret = env.SESSION_SECRET;
+  const valid = await validateToken(token, secret);
+  if (!valid) {
+    return new Response(JSON.stringify({ error: true, message: 'Token inválido' }), { status: 401, headers: corsHeaders });
+  }
 
-function decodeBase64(b64) {
-  const bin = atob(b64);
-  const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
-  return new TextDecoder().decode(bytes);
-}
+  try {
+    const providerId = parseInt(params.id);
 
-function encodeBase64(str) {
-  const bytes = new TextEncoder().encode(str);
-  let bin = '';
-  bytes.forEach(b => bin += String.fromCharCode(b));
-  return btoa(bin);
+    const currentResponse = await fetch(`${SITE_URL}/data/proveedores.json`, { cache: 'no-store' });
+    const currentData = await currentResponse.json();
+    let proveedores = Array.isArray(currentData) ? currentData : [];
+
+    const filtered = proveedores.filter(p => p.id !== providerId);
+    if (filtered.length === proveedores.length) {
+      return new Response(JSON.stringify({ error: true, message: 'Proveedor no encontrado' }), { status: 404, headers: corsHeaders });
+    }
+
+    // Guardar vía GitHub API
+    const githubToken = env.GITHUB_TOKEN;
+    if (!githubToken) {
+      return new Response(JSON.stringify({ error: true, message: 'GITHUB_TOKEN no configurado' }), { status: 500, headers: corsHeaders });
+    }
+
+    const content = btoa(JSON.stringify(filtered, null, 2));
+    const repoPath = 'data/proveedores.json';
+
+    const shaResponse = await fetch(
+      `https://api.github.com/repos/roberttivo29-sys/lapazteacerca/contents/${repoPath}?ref=main`,
+      { headers: { 'Authorization': `token ${githubToken}` } }
+    );
+    const shaData = await shaResponse.json();
+
+    const updateResponse = await fetch(
+      `https://api.github.com/repos/roberttivo29-sys/lapazteacerca/contents/${repoPath}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${githubToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: `Eliminar proveedor ID ${providerId}`,
+          content: content,
+          sha: shaData.sha,
+          branch: 'main'
+        })
+      }
+    );
+
+    if (!updateResponse.ok) {
+      const err = await updateResponse.json();
+      throw new Error(err.message || 'Error al eliminar');
+    }
+
+    return new Response(
+      JSON.stringify({ success: true, message: 'Proveedor eliminado' }),
+      { status: 200, headers: corsHeaders }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'Error: ' + error.message }),
+      { status: 500, headers: corsHeaders }
+    );
+  }
 }
