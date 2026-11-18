@@ -1,16 +1,36 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS v12.2.9 (COMPLETO)
+   LA PAZ TE ACERCA — CSS v12.3.0 (COMPLETO)
    Doctrina: rescatar lo operativo, reinventar lo estético.
    Nomenclatura blindada: GRATUITO / BÁSICO / COMPLETO.
    
-   Historial:
-   - v12.0: Base reescrita (nav 2×5, número equilibrado, drawer)
-   - v12.1: Hero categoría con chips + sidebar rotativo + destacados
-   - v12.2: Servicios rotativos con color de categoría
-   - v12.2.1: Servicios compactos + contact-info-light
-   - v12.2.7: Drawer móvil estético
-   - v12.2.8: Drawer unificado (hero=secciones), márgenes mínimos
-   - v12.2.9: FIX z-index drawer (links navegan, un solo X, fondo sólido)
+   Principios de esta versión:
+   1. Jerarquía tipográfica única (display > título > cuerpo > nota).
+   2. Espaciado en escala disciplinada (4/8/12/16/24/32/48/64).
+   3. Nav en grid 2×5 alineado (orden horizontal Y vertical).
+   4. Número héroe con notoriedad por peso+marco, NO por tamaño.
+   5. Drawer móvil estético (cabecera de marca + cerrar + CTA).
+   6. Márgenes mínimos en móvil.
+   7. Accesibilidad: prefers-reduced-motion.
+   
+   Novedades v12.1:
+   - Hero de categoría sin número repetido (chips + CTA scroll).
+   - Sidebar con servicios rotativos.
+   - Sidebar con profesionales destacados (cargados desde JSON).
+   
+   Novedades v12.2:
+   - Servicios rotativos CON VIDA y COLOR de categoría.
+   - Rotación real (solo el activo visible) + puntos de progreso.
+   - Color aplicado por JS leyendo el badge (sin tocar HTML).
+   
+   Novedades v12.2.1:
+   - Servicios rotativos COMPACTOS (display:none/active, no absolute).
+   - Clase .contact-info-light para sidebars claros (fix horarios).
+   
+   Novedades v12.3.0:
+   - Drawer blanco SÓLIDO (sin blur, sin transparencia).
+   - Márgenes móviles MÍNIMOS (padding 0.3rem).
+   - Links del drawer NAVEGAN correctamente.
+   - Badges de plan OCULTOS en público (solo admin los ve).
    ============================================================ */
 
 /* ---------- 0. RESET ---------- */
@@ -119,12 +139,12 @@
   --sp-5:3rem;
   --sp-6:4rem;
 
-  /* Z-index — v12.2.9 REORDENADO (fix drawer) */
-  --z-float:990;
+  /* Z-index */
+  --z-overlay:999;
   --z-header:1000;
-  --z-toggle:1000;      /* ← antes 1003: el drawer lo cubre, ya no se ve doble X */
-  --z-overlay:1001;
-  --z-drawer:1002;
+  --z-drawer:1001;
+  --z-toggle:1002;
+  --z-float:990;
   --z-toast:9999;
   --z-modal:9999;
 
@@ -319,15 +339,16 @@ ul{list-style:none}
 .menu-toggle.active span:nth-child(2){opacity:0}
 .menu-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px)}
 
-/* Overlay (desktop: oculto) */
+/* Overlay */
 .nav-overlay{
   position:fixed;
   inset:0;
-  background:rgba(15,23,42,.6);
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(4px);
   z-index:var(--z-overlay);
   opacity:0;
   visibility:hidden;
-  transition:opacity .35s ease,visibility .35s ease;
+  transition:opacity .3s,visibility .3s;
   pointer-events:none;
 }
 .nav-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
@@ -824,8 +845,9 @@ section+section{margin-top:var(--sp-6)}
 .galeria-secundarias .img-galeria:last-child{border-right:none}
 
 /* ============================================================
-   8. BADGES DE PLAN — SOLO USO INTERNO (admin)
-   v12.2.9: los badges de plan NO se muestran en tarjetas públicas.
+   8. BADGES DE PLAN — GRATUITO / BÁSICO / COMPLETO (blindado)
+   v12.3.0: estos badges SOLO se usan en el admin.
+   En público NO se inyectan (ver main.js).
    ============================================================ */
 .badge-nivel{
   display:inline-flex;
@@ -1295,7 +1317,7 @@ section+section{margin-top:var(--sp-6)}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
 /* ============================================================
-   17. RESPONSIVE
+   17. RESPONSIVE — v12.3.0: márgenes MÍNIMOS, drawer SÓLIDO
    ============================================================ */
 @media(max-width:1200px){
   .header-content{grid-template-columns:auto 1fr;gap:var(--sp-2)}
@@ -1309,7 +1331,7 @@ section+section{margin-top:var(--sp-6)}
   .header-content{grid-template-columns:auto 1fr auto}
   .cta-proveedor,.btn-proveedor{display:none}
 
-  /* ===== DRAWER MÓVIL — v12.2.9 (links navegan, un solo X, fondo sólido) ===== */
+  /* ===== DRAWER MÓVIL — v12.3.0: blanco sólido, links navegables ===== */
   .nav-simetrico{
     display:flex;
     position:fixed;
@@ -1469,57 +1491,57 @@ section+section{margin-top:var(--sp-6)}
 }
 
 @media(max-width:767px){
-  .container{padding:0 .4rem}
-  .header-dynamic{padding:.4rem 0}
-  .header-content{padding:0 .4rem;gap:.4rem}
-  .logo h1{font-size:clamp(.95rem,4.5vw,1.25rem)}
-  .logo h1 i{font-size:clamp(.95rem,4.5vw,1.25rem)}
-  .tagline{font-size:.5rem;letter-spacing:.4px}
+  .container{padding:0 .3rem}
+  .header-dynamic{padding:.3rem 0}
+  .header-content{padding:0 .3rem;gap:.3rem}
+  .logo h1{font-size:clamp(.9rem,4.5vw,1.2rem)}
+  .logo h1 i{font-size:clamp(.9rem,4.5vw,1.2rem)}
+  .tagline{font-size:.45rem;letter-spacing:.3px}
   
-  .hero{padding:.9rem .6rem;border-radius:10px;margin-bottom:var(--sp-3)}
-  .hero-number{border-radius:10px;padding:.8rem .6rem;margin-bottom:.8rem}
-  .hero-number-tel{font-size:clamp(1.4rem,6vw,1.8rem);margin-bottom:.7rem}
-  .hero-number-tel i{font-size:clamp(1rem,5vw,1.4rem)}
-  .hero-number-actions{gap:.4rem}
-  .btn-wa-hero{font-size:.85rem;padding:.65rem 1.1rem}
-  .btn-call-hero{font-size:.8rem;padding:.65rem .9rem}
+  .hero{padding:.7rem .5rem;border-radius:8px;margin-bottom:var(--sp-3)}
+  .hero-number{border-radius:8px;padding:.7rem .5rem;margin-bottom:.7rem}
+  .hero-number-tel{font-size:clamp(1.3rem,6vw,1.7rem);margin-bottom:.6rem}
+  .hero-number-tel i{font-size:clamp(.95rem,5vw,1.3rem)}
+  .hero-number-actions{gap:.3rem}
+  .btn-wa-hero{font-size:.8rem;padding:.6rem 1rem}
+  .btn-call-hero{font-size:.75rem;padding:.6rem .85rem}
   
-  .hero-chips-wrapper{padding:.8rem .6rem;margin-top:.8rem;border-radius:10px}
-  .hero-chips-title{font-size:.7rem;margin-bottom:.65rem}
-  .hero-chips{grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem}
-  .chip{padding:.5rem .55rem;font-size:.75rem;max-width:none}
-  .chip i{font-size:.8rem}
+  .hero-chips-wrapper{padding:.7rem .5rem;margin-top:.7rem;border-radius:8px}
+  .hero-chips-title{font-size:.65rem;margin-bottom:.6rem}
+  .hero-chips{grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem}
+  .chip{padding:.45rem .5rem;font-size:.72rem;max-width:none}
+  .chip i{font-size:.75rem}
   
   .categories-grid{grid-template-columns:1fr;gap:var(--sp-3)}
-  .category-card,.destacado-card,.sidebar-section,.featured-section,.trust-bar,.acordeon-info{border-radius:10px}
+  .category-card,.destacado-card,.sidebar-section,.featured-section,.trust-bar,.acordeon-info{border-radius:8px}
   .category-card{padding:var(--sp-3)}
-  .category-icon{width:56px;height:56px;font-size:1.7rem}
-  .category-card h3{font-size:1.15rem}
+  .category-icon{width:52px;height:52px;font-size:1.6rem}
+  .category-card h3{font-size:1.1rem}
   .testimonials-grid,.destacados-grid,.proveedores-grid{grid-template-columns:1fr}
   .testimonial-card{padding:var(--sp-3)}
   .featured-section{padding:var(--sp-3);border-left-width:4px;margin:var(--sp-4) 0}
   .footer{padding:var(--sp-5) 0 var(--sp-3)}
   .footer-content{grid-template-columns:1fr;gap:var(--sp-4)}
-  .footer-legal p{font-size:.75rem}
-  .back-to-top{bottom:75px;right:12px;width:42px;height:42px;font-size:.95rem}
-  .toast-container{top:auto;bottom:80px;right:8px;left:8px;max-width:none}
-  .toast{font-size:.85rem}
+  .footer-legal p{font-size:.72rem}
+  .back-to-top{bottom:75px;right:10px;width:40px;height:40px;font-size:.9rem}
+  .toast-container{top:auto;bottom:80px;right:6px;left:6px;max-width:none}
+  .toast{font-size:.82rem}
   section+section{margin-top:var(--sp-5)}
   .mobile-showcase{display:flex}
   .trust-grid{grid-template-columns:repeat(2,1fr)}
   body{padding-bottom:80px}
-  .filtros-vivos{gap:.35rem}
-  .filtro-chip{padding:.35rem .7rem;font-size:.78rem}
+  .filtros-vivos{gap:.3rem}
+  .filtro-chip{padding:.3rem .65rem;font-size:.75rem}
 }
 
 @media(max-width:360px){
-  .container{padding:0 .35rem}
-  .hero-title{font-size:1.2rem}
-  .hero-number-tel{font-size:1.4rem}
-  .logo h1{font-size:.95rem}
-  .tagline{font-size:.48rem}
-  .hero-chips-wrapper{padding:.7rem .5rem}
-  .chip{padding:.45rem .5rem;font-size:.7rem}
+  .container{padding:0 .25rem}
+  .hero-title{font-size:1.1rem}
+  .hero-number-tel{font-size:1.3rem}
+  .logo h1{font-size:.9rem}
+  .tagline{font-size:.42rem}
+  .hero-chips-wrapper{padding:.6rem .4rem}
+  .chip{padding:.4rem .45rem;font-size:.68rem}
 }
 
 @media(min-width:1400px){
