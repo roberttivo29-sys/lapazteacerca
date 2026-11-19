@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css?v=12.2.7">
+    <link rel="stylesheet" href="css/style.css?v=12.4.0">
     <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
     <script type="application/ld+json">
     {
@@ -36,7 +36,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.2.7
+         HEADER DINÁMICO v12.4.0
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -54,7 +54,7 @@
             </button>
 
             <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
-                <!-- Cabecera del drawer móvil (UNA SOLA) -->
+                <!-- Cabecera del drawer móvil -->
                 <div class="drawer-header">
                     <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
                     <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
@@ -91,7 +91,7 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO v12.1 — NÚMERO EQUILIBRADO
+                     HERO v12.4.0
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
@@ -390,11 +390,9 @@
     </footer>
 
     <!-- ========================================
-         BARRA FIJA MÓVIL / TOAST / BACK TO TOP / OVERLAY
+         TOAST / BACK TO TOP / OVERLAY
+         (v12.4.0: Se eliminó mobile-showcase para quitar el botón flotante)
          ======================================== -->
-    <div class="mobile-showcase" id="mobileShowcase" style="justify-content:center;">
-        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer" style="max-width:400px;"><i class="fab fa-whatsapp"></i> WhatsApp: 76536286</a>
-    </div>
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
     <div class="nav-overlay" id="navOverlay"></div>
@@ -402,7 +400,7 @@
     <!-- ========================================
          SCRIPTS
          ======================================== -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=12.4.0"></script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>

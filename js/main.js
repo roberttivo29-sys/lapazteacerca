@@ -1,5 +1,5 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA — JavaScript v12.3.0
+// LA PAZ TE ACERCA — JavaScript v12.4.0
 // ========================================
 // Doctrina: rescatar lo operativo, reinventar lo estético.
 // Nomenclatura blindada: GRATUITO / BÁSICO / COMPLETO.
@@ -11,27 +11,15 @@
 // 4. Filtros en vivo sin recarga de página.
 // 5. Toasts accesibles con aria-live.
 //
-// Novedades v12.1:
-// - Chips del hero hacen scroll + activan filtro.
-// - Servicios rotativos en sidebar (cada 3s).
-// - Profesionales destacados cargados desde JSON.
-//
-// Novedades v12.2:
-// - Servicios rotativos con COLOR de categoría (leído del badge).
-// - Rotación real (solo el activo visible) + puntos de progreso.
-// - Ícono del título "Servicios disponibles" se colorea por categoría.
-//
-// Novedades v12.3.0:
-// - Las tarjetas PÚBLICAS ya NO muestran badge de plan.
-//   Solo se muestra DESTACADO y 24H (relevantes para el ciudadano).
-// - El plan sigue controlando internamente: nº de imágenes y prioridad.
-// - Destacado puede ser de CUALQUIER plan (incl. gratuito excepcional).
-// - Drawer: links navegan correctamente (sin preventDefault).
+// Novedades v12.4.0:
+// - Eliminada por completo la función initMobileShowcase() para erradicar el botón flotante.
+// - Badges de plan ocultos en público (solo admin).
+// - Drawer: links navegan correctamente.
 // - Cache busting forzado en fetch de proveedores.
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ La Paz te Acerca - JS v12.3.0 cargado');
+    console.log('✅ La Paz te Acerca - JS v12.4.0 cargado');
 
     // Inicializadores base
     initHeader();
@@ -42,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initLazyLoading();
     initPrevencionClicksDobles();
     initBackToTop();
-    initMobileShowcase();
+    // initMobileShowcase(); <-- ELIMINADO en v12.4.0
     initFiltrosEnVivo();
     initToastDeExito();
 
@@ -62,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // UTILIDADES
 // ========================================
 
-// Normaliza texto para búsquedas (quita acentos, minúsculas, espacios extra)
 function normalizarTexto(texto) {
     if (!texto) return '';
     return String(texto)
@@ -74,7 +61,6 @@ function normalizarTexto(texto) {
         .trim();
 }
 
-// Escapa HTML para prevenir XSS en contenido dinámico
 function escaparHTML(valor) {
     if (valor === null || valor === undefined) return '';
     return String(valor).replace(/[&<>"']/g, s => ({
@@ -86,7 +72,6 @@ function escaparHTML(valor) {
     }[s]));
 }
 
-// Devuelve la clase CSS de color según la categoría
 function getCategoriaClass(categoria) {
     const classes = {
         'Salud y Bienestar': 'category-salud',
@@ -101,7 +86,6 @@ function getCategoriaClass(categoria) {
     return classes[categoria] || '';
 }
 
-// Devuelve la variable CSS de color según la categoría
 function getColorVariable(categoria) {
     const colors = {
         'Salud y Bienestar': 'var(--c-salud, #0D9488)',
@@ -119,7 +103,6 @@ function getColorVariable(categoria) {
 
 // ========================================
 // BADGES DE PLAN — SOLO USO INTERNO (admin)
-// v12.3.0: ya NO se inyectan en tarjetas públicas.
 // ========================================
 
 function getPlanBadge(tipo_plan) {
@@ -156,7 +139,6 @@ async function obtenerProveedores() {
         return cacheProveedores.datos;
     }
     try {
-        // v12.3.0: cache busting con timestamp para forzar recarga
         const response = await fetch('data/proveedores.json?t=' + ahora, { cache: 'no-store' });
         if (!response.ok) throw new Error('No se pudo cargar el archivo de datos');
         const raw = await response.json();
@@ -236,7 +218,7 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
 
 // ========================================
 // GENERAR TARJETA DE PROVEEDOR (pública)
-// v12.3.0: SIN badge de plan. Solo DESTACADO + 24H.
+// v12.4.0: SIN badge de plan. Solo DESTACADO + 24H.
 // ========================================
 
 function generarTarjetaProveedor(p) {
@@ -268,7 +250,6 @@ function generarTarjetaProveedor(p) {
         else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 La Paz</span>';
     }
 
-    // v12.3.0: SIN badge de plan. Solo DESTACADO y 24H.
     return `
         <article class="category-card ${categoriaClass} fade-in" style="border-left: 4px solid ${colorVar};">
             ${p.destacado == 1 ? '<div class="featured-badge" style="position:absolute; top:10px; right:10px; z-index:2;"><i class="fas fa-crown"></i> DESTACADO</div>' : ''}
@@ -469,7 +450,6 @@ function initMenuHamburguesa() {
     if (overlay) overlay.addEventListener('click', toggleMenu);
     if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
 
-    // v12.3.0: cerrar menú al navegar (SIN preventDefault → el link SÍ navega)
     nav.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function() {
             if (nav.classList.contains('active')) {
@@ -568,15 +548,6 @@ function initBackToTop() {
     backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-function initMobileShowcase() {
-    const showcase = document.getElementById('mobileShowcase');
-    if (!showcase) return;
-    window.addEventListener('scroll', () => {
-        showcase.classList.toggle('visible', window.pageYOffset > 400);
-    }, { passive: true });
-}
-
-
 // ========================================
 // ACORDEÓN
 // ========================================
@@ -590,7 +561,7 @@ function toggleAcordeon(header) {
 
 
 // ========================================
-// CHIPS DEL HERO → SCROLL + FILTRO v12.1
+// CHIPS DEL HERO → SCROLL + FILTRO
 // ========================================
 
 function initHeroChips() {
@@ -611,7 +582,7 @@ function initHeroChips() {
 
 
 // ========================================
-// SERVICIOS ROTATIVOS (SIDEBAR) v12.2
+// SERVICIOS ROTATIVOS (SIDEBAR)
 // ========================================
 
 function initServiciosRotativos() {
@@ -621,19 +592,16 @@ function initServiciosRotativos() {
     const items = contenedor.querySelectorAll('.servicio-item');
     if (items.length === 0) return;
 
-    // 1) Leer la categoría del badge del hero y aplicar su color al contenedor
     const badge = document.querySelector('.hero-badge');
     if (badge) {
         const categoria = badge.textContent.trim();
         const colorCat = getColorVariable(categoria);
         contenedor.style.setProperty('--color-cat', colorCat);
 
-        // Colorear también el ícono del título "SERVICIOS DISPONIBLES"
         const titulo = contenedor.parentElement.querySelector('h3 i');
         if (titulo) titulo.style.color = colorCat;
     }
 
-    // 2) Crear puntos de progreso (dots) una sola vez
     let dotsWrap = contenedor.parentElement.querySelector('.servicios-dots');
     if (!dotsWrap) {
         dotsWrap = document.createElement('div');
@@ -647,7 +615,6 @@ function initServiciosRotativos() {
     }
     const dots = dotsWrap.querySelectorAll('.dot');
 
-    // 3) Rotación: solo el item .active es visible (el resto oculto por CSS)
     let indice = 0;
     setInterval(() => {
         items[indice].classList.remove('active');
@@ -662,7 +629,7 @@ function initServiciosRotativos() {
 
 
 // ========================================
-// PROFESIONALES DESTACADOS (SIDEBAR) v12.1
+// PROFESIONALES DESTACADOS (SIDEBAR)
 // ========================================
 
 async function cargarProfesionalesDestacados() {
