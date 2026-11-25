@@ -1,24 +1,24 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA - Service Worker v13.0
+// LA PAZ TE ACERCA - Service Worker v13.7
 // ========================================
 // Estrategia dual: Cache-First (estáticos) + Network-First (datos)
 //
-// Cambios v13.0:
-// - Cache name actualizado a v13.0.0
-// - URLs de CSS y JS con ?v=13.0.0
-// - Manejo correcto de rutas sin ?t=
+// Cambios v13.7:
+// - Cache name actualizado a v13.7.0 (fuerza limpieza del cache v13.0.0).
+// - URLs de CSS y JS actualizadas a ?v=13.7.0.
+// - Manejo correcto de rutas sin ?t= (Network-First para datos).
 // ========================================
 
-const STATIC_CACHE = 'lapazteacerca-static-v13.0.0';
-const DATA_CACHE = 'lapazteacerca-data-v13.0.0';
+const STATIC_CACHE = 'lapazteacerca-static-v13.7.0';
+const DATA_CACHE = 'lapazteacerca-data-v13.7.0';
 
 // URLs a precachear en la instalación
 const urlsToCache = [
     '/',
     '/index.html',
     '/css/tokens.css',
-    '/css/style.css?v=13.0.0',
-    '/js/main.js?v=13.0.0',
+    '/css/style.css?v=13.7.0',
+    '/js/main.js?v=13.7.0',
     '/404.html'
 ];
 
@@ -26,6 +26,7 @@ const urlsToCache = [
 // INSTALACIÓN
 // ========================================
 self.addEventListener('install', event => {
+    // Forzar a que este nuevo SW tome el control inmediatamente
     self.skipWaiting();
     
     event.waitUntil(
@@ -43,7 +44,9 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
     event.waitUntil(
         Promise.all([
+            // Tomar control inmediato de todas las pestañas abiertas
             clients.claim(),
+            // Eliminar cachés que no sean las actuales (v13.7.0)
             caches.keys().then(keys => {
                 return Promise.all(
                     keys.filter(key => key !== STATIC_CACHE && key !== DATA_CACHE)
