@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.3
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.4
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
    Cambios v13.0:
@@ -16,7 +16,10 @@
    
    Cambios v13.3:
    - FIX: Header simplificado - menú centrado sin CTA.
-   - FIX: Nav en flex-wrap para mejor distribución de 10 items.
+   
+   Cambios v13.4:
+   - FIX DEFINITIVO: Grid 3 columnas (logo | nav centrado | CTA).
+   - FIX: Nav en flex-wrap centrado para 10 items.
    ============================================================ */
 
 @import url('tokens.css');
@@ -61,7 +64,7 @@ ul { list-style: none; }
 }
 
 /* ============================================================
-   1. HEADER + NAV (menú centrado, sin CTA en header)
+   1. HEADER + NAV (3 columnas: logo | nav centrado | CTA)
    ============================================================ */
 .header-dynamic {
   background: rgba(253, 251, 247, .98);
@@ -78,12 +81,12 @@ ul { list-style: none; }
 
 .header-dynamic.scrolled { padding: var(--sp-2) 0; box-shadow: var(--sh-3); }
 
-/* FIX v13.3: Grid auto 1fr (sin CTA), menú se expande y centra */
+/* FIX v13.4: Grid 3 columnas - logo | nav centrado | CTA */
 .header-content {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: var(--sp-4);
+  gap: var(--sp-3);
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -93,7 +96,7 @@ ul { list-style: none; }
 /* Logo */
 .logo-link { display: flex; text-decoration: none; }
 
-/* FIX v13.1 + v13.3: Padding derecho para separar logo del menú */
+/* FIX v13.1 + v13.4: Padding derecho para separar logo del menú */
 .logo { 
   display: flex; 
   flex-direction: column; 
@@ -137,7 +140,7 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 
-/* FIX v13.3: NAV en flex-wrap centrado para 10 items */
+/* FIX v13.4: NAV en flex-wrap centrado para 10 items */
 .nav-simetrico {
   display: flex;
   flex-wrap: wrap;
@@ -187,7 +190,7 @@ ul { list-style: none; }
 
 .nav-link i { font-size: .9rem; width: 16px; text-align: center; flex-shrink: 0; }
 
-/* CTA proveedor (solo en drawer móvil) */
+/* CTA proveedor (visible en desktop, oculto en móvil) */
 .cta-proveedor, .btn-proveedor {
   display: inline-flex;
   align-items: center;
@@ -204,6 +207,7 @@ ul { list-style: none; }
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
+  justify-self: end;
 }
 
 .cta-proveedor::before, .btn-proveedor::before {
@@ -1621,6 +1625,7 @@ section + section { margin-top: var(--sp-5); }
    ============================================================ */
 @media (max-width: 1200px) {
   .header-content { grid-template-columns: auto 1fr; gap: var(--sp-2); }
+  .cta-proveedor, .btn-proveedor { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 300px; margin-top: var(--sp-1); }
   .nav-link { font-size: .78rem; padding: .4rem .5rem; }
   .logo { padding-right: var(--sp-2); }
 }
