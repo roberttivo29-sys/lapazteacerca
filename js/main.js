@@ -1,5 +1,5 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA — JavaScript v13.9
+// LA PAZ TE ACERCA — JavaScript v13.14
 // ========================================
 // Doctrina: rescatar lo operativo, reinventar lo estético.
 //
@@ -8,18 +8,19 @@
 // - Filtros dinámicos: se generan desde los chips del HTML.
 // - WhatsApp seguro: no convierte fijos en enlaces.
 // - Delegación de eventos para evitar XSS.
-// - Eliminada la dependencia del texto del .hero-badge.
 //
 // Cambios v13.9:
-// - FIX: Unificación de estilos. generarTarjetaDestacada ahora usa 
-//   la misma estructura (category-card) que generarTarjetaProveedor 
-//   para consistencia visual en móvil y desktop.
+// - FIX: Unificación de estilos en tarjetas destacadas.
+//
+// Cambios v13.14:
+// - FIX: Tarjeta simplificada (sin subcategoría redundante, sin precios).
+//   Estructura: Nombre → Servicios que da → Horario → Dirección → Contacto.
+//   La subcategoría solo aparece si NO hay descripción (anti-redundancia).
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ La Paz te Acerca - JS v13.9 cargado');
+    console.log('✅ La Paz te Acerca - JS v13.14 cargado');
 
-    // Inicializadores base
     initHeader();
     initMenuHamburguesa();
     initFadeInAnimations();
@@ -33,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeroChips();
     initServiciosRotativos();
 
-    // Carga de datos
     cargarDestacados();
     cargarProfesionalesDestacados();
 
@@ -189,6 +189,7 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
 
 // ========================================
 // GENERAR TARJETA DE PROVEEDOR (pública)
+// v13.14: simplificada (sin subcategoría redundante, sin precios)
 // ========================================
 
 function generarTarjetaProveedor(p) {
@@ -212,34 +213,40 @@ function generarTarjetaProveedor(p) {
 
     let html24h = '';
     if (p['24horas']) {
-        html24h = `<span class="badge-24horas badge-24h-pulse"><i class="fas fa-moon"></i> Atención 24h</span><p class="aviso-24horas">⚠️ Te sugerimos llamar para confirmar disponibilidad en horarios nocturnos o festivos.</p>`;
+        html24h = `<div style="text-align:center; margin-bottom:.75rem;"><span class="badge-24horas badge-24h-pulse"><i class="fas fa-moon"></i> Atención 24h</span><p class="aviso-24horas">⚠️ Te sugerimos llamar para confirmar disponibilidad en horarios nocturnos o festivos.</p></div>`;
     }
 
     let zonaBadge = '';
     if (p.direccion) {
         const dirLower = p.direccion.toLowerCase();
-        if (dirLower.includes('el alto')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 El Alto</span>';
-        else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 La Paz</span>';
+        if (dirLower.includes('el alto')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px;">📍 El Alto</span>';
+        else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px;">📍 La Paz</span>';
     }
 
+    // FIX v13.14: anti-redundancia. Si hay descripción, es "los servicios que da".
+    // Si no hay descripción, se usa la subcategoría como servicio. Nunca ambas.
+    const tieneDesc = p.descripcion && p.descripcion.trim() !== '';
+    const serviciosLinea = tieneDesc ? p.descripcion : (p.subcategoria || '');
+
+    // Lista de datos: horario + dirección (SIN precios)
+    let datosLista = '';
+    if (p.horario) datosLista += `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${escaparHTML(p.horario)}</li>`;
+    if (p.direccion) datosLista += `<li><i class="fas fa-map-marker-alt" style="width:16px; color:#ef4444;"></i> ${escaparHTML(p.direccion)}</li>`;
+
     return `
-        <article class="category-card ${categoriaClass} fade-in" style="border-left: 4px solid ${colorVar};">
+        <article class="category-card ${categoriaClass} fade-in" style="border-left: 2px solid ${colorVar};">
             ${p.destacado == 1 ? '<div class="featured-badge" style="position:absolute; top:10px; right:10px; z-index:2;"><i class="fas fa-crown"></i> DESTACADO</div>' : ''}
 
             ${htmlImagenes}
 
             <div class="card-content-wrapper">
                 <h3 style="margin-top:0;">${escaparHTML(p.nombre) || 'Proveedor Verificado'} ${zonaBadge}</h3>
-                <p class="category-subtitle" style="color: ${colorVar}; font-weight:600;">${escaparHTML(p.subcategoria) || ''}</p>
-                ${p.descripcion ? `<p style="color:#475569; font-size:.9rem; margin-bottom:.5rem; line-height:1.4;">${escaparHTML(p.descripcion)}</p>` : ''}
+
+                ${serviciosLinea ? `<p class="proveedor-servicios">${escaparHTML(serviciosLinea)}</p>` : ''}
 
                 ${html24h}
 
-                <ul class="category-services">
-                    ${p.direccion ? `<li><i class="fas fa-map-marker-alt" style="width:16px; color:#ef4444;"></i> ${escaparHTML(p.direccion)}</li>` : ''}
-                    ${p.horario ? `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${escaparHTML(p.horario)}</li>` : ''}
-                    ${p.precios ? `<li><i class="fas fa-dollar-sign" style="width:16px; color:#10b981;"></i> ${escaparHTML(p.precios)}</li>` : ''}
-                </ul>
+                ${datosLista ? `<ul class="category-services">${datosLista}</ul>` : ''}
 
                 ${p.audio_url ? `<div style="margin:.5rem 0;"><audio controls preload="metadata" style="width:100%; height:32px;"><source src="${escaparHTML(p.audio_url)}" type="audio/mpeg"></audio></div>` : ''}
 
@@ -280,9 +287,7 @@ async function cargarDestacados() {
     }
 }
 
-// ========================================
-// FIX v13.9: Unificación de estilos con generarTarjetaProveedor
-// ========================================
+// FIX v13.14: misma estructura simplificada que generarTarjetaProveedor
 function generarTarjetaDestacada(p) {
     const waLink = p.whatsapp ? buildWhatsLink(p.whatsapp, 'Hola, vi tu perfil destacado en La Paz te Acerca') : null;
     const telLink = p.telefono ? `tel:${String(p.telefono).replace(/[^\d+]/g, '')}` : null;
@@ -304,32 +309,35 @@ function generarTarjetaDestacada(p) {
 
     let html24h = '';
     if (p['24horas']) {
-        html24h = `<span class="badge-24horas badge-24h-pulse"><i class="fas fa-moon"></i> Atención 24h</span><p class="aviso-24horas">⚠️ Te sugerimos llamar para confirmar disponibilidad en horarios nocturnos o festivos.</p>`;
+        html24h = `<div style="text-align:center; margin-bottom:.75rem;"><span class="badge-24horas badge-24h-pulse"><i class="fas fa-moon"></i> Atención 24h</span><p class="aviso-24horas">⚠️ Te sugerimos llamar para confirmar disponibilidad en horarios nocturnos o festivos.</p></div>`;
     }
 
     let zonaBadge = '';
     if (p.direccion) {
         const dirLower = p.direccion.toLowerCase();
-        if (dirLower.includes('el alto')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 El Alto</span>';
-        else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px; margin-left:5px;">📍 La Paz</span>';
+        if (dirLower.includes('el alto')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px;">📍 El Alto</span>';
+        else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px;">📍 La Paz</span>';
     }
 
+    const tieneDesc = p.descripcion && p.descripcion.trim() !== '';
+    const serviciosLinea = tieneDesc ? p.descripcion : (p.subcategoria || '');
+
+    let datosLista = '';
+    if (p.horario) datosLista += `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${escaparHTML(p.horario)}</li>`;
+    if (p.direccion) datosLista += `<li><i class="fas fa-map-marker-alt" style="width:16px; color:#ef4444;"></i> ${escaparHTML(p.direccion)}</li>`;
+
     return `
-        <article class="category-card ${categoriaClass} fade-in" style="border-left: 4px solid ${colorVar};">
+        <article class="category-card ${categoriaClass} fade-in" style="border-left: 2px solid ${colorVar};">
             ${htmlImagenes}
 
             <div class="card-content-wrapper">
                 <h3 style="margin-top:0;">${escaparHTML(p.nombre) || 'Proveedor Verificado'} ${zonaBadge}</h3>
-                <p class="category-subtitle" style="color: ${colorVar}; font-weight:600;">${escaparHTML(p.subcategoria) || ''}</p>
-                ${p.descripcion ? `<p style="color:#475569; font-size:.9rem; margin-bottom:.5rem; line-height:1.4;">${escaparHTML(p.descripcion)}</p>` : ''}
+
+                ${serviciosLinea ? `<p class="proveedor-servicios">${escaparHTML(serviciosLinea)}</p>` : ''}
 
                 ${html24h}
 
-                <ul class="category-services">
-                    ${p.direccion ? `<li><i class="fas fa-map-marker-alt" style="width:16px; color:#ef4444;"></i> ${escaparHTML(p.direccion)}</li>` : ''}
-                    ${p.horario ? `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${escaparHTML(p.horario)}</li>` : ''}
-                    ${p.precios ? `<li><i class="fas fa-dollar-sign" style="width:16px; color:#10b981;"></i> ${escaparHTML(p.precios)}</li>` : ''}
-                </ul>
+                ${datosLista ? `<ul class="category-services">${datosLista}</ul>` : ''}
 
                 ${p.audio_url ? `<div style="margin:.5rem 0;"><audio controls preload="metadata" style="width:100%; height:32px;"><source src="${escaparHTML(p.audio_url)}" type="audio/mpeg"></audio></div>` : ''}
 

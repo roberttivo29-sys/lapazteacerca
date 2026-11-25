@@ -1,42 +1,13 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.13
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.14
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
-   Cambios v13.0:
-   - Importa tokens.css (variables compartidas con admin).
-   - Eliminado .mobile-showcase (código muerto).
-   - Filtros dinámicos (no depende del texto del HTML).
-   - WhatsApp seguro (no convierte fijos en enlaces).
+   Cambios v13.0 → v13.13: (ver historial previo)
    
-   Cambios v13.1:
-   - FIX: Logo con padding-right para respiración visual.
-   
-   Cambios v13.2:
-   - FIX: Sidebar contacto legible (texto gris oscuro sobre blanco).
-   
-   Cambios v13.3:
-   - FIX: Header simplificado - menú centrado sin CTA.
-   
-   Cambios v13.4:
-   - FIX: Grid 3 columnas (logo | nav centrado | CTA).
-   
-   Cambios v13.5:
-   - FIX: Nav en grid 5×2 (como chips del hero).
-   
-   Cambios v13.6:
-   - FIX: Header gap reducido para evitar solapamiento CTA.
-   - FIX: Nav-link padding ajustado para mejor distribución.
-   
-   Cambios v13.10:
-   - FIX: Badge de zona (📍 La Paz) ya no se parte en dos líneas.
-   
-   Cambios v13.12:
-   - FIX: Bordes mínimos en todas las tarjetas (2px lateral, 3px superior).
-   
-   Cambios v13.13:
-   - FIX RAÍZ: Eliminado :has() (no funciona en Chrome cacheado).
-   - FIX RAÍZ: .featured-section sin borde por defecto.
-   - FIX RAÍZ: Solo .cta-final tiene borde naranja.
+   Cambios v13.14:
+   - FIX RAÍZ: Drawer con transform (elimina scroll horizontal fantasma).
+   - FIX RAÍZ: overflow-x hidden en html.
+   - FIX: Paddings laterales reducidos en móvil (menos campo muerto).
    ============================================================ */
 
 @import url('tokens.css');
@@ -44,7 +15,7 @@
 /* ---------- 0. RESET ---------- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 
 body {
   font-family: var(--f-cuerpo);
@@ -695,7 +666,6 @@ section + section { margin-top: var(--sp-5); }
   gap: var(--sp-4);
 }
 
-/* FIX v13.12 + v13.13: Borde lateral mínimo (2px) + línea superior mínima (3px) */
 .category-card {
   background: var(--blanco);
   padding: var(--sp-4);
@@ -711,7 +681,6 @@ section + section { margin-top: var(--sp-5); }
   flex-direction: column;
 }
 
-/* FIX v13.12: Línea superior de 3px (antes 5px) */
 .category-card::before {
   content: '';
   position: absolute;
@@ -739,7 +708,6 @@ section + section { margin-top: var(--sp-5); }
 
 .category-card:hover .category-icon { transform: scale(1.1) rotate(5deg); }
 
-/* FIX v13.12 + v13.13: Cada categoría con su color en borde lateral (2px) y superior (3px) */
 .category-salud::before { background: var(--c-salud); }
 .category-salud { border-left-color: var(--c-salud) !important; }
 .category-salud .category-icon { background: var(--bg-salud); color: var(--c-salud); }
@@ -772,7 +740,6 @@ section + section { margin-top: var(--sp-5); }
 .category-imagen { border-left-color: var(--c-imagen) !important; }
 .category-imagen .category-icon { background: var(--bg-imagen); color: var(--c-imagen); }
 
-/* FIX v13.10 + v13.12: h3 como flex para que el badge de zona no se parta */
 .category-card h3 {
   font-family: var(--f-titulo);
   font-size: var(--fs-h3);
@@ -789,7 +756,6 @@ section + section { margin-top: var(--sp-5); }
   row-gap: .3rem;
 }
 
-/* FIX v13.10 + v13.12: badge de zona unido (no se corta "La / Paz" ni "El / Alto") */
 .category-card h3 span {
   white-space: nowrap !important;
   flex-shrink: 0 !important;
@@ -812,6 +778,15 @@ section + section { margin-top: var(--sp-5); }
   margin-bottom: var(--sp-3);
   line-height: 1.6;
   flex-grow: 1;
+}
+
+/* FIX v13.14: línea de servicios (descripción) en la tarjeta de proveedor */
+.proveedor-servicios {
+  color: var(--gris-oscuro);
+  font-size: .92rem;
+  line-height: 1.5;
+  text-align: center;
+  margin-bottom: var(--sp-2);
 }
 
 .category-services { margin-bottom: var(--sp-3); }
@@ -957,18 +932,15 @@ section + section { margin-top: var(--sp-5); }
 /* ============================================================
    8. DESTACADOS / FEATURED / TRUST
    ============================================================ */
-
-/* FIX v13.13: featured-section SIN borde por defecto (solución raíz sin :has()) */
 .featured-section {
   background: var(--blanco);
   padding: var(--sp-4);
   border-radius: var(--r-lg);
   box-shadow: var(--sh-2);
-  border-left: none; /* ← SIN borde naranja por defecto */
+  border-left: none;
   margin: var(--sp-4) 0;
 }
 
-/* FIX v13.13: Solo el CTA final mantiene el borde naranja */
 .featured-section.cta-final {
   border-left: 5px solid var(--ocre-calidad);
 }
@@ -1677,12 +1649,14 @@ section + section { margin-top: var(--sp-5); }
   .cta-proveedor, .btn-proveedor { display: none; }
   .logo { padding-right: 0; }
 
+  /* FIX v13.14: DRAWER con transform (sin scroll horizontal fantasma) */
   .nav-simetrico {
     display: flex;
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     bottom: 0;
+    transform: translateX(100%);
     width: min(75vw, 280px);
     height: 100vh;
     height: 100dvh;
@@ -1691,16 +1665,17 @@ section + section { margin-top: var(--sp-5); }
     flex-direction: column;
     padding: 0;
     box-shadow: -8px 0 32px rgba(0, 0, 0, .25);
-    transition: right .35s cubic-bezier(.4, 0, .2, 1);
+    transition: transform .35s cubic-bezier(.4, 0, .2, 1);
     z-index: var(--z-drawer);
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     align-items: stretch;
     gap: 0;
+    will-change: transform;
   }
 
-  .nav-simetrico.active { right: 0; }
+  .nav-simetrico.active { transform: translateX(0); }
 
   .drawer-header {
     display: flex;
@@ -1825,9 +1800,10 @@ section + section { margin-top: var(--sp-5); }
 }
 
 @media (max-width: 767px) {
-  .container { padding: 0 1rem; }
+  /* FIX v13.14: paddings laterales reducidos (menos campo muerto) */
+  .container { padding: 0 .75rem; }
   .header-dynamic { padding: .4rem 0; }
-  .header-content { padding: 0 1rem; gap: .4rem; }
+  .header-content { padding: 0 .75rem; gap: .4rem; }
   .logo h1 { font-size: clamp(1.1rem, 4.5vw, 1.5rem); }
   .logo h1 i { font-size: clamp(1rem, 4.5vw, 1.4rem); }
   .tagline { font-size: clamp(.55rem, 1.5vw, .7rem); letter-spacing: .8px; }
@@ -1848,12 +1824,11 @@ section + section { margin-top: var(--sp-5); }
 
   .categories-grid { grid-template-columns: 1fr; gap: var(--sp-3); }
   .category-card, .destacado-card, .sidebar-section, .featured-section, .trust-bar, .acordeon-info { border-radius: 10px; }
-  .category-card { padding: var(--sp-3); }
+  .category-card { padding: var(--sp-3) .85rem; }
   .category-icon { width: 56px; height: 56px; font-size: 1.7rem; }
   .category-card h3 { font-size: 1.15rem; }
   .testimonials-grid, .destacados-grid, .proveedores-grid { grid-template-columns: 1fr; }
   .testimonial-card { padding: var(--sp-3); }
-  /* FIX v13.13: featured-section sin borde en móvil, excepto cta-final */
   .featured-section { padding: var(--sp-3); border-left: none; margin: var(--sp-3) 0; }
   .featured-section.cta-final { border-left: 4px solid var(--ocre-calidad); padding: var(--sp-3); }
   .footer { padding: var(--sp-4) 0 var(--sp-3); }
@@ -1870,7 +1845,7 @@ section + section { margin-top: var(--sp-5); }
 }
 
 @media (max-width: 360px) {
-  .container { padding: 0 .75rem; }
+  .container { padding: 0 .6rem; }
   .hero-title { font-size: 1.15rem; }
   .hero-number-tel { font-size: 1.35rem; }
   .logo h1 { font-size: 1rem; }
