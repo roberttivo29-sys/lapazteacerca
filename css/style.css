@@ -1,13 +1,15 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.14
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.16
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
-   Cambios v13.0 → v13.13: (ver historial previo)
+   Cambios v13.0 → v13.15: (ver historial previo)
    
-   Cambios v13.14:
-   - FIX RAÍZ: Drawer con transform (elimina scroll horizontal fantasma).
-   - FIX RAÍZ: overflow-x hidden en html.
-   - FIX: Paddings laterales reducidos en móvil (menos campo muerto).
+   Cambios v13.16:
+   - FIX: Sidebar sticky con scroll interno (max-height + overflow-y).
+   - FIX: Tarjetas compactas en desktop (>1200px).
+   - FIX: Prevención total de scroll horizontal.
+   - FIX: Bordes mínimos (2px lateral, 3px superior) en móvil.
+   - FIX: Espacios entre caracteres mínimos en móvil.
    ============================================================ */
 
 @import url('tokens.css');
@@ -15,7 +17,12 @@
 /* ---------- 0. RESET ---------- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
 
 body {
   font-family: var(--f-cuerpo);
@@ -25,12 +32,17 @@ body {
   background: var(--fondo);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100vw;
 }
 
 ::selection { background: var(--ocre-calidad); color: var(--blanco); }
 
-img { max-width: 100%; height: auto; display: block; }
+img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
 
 a { text-decoration: none; color: inherit; }
 
@@ -666,6 +678,7 @@ section + section { margin-top: var(--sp-5); }
   gap: var(--sp-4);
 }
 
+/* FIX v13.16: Bordes mínimos + overflow controlado */
 .category-card {
   background: var(--blanco);
   padding: var(--sp-4);
@@ -679,6 +692,7 @@ section + section { margin-top: var(--sp-5); }
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  max-width: 100%;
 }
 
 .category-card::before {
@@ -986,6 +1000,7 @@ section + section { margin-top: var(--sp-5); }
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .destacado-card::before {
@@ -1168,7 +1183,22 @@ section + section { margin-top: var(--sp-5); }
 /* ============================================================
    10. SIDEBAR
    ============================================================ */
-.sidebar { position: sticky; top: 100px; height: fit-content; }
+
+/* FIX v13.16: Sidebar sticky con scroll interno */
+.sidebar {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Scrollbar personalizado del sidebar */
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-track { background: var(--gris-suave); border-radius: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--gris-borde); border-radius: 3px; }
+.sidebar::-webkit-scrollbar-thumb:hover { background: var(--gris-medio); }
 
 .sidebar-section {
   background: var(--blanco);
@@ -1643,13 +1673,35 @@ section + section { margin-top: var(--sp-5); }
   .logo { padding-right: var(--sp-2); }
 }
 
+/* FIX v13.16: Tarjetas compactas en desktop grande */
+@media (min-width: 1200px) {
+  .destacados-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .category-card { padding: var(--sp-3); }
+  .category-card h3 { font-size: 1.1rem; }
+  .category-icon { width: 60px; height: 60px; font-size: 1.8rem; }
+}
+
 @media (max-width: 991px) {
   .menu-toggle { display: flex; }
   .header-content { grid-template-columns: auto 1fr auto; }
   .cta-proveedor, .btn-proveedor { display: none; }
   .logo { padding-right: 0; }
 
-  /* FIX v13.14: DRAWER con transform (sin scroll horizontal fantasma) */
+  /* FIX v13.16: Sidebar sin sticky en móvil */
+  .sidebar {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    margin-top: var(--sp-4);
+    padding-right: 0;
+  }
+
+  /* DRAWER con transform (sin scroll horizontal fantasma) */
   .nav-simetrico {
     display: flex;
     position: fixed;
@@ -1794,19 +1846,18 @@ section + section { margin-top: var(--sp-5); }
   .hero-title { font-size: clamp(1.4rem, 5vw, 2rem); }
   .section-title { font-size: clamp(1.4rem, 4vw, 1.9rem); }
   .categories-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); }
-  .sidebar { position: static; margin-top: var(--sp-4); }
   .back-to-top { bottom: 90px; right: 20px; width: 45px; height: 45px; }
   .toast-container { top: 80px; right: 10px; left: 10px; max-width: none; }
 }
 
 @media (max-width: 767px) {
-  /* FIX v13.14: paddings laterales reducidos (menos campo muerto) */
+  /* FIX v13.16: paddings laterales mínimos + letter-spacing reducido */
   .container { padding: 0 .75rem; }
   .header-dynamic { padding: .4rem 0; }
   .header-content { padding: 0 .75rem; gap: .4rem; }
-  .logo h1 { font-size: clamp(1.1rem, 4.5vw, 1.5rem); }
+  .logo h1 { font-size: clamp(1.1rem, 4.5vw, 1.5rem); letter-spacing: -.3px; }
   .logo h1 i { font-size: clamp(1rem, 4.5vw, 1.4rem); }
-  .tagline { font-size: clamp(.55rem, 1.5vw, .7rem); letter-spacing: .8px; }
+  .tagline { font-size: clamp(.55rem, 1.5vw, .7rem); letter-spacing: .5px; }
 
   .hero { padding: 1rem .6rem; border-radius: 10px; margin-bottom: var(--sp-4); }
   .hero-number { border-radius: 10px; padding: .9rem .6rem; margin-bottom: .8rem; }
@@ -1817,16 +1868,16 @@ section + section { margin-top: var(--sp-5); }
   .btn-call-hero { font-size: .8rem; padding: .7rem .9rem; }
 
   .hero-chips-wrapper { padding: .8rem .6rem; margin-top: .8rem; border-radius: 10px; }
-  .hero-chips-title { font-size: .7rem; margin-bottom: .7rem; }
+  .hero-chips-title { font-size: .7rem; margin-bottom: .7rem; letter-spacing: .8px; }
   .hero-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem; }
-  .chip { padding: .5rem .55rem; font-size: .75rem; max-width: none; }
+  .chip { padding: .5rem .55rem; font-size: .75rem; max-width: none; letter-spacing: .2px; }
   .chip i { font-size: .8rem; }
 
   .categories-grid { grid-template-columns: 1fr; gap: var(--sp-3); }
   .category-card, .destacado-card, .sidebar-section, .featured-section, .trust-bar, .acordeon-info { border-radius: 10px; }
   .category-card { padding: var(--sp-3) .85rem; }
   .category-icon { width: 56px; height: 56px; font-size: 1.7rem; }
-  .category-card h3 { font-size: 1.15rem; }
+  .category-card h3 { font-size: 1.15rem; letter-spacing: -.2px; }
   .testimonials-grid, .destacados-grid, .proveedores-grid { grid-template-columns: 1fr; }
   .testimonial-card { padding: var(--sp-3); }
   .featured-section { padding: var(--sp-3); border-left: none; margin: var(--sp-3) 0; }
@@ -1841,17 +1892,17 @@ section + section { margin-top: var(--sp-5); }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
   body { padding-bottom: 0; }
   .filtros-vivos { gap: .35rem; }
-  .filtro-chip { padding: .35rem .7rem; font-size: .78rem; }
+  .filtro-chip { padding: .35rem .7rem; font-size: .78rem; letter-spacing: .2px; }
 }
 
 @media (max-width: 360px) {
   .container { padding: 0 .6rem; }
   .hero-title { font-size: 1.15rem; }
   .hero-number-tel { font-size: 1.35rem; }
-  .logo h1 { font-size: 1rem; }
-  .tagline { font-size: .5rem; }
+  .logo h1 { font-size: 1rem; letter-spacing: -.2px; }
+  .tagline { font-size: .5rem; letter-spacing: .3px; }
   .hero-chips-wrapper { padding: .7rem .5rem; }
-  .chip { padding: .45rem .5rem; font-size: .7rem; }
+  .chip { padding: .45rem .5rem; font-size: .7rem; letter-spacing: .1px; }
 }
 
 @media (min-width: 1400px) {
