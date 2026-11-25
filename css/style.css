@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.5
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.6
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
    Cambios v13.0:
@@ -22,6 +22,10 @@
    
    Cambios v13.5:
    - FIX: Nav en grid 5×2 (como chips del hero).
+   
+   Cambios v13.6:
+   - FIX: Header gap reducido para evitar solapamiento CTA.
+   - FIX: Nav-link padding ajustado para mejor distribución.
    ============================================================ */
 
 @import url('tokens.css');
@@ -83,12 +87,12 @@ ul { list-style: none; }
 
 .header-dynamic.scrolled { padding: var(--sp-2) 0; box-shadow: var(--sh-3); }
 
-/* FIX v13.5: Grid 3 columnas - logo | nav grid 5×2 | CTA */
+/* FIX v13.6: Gap reducido de sp-3 a sp-2 para evitar solapamiento */
 .header-content {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: var(--sp-3);
+  gap: var(--sp-2); /* 16px en lugar de 24px */
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -98,12 +102,12 @@ ul { list-style: none; }
 /* Logo */
 .logo-link { display: flex; text-decoration: none; }
 
-/* FIX v13.1 + v13.5: Padding derecho para separar logo del menú */
+/* FIX v13.1 + v13.6: Padding derecho reducido */
 .logo { 
   display: flex; 
   flex-direction: column; 
   flex-shrink: 0;
-  padding-right: var(--sp-3);
+  padding-right: var(--sp-2); /* 16px en lugar de 24px */
 }
 
 .logo h1 {
@@ -142,29 +146,30 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 
-/* FIX v13.5: NAV en grid 5 columnas × 2 filas (como chips del hero) */
+/* FIX v13.5 + v13.6: NAV en grid 5×2 con padding ajustado */
 .nav-simetrico {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, auto);
   justify-items: center;
   align-items: center;
-  gap: .5rem .8rem;
+  gap: .4rem .6rem; /* Reducido de .5rem .8rem */
   flex: 1;
   min-width: 0;
 }
 
 .nav-row { display: contents; }
 
+/* FIX v13.6: Padding reducido para que quepan mejor los 10 items */
 .nav-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .4rem;
+  gap: .3rem; /* Reducido de .4rem */
   color: var(--gris-oscuro);
   font-weight: 600;
-  font-size: .85rem;
-  padding: .5rem .7rem;
+  font-size: .82rem; /* Reducido de .85rem */
+  padding: .4rem .5rem; /* Reducido de .5rem .7rem */
   border-radius: var(--r-sm);
   transition: var(--t-fast);
   position: relative;
@@ -190,7 +195,7 @@ ul { list-style: none; }
 
 .nav-link.active { color: var(--azul-confianza); background: rgba(30, 64, 175, .08); font-weight: 700; }
 
-.nav-link i { font-size: .9rem; width: 16px; text-align: center; flex-shrink: 0; }
+.nav-link i { font-size: .85rem; width: 14px; text-align: center; flex-shrink: 0; }
 
 /* CTA proveedor (visible en desktop, oculto en móvil) */
 .cta-proveedor, .btn-proveedor {
@@ -1629,7 +1634,7 @@ section + section { margin-top: var(--sp-5); }
   .header-content { grid-template-columns: auto 1fr; gap: var(--sp-2); }
   .cta-proveedor, .btn-proveedor { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 300px; margin-top: var(--sp-1); }
   .nav-simetrico { grid-template-columns: repeat(5, 1fr); }
-  .nav-link { font-size: .78rem; padding: .4rem .5rem; }
+  .nav-link { font-size: .75rem; padding: .35rem .45rem; }
   .logo { padding-right: var(--sp-2); }
 }
 
