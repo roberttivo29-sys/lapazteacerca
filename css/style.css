@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.1
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.2
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
    Cambios v13.0:
@@ -9,8 +9,11 @@
    - WhatsApp seguro (no convierte fijos en enlaces).
    
    Cambios v13.1:
-   - FIX: Header con grid proporcional 2fr 3fr 1fr.
    - FIX: Logo con padding-right para respiración visual.
+   
+   Cambios v13.2:
+   - FIX: Header vuelve a auto 1fr auto con gap generoso (32px).
+   - FIX: Sidebar contacto legible (texto gris oscuro sobre blanco).
    ============================================================ */
 
 @import url('tokens.css');
@@ -72,12 +75,12 @@ ul { list-style: none; }
 
 .header-dynamic.scrolled { padding: var(--sp-2) 0; box-shadow: var(--sh-3); }
 
-/* FIX v13.1: Grid proporcional para dar respiración al logo */
+/* FIX v13.2: Vuelve a auto 1fr auto con gap generoso para evitar solapamiento */
 .header-content {
   display: grid;
-  grid-template-columns: 2fr 3fr 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: var(--sp-3);
+  gap: var(--sp-4); /* 32px de respiración entre logo, menú y CTA */
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -87,12 +90,12 @@ ul { list-style: none; }
 /* Logo */
 .logo-link { display: flex; text-decoration: none; }
 
-/* FIX v13.1: Padding derecho para separar logo del menú */
+/* FIX v13.1 + v13.2: Padding derecho para separar logo del menú */
 .logo { 
   display: flex; 
   flex-direction: column; 
   flex-shrink: 0;
-  padding-right: var(--sp-3);
+  padding-right: var(--sp-3); /* 24px de separación con el menú */
 }
 
 .logo h1 {
@@ -1263,6 +1266,7 @@ section + section { margin-top: var(--sp-5); }
 .footer-section ul a:hover { color: var(--ocre-calidad); padding-left: .5rem; }
 .footer-section ul a i { color: var(--ocre-calidad); font-size: .85rem; width: 16px; flex-shrink: 0; }
 
+/* FIX v13.2: contact-info en footer (fondo oscuro) = texto blanco */
 .contact-info li {
   display: flex;
   align-items: center;
@@ -1274,6 +1278,17 @@ section + section { margin-top: var(--sp-5); }
 }
 
 .contact-info li i { color: var(--ocre-calidad); width: 18px; flex-shrink: 0; }
+
+/* FIX v13.2: contact-info en sidebar (fondo blanco) = texto gris oscuro */
+.sidebar .contact-info li {
+  color: var(--gris-oscuro) !important;
+}
+
+.sidebar .contact-info li i {
+  color: var(--ocre-calidad) !important;
+  width: 18px;
+  flex-shrink: 0;
+}
 
 .contact-info-light li { color: var(--gris-oscuro); font-size: .88rem; }
 .contact-info-light li i { color: var(--ocre-calidad); width: 18px; flex-shrink: 0; }
