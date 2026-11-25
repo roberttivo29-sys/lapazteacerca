@@ -1,5 +1,5 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA — JavaScript v13.14
+// LA PAZ TE ACERCA — JavaScript v13.15
 // ========================================
 // Doctrina: rescatar lo operativo, reinventar lo estético.
 //
@@ -14,12 +14,14 @@
 //
 // Cambios v13.14:
 // - FIX: Tarjeta simplificada (sin subcategoría redundante, sin precios).
-//   Estructura: Nombre → Servicios que da → Horario → Dirección → Contacto.
-//   La subcategoría solo aparece si NO hay descripción (anti-redundancia).
+//
+// Cambios v13.15:
+// - FIX: Sidebar sticky recuperado (overflow-x: clip en body).
+// - FIX: Cache-buster a v=13.15.
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ La Paz te Acerca - JS v13.14 cargado');
+    console.log('✅ La Paz te Acerca - JS v13.15 cargado');
 
     initHeader();
     initMenuHamburguesa();
@@ -97,7 +99,7 @@ function getColorVariable(categoria) {
 
 
 // ========================================
-// WHATSAPP SEGURO (fix: solo si es móvil)
+// WHATSAPP SEGURO
 // ========================================
 
 function buildWhatsLink(raw, msg) {
@@ -109,7 +111,7 @@ function buildWhatsLink(raw, msg) {
 
 
 // ========================================
-// CACHÉ DE DATOS (TTL 60s, sin ?t=)
+// CACHÉ DE DATOS (TTL 60s)
 // ========================================
 
 const cacheProveedores = { datos: null, tiempo: 0 };
@@ -188,8 +190,8 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
 
 
 // ========================================
-// GENERAR TARJETA DE PROVEEDOR (pública)
-// v13.14: simplificada (sin subcategoría redundante, sin precios)
+// GENERAR TARJETA DE PROVEEDOR
+// v13.15: simplificada (sin precios, sin subcategoría redundante)
 // ========================================
 
 function generarTarjetaProveedor(p) {
@@ -223,8 +225,7 @@ function generarTarjetaProveedor(p) {
         else if (dirLower.includes('la paz')) zonaBadge = '<span style="font-size:.7rem; background:#e2e8f0; padding:2px 6px; border-radius:4px;">📍 La Paz</span>';
     }
 
-    // FIX v13.14: anti-redundancia. Si hay descripción, es "los servicios que da".
-    // Si no hay descripción, se usa la subcategoría como servicio. Nunca ambas.
+    // Anti-redundancia: si hay descripción, úsala; si no, usa subcategoría
     const tieneDesc = p.descripcion && p.descripcion.trim() !== '';
     const serviciosLinea = tieneDesc ? p.descripcion : (p.subcategoria || '');
 
@@ -287,7 +288,6 @@ async function cargarDestacados() {
     }
 }
 
-// FIX v13.14: misma estructura simplificada que generarTarjetaProveedor
 function generarTarjetaDestacada(p) {
     const waLink = p.whatsapp ? buildWhatsLink(p.whatsapp, 'Hola, vi tu perfil destacado en La Paz te Acerca') : null;
     const telLink = p.telefono ? `tel:${String(p.telefono).replace(/[^\d+]/g, '')}` : null;
@@ -352,7 +352,7 @@ function generarTarjetaDestacada(p) {
 
 
 // ========================================
-// FILTROS EN VIVO (delegación de eventos)
+// FILTROS EN VIVO
 // ========================================
 
 function initFiltrosEnVivo() {
@@ -387,7 +387,7 @@ function initFiltrosEnVivo() {
 
 
 // ========================================
-// TOAST PÚBLICO (accesible con aria-live)
+// TOAST PÚBLICO
 // ========================================
 
 function showToast(title, message, type = 'info', duration = 5000) {
@@ -705,7 +705,7 @@ async function cargarProfesionalesDestacados() {
 
 
 // ========================================
-// LISTENERS GLOBALES (debug)
+// LISTENERS GLOBALES
 // ========================================
 
 window.addEventListener('error', (e) => console.error('Error global:', e.error));
