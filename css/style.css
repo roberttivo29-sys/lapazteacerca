@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.10
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.12
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
    Cambios v13.0:
@@ -30,6 +30,10 @@
    Cambios v13.10:
    - FIX: Eliminado doble borde en destacados (featured-section + category-card).
    - FIX: Badge de zona (📍 La Paz) ya no se parte en dos líneas.
+   
+   Cambios v13.12:
+   - FIX: Bordes mínimos en todas las tarjetas (2px lateral, 3px superior).
+   - FIX: Anulación del border-left inline del JS con !important por categoría.
    ============================================================ */
 
 @import url('tokens.css');
@@ -688,6 +692,7 @@ section + section { margin-top: var(--sp-5); }
   gap: var(--sp-4);
 }
 
+/* FIX v13.12: Borde lateral mínimo (2px) + línea superior mínima (3px) */
 .category-card {
   background: var(--blanco);
   padding: var(--sp-4);
@@ -695,19 +700,22 @@ section + section { margin-top: var(--sp-5); }
   box-shadow: var(--sh-2);
   transition: var(--t-norm);
   border: 2px solid transparent;
+  border-left-width: 2px !important;
+  border-left-style: solid !important;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
+/* FIX v13.12: Línea superior de 3px (antes 5px) */
 .category-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
+  height: 3px;
   background: var(--grad-azul);
 }
 
@@ -728,31 +736,40 @@ section + section { margin-top: var(--sp-5); }
 
 .category-card:hover .category-icon { transform: scale(1.1) rotate(5deg); }
 
+/* FIX v13.12: Cada categoría con su color en borde lateral (2px) y superior (3px) */
 .category-salud::before { background: var(--c-salud); }
+.category-salud { border-left-color: var(--c-salud) !important; }
 .category-salud .category-icon { background: var(--bg-salud); color: var(--c-salud); }
 
 .category-hogar::before { background: var(--c-hogar); }
+.category-hogar { border-left-color: var(--c-hogar) !important; }
 .category-hogar .category-icon { background: var(--bg-hogar); color: var(--c-hogar); }
 
 .category-construccion::before { background: var(--c-construccion); }
+.category-construccion { border-left-color: var(--c-construccion) !important; }
 .category-construccion .category-icon { background: var(--bg-construccion); color: var(--c-construccion); }
 
 .category-auto::before { background: var(--c-auto); }
+.category-auto { border-left-color: var(--c-auto) !important; }
 .category-auto .category-icon { background: var(--bg-auto); color: var(--c-auto); }
 
 .category-tecnologia::before { background: var(--c-tecnologia); }
+.category-tecnologia { border-left-color: var(--c-tecnologia) !important; }
 .category-tecnologia .category-icon { background: var(--bg-tecnologia); color: var(--c-tecnologia); }
 
 .category-funeraria::before { background: var(--c-funeraria); }
+.category-funeraria { border-left-color: var(--c-funeraria) !important; }
 .category-funeraria .category-icon { background: var(--bg-funeraria); color: var(--c-funeraria); }
 
 .category-eventos::before { background: var(--c-eventos); }
+.category-eventos { border-left-color: var(--c-eventos) !important; }
 .category-eventos .category-icon { background: var(--bg-eventos); color: var(--c-eventos); }
 
 .category-imagen::before { background: var(--c-imagen); }
+.category-imagen { border-left-color: var(--c-imagen) !important; }
 .category-imagen .category-icon { background: var(--bg-imagen); color: var(--c-imagen); }
 
-/* FIX v13.10: h3 como flex para que el badge de zona no se parta */
+/* FIX v13.10 + v13.12: h3 como flex para que el badge de zona no se parta */
 .category-card h3 {
   font-family: var(--f-titulo);
   font-size: var(--fs-h3);
@@ -766,12 +783,14 @@ section + section { margin-top: var(--sp-5); }
   align-items: center;
   justify-content: center;
   gap: .4rem;
+  row-gap: .3rem;
 }
 
-/* FIX v13.10: badge de zona unido (no se corta "La / Paz") */
+/* FIX v13.10 + v13.12: badge de zona unido (no se corta "La / Paz" ni "El / Alto") */
 .category-card h3 span {
-  white-space: nowrap;
-  display: inline-flex;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
   align-items: center;
   gap: .2rem;
 }
@@ -944,9 +963,9 @@ section + section { margin-top: var(--sp-5); }
   margin: var(--sp-4) 0;
 }
 
-/* FIX v13.10: Cuando featured-section contiene tarjetas de proveedor,
+/* FIX v13.10 + v13.12: Cuando featured-section contiene tarjetas de proveedor,
    se elimina el borde izquierdo naranja para evitar DOBLE BORDE.
-   Las tarjetas ya traen su propio borde de color de categoría. */
+   Las tarjetas ya traen su propio borde mínimo de color de categoría. */
 .featured-section:has(.category-card) {
   border-left: none;
   background: transparent;
@@ -955,7 +974,6 @@ section + section { margin-top: var(--sp-5); }
   margin: var(--sp-4) 0;
 }
 
-/* Fallback para navegadores sin :has() — oculta el borde si hay grid de proveedores dentro */
 .featured-section:has(.proveedores-grid),
 .featured-section:has(.destacados-grid) {
   border-left: none;
@@ -1013,7 +1031,7 @@ section + section { margin-top: var(--sp-5); }
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: var(--grad-azul);
 }
 
@@ -1845,7 +1863,6 @@ section + section { margin-top: var(--sp-5); }
   .testimonials-grid, .destacados-grid, .proveedores-grid { grid-template-columns: 1fr; }
   .testimonial-card { padding: var(--sp-3); }
   .featured-section { padding: var(--sp-3); border-left-width: 4px; margin: var(--sp-3) 0; }
-  /* FIX v13.10: en móvil también se anula el borde si contiene category-cards */
   .featured-section:has(.category-card) { padding: 0; border-left: none; }
   .footer { padding: var(--sp-4) 0 var(--sp-3); }
   .footer-content { grid-template-columns: 1fr; gap: var(--sp-3); }
