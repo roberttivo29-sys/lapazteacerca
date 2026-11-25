@@ -8,7 +8,7 @@
     <meta property="og:description" content="Ferreterías y distribuidoras de materiales en La Paz y El Alto.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lapazteacerca.com/construccion.html">
-    <meta property="og:image" content="img/og-construccion.jpg">
+    <meta property="og:image" content="https://lapazteacerca.com/img/og-construccion.jpg">
     <meta property="og:locale" content="es_BO">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="author" content="La Paz te Acerca">
@@ -21,14 +21,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=13.0">
     <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
 </head>
 <body>
 
-    <!-- ========================================
-         HEADER DINÁMICO v12.1
-         ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
             <a href="index.html" class="logo-link">
@@ -39,9 +36,7 @@
             </a>
 
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
 
             <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
@@ -49,7 +44,6 @@
                     <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
                     <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
                 </div>
-
                 <div class="nav-row">
                     <a href="index.html" class="nav-link"><i class="fas fa-house" aria-hidden="true"></i> Inicio</a>
                     <a href="salud.html" class="nav-link"><i class="fas fa-heartbeat" aria-hidden="true"></i> Salud</a>
@@ -64,15 +58,10 @@
                     <a href="imagen.html" class="nav-link"><i class="fas fa-spa" aria-hidden="true"></i> Imagen</a>
                     <a href="contacto.html" class="nav-link"><i class="fas fa-envelope" aria-hidden="true"></i> Contacto</a>
                 </div>
-
-                <a href="contacto.html" class="cta-proveedor drawer-cta">
-                    <i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor
-                </a>
+                <a href="contacto.html" class="cta-proveedor drawer-cta"><i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor</a>
             </nav>
 
-            <a href="contacto.html" class="cta-proveedor">
-                <i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor
-            </a>
+            <a href="contacto.html" class="cta-proveedor"><i class="fas fa-store" aria-hidden="true"></i> Soy Proveedor</a>
         </div>
     </header>
 
@@ -80,12 +69,9 @@
         <div class="container content-grid">
             <div class="content-main">
 
-                <!-- ========================================
-                     HERO DE CATEGORÍA v12.1
-                     ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
-                        <div class="hero-badge fade-in">
+                        <div class="hero-badge fade-in" data-categoria="Materiales de Construcción">
                             <i class="fas fa-cubes" aria-hidden="true"></i>
                             Materiales de Construcción
                         </div>
@@ -98,7 +84,6 @@
                             Compara ferreterías y distribuidoras. Datos de contacto, dirección y horarios para que cotices directamente.
                         </p>
 
-                        <!-- CHIPS DE SUBSECCIONES -->
                         <div class="hero-chips-wrapper fade-in">
                             <p class="hero-chips-title">
                                 <i class="fas fa-th-large" aria-hidden="true"></i> Filtra por tipo de material
@@ -115,14 +100,12 @@
                             </div>
                         </div>
 
-                        <!-- BENEFICIOS ESPECÍFICOS -->
                         <div class="hero-features fade-in">
                             <div class="hero-feature"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Dirección publicada</span></div>
                             <div class="hero-feature"><i class="fas fa-file-invoice" aria-hidden="true"></i><span>Cotización directa</span></div>
                             <div class="hero-feature"><i class="fas fa-comments" aria-hidden="true"></i><span>Sin intermediarios</span></div>
                         </div>
 
-                        <!-- CTA: scroll al listado -->
                         <a href="#contenedor-principal" class="btn-provider-link fade-in">
                             <i class="fas fa-arrow-down" aria-hidden="true"></i>
                             Ver proveedores de Construcción
@@ -130,9 +113,6 @@
                     </div>
                 </section>
 
-                <!-- ========================================
-                     PROVEEDORES DISPONIBLES
-                     ======================================== -->
                 <section aria-labelledby="proveedores-title">
                     <h2 class="section-title fade-in" id="proveedores-title">
                         <i class="fas fa-store" aria-hidden="true"></i>
@@ -148,9 +128,6 @@
                     </div>
                 </section>
 
-                <!-- ========================================
-                     ACORDEÓN INFORMATIVO
-                     ======================================== -->
                 <section class="fade-in" style="margin-top:3rem;">
                     <div class="acordeon-info">
                         <div class="acordeon-header" onclick="toggleAcordeon(this)">
@@ -171,9 +148,6 @@
                     </div>
                 </section>
 
-                <!-- ========================================
-                     CTA FINAL
-                     ======================================== -->
                 <section class="featured-section fade-in cta-final" aria-labelledby="cta-title">
                     <div class="featured-badge">
                         <i class="fas fa-clipboard-list" aria-hidden="true"></i>
@@ -192,62 +166,39 @@
 
             </div>
 
-            <!-- ========================================
-                 SIDEBAR v12.1
-                 ======================================== -->
             <aside class="sidebar" role="complementary">
                 
-                <!-- SERVICIOS ROTATIVOS -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-hard-hat" aria-hidden="true"></i> MATERIALES DISPONIBLES</h3>
                     <p>Lo que puedes encontrar en esta categoría:</p>
                     <div class="servicios-rotativos" id="serviciosRotativos">
                         <div class="servicio-item active">
                             <i class="fas fa-cubes"></i>
-                            <div>
-                                <strong>Cemento y Estuco</strong>
-                                <span>SOBOCE, Fancesa, bolsas de 50kg</span>
-                            </div>
+                            <div><strong>Cemento y Estuco</strong><span>SOBOCE, Fancesa, bolsas de 50kg</span></div>
                         </div>
                         <div class="servicio-item">
                             <i class="fas fa-layer-group"></i>
-                            <div>
-                                <strong>Fierro y Acero</strong>
-                                <span>Corrugado, liso, malla electrosoldada</span>
-                            </div>
+                            <div><strong>Fierro y Acero</strong><span>Corrugado, liso, malla electrosoldada</span></div>
                         </div>
                         <div class="servicio-item">
                             <i class="fas fa-th"></i>
-                            <div>
-                                <strong>Ladrillos y Bloques</strong>
-                                <span>Huecos, macizos, prefabricados</span>
-                            </div>
+                            <div><strong>Ladrillos y Bloques</strong><span>Huecos, macizos, prefabricados</span></div>
                         </div>
                         <div class="servicio-item">
                             <i class="fas fa-tree"></i>
-                            <div>
-                                <strong>Maderas y Cubiertas</strong>
-                                <span>Pino, eucalipto, calaminas</span>
-                            </div>
+                            <div><strong>Maderas y Cubiertas</strong><span>Pino, eucalipto, calaminas</span></div>
                         </div>
                         <div class="servicio-item">
                             <i class="fas fa-paint-roller"></i>
-                            <div>
-                                <strong>Pinturas y Acabados</strong>
-                                <span>Látex, esmalte, impermeabilizantes</span>
-                            </div>
+                            <div><strong>Pinturas y Acabados</strong><span>Látex, esmalte, impermeabilizantes</span></div>
                         </div>
                         <div class="servicio-item">
                             <i class="fas fa-truck"></i>
-                            <div>
-                                <strong>Alquiler de Maquinaria</strong>
-                                <span>Mezcladoras, vibradoras, andamios</span>
-                            </div>
+                            <div><strong>Alquiler de Maquinaria</strong><span>Mezcladoras, vibradoras, andamios</span></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- PROFESIONALES DESTACADOS -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-crown" aria-hidden="true"></i> DISTRIBUIDORES DESTACADOS</h3>
                     <p>Ferreterías con paquete Completo o Básico:</p>
@@ -258,7 +209,6 @@
                     </div>
                 </div>
 
-                <!-- CTA PROVEEDOR -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-store" aria-hidden="true"></i> ¿ERES FERRETERÍA?</h3>
                     <p>Damos visibilidad a tu negocio con una ficha clara y datos actualizados.</p>
@@ -270,7 +220,6 @@
                     <a href="https://wa.me/59178835306?text=Hola,%20soy%20ferreteria%20y%20quiero%20aparecer%20en%20el%20directorio" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-store" aria-hidden="true"></i> Unirme ahora</a>
                 </div>
 
-                <!-- SÍGUENOS -->
                 <div class="sidebar-section fade-in">
                     <h3><i class="fas fa-share-alt" aria-hidden="true"></i> SÍGUENOS</h3>
                     <div class="social-grid">
@@ -283,9 +232,6 @@
         </div>
     </main>
 
-    <!-- ========================================
-         FOOTER
-         ======================================== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
@@ -336,38 +282,21 @@
         </div>
     </footer>
 
-    <!-- ========================================
-         BARRA FIJA MÓVIL / TOAST / BACK TO TOP / OVERLAY
-         ======================================== -->
-    <div class="mobile-showcase" id="mobileShowcase" style="justify-content:center;">
-        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer" style="max-width:400px;"><i class="fab fa-whatsapp"></i> WhatsApp: 76536286</a>
-    </div>
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <!-- ========================================
-         SCRIPTS
-         ======================================== -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=13.0"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const secciones = [
-                { categoria: 'Materiales de Construcción', keyword: null, label: 'Todos', icono: 'fa-th-large' },
-                { categoria: 'Materiales de Construcción', keyword: 'ferreter', label: 'Ferreterías', icono: 'fa-store' },
-                { categoria: 'Materiales de Construcción', keyword: 'cemento', label: 'Cemento', icono: 'fa-cubes' },
-                { categoria: 'Materiales de Construcción', keyword: 'fierro', label: 'Fierro', icono: 'fa-layer-group' },
-                { categoria: 'Materiales de Construcción', keyword: 'ladrillo', label: 'Ladrillos', icono: 'fa-th' },
-                { categoria: 'Materiales de Construcción', keyword: 'madera', label: 'Maderas', icono: 'fa-tree' },
-                { categoria: 'Materiales de Construcción', keyword: 'pintura', label: 'Pinturas', icono: 'fa-paint-roller' },
-                { categoria: 'Materiales de Construcción', keyword: 'herramienta', label: 'Herramientas', icono: 'fa-screwdriver-wrench' }
-            ];
-            
-            document.getElementById('filtrosVivos').innerHTML = secciones.map((s, i) =>
-                `<button class="filtro-chip ${i === 0 ? 'active' : ''}" data-contenedor="contenedor-principal" data-categoria="${s.categoria}" data-keyword="${s.keyword || ''}"><i class="fas ${s.icono}"></i> ${s.label}</button>`
-            ).join('');
-            
-            cargarProveedoresEnContenedor('contenedor-principal', 'Materiales de Construcción');
+            const categoria = document.querySelector('.hero-badge').getAttribute('data-categoria');
+            const chips = [...document.querySelectorAll('#heroChips .chip[data-jump]')];
+            const cont = document.getElementById('filtrosVivos');
+
+            cont.innerHTML = `<button class="filtro-chip active" data-contenedor="contenedor-principal" data-categoria="${categoria}" data-keyword="">Todos</button>` +
+                chips.map(c => `<button class="filtro-chip" data-contenedor="contenedor-principal" data-categoria="${categoria}" data-keyword="${c.dataset.jump}">${c.textContent.trim()}</button>`).join('');
+
+            cargarProveedoresEnContenedor('contenedor-principal', categoria);
             document.getElementById('current-year').textContent = new Date().getFullYear();
         });
     </script>

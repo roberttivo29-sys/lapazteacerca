@@ -1,0 +1,120 @@
+/* ============================================================
+   LA PAZ TE ACERCA — TOKENS DE DISEÑO v1.0
+   Variables compartidas entre público y admin.
+   ============================================================ */
+
+:root {
+  /* Marca */
+  --azul-profundo: #0F172A;
+  --azul-confianza: #1E40AF;
+  --azul-claro: #3B82F6;
+  --azul-suave: #60A5FA;
+
+  --ocre-calidad: #D97706;
+  --ocre-oscuro: #B45309;
+  --ocre-claro: #F59E0B;
+  --terracota: #C2410C;
+
+  --verde-accion: #10B981;
+  --verde-oscuro: #059669;
+  --rojo-alerta: #EF4444;
+
+  --whatsapp: #25D366;
+  --whatsapp-hover: #20BA5A;
+  --telegram: #0088CC;
+
+  /* Neutros */
+  --fondo: #FDFBF7;
+  --gris-suave: #F8FAFC;
+  --gris-medio: #64748B;
+  --gris-claro: #94A3B8;
+  --gris-borde: #E2E8F0;
+  --gris-oscuro: #334155;
+  --blanco: #FFFFFF;
+  --negro: #0F172A;
+
+  /* Categorías */
+  --c-salud: #0D9488;
+  --c-salud-l: #14B8A6;
+  --bg-salud: #F0FDFA;
+
+  --c-hogar: #EA580C;
+  --c-hogar-l: #F97316;
+  --bg-hogar: #FFF7ED;
+
+  --c-construccion: #C2410C;
+  --c-construccion-l: #EA580C;
+  --bg-construccion: #FFF7ED;
+
+  --c-auto: #1D4ED8;
+  --c-auto-l: #3B82F6;
+  --bg-auto: #EFF6FF;
+
+  --c-tecnologia: #0891B2;
+  --c-tecnologia-l: #06B6D4;
+  --bg-tecnologia: #ECFEFF;
+
+  --c-funeraria: #475569;
+  --c-funeraria-l: #64748B;
+  --bg-funeraria: #F1F5F9;
+
+  --c-eventos: #8B5CF6;
+  --c-eventos-l: #A78BFA;
+  --bg-eventos: #F3E8FF;
+
+  --c-imagen: #7C3AED;
+  --c-imagen-l: #8B5CF6;
+  --bg-imagen: #F5F3FF;
+
+  /* Gradientes */
+  --grad-azul: linear-gradient(135deg, #1E40AF, #0F172A);
+  --grad-ocre: linear-gradient(135deg, #D97706, #B45309);
+  --grad-hero: linear-gradient(135deg, #0F172A 0%, #1E3A8A 55%, #1E40AF 100%);
+
+  /* Sombras */
+  --sh-1: 0 1px 2px rgba(0, 0, 0, .05);
+  --sh-2: 0 4px 10px -2px rgba(0, 0, 0, .08);
+  --sh-3: 0 12px 24px -6px rgba(0, 0, 0, .12);
+  --sh-4: 0 24px 48px -12px rgba(0, 0, 0, .20);
+  --glow-ocre: 0 0 36px rgba(217, 119, 6, .30);
+  --glow-azul: 0 0 36px rgba(30, 64, 175, .28);
+  --glow-wa: 0 12px 32px rgba(37, 211, 102, .50);
+
+  /* Radios */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-full: 9999px;
+
+  /* Tipografía */
+  --f-titulo: 'Poppins', sans-serif;
+  --f-cuerpo: 'Inter', sans-serif;
+  --fs-display: clamp(1.5rem, 4vw, 2.3rem);
+  --fs-h2: clamp(1.4rem, 3.5vw, 2rem);
+  --fs-h3: 1.2rem;
+  --fs-body: 1rem;
+  --fs-sm: .9rem;
+  --fs-xs: .8rem;
+
+  /* Espaciado */
+  --sp-1: .5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2rem;
+  --sp-5: 3rem;
+  --sp-6: 4rem;
+
+  /* Z-index */
+  --z-overlay: 999;
+  --z-header: 1000;
+  --z-drawer: 1001;
+  --z-toggle: 1002;
+  --z-float: 990;
+  --z-toast: 9999;
+  --z-modal: 9999;
+
+  /* Transiciones */
+  --t-fast: all .2s cubic-bezier(.4, 0, .2, 1);
+  --t-norm: all .3s cubic-bezier(.4, 0, .2, 1);
+}

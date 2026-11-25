@@ -7,28 +7,32 @@
     <meta property="og:title" content="La Paz te Acerca | Tu enlace con servicios de confianza">
     <meta property="og:description" content="Olvídate de buscar a ciegas. Conecta directo con profesionales recomendados en La Paz y El Alto.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://lapazteacerca.com">
-    <meta property="og:image" content="img/og-image.jpg">
+    <meta property="og:url" content="https://lapazteacerca.com/">
+    <meta property="og:image" content="https://lapazteacerca.com/img/og-image.jpg">
     <meta property="og:locale" content="es_BO">
+    <meta property="og:site_name" content="La Paz te Acerca">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="La Paz te Acerca | Tu enlace con servicios de confianza">
+    <meta name="twitter:description" content="Conecta directo con profesionales recomendados en La Paz y El Alto.">
+    <meta name="twitter:image" content="https://lapazteacerca.com/img/og-image.jpg">
     <meta name="author" content="La Paz te Acerca">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0F172A">
-    <link rel="canonical" href="https://lapazteacerca.com">
+    <link rel="canonical" href="https://lapazteacerca.com/">
     <title>La Paz te Acerca | Tu enlace con servicios de confianza</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css?v=12.4.0">
+    <link rel="stylesheet" href="css/style.css?v=13.0">
     <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "La Paz te Acerca",
-        "url": "https://lapazteacerca.com",
+        "url": "https://lapazteacerca.com/",
         "description": "Directorio de confianza de servicios en La Paz y El Alto"
     }
     </script>
@@ -36,7 +40,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.4.0
+         HEADER DINÁMICO v13.0
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -54,7 +58,6 @@
             </button>
 
             <nav class="nav-simetrico" id="nav" role="navigation" aria-label="Navegación principal">
-                <!-- Cabecera del drawer móvil -->
                 <div class="drawer-header">
                     <span class="drawer-title"><i class="fas fa-hands-helping"></i> La Paz te Acerca</span>
                     <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
@@ -91,11 +94,11 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO v12.4.0
+                     HERO v13.0
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
-                        <div class="hero-badge fade-in">
+                        <div class="hero-badge fade-in" data-categoria="Inicio">
                             <i class="fas fa-check-circle" aria-hidden="true"></i>
                             Tu red de confianza local
                         </div>
@@ -108,7 +111,6 @@
                             Somos tu enlace directo con profesionales verificados. Sin intermediarios que cobren comisión: tú hablas con quien hace el trabajo.
                         </p>
 
-                        <!-- Número héroe equilibrado (solo WhatsApp) -->
                         <div class="hero-number fade-in">
                             <p class="hero-number-label">Escríbenos ahora</p>
                             <a href="https://wa.me/59176536286" class="hero-number-tel" target="_blank" rel="noopener noreferrer">
@@ -127,7 +129,6 @@
                             <p class="hero-number-note">Respuesta en menos de 2 horas · Lunes a Domingo</p>
                         </div>
 
-                        <!-- Chips de categorías -->
                         <div class="hero-chips-wrapper fade-in">
                             <p class="hero-chips-title">
                                 <i class="fas fa-th-large" aria-hidden="true"></i> Explora por categoría
@@ -391,7 +392,6 @@
 
     <!-- ========================================
          TOAST / BACK TO TOP / OVERLAY
-         (v12.4.0: Se eliminó mobile-showcase para quitar el botón flotante)
          ======================================== -->
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
@@ -400,7 +400,7 @@
     <!-- ========================================
          SCRIPTS
          ======================================== -->
-    <script src="js/main.js?v=12.4.0"></script>
+    <script src="js/main.js?v=13.0"></script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>

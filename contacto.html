@@ -8,7 +8,7 @@
     <meta property="og:description" content="¿Tienes dudas o quieres que verifiquemos un nuevo servicio? Contáctanos.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lapazteacerca.com/contacto.html">
-    <meta property="og:image" content="img/og-contacto.jpg">
+    <meta property="og:image" content="https://lapazteacerca.com/img/og-contacto.jpg">
     <meta property="og:locale" content="es_BO">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="author" content="La Paz te Acerca">
@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=13.0">
     <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
     <style>
         /* Estilos nativos para el formulario (sin Bootstrap) */
@@ -37,7 +37,7 @@
 <body>
 
     <!-- ========================================
-         HEADER DINÁMICO v12.1
+         HEADER DINÁMICO v13.0
          ======================================== -->
     <header class="header-dynamic" id="header" role="banner">
         <div class="container header-content">
@@ -91,11 +91,12 @@
             <div class="content-main">
 
                 <!-- ========================================
-                     HERO DE CONTACTO v12.1
+                     HERO DE CONTACTO v13.0
                      ======================================== -->
                 <section class="hero" aria-labelledby="hero-title">
                     <div class="hero-content">
-                        <div class="hero-badge fade-in">
+                        <!-- FIX: Agregado data-categoria para consistencia con el JS -->
+                        <div class="hero-badge fade-in" data-categoria="Contacto">
                             <i class="fas fa-comments" aria-hidden="true"></i>
                             Hablemos
                         </div>
@@ -212,7 +213,8 @@
                     <div class="featured-section">
                         <form action="https://formsubmit.co/contactoverificalapaz@gmail.com" method="POST">
                             <input type="hidden" name="_subject" value="Nueva consulta desde La Paz te Acerca">
-                            <input type="hidden" name="_captcha" value="false">
+                            <!-- FIX: Captcha activado para evitar spam -->
+                            <input type="hidden" name="_captcha" value="true">
                             <input type="hidden" name="_next" value="https://lapazteacerca.com/contacto.html?exito=1">
 
                             <div class="form-grid">
@@ -397,11 +399,9 @@
     </footer>
 
     <!-- ========================================
-         BARRA FIJA MÓVIL / TOAST / BACK TO TOP / OVERLAY
+         TOAST / BACK TO TOP / OVERLAY
+         (FIX: Eliminado el bloque .mobile-showcase muerto)
          ======================================== -->
-    <div class="mobile-showcase" id="mobileShowcase" style="justify-content:center;">
-        <a href="https://wa.me/59176536286" class="mobile-showcase-wa" target="_blank" rel="noopener noreferrer" style="max-width:400px;"><i class="fab fa-whatsapp"></i> WhatsApp: 76536286</a>
-    </div>
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
     <div class="nav-overlay" id="navOverlay"></div>
@@ -409,7 +409,7 @@
     <!-- ========================================
          SCRIPTS
          ======================================== -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=13.0"></script>
     <script>
         // Función para enviar el formulario por WhatsApp directamente
         function enviarWhatsAppDirecto() {

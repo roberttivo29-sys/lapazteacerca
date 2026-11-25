@@ -1,28 +1,24 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA - Service Worker v12.3.0
+// LA PAZ TE ACERCA - Service Worker v13.0
 // ========================================
 // Estrategia dual: Cache-First (estáticos) + Network-First (datos)
 //
-// Principios de esta versión:
-// 1. Cache busting forzado con versión en nombre y URLs.
-// 2. Limpieza automática de cachés viejas al activar.
-// 3. NO cachear /api/ ni /data/proveedores.json (siempre frescos).
-// 4. Navegación con fallback a caché (offline friendly).
-//
-// Novedad v12.3.0:
-// - Cache name actualizado a v12.3.0 (rompe caché vieja).
-// - URLs de CSS y JS con ?v=12.3.0 para forzar descarga nueva.
+// Cambios v13.0:
+// - Cache name actualizado a v13.0.0
+// - URLs de CSS y JS con ?v=13.0.0
+// - Manejo correcto de rutas sin ?t=
 // ========================================
 
-const STATIC_CACHE = 'lapazteacerca-static-v12.3.0';
-const DATA_CACHE = 'lapazteacerca-data-v12.3.0';
+const STATIC_CACHE = 'lapazteacerca-static-v13.0.0';
+const DATA_CACHE = 'lapazteacerca-data-v13.0.0';
 
 // URLs a precachear en la instalación
 const urlsToCache = [
     '/',
     '/index.html',
-    '/css/style.css?v=12.3.0',
-    '/js/main.js?v=12.3.0',
+    '/css/tokens.css',
+    '/css/style.css?v=13.0.0',
+    '/js/main.js?v=13.0.0',
     '/404.html'
 ];
 
@@ -30,7 +26,6 @@ const urlsToCache = [
 // INSTALACIÓN
 // ========================================
 self.addEventListener('install', event => {
-    // Forzar activación inmediata del nuevo SW
     self.skipWaiting();
     
     event.waitUntil(
@@ -48,9 +43,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
     event.waitUntil(
         Promise.all([
-            // Tomar control inmediato de las pestañas abiertas
             clients.claim(),
-            // Eliminar cachés que no sean las actuales
             caches.keys().then(keys => {
                 return Promise.all(
                     keys.filter(key => key !== STATIC_CACHE && key !== DATA_CACHE)
@@ -71,7 +64,6 @@ self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
     
     // 1) API Y DATOS → Network-First SIN caché
-    //    Nunca cachear proveedores.json ni endpoints de API
     if (url.pathname.startsWith('/api/') || 
         url.pathname.includes('/data/proveedores.json')) {
         event.respondWith(networkFirstNoCache(event.request));
@@ -79,14 +71,12 @@ self.addEventListener('fetch', event => {
     }
     
     // 2) NAVEGACIÓN (HTML) → Network-First con fallback a caché
-    //    Permite offline para páginas ya visitadas
     if (event.request.mode === 'navigate') {
         event.respondWith(networkFirst(event.request));
         return;
     }
     
     // 3) ESTÁTICOS (CSS, JS, imágenes, fuentes) → Cache-First
-    //    Máximo rendimiento, se actualiza al cambiar versión
     if (url.pathname.match(/\.(css|js|png|jpg|jpeg|gif|svg|webp|woff2?|ttf|eot)$/i)) {
         event.respondWith(cacheFirst(event.request));
         return;
