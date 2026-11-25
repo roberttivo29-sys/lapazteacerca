@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.12
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.13
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
    Cambios v13.0:
@@ -28,12 +28,15 @@
    - FIX: Nav-link padding ajustado para mejor distribución.
    
    Cambios v13.10:
-   - FIX: Eliminado doble borde en destacados (featured-section + category-card).
    - FIX: Badge de zona (📍 La Paz) ya no se parte en dos líneas.
    
    Cambios v13.12:
    - FIX: Bordes mínimos en todas las tarjetas (2px lateral, 3px superior).
-   - FIX: Anulación del border-left inline del JS con !important por categoría.
+   
+   Cambios v13.13:
+   - FIX RAÍZ: Eliminado :has() (no funciona en Chrome cacheado).
+   - FIX RAÍZ: .featured-section sin borde por defecto.
+   - FIX RAÍZ: Solo .cta-final tiene borde naranja.
    ============================================================ */
 
 @import url('tokens.css');
@@ -692,7 +695,7 @@ section + section { margin-top: var(--sp-5); }
   gap: var(--sp-4);
 }
 
-/* FIX v13.12: Borde lateral mínimo (2px) + línea superior mínima (3px) */
+/* FIX v13.12 + v13.13: Borde lateral mínimo (2px) + línea superior mínima (3px) */
 .category-card {
   background: var(--blanco);
   padding: var(--sp-4);
@@ -736,7 +739,7 @@ section + section { margin-top: var(--sp-5); }
 
 .category-card:hover .category-icon { transform: scale(1.1) rotate(5deg); }
 
-/* FIX v13.12: Cada categoría con su color en borde lateral (2px) y superior (3px) */
+/* FIX v13.12 + v13.13: Cada categoría con su color en borde lateral (2px) y superior (3px) */
 .category-salud::before { background: var(--c-salud); }
 .category-salud { border-left-color: var(--c-salud) !important; }
 .category-salud .category-icon { background: var(--bg-salud); color: var(--c-salud); }
@@ -954,32 +957,20 @@ section + section { margin-top: var(--sp-5); }
 /* ============================================================
    8. DESTACADOS / FEATURED / TRUST
    ============================================================ */
+
+/* FIX v13.13: featured-section SIN borde por defecto (solución raíz sin :has()) */
 .featured-section {
   background: var(--blanco);
   padding: var(--sp-4);
   border-radius: var(--r-lg);
   box-shadow: var(--sh-2);
+  border-left: none; /* ← SIN borde naranja por defecto */
+  margin: var(--sp-4) 0;
+}
+
+/* FIX v13.13: Solo el CTA final mantiene el borde naranja */
+.featured-section.cta-final {
   border-left: 5px solid var(--ocre-calidad);
-  margin: var(--sp-4) 0;
-}
-
-/* FIX v13.10 + v13.12: Cuando featured-section contiene tarjetas de proveedor,
-   se elimina el borde izquierdo naranja para evitar DOBLE BORDE.
-   Las tarjetas ya traen su propio borde mínimo de color de categoría. */
-.featured-section:has(.category-card) {
-  border-left: none;
-  background: transparent;
-  box-shadow: none;
-  padding: 0;
-  margin: var(--sp-4) 0;
-}
-
-.featured-section:has(.proveedores-grid),
-.featured-section:has(.destacados-grid) {
-  border-left: none;
-  background: transparent;
-  box-shadow: none;
-  padding: 0;
 }
 
 .featured-badge {
@@ -1862,8 +1853,9 @@ section + section { margin-top: var(--sp-5); }
   .category-card h3 { font-size: 1.15rem; }
   .testimonials-grid, .destacados-grid, .proveedores-grid { grid-template-columns: 1fr; }
   .testimonial-card { padding: var(--sp-3); }
-  .featured-section { padding: var(--sp-3); border-left-width: 4px; margin: var(--sp-3) 0; }
-  .featured-section:has(.category-card) { padding: 0; border-left: none; }
+  /* FIX v13.13: featured-section sin borde en móvil, excepto cta-final */
+  .featured-section { padding: var(--sp-3); border-left: none; margin: var(--sp-3) 0; }
+  .featured-section.cta-final { border-left: 4px solid var(--ocre-calidad); padding: var(--sp-3); }
   .footer { padding: var(--sp-4) 0 var(--sp-3); }
   .footer-content { grid-template-columns: 1fr; gap: var(--sp-3); }
   .footer-legal p { font-size: .75rem; }
