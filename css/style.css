@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.0
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.1
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
    Cambios v13.0:
@@ -7,6 +7,10 @@
    - Eliminado .mobile-showcase (código muerto).
    - Filtros dinámicos (no depende del texto del HTML).
    - WhatsApp seguro (no convierte fijos en enlaces).
+   
+   Cambios v13.1:
+   - FIX: Header con grid proporcional 2fr 3fr 1fr.
+   - FIX: Logo con padding-right para respiración visual.
    ============================================================ */
 
 @import url('tokens.css');
@@ -68,9 +72,10 @@ ul { list-style: none; }
 
 .header-dynamic.scrolled { padding: var(--sp-2) 0; box-shadow: var(--sh-3); }
 
+/* FIX v13.1: Grid proporcional para dar respiración al logo */
 .header-content {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 2fr 3fr 1fr;
   align-items: center;
   gap: var(--sp-3);
   width: 100%;
@@ -82,7 +87,13 @@ ul { list-style: none; }
 /* Logo */
 .logo-link { display: flex; text-decoration: none; }
 
-.logo { display: flex; flex-direction: column; flex-shrink: 0; }
+/* FIX v13.1: Padding derecho para separar logo del menú */
+.logo { 
+  display: flex; 
+  flex-direction: column; 
+  flex-shrink: 0;
+  padding-right: var(--sp-3);
+}
 
 .logo h1 {
   font-family: var(--f-titulo);
@@ -1593,12 +1604,14 @@ section + section { margin-top: var(--sp-5); }
   .header-content { grid-template-columns: auto 1fr; gap: var(--sp-2); }
   .cta-proveedor, .btn-proveedor { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 300px; margin-top: var(--sp-1); }
   .nav-link { font-size: .78rem; padding: .4rem .5rem; }
+  .logo { padding-right: var(--sp-2); }
 }
 
 @media (max-width: 991px) {
   .menu-toggle { display: flex; }
   .header-content { grid-template-columns: auto 1fr auto; }
   .cta-proveedor, .btn-proveedor { display: none; }
+  .logo { padding-right: 0; }
 
   /* DRAWER MÓVIL */
   .nav-simetrico {
