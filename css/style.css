@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   LA PAZ TE ACERCA — CSS PÚBLICO v13.6
+   LA PAZ TE ACERCA — CSS PÚBLICO v13.10
    Doctrina: rescatar lo operativo, reinventar lo estético.
    
    Cambios v13.0:
@@ -26,6 +26,10 @@
    Cambios v13.6:
    - FIX: Header gap reducido para evitar solapamiento CTA.
    - FIX: Nav-link padding ajustado para mejor distribución.
+   
+   Cambios v13.10:
+   - FIX: Eliminado doble borde en destacados (featured-section + category-card).
+   - FIX: Badge de zona (📍 La Paz) ya no se parte en dos líneas.
    ============================================================ */
 
 @import url('tokens.css');
@@ -87,27 +91,24 @@ ul { list-style: none; }
 
 .header-dynamic.scrolled { padding: var(--sp-2) 0; box-shadow: var(--sh-3); }
 
-/* FIX v13.6: Gap reducido de sp-3 a sp-2 para evitar solapamiento */
 .header-content {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: var(--sp-2); /* 16px en lugar de 24px */
+  gap: var(--sp-2);
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-/* Logo */
 .logo-link { display: flex; text-decoration: none; }
 
-/* FIX v13.1 + v13.6: Padding derecho reducido */
 .logo { 
   display: flex; 
   flex-direction: column; 
   flex-shrink: 0;
-  padding-right: var(--sp-2); /* 16px en lugar de 24px */
+  padding-right: var(--sp-2);
 }
 
 .logo h1 {
@@ -146,30 +147,28 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 
-/* FIX v13.5 + v13.6: NAV en grid 5×2 con padding ajustado */
 .nav-simetrico {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, auto);
   justify-items: center;
   align-items: center;
-  gap: .4rem .6rem; /* Reducido de .5rem .8rem */
+  gap: .4rem .6rem;
   flex: 1;
   min-width: 0;
 }
 
 .nav-row { display: contents; }
 
-/* FIX v13.6: Padding reducido para que quepan mejor los 10 items */
 .nav-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .3rem; /* Reducido de .4rem */
+  gap: .3rem;
   color: var(--gris-oscuro);
   font-weight: 600;
-  font-size: .82rem; /* Reducido de .85rem */
-  padding: .4rem .5rem; /* Reducido de .5rem .7rem */
+  font-size: .82rem;
+  padding: .4rem .5rem;
   border-radius: var(--r-sm);
   transition: var(--t-fast);
   position: relative;
@@ -197,7 +196,6 @@ ul { list-style: none; }
 
 .nav-link i { font-size: .85rem; width: 14px; text-align: center; flex-shrink: 0; }
 
-/* CTA proveedor (visible en desktop, oculto en móvil) */
 .cta-proveedor, .btn-proveedor {
   display: inline-flex;
   align-items: center;
@@ -234,7 +232,6 @@ ul { list-style: none; }
 
 .cta-proveedor:hover, .btn-proveedor:hover { transform: translateY(-3px); box-shadow: var(--glow-ocre); color: var(--blanco); }
 
-/* Hamburguesa */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -268,7 +265,6 @@ ul { list-style: none; }
 .menu-toggle.active span:nth-child(2) { opacity: 0; }
 .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
 
-/* Overlay */
 .nav-overlay {
   position: fixed;
   inset: 0;
@@ -364,7 +360,6 @@ ul { list-style: none; }
   animation: fadeInUp 1s ease-out;
 }
 
-/* Número héroe */
 .hero-number {
   max-width: 520px;
   margin: 0 auto var(--sp-3);
@@ -452,7 +447,6 @@ ul { list-style: none; }
 
 .btn-call-hero:hover { background: rgba(255, 255, 255, .28); transform: translateY(-3px); }
 
-/* Features + chips */
 .hero-features {
   display: flex;
   justify-content: center;
@@ -495,7 +489,6 @@ ul { list-style: none; }
   border-color: var(--ocre-calidad);
 }
 
-/* Chips */
 .hero-chips-wrapper {
   max-width: 820px;
   margin: var(--sp-4) auto 0;
@@ -759,6 +752,7 @@ section + section { margin-top: var(--sp-5); }
 .category-imagen::before { background: var(--c-imagen); }
 .category-imagen .category-icon { background: var(--bg-imagen); color: var(--c-imagen); }
 
+/* FIX v13.10: h3 como flex para que el badge de zona no se parta */
 .category-card h3 {
   font-family: var(--f-titulo);
   font-size: var(--fs-h3);
@@ -767,6 +761,19 @@ section + section { margin-top: var(--sp-5); }
   text-align: center;
   margin-bottom: var(--sp-1);
   line-height: 1.2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+}
+
+/* FIX v13.10: badge de zona unido (no se corta "La / Paz") */
+.category-card h3 span {
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: .2rem;
 }
 
 .category-subtitle {
@@ -935,6 +942,26 @@ section + section { margin-top: var(--sp-5); }
   box-shadow: var(--sh-2);
   border-left: 5px solid var(--ocre-calidad);
   margin: var(--sp-4) 0;
+}
+
+/* FIX v13.10: Cuando featured-section contiene tarjetas de proveedor,
+   se elimina el borde izquierdo naranja para evitar DOBLE BORDE.
+   Las tarjetas ya traen su propio borde de color de categoría. */
+.featured-section:has(.category-card) {
+  border-left: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: var(--sp-4) 0;
+}
+
+/* Fallback para navegadores sin :has() — oculta el borde si hay grid de proveedores dentro */
+.featured-section:has(.proveedores-grid),
+.featured-section:has(.destacados-grid) {
+  border-left: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
 }
 
 .featured-badge {
@@ -1281,7 +1308,6 @@ section + section { margin-top: var(--sp-5); }
 .footer-section ul a:hover { color: var(--ocre-calidad); padding-left: .5rem; }
 .footer-section ul a i { color: var(--ocre-calidad); font-size: .85rem; width: 16px; flex-shrink: 0; }
 
-/* FIX v13.2: contact-info en footer (fondo oscuro) = texto blanco */
 .contact-info li {
   display: flex;
   align-items: center;
@@ -1294,7 +1320,6 @@ section + section { margin-top: var(--sp-5); }
 
 .contact-info li i { color: var(--ocre-calidad); width: 18px; flex-shrink: 0; }
 
-/* FIX v13.2: contact-info en sidebar (fondo blanco) = texto gris oscuro */
 .sidebar .contact-info li {
   color: var(--gris-oscuro) !important;
 }
@@ -1565,7 +1590,6 @@ section + section { margin-top: var(--sp-5); }
 
 .servicios-dots .dot.active { background: var(--color-cat); width: 18px; }
 
-/* Profesionales destacados */
 .profesionales-list { display: flex; flex-direction: column; gap: .5rem; }
 
 .profe-item {
@@ -1644,7 +1668,6 @@ section + section { margin-top: var(--sp-5); }
   .cta-proveedor, .btn-proveedor { display: none; }
   .logo { padding-right: 0; }
 
-  /* DRAWER MÓVIL */
   .nav-simetrico {
     display: flex;
     position: fixed;
@@ -1784,7 +1807,6 @@ section + section { margin-top: var(--sp-5); }
 
   .nav-overlay.active { opacity: 1; visibility: visible; }
 
-  /* OTROS AJUSTES MÓVILES */
   .hero-title { font-size: clamp(1.4rem, 5vw, 2rem); }
   .section-title { font-size: clamp(1.4rem, 4vw, 1.9rem); }
   .categories-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); }
@@ -1823,6 +1845,8 @@ section + section { margin-top: var(--sp-5); }
   .testimonials-grid, .destacados-grid, .proveedores-grid { grid-template-columns: 1fr; }
   .testimonial-card { padding: var(--sp-3); }
   .featured-section { padding: var(--sp-3); border-left-width: 4px; margin: var(--sp-3) 0; }
+  /* FIX v13.10: en móvil también se anula el borde si contiene category-cards */
+  .featured-section:has(.category-card) { padding: 0; border-left: none; }
   .footer { padding: var(--sp-4) 0 var(--sp-3); }
   .footer-content { grid-template-columns: 1fr; gap: var(--sp-3); }
   .footer-legal p { font-size: .75rem; }
