@@ -13,8 +13,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* ========================================
-           ADMIN v12.0 — SISTEMA DE DISEÑO PROPIO
+           ADMIN v13.18 — SISTEMA DE DISEÑO PROPIO
            Coherencia total con el frontend
+           
+           Cambios v13.18:
+           - Parche de diagnóstico en apiRequest (muestra error exacto del backend).
+           - Eliminado campo Teléfono.
+           - Eliminado campo Rango de Precios.
+           - Nuevas reglas de imágenes: Gratuito=1, Básico=2, Completo=3.
+           - Destacado automático para plan Completo.
            ======================================== */
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
@@ -296,7 +303,7 @@
                     </div>
                     <div>
                         <label class="form-label">Buscar por texto</label>
-                        <input type="text" id="filtroTexto" class="form-control" placeholder="Nombre, dirección, teléfono..." oninput="filtrarConsultaRapida()">
+                        <input type="text" id="filtroTexto" class="form-control" placeholder="Nombre, dirección, WhatsApp..." oninput="filtrarConsultaRapida()">
                     </div>
                 </div>
 
@@ -353,10 +360,6 @@
                             <input type="text" id="f_direccion" class="form-control">
                         </div>
                         <div>
-                            <label class="form-label">Teléfono</label>
-                            <input type="text" id="f_telefono" class="form-control">
-                        </div>
-                        <div>
                             <label class="form-label">WhatsApp (solo números)</label>
                             <input type="text" id="f_whatsapp" class="form-control">
                         </div>
@@ -364,21 +367,17 @@
                             <label class="form-label">Horario</label>
                             <input type="text" id="f_horario" class="form-control">
                         </div>
-                        <div>
-                            <label class="form-label">Rango de Precios</label>
-                            <input type="text" id="f_precios" class="form-control">
-                        </div>
                         <div class="full-width">
                             <label class="form-label">Descripción</label>
                             <textarea id="f_descripcion" class="form-control" rows="2"></textarea>
                         </div>
 
-                        <!-- IMÁGENES -->
+                        <!-- IMÁGENES (Gratuito=1, Básico=2, Completo=3) -->
                         <div class="full-width">
                             <label class="form-label">Imágenes del Negocio</label>
-                            <small style="color:var(--gris-medio);font-size:.8rem;display:block;margin-bottom:var(--sp-2)">Gratuito: sin imágenes | Básico: 2 imágenes | Completo: 4 imágenes</small>
+                            <small style="color:var(--gris-medio);font-size:.8rem;display:block;margin-bottom:var(--sp-2)">Gratuito: 1 imagen | Básico: 2 imágenes | Completo: 3 imágenes (y destacado automático)</small>
 
-                            <div class="image-upload-container">
+                            <div class="image-upload-container" id="imgGroup1">
                                 <input type="text" id="f_imagen1" class="form-control" placeholder="URL de Imagen 1" readonly>
                                 <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput1').click()"><i class="fas fa-camera"></i> Subir</button>
                                 <input type="file" id="fileInput1" style="display:none" accept="image/*" onchange="handleFileSelect(1, this)">
@@ -387,7 +386,7 @@
                             <div class="upload-status" id="status1"></div>
                             <img id="preview1" class="image-preview hidden" src="" alt="Preview 1">
 
-                            <div class="image-upload-container">
+                            <div class="image-upload-container hidden" id="imgGroup2">
                                 <input type="text" id="f_imagen2" class="form-control" placeholder="URL de Imagen 2" readonly>
                                 <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput2').click()"><i class="fas fa-camera"></i> Subir</button>
                                 <input type="file" id="fileInput2" style="display:none" accept="image/*" onchange="handleFileSelect(2, this)">
@@ -396,7 +395,7 @@
                             <div class="upload-status" id="status2"></div>
                             <img id="preview2" class="image-preview hidden" src="" alt="Preview 2">
 
-                            <div class="image-upload-container completo-only hidden">
+                            <div class="image-upload-container hidden" id="imgGroup3">
                                 <input type="text" id="f_imagen3" class="form-control" placeholder="URL de Imagen 3" readonly>
                                 <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput3').click()"><i class="fas fa-camera"></i> Subir</button>
                                 <input type="file" id="fileInput3" style="display:none" accept="image/*" onchange="handleFileSelect(3, this)">
@@ -404,23 +403,14 @@
                             <div class="upload-progress hidden" id="progress3"><div class="upload-progress-bar"></div></div>
                             <div class="upload-status" id="status3"></div>
                             <img id="preview3" class="image-preview hidden" src="" alt="Preview 3">
-
-                            <div class="image-upload-container completo-only hidden">
-                                <input type="text" id="f_imagen4" class="form-control" placeholder="URL de Imagen 4" readonly>
-                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput4').click()"><i class="fas fa-camera"></i> Subir</button>
-                                <input type="file" id="fileInput4" style="display:none" accept="image/*" onchange="handleFileSelect(4, this)">
-                            </div>
-                            <div class="upload-progress hidden" id="progress4"><div class="upload-progress-bar"></div></div>
-                            <div class="upload-status" id="status4"></div>
-                            <img id="preview4" class="image-preview hidden" src="" alt="Preview 4">
                         </div>
 
                         <div>
                             <label class="form-label">Paquete de Visibilidad</label>
-                            <select id="f_tipo_plan" class="form-control" onchange="toggleCompletoFields()">
-                                <option value="gratuito">Gratuito (Listado básico)</option>
-                                <option value="basico">Paquete Básico</option>
-                                <option value="completo">Paquete Completo (Máxima visibilidad)</option>
+                            <select id="f_tipo_plan" class="form-control" onchange="toggleImagenesPorPlan()">
+                                <option value="gratuito">Gratuito (1 imagen)</option>
+                                <option value="basico">Paquete Básico (2 imágenes)</option>
+                                <option value="completo">Paquete Completo (3 imágenes + Destacado)</option>
                             </select>
                         </div>
                         <div>
@@ -429,6 +419,7 @@
                                 <input type="checkbox" id="f_destacado_switch">
                                 <label for="f_destacado_switch">Mostrar en "Recomendados"</label>
                             </div>
+                            <small id="destacadoHint" style="color:var(--gris-medio);font-size:.75rem;display:none">🔒 Automático por plan Completo</small>
                         </div>
                         <div>
                             <label class="form-label">¿Atención 24h?</label>
@@ -586,7 +577,7 @@
         }
 
         // ==========================================
-        // API
+        // API — v13.18: diagnóstico de errores mejorado
         // ==========================================
         async function apiRequest(endpoint, method = 'GET', body = null) {
             const options = {
@@ -608,8 +599,15 @@
             }
 
             if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Error en la petición');
+                let errorText = '';
+                try {
+                    const errData = await response.json();
+                    // El backend puede devolver message, error, details o un objeto con campos
+                    errorText = errData.message || errData.error || errData.details || JSON.stringify(errData);
+                } catch {
+                    try { errorText = await response.text(); } catch { errorText = ''; }
+                }
+                throw new Error(errorText || 'Error ' + response.status);
             }
 
             return response.json();
@@ -689,6 +687,46 @@
         document.getElementById('f_subcategoria_otro').addEventListener('input', function() {
             document.getElementById('f_subcategoria').value = this.value;
         });
+
+        // ==========================================
+        // v13.18: Reglas de imágenes por plan + destacado automático
+        // Gratuito=1, Básico=2, Completo=3 (destacado forzado)
+        // ==========================================
+        function toggleImagenesPorPlan() {
+            const plan = document.getElementById('f_tipo_plan').value;
+            const img2 = document.getElementById('imgGroup2');
+            const img3 = document.getElementById('imgGroup3');
+            const destacado = document.getElementById('f_destacado_switch');
+            const hint = document.getElementById('destacadoHint');
+
+            // Limpiar campos ocultos
+            if (plan === 'gratuito') {
+                img2.classList.add('hidden');
+                img3.classList.add('hidden');
+                document.getElementById('f_imagen2').value = '';
+                document.getElementById('f_imagen3').value = '';
+                document.getElementById('preview2').classList.add('hidden');
+                document.getElementById('preview3').classList.add('hidden');
+            } else if (plan === 'basico') {
+                img2.classList.remove('hidden');
+                img3.classList.add('hidden');
+                document.getElementById('f_imagen3').value = '';
+                document.getElementById('preview3').classList.add('hidden');
+            } else { // completo
+                img2.classList.remove('hidden');
+                img3.classList.remove('hidden');
+            }
+
+            // Destacado automático para completo
+            if (plan === 'completo') {
+                destacado.checked = true;
+                destacado.disabled = true;
+                hint.style.display = 'block';
+            } else {
+                destacado.disabled = false;
+                hint.style.display = 'none';
+            }
+        }
 
         // ==========================================
         // SUBIDA DE IMÁGENES
@@ -772,24 +810,6 @@
         }
 
         // ==========================================
-        // CAMBIO DE NOMENCLATURA v12.0
-        // ==========================================
-        function toggleCompletoFields() {
-            const plan = document.getElementById('f_tipo_plan').value;
-            const completoFields = document.querySelectorAll('.completo-only');
-
-            if (plan === 'completo') {
-                completoFields.forEach(field => field.classList.remove('hidden'));
-            } else {
-                completoFields.forEach(field => field.classList.add('hidden'));
-                document.getElementById('f_imagen3').value = '';
-                document.getElementById('f_imagen4').value = '';
-                document.getElementById('preview3').classList.add('hidden');
-                document.getElementById('preview4').classList.add('hidden');
-            }
-        }
-
-        // ==========================================
         // CRUD
         // ==========================================
         async function loadProviders() {
@@ -840,7 +860,7 @@
                             </h4>
                             <p><strong>${escaparHTML(p.categoria)}</strong> &gt; ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
                             <p><i class="fas fa-map-marker-alt" style="color:var(--rojo-alerta)"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
-                            <p><i class="fas fa-phone" style="color:var(--azul-confianza)"></i> ${escaparHTML(p.telefono || 'Sin teléfono')} | <i class="fab fa-whatsapp" style="color:var(--verde-accion)"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
+                            <p><i class="fab fa-whatsapp" style="color:var(--verde-accion)"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
                         </div>
                         <div class="provider-actions">
                             <button onclick="editProvider(${i})" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</button>
@@ -863,7 +883,6 @@
                 const matchTexto = !texto ||
                     (p.nombre || '').toLowerCase().includes(texto) ||
                     (p.direccion || '').toLowerCase().includes(texto) ||
-                    (p.telefono || '').toLowerCase().includes(texto) ||
                     (p.whatsapp || '').toLowerCase().includes(texto) ||
                     (p.descripcion || '').toLowerCase().includes(texto) ||
                     (p.subcategoria || '').toLowerCase().includes(texto);
@@ -891,10 +910,10 @@
             }
 
             const html = lista.map(p => {
-                const whatsappNum = (p.whatsapp || p.telefono || '').replace(/\D/g, '');
+                const whatsappNum = (p.whatsapp || '').replace(/\D/g, '');
                 const fullNum = whatsappNum.startsWith('591') ? whatsappNum : '591' + whatsappNum;
                 const whatsappLink = whatsappNum ? `https://wa.me/${fullNum}` : '#';
-                const textoCopiar = `${p.nombre}\n${p.categoria} &gt; ${p.subcategoria}\n📍 ${p.direccion || 'Sin dirección'}\n📞 ${p.telefono || 'Sin teléfono'}\n💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}\n🕒 ${p.horario || 'Sin horario'}`;
+                const textoCopiar = `${p.nombre}\n${p.categoria} > ${p.subcategoria}\n📍 ${p.direccion || 'Sin dirección'}\n💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}\n🕒 ${p.horario || 'Sin horario'}`;
 
                 return `
                     <div class="quick-provider-row">
@@ -907,7 +926,7 @@
                             </h5>
                             <p><strong>${escaparHTML(p.categoria)}</strong> &gt; ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
                             <p><i class="fas fa-map-marker-alt" style="color:var(--rojo-alerta)"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
-                            <p><i class="fas fa-phone" style="color:var(--azul-confianza)"></i> ${escaparHTML(p.telefono || 'Sin teléfono')} | <i class="fab fa-whatsapp" style="color:var(--verde-accion)"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
+                            <p><i class="fab fa-whatsapp" style="color:var(--verde-accion)"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
                             <p><i class="fas fa-clock" style="color:var(--ocre-calidad)"></i> ${escaparHTML(p.horario || 'Sin horario')}</p>
                         </div>
                         <div class="quick-provider-actions">
@@ -951,9 +970,9 @@
 
             document.getElementById('f_categoria').value = 'Salud y Bienestar';
             actualizarSubcategorias();
-            toggleCompletoFields();
+            toggleImagenesPorPlan();
 
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 3; i++) {
                 document.getElementById(`preview${i}`).classList.add('hidden');
                 document.getElementById(`preview${i}`).src = '';
                 document.getElementById(`f_imagen${i}`).value = '';
@@ -990,17 +1009,14 @@
             }
 
             document.getElementById('f_direccion').value = p.direccion || '';
-            document.getElementById('f_telefono').value = p.telefono || '';
             document.getElementById('f_whatsapp').value = p.whatsapp || '';
             document.getElementById('f_horario').value = p.horario || '';
-            document.getElementById('f_precios').value = p.precios || '';
             document.getElementById('f_descripcion').value = p.descripcion || '';
             document.getElementById('f_tipo_plan').value = p.tipo_plan || 'gratuito';
-            document.getElementById('f_destacado_switch').checked = p.destacado == 1;
             document.getElementById('f_24horas_switch').checked = p['24horas'] || false;
             document.getElementById('f_audio_url').value = p.audio_url || '';
 
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 3; i++) {
                 const imgField = document.getElementById(`f_imagen${i}`);
                 const preview = document.getElementById(`preview${i}`);
                 imgField.value = p[`imagen${i}`] || '';
@@ -1012,7 +1028,11 @@
                 }
             }
 
-            toggleCompletoFields();
+            toggleImagenesPorPlan();
+            // Restaurar estado de destacado (por si el plan no es completo)
+            if (p.tipo_plan !== 'completo') {
+                document.getElementById('f_destacado_switch').checked = p.destacado == 1;
+            }
             document.getElementById('editModal').classList.add('active');
         }
 
@@ -1047,24 +1067,26 @@
                 }
             }
 
+            // v13.18: sin teléfono, sin precios. Destacado forzado si es completo.
+            const plan = document.getElementById('f_tipo_plan').value;
             const newProvider = {
                 id: nuevoId,
                 nombre: document.getElementById('f_nombre').value,
                 categoria: document.getElementById('f_categoria').value,
                 subcategoria: document.getElementById('f_subcategoria').value,
                 direccion: document.getElementById('f_direccion').value,
-                telefono: document.getElementById('f_telefono').value,
+                telefono: '',
                 whatsapp: document.getElementById('f_whatsapp').value,
                 horario: document.getElementById('f_horario').value,
-                precios: document.getElementById('f_precios').value,
+                precios: '',
                 descripcion: document.getElementById('f_descripcion').value,
-                tipo_plan: document.getElementById('f_tipo_plan').value,
-                destacado: document.getElementById('f_destacado_switch').checked ? 1 : 0,
+                tipo_plan: plan,
+                destacado: plan === 'completo' ? 1 : (document.getElementById('f_destacado_switch').checked ? 1 : 0),
                 '24horas': document.getElementById('f_24horas_switch').checked,
                 imagen1: document.getElementById('f_imagen1').value,
                 imagen2: document.getElementById('f_imagen2').value,
                 imagen3: document.getElementById('f_imagen3').value,
-                imagen4: document.getElementById('f_imagen4').value,
+                imagen4: '',
                 audio_url: document.getElementById('f_audio_url').value
             };
 
@@ -1146,7 +1168,3 @@
     </script>
 </body>
 </html>
-
-
-
-
