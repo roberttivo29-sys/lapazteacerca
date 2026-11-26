@@ -13,15 +13,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* ========================================
-           ADMIN v13.18 — SISTEMA DE DISEÑO PROPIO
+           ADMIN v13.19 — SISTEMA DE DISEÑO PROPIO
            Coherencia total con el frontend
            
            Cambios v13.18:
-           - Parche de diagnóstico en apiRequest (muestra error exacto del backend).
            - Eliminado campo Teléfono.
            - Eliminado campo Rango de Precios.
            - Nuevas reglas de imágenes: Gratuito=1, Básico=2, Completo=3.
            - Destacado automático para plan Completo.
+           
+           Cambios v13.19:
+           - FIX: Diagnóstico de errores mejorado (muestra el array "detalles" del backend).
            ======================================== */
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
@@ -577,7 +579,7 @@
         }
 
         // ==========================================
-        // API — v13.18: diagnóstico de errores mejorado
+        // API — v13.19: diagnóstico de errores mejorado (muestra "detalles")
         // ==========================================
         async function apiRequest(endpoint, method = 'GET', body = null) {
             const options = {
@@ -602,8 +604,12 @@
                 let errorText = '';
                 try {
                     const errData = await response.json();
-                    // El backend puede devolver message, error, details o un objeto con campos
-                    errorText = errData.message || errData.error || errData.details || JSON.stringify(errData);
+                    // v13.19: Si el backend devuelve un array de "detalles", los unimos con " · "
+                    if (errData.detalles && Array.isArray(errData.detalles)) {
+                        errorText = errData.detalles.join(' · ');
+                    } else {
+                        errorText = errData.message || errData.error || errData.details || JSON.stringify(errData);
+                    }
                 } catch {
                     try { errorText = await response.text(); } catch { errorText = ''; }
                 }
@@ -1067,7 +1073,7 @@
                 }
             }
 
-            // v13.18: sin teléfono, sin precios. Destacado forzado si es completo.
+            // v13.19: sin teléfono, sin precios. Destacado forzado si es completo.
             const plan = document.getElementById('f_tipo_plan').value;
             const newProvider = {
                 id: nuevoId,

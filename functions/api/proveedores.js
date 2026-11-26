@@ -1,13 +1,17 @@
 // ========================================
-// LA PAZ TE ACERCA - API de Proveedores v13.0
+// LA PAZ TE ACERCA - API de Proveedores v13.19
 // Lee directamente de GitHub API (sin loops)
 //
 // Novedades v13.0:
 // - FIX CRÍTICO: Decodificación UTF-8 correcta en lectura (atob + TextDecoder).
 // - FIX CRÍTICO: Codificación UTF-8 correcta en escritura (TextEncoder + btoa).
-//   (Antes: "Clínica" → "ClÃ­nica" en cada guardado. Ahora: se preserva.)
-// - NUEVO: validación de esquema antes de POST/PUT (reglas de plan, campos obligatorios).
-// - Se mantiene TODO el código original: CORS, OPTIONS, User-Agent, console.error, etc.
+// - NUEVO: validación de esquema antes de POST/PUT.
+//
+// Novedades v13.19:
+// - FIX: Nuevas reglas de imágenes por plan → Gratuito=1, Básico=2, Completo=3.
+// - FIX: Completo exige destacado=1 (coherencia). Gratuito prohíbe destacado.
+// - FIX: Se ignora imagen4 (fuera de esquema). Solo se validan 1-3.
+// - FIX: Mensaje de error ahora incluye los detalles (para el admin).
 // ========================================
 
 import { validateToken } from './login.js';
@@ -18,7 +22,7 @@ const GITHUB_PATH = 'data/proveedores.json';
 const GITHUB_BRANCH = 'main';
 
 // ========================================
-// NUEVO v13.0: Validación de esquema
+// v13.19: Validación de esquema
 // ========================================
 function validarProveedor(p) {
     const errores = [];
@@ -52,19 +56,22 @@ function validarProveedor(p) {
         errores.push('Plan de visibilidad no válido');
     }
 
-    // Regla de negocio: imágenes máximas por plan
-    const imagenesUsadas = [1, 2, 3, 4].filter(i => (p['imagen' + i] || '').trim().length > 0);
-    const maxImagenes = p.tipo_plan === 'completo' ? 4 : (p.tipo_plan === 'basico' ? 2 : 0);
+    // v13.19: Regla de negocio — imágenes máximas por plan (1 / 2 / 3)
+    const imagenesUsadas = [1, 2, 3].filter(i => (p['imagen' + i] || '').trim().length > 0);
+    const maxImagenes = p.tipo_plan === 'completo' ? 3 : (p.tipo_plan === 'basico' ? 2 : 1);
     if (imagenesUsadas.length > maxImagenes) {
-        errores.push(`El plan ${p.tipo_plan} solo permite ${maxImagenes} imagen(es). Tienes ${imagenesUsadas.length}.`);
+        errores.push(`El plan ${p.tipo_plan} permite máximo ${maxImagenes} imagen(es). Tienes ${imagenesUsadas.length}.`);
     }
 
-    // Regla de negocio: destacado requiere plan de pago
+    // v13.19: Coherencia destacado ↔ plan
     if (Number(p.destacado) === 1 && p.tipo_plan === 'gratuito') {
-        errores.push('Solo los planes Básico o Completo pueden aparecer en Destacados');
+        errores.push('El plan Gratuito no puede aparecer en Destacados');
+    }
+    if (p.tipo_plan === 'completo' && Number(p.destacado) !== 1) {
+        errores.push('El plan Completo requiere estar Destacado (automático)');
     }
 
-    // Validación de WhatsApp (si existe, debe ser numérico)
+    // Validación de WhatsApp (si existe, debe ser numérico y razonable)
     if (p.whatsapp && String(p.whatsapp).trim() !== '') {
         const soloDigitos = String(p.whatsapp).replace(/\D/g, '');
         if (soloDigitos.length < 7 || soloDigitos.length > 12) {
@@ -80,6 +87,16 @@ function validarProveedor(p) {
     }
 
     return errores.length > 0 ? errores : null;
+}
+
+// ========================================
+// Helper: Normalizar proveedor (limpiar imagen4, forzar destacado en completo)
+// ========================================
+function normalizarProveedor(p) {
+    const limpio = { ...p };
+    delete limpio.imagen4; // fuera de esquema v13.19
+    if (limpio.tipo_plan === 'completo') limpio.destacado = 1;
+    return limpio;
 }
 
 // ========================================
@@ -103,8 +120,6 @@ async function readProveedoresFromGitHub(githubToken) {
 
     const data = await response.json();
 
-    // GitHub devuelve el contenido en base64
-    // FIX v13.0: atob() devuelve string latin1. Convertir a bytes y decodificar como UTF-8.
     const raw = atob(data.content);
     const bytes = Uint8Array.from(raw, c => c.charCodeAt(0));
     const content = new TextDecoder('utf-8').decode(bytes);
@@ -115,12 +130,11 @@ async function readProveedoresFromGitHub(githubToken) {
 
 // ========================================
 // Helper: Guardar proveedores en GitHub
-// FIX v13.0: Codificación UTF-8 correcta (sin unescape deprecated)
+// FIX v13.0: Codificación UTF-8 correcta
 // ========================================
 async function writeProveedoresToGitHub(githubToken, proveedores, message) {
     const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
 
-    // Obtener SHA actual
     const shaResponse = await fetch(
         `${url}?ref=${GITHUB_BRANCH}`,
         {
@@ -138,14 +152,12 @@ async function writeProveedoresToGitHub(githubToken, proveedores, message) {
 
     const shaData = await shaResponse.json();
 
-    // FIX v13.0: Codificar UTF-8 correctamente sin usar unescape() (deprecated)
     const jsonString = JSON.stringify(proveedores, null, 2);
     const jsonBytes = new TextEncoder().encode(jsonString);
     let bin = '';
     jsonBytes.forEach(b => bin += String.fromCharCode(b));
     const content = btoa(bin);
 
-    // Actualizar archivo
     const updateResponse = await fetch(url, {
         method: 'PUT',
         headers: {
@@ -210,7 +222,6 @@ export async function onRequestGet(context) {
         return new Response(null, { headers: corsHeaders });
     }
 
-    // Validar auth
     const auth = await validateAuth(request, env);
     if (!auth.valid) {
         return new Response(
@@ -276,20 +287,23 @@ export async function onRequestPost(context) {
     }
 
     try {
-        const newProvider = await request.json();
+        const rawProvider = await request.json();
+        const newProvider = normalizarProveedor(rawProvider);
 
-        // NUEVO v13.0: Validación de esquema
         const errores = validarProveedor(newProvider);
         if (errores) {
             return new Response(
-                JSON.stringify({ error: true, message: 'Datos inválidos', detalles: errores }),
+                JSON.stringify({
+                    error: true,
+                    message: 'Datos inválidos: ' + errores.join(' · '),
+                    detalles: errores
+                }),
                 { status: 400, headers: corsHeaders }
             );
         }
 
         const proveedores = await readProveedoresFromGitHub(githubToken);
 
-        // Verificar ID único
         if (proveedores.some(p => p.id === newProvider.id)) {
             return new Response(
                 JSON.stringify({ error: true, message: `El ID ${newProvider.id} ya existe` }),
@@ -347,14 +361,18 @@ export async function onRequestPut(context) {
     }
 
     try {
-        const updatedProvider = await request.json();
+        const rawProvider = await request.json();
+        const updatedProvider = normalizarProveedor(rawProvider);
         const providerId = parseInt(params.id);
 
-        // NUEVO v13.0: Validación de esquema
         const errores = validarProveedor(updatedProvider);
         if (errores) {
             return new Response(
-                JSON.stringify({ error: true, message: 'Datos inválidos', detalles: errores }),
+                JSON.stringify({
+                    error: true,
+                    message: 'Datos inválidos: ' + errores.join(' · '),
+                    detalles: errores
+                }),
                 { status: 400, headers: corsHeaders }
             );
         }
