@@ -816,4 +816,6 @@ function obtenerImagenesMuestra(subcategoria) {
 
 function tienePlantillas(subcategoria) {
   return plantillasServicios.hasOwnProperty(subcategoria);
-}
+} 
+ / /   v 1 4 . 1 :   4   i m á g e n e s   e s t a n d a r i z a d a s   1 1 / 2 7 / 2 0 2 6   0 7 : 2 5 : 5 4  
+ 
