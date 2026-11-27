@@ -484,17 +484,20 @@ const imagenesMuestra = {
   "Clínicas y Urgencias": [
     "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&h=400&fit=crop"
   ],
   "Consultorios y Especialistas": [
     "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&h=400&fit=crop"
   ],
   "Odontología": [
     "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=400&fit=crop"
   ],
   "Laboratorios y Análisis": [
     "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&h=400&fit=crop",
@@ -505,34 +508,40 @@ const imagenesMuestra = {
   "Veterinaria y Mascotas": [
     "https://images.unsplash.com/photo-1628009368231-7603352989c3?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1628009368231-7603352989c3?w=600&h=400&fit=crop"
   ],
   "Óptica y Audición": [
     "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&h=400&fit=crop"
   ],
   "Ambulancias y Traslados": [
     "https://images.unsplash.com/photo-1587351021759-3e566b2af1cc?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1587745416684-47953f16f02f?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1587745416684-47953f16f02f?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1587351021759-3e566b2af1cc?w=600&h=400&fit=crop"
   ],
   "Fisioterapia y Rehabilitación": [
     "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop"
   ],
   "Otros Servicios de Salud": [
     "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1584515933487-779824d29309?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1584515933487-779824d29309?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop"
   ],
 
   // MANTENIMIENTO DEL HOGAR
   "Plomería": [
     "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1584622650114-93eb43884739?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1584622650114-93eb43884739?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=400&fit=crop"
   ],
   "Electricidad": [
     "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=600&h=400&fit=crop",
@@ -543,184 +552,219 @@ const imagenesMuestra = {
   "Albañilería y Reparaciones": [
     "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop"
   ],
   "Pintura y Acabados": [
     "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1589939705387-957fa28b4a2d?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop"
   ],
   "Cerrajería": [
     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop"
   ],
   "Carpintería": [
     "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1611021061285-5d9d7b1b2c4e?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1611021061285-5d9d7b1b2c4e?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=400&fit=crop"
   ],
   "Limpieza y Fumigación": [
     "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1585421514738-01798e348b17?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop"
   ],
   "Jardinería y Paisajismo": [
     "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=600&h=400&fit=crop"
   ],
   "Instalación y Mantenimiento de Gas": [
     "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=400&fit=crop"
   ],
   "Otros Oficios del Hogar": [
     "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop"
   ],
 
   // MATERIALES DE CONSTRUCCIÓN
   "Cemento, Estuco y Yeso": [
     "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop"
   ],
   "Áridos: Arena, Grava y Piedra": [
     "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop"
   ],
   "Ladrillos, Bloques y Prefabricados": [
     "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=600&h=400&fit=crop"
   ],
   "Barracas de Madera y Cubiertas": [
     "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1611021061285-5d9d7b1b2c4e?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1611021061285-5d9d7b1b2c4e?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=400&fit=crop"
   ],
   "Alquiler de Equipos y Maquinaria": [
     "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop"
   ],
 
   // TALLERES AUTOMOTRICES
   "Taller Mecánico General": [
     "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
   ],
   "Frenos y Suspensión": [
     "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
   ],
   "Muñonería (Alineación y Balanceo)": [
     "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
   ],
   "Chapistería y Pintura": [
     "https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=600&h=400&fit=crop"
   ],
   "Electricidad y Electromecánica": [
     "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
   ],
   "Grúas y Auxilio Vial": [
     "https://images.unsplash.com/photo-1580983218765-1f71dd037419?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1580983218765-1f71dd037419?w=600&h=400&fit=crop"
   ],
   "Lavado y Detallado": [
     "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1605152276897-4f618f831968?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&h=400&fit=crop"
   ],
   "Repuestos y Accesorios": [
     "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
   ],
   "Lubricentros y Cambio de Aceite": [
     "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
   ],
   "Otros Servicios Automotrices": [
     "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&h=400&fit=crop"
   ],
 
   // TECNOLOGÍA Y REDES
   "Reparación de PC y Laptops": [
     "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop"
   ],
   "Reparación de Celulares y Tablets": [
     "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1512054502232-10a0a035d672?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1512054502232-10a0a035d672?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop"
   ],
   "Cámaras de Seguridad y CCTV": [
     "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&h=400&fit=crop"
   ],
   "Redes e Internet": [
     "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"
   ],
   "Soporte Técnico a Domicilio": [
     "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop"
   ],
   "Impresoras y Suministros de Oficina": [
     "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&h=400&fit=crop"
   ],
   "Videojuegos y Consolas": [
     "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=400&fit=crop"
   ],
   "Otros Servicios Tecnológicos": [
     "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop"
   ],
 
   // SERVICIOS DE DESPEDIDA
   "Funerarias y Velatorios": [
     "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop"
   ],
   "Cremación y Urnas": [
     "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop"
   ],
   "Floristerías y Homenajes": [
     "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=400&fit=crop"
   ],
   "Trámites y Gestoría Funeraria": [
     "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop"
   ],
 
@@ -728,79 +772,94 @@ const imagenesMuestra = {
   "Filmación y Fotografía": [
     "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=400&fit=crop"
   ],
   "Sonido e Iluminación": [
     "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop"
   ],
   "Bandas y Música en Vivo": [
     "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop"
   ],
   "Locales y Salones de Eventos": [
     "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&h=400&fit=crop"
   ],
   "Decoración y Mobiliario": [
     "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop"
   ],
   "Catering y Banquetes": [
     "https://images.unsplash.com/photo-1555244162-803834f70033?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1555244162-803834f70033?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1555244162-803834f70033?w=600&h=400&fit=crop"
   ],
   "Animación y Espectáculos": [
     "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop"
   ],
   "Alquiler de Vestuario y Trajes": [
     "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=400&fit=crop"
   ],
   "Otros Servicios para Eventos": [
     "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop"
   ],
 
   // IMAGEN Y CUIDADO PERSONAL
   "Barberías": [
     "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&h=400&fit=crop"
   ],
   "Salones de Belleza Unisex": [
     "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop"
   ],
   "Centros de Estética": [
     "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=400&fit=crop"
   ],
   "Maquillaje Profesional": [
     "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1522335789203-aaa2f6b5e6a4?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&h=400&fit=crop"
   ],
   "Spas y Masajes": [
     "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=400&fit=crop"
   ],
   "Servicios a Domicilio": [
     "https://images.unsplash.com/photo-1522335789203-aaa2f6b5e6a4?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1522335789203-aaa2f6b5e6a4?w=600&h=400&fit=crop"
   ]
 
 };
