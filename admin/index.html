@@ -155,7 +155,7 @@
         .upload-status.success{color:var(--verde-accion)}
         .upload-status.error{color:var(--rojo-alerta)}
 
-        /* v14.0: NUEVOS ESTILOS PARA PLANTILLAS */
+        /* v14.0: PLANTILLAS DE DESCRIPCIÓN */
         .plantillas-box{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:1rem;margin-top:1rem}
         .plantillas-box-title{font-weight:600;font-size:.9rem;color:#334155;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
         .plantillas-box-title small{font-weight:400;color:#64748B;font-size:.8rem}
@@ -170,6 +170,24 @@
         .imagen-muestra-item img{width:100px;height:75px;object-fit:cover;border-radius:6px;border:1px solid #E2E8F0}
         .btn-usar-imagen{position:absolute;bottom:4px;right:4px;background:#10B981;color:#fff;border:none;padding:2px 6px;border-radius:4px;font-size:.7rem;cursor:pointer;font-family:var(--f-cuerpo)}
         .btn-usar-imagen:hover{background:#059669}
+
+        /* v14.0: SISTEMA DE HORARIOS */
+        .horario-container{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:1rem;margin-top:1rem}
+        .horario-container-title{font-weight:600;font-size:.9rem;color:#334155;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+        .horario-container-title small{font-weight:400;color:#64748B;font-size:.8rem}
+        .chips-dias{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem}
+        .chip-dia{background:#fff;border:1px solid #E2E8F0;padding:.5rem .8rem;border-radius:6px;font-size:.85rem;cursor:pointer;transition:all .2s;font-family:var(--f-cuerpo);color:#334155}
+        .chip-dia:hover{border-color:#1E40AF;background:#EFF6FF}
+        .chip-dia.activo{background:#1E40AF;color:#fff;border-color:#1E40AF}
+        .horario-reloj{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+        .horario-reloj label{font-size:.85rem;color:#64748B;font-weight:500}
+        .horario-reloj input[type="time"]{padding:.5rem;border:1px solid #E2E8F0;border-radius:6px;font-family:var(--f-cuerpo);font-size:.9rem}
+        .horario-reloj input[type="time"]:focus{outline:none;border-color:#1E40AF}
+        .horario-24h{margin-top:.75rem;display:flex;align-items:center;gap:.5rem}
+        .horario-24h input[type="checkbox"]{width:18px;height:18px;cursor:pointer}
+        .horario-24h label{font-size:.85rem;color:#334155;cursor:pointer}
+        .horario-texto{margin-top:.75rem}
+        .horario-texto textarea{width:100%;padding:.5rem;border:1px solid #E2E8F0;border-radius:6px;font-family:var(--f-cuerpo);font-size:.9rem;resize:vertical}
 
         /* TOAST */
         .toast-container{position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:var(--sp-2);max-width:400px}
@@ -368,16 +386,41 @@
                             <label class="form-label">WhatsApp (solo números)</label>
                             <input type="text" id="f_whatsapp" class="form-control">
                         </div>
-                        <div>
-                            <label class="form-label">Horario</label>
-                            <input type="text" id="f_horario" class="form-control">
+
+                        <!-- v14.0: SISTEMA DE HORARIOS -->
+                        <div class="full-width">
+                            <div class="horario-container">
+                                <div class="horario-container-title">
+                                    🕐 Horario de Atención <small>(selecciona los días y la hora)</small>
+                                </div>
+                                <div class="chips-dias" id="horario_dias_chips"></div>
+                                <input type="hidden" id="horario_dias_input" value="lunes_viernes">
+                                
+                                <div class="horario-reloj" id="horario_reloj">
+                                    <label>Apertura:</label>
+                                    <input type="time" id="horario_apertura" value="08:00">
+                                    <label>Cierre:</label>
+                                    <input type="time" id="horario_cierre" value="18:00">
+                                </div>
+
+                                <div class="horario-24h">
+                                    <input type="checkbox" id="horario_24horas" onchange="toggle24Horas()">
+                                    <label for="horario_24horas">Atención 24 horas</label>
+                                </div>
+
+                                <div class="horario-texto hidden" id="horario_texto_container">
+                                    <label class="form-label" style="font-size:.85rem;margin-bottom:.25rem">Horario personalizado:</label>
+                                    <textarea id="horario_texto" rows="2" placeholder="Ej: Lun-Mié 9-18, Vie 9-14, Sáb 10-13"></textarea>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="full-width">
                             <label class="form-label">Descripción</label>
                             <textarea id="f_descripcion" class="form-control" rows="2"></textarea>
                         </div>
 
-                        <!-- v14.0: SECCIÓN PLANTILLAS DE DESCRIPCIÓN -->
+                        <!-- v14.0: PLANTILLAS DE DESCRIPCIÓN -->
                         <div class="full-width">
                             <div id="seccionPlantillas" class="plantillas-box hidden">
                                 <div class="plantillas-box-title">
@@ -390,7 +433,7 @@
                             </div>
                         </div>
 
-                        <!-- IMÁGENES (Gratuito=1, Básico=2, Completo=3) -->
+                        <!-- IMÁGENES -->
                         <div class="full-width">
                             <label class="form-label">Imágenes del Negocio</label>
                             <small style="color:var(--gris-medio);font-size:.8rem;display:block;margin-bottom:var(--sp-2)">Gratuito: 1 imagen | Básico: 2 imágenes | Completo: 3 imágenes (y destacado automático)</small>
@@ -422,7 +465,7 @@
                             <div class="upload-status" id="status3"></div>
                             <img id="preview3" class="image-preview hidden" src="" alt="Preview 3">
 
-                            <!-- v14.0: SECCIÓN IMÁGENES DE MUESTRA -->
+                            <!-- v14.0: IMÁGENES DE MUESTRA -->
                             <div id="seccionImagenesMuestra" class="plantillas-box hidden">
                                 <div class="plantillas-box-title">
                                     📸 ¿Sin fotos aún? Usa una de muestra <small>(puedes reemplazarla después)</small>
@@ -471,9 +514,10 @@
     <!-- TOAST CONTAINER -->
     <div id="toastContainer" class="toast-container"></div>
 
-    <!-- v14.0: IMPORTAR PLANTILLAS Y COMUNICACIÓN -->
+    <!-- v14.0: IMPORTAR SCRIPTS -->
     <script src="plantillas.js"></script>
     <script src="comunicacion.js"></script>
+    <script src="horarios.js"></script>
 
     <script>
         // ==========================================
@@ -607,7 +651,7 @@
         }
 
         // ==========================================
-        // API — v13.19: diagnóstico de errores mejorado
+        // API
         // ==========================================
         async function apiRequest(endpoint, method = 'GET', body = null) {
             const options = {
@@ -716,7 +760,6 @@
                 hiddenInput.value = subSelect.value;
             }
 
-            // v14.0: Actualizar plantillas cuando cambia la subcategoría
             const subActual = hiddenInput.value || subSelect.value;
             if (subActual && subActual !== 'Otro') {
                 renderPlantillas(subActual);
@@ -732,7 +775,7 @@
         });
 
         // ==========================================
-        // v14.0: PLANTILLAS DE DESCRIPCIÓN
+        // PLANTILLAS DE DESCRIPCIÓN
         // ==========================================
         function renderPlantillas(subcategoria) {
             const seccion = document.getElementById('seccionPlantillas');
@@ -762,7 +805,6 @@
             const plantillas = obtenerPlantillas(sub);
             const textarea = document.getElementById('f_descripcion');
 
-            // Si ya hay texto, confirmar antes de reemplazar
             if (textarea.value.trim() !== '') {
                 if (!confirm('Ya escribiste una descripción. ¿Reemplazarla con la plantilla?')) {
                     return;
@@ -772,7 +814,6 @@
             textarea.value = plantillas[index];
             textarea.focus();
 
-            // Marcar visualmente el chip aplicado
             document.querySelectorAll('.plantilla-chip').forEach((chip, i) => {
                 chip.classList.toggle('applied', i === index);
             });
@@ -785,7 +826,7 @@
         }
 
         // ==========================================
-        // v14.0: IMÁGENES DE MUESTRA
+        // IMÁGENES DE MUESTRA
         // ==========================================
         function renderImagenesMuestra(subcategoria) {
             const seccion = document.getElementById('seccionImagenesMuestra');
@@ -829,7 +870,7 @@
         }
 
         // ==========================================
-        // v13.18: Reglas de imágenes por plan + destacado automático
+        // REGLAS DE IMÁGENES POR PLAN
         // ==========================================
         function toggleImagenesPorPlan() {
             const plan = document.getElementById('f_tipo_plan').value;
@@ -1080,7 +1121,6 @@
             container.innerHTML = html;
         }
 
-        // v14.0: Mensaje institucional al copiar
         function copiarDatos(texto) {
             const mensajeCompleto = `¡Hola! Gracias por comunicarte con La Paz te Acerca 🤝
 
@@ -1124,7 +1164,13 @@ ${texto}
             actualizarSubcategorias();
             toggleImagenesPorPlan();
 
-            // v14.0: Ocultar plantillas al abrir formulario nuevo
+            // v14.0: Inicializar sistema de horarios
+            renderizarChipsDias('horario_dias_chips', 'lunes_viernes');
+            document.getElementById('horario_apertura').value = '08:00';
+            document.getElementById('horario_cierre').value = '18:00';
+            document.getElementById('horario_24horas').checked = false;
+            document.getElementById('horario_texto').value = '';
+
             ocultarPlantillas();
             document.getElementById('seccionImagenesMuestra').classList.add('hidden');
 
@@ -1166,11 +1212,13 @@ ${texto}
 
             document.getElementById('f_direccion').value = p.direccion || '';
             document.getElementById('f_whatsapp').value = p.whatsapp || '';
-            document.getElementById('f_horario').value = p.horario || '';
             document.getElementById('f_descripcion').value = p.descripcion || '';
             document.getElementById('f_tipo_plan').value = p.tipo_plan || 'gratuito';
             document.getElementById('f_24horas_switch').checked = p['24horas'] || false;
             document.getElementById('f_audio_url').value = p.audio_url || '';
+
+            // v14.0: Cargar horario
+            cargarHorarioJSON(p.horario);
 
             for (let i = 1; i <= 3; i++) {
                 const imgField = document.getElementById(`f_imagen${i}`);
@@ -1189,7 +1237,6 @@ ${texto}
                 document.getElementById('f_destacado_switch').checked = p.destacado == 1;
             }
 
-            // v14.0: Mostrar plantillas e imágenes de muestra al editar
             const subActual = document.getElementById('f_subcategoria').value;
             if (subActual && subActual !== 'Otro') {
                 renderPlantillas(subActual);
@@ -1230,6 +1277,10 @@ ${texto}
                 }
             }
 
+            // v14.0: Obtener horario como JSON string
+            const horarioJSON = obtenerHorarioJSON();
+            const horarioTexto = JSON.stringify(horarioJSON);
+
             const plan = document.getElementById('f_tipo_plan').value;
             const newProvider = {
                 id: nuevoId,
@@ -1239,7 +1290,7 @@ ${texto}
                 direccion: document.getElementById('f_direccion').value,
                 telefono: '',
                 whatsapp: document.getElementById('f_whatsapp').value,
-                horario: document.getElementById('f_horario').value,
+                horario: horarioTexto,
                 precios: '',
                 descripcion: document.getElementById('f_descripcion').value,
                 tipo_plan: plan,
