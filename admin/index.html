@@ -12,19 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ========================================
-           ADMIN v13.19 — SISTEMA DE DISEÑO PROPIO
-           Coherencia total con el frontend
-           
-           Cambios v13.18:
-           - Eliminado campo Teléfono.
-           - Eliminado campo Rango de Precios.
-           - Nuevas reglas de imágenes: Gratuito=1, Básico=2, Completo=3.
-           - Destacado automático para plan Completo.
-           
-           Cambios v13.19:
-           - FIX: Diagnóstico de errores mejorado (muestra el array "detalles" del backend).
-           ======================================== */
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
             --azul-profundo:#0F172A;--azul-confianza:#1E40AF;--azul-claro:#3B82F6;
@@ -167,6 +154,22 @@
         .upload-status{font-size:.75rem;margin-top:.3rem;color:var(--gris-medio)}
         .upload-status.success{color:var(--verde-accion)}
         .upload-status.error{color:var(--rojo-alerta)}
+
+        /* v14.0: NUEVOS ESTILOS PARA PLANTILLAS */
+        .plantillas-box{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:1rem;margin-top:1rem}
+        .plantillas-box-title{font-weight:600;font-size:.9rem;color:#334155;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+        .plantillas-box-title small{font-weight:400;color:#64748B;font-size:.8rem}
+        .plantillas-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
+        .plantilla-chip{background:#fff;border:1px solid #E2E8F0;padding:.5rem .8rem;border-radius:6px;font-size:.8rem;cursor:pointer;text-align:left;max-width:100%;transition:all .2s;font-family:var(--f-cuerpo);color:#334155;line-height:1.4}
+        .plantilla-chip:hover{border-color:#1E40AF;background:#EFF6FF}
+        .plantilla-chip.applied{border-color:#10B981;background:#ECFDF5}
+        .btn-manual{background:none;border:1px dashed #94A3B8;color:#64748B;padding:.4rem .8rem;border-radius:6px;font-size:.8rem;cursor:pointer;font-family:var(--f-cuerpo)}
+        .btn-manual:hover{border-color:#64748B;color:#334155}
+        .imagenes-muestra-grid{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+        .imagen-muestra-item{position:relative;width:100px}
+        .imagen-muestra-item img{width:100px;height:75px;object-fit:cover;border-radius:6px;border:1px solid #E2E8F0}
+        .btn-usar-imagen{position:absolute;bottom:4px;right:4px;background:#10B981;color:#fff;border:none;padding:2px 6px;border-radius:4px;font-size:.7rem;cursor:pointer;font-family:var(--f-cuerpo)}
+        .btn-usar-imagen:hover{background:#059669}
 
         /* TOAST */
         .toast-container{position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:var(--sp-2);max-width:400px}
@@ -374,6 +377,19 @@
                             <textarea id="f_descripcion" class="form-control" rows="2"></textarea>
                         </div>
 
+                        <!-- v14.0: SECCIÓN PLANTILLAS DE DESCRIPCIÓN -->
+                        <div class="full-width">
+                            <div id="seccionPlantillas" class="plantillas-box hidden">
+                                <div class="plantillas-box-title">
+                                    🚀 Descripción sugerida <small>(opcional, elige una o escribe la tuya)</small>
+                                </div>
+                                <div id="chipsPlantillas" class="plantillas-chips"></div>
+                                <button type="button" class="btn-manual" onclick="ocultarPlantillas()">
+                                    ✏️ Escribir mi propia descripción
+                                </button>
+                            </div>
+                        </div>
+
                         <!-- IMÁGENES (Gratuito=1, Básico=2, Completo=3) -->
                         <div class="full-width">
                             <label class="form-label">Imágenes del Negocio</label>
@@ -405,6 +421,14 @@
                             <div class="upload-progress hidden" id="progress3"><div class="upload-progress-bar"></div></div>
                             <div class="upload-status" id="status3"></div>
                             <img id="preview3" class="image-preview hidden" src="" alt="Preview 3">
+
+                            <!-- v14.0: SECCIÓN IMÁGENES DE MUESTRA -->
+                            <div id="seccionImagenesMuestra" class="plantillas-box hidden">
+                                <div class="plantillas-box-title">
+                                    📸 ¿Sin fotos aún? Usa una de muestra <small>(puedes reemplazarla después)</small>
+                                </div>
+                                <div id="miniaturasMuestra" class="imagenes-muestra-grid"></div>
+                            </div>
                         </div>
 
                         <div>
@@ -446,6 +470,10 @@
 
     <!-- TOAST CONTAINER -->
     <div id="toastContainer" class="toast-container"></div>
+
+    <!-- v14.0: IMPORTAR PLANTILLAS Y COMUNICACIÓN -->
+    <script src="plantillas.js"></script>
+    <script src="comunicacion.js"></script>
 
     <script>
         // ==========================================
@@ -579,7 +607,7 @@
         }
 
         // ==========================================
-        // API — v13.19: diagnóstico de errores mejorado (muestra "detalles")
+        // API — v13.19: diagnóstico de errores mejorado
         // ==========================================
         async function apiRequest(endpoint, method = 'GET', body = null) {
             const options = {
@@ -604,7 +632,6 @@
                 let errorText = '';
                 try {
                     const errData = await response.json();
-                    // v13.19: Si el backend devuelve un array de "detalles", los unimos con " · "
                     if (errData.detalles && Array.isArray(errData.detalles)) {
                         errorText = errData.detalles.join(' · ');
                     } else {
@@ -688,6 +715,16 @@
                 otroInput.required = false;
                 hiddenInput.value = subSelect.value;
             }
+
+            // v14.0: Actualizar plantillas cuando cambia la subcategoría
+            const subActual = hiddenInput.value || subSelect.value;
+            if (subActual && subActual !== 'Otro') {
+                renderPlantillas(subActual);
+                renderImagenesMuestra(subActual);
+            } else {
+                ocultarPlantillas();
+                document.getElementById('seccionImagenesMuestra').classList.add('hidden');
+            }
         }
 
         document.getElementById('f_subcategoria_otro').addEventListener('input', function() {
@@ -695,8 +732,104 @@
         });
 
         // ==========================================
+        // v14.0: PLANTILLAS DE DESCRIPCIÓN
+        // ==========================================
+        function renderPlantillas(subcategoria) {
+            const seccion = document.getElementById('seccionPlantillas');
+            const chips = document.getElementById('chipsPlantillas');
+
+            if (typeof tienePlantillas === 'undefined' || !tienePlantillas(subcategoria)) {
+                seccion.classList.add('hidden');
+                return;
+            }
+
+            const plantillas = obtenerPlantillas(subcategoria);
+            if (plantillas.length === 0) {
+                seccion.classList.add('hidden');
+                return;
+            }
+
+            chips.innerHTML = plantillas.map((p, i) => {
+                const preview = p.length > 90 ? p.substring(0, 90) + '...' : p;
+                return `<button type="button" class="plantilla-chip" onclick="aplicarPlantilla(${i})" title="${escaparHTML(p)}">${escaparHTML(preview)}</button>`;
+            }).join('');
+
+            seccion.classList.remove('hidden');
+        }
+
+        function aplicarPlantilla(index) {
+            const sub = document.getElementById('f_subcategoria').value;
+            const plantillas = obtenerPlantillas(sub);
+            const textarea = document.getElementById('f_descripcion');
+
+            // Si ya hay texto, confirmar antes de reemplazar
+            if (textarea.value.trim() !== '') {
+                if (!confirm('Ya escribiste una descripción. ¿Reemplazarla con la plantilla?')) {
+                    return;
+                }
+            }
+
+            textarea.value = plantillas[index];
+            textarea.focus();
+
+            // Marcar visualmente el chip aplicado
+            document.querySelectorAll('.plantilla-chip').forEach((chip, i) => {
+                chip.classList.toggle('applied', i === index);
+            });
+
+            showToast('Plantilla aplicada', 'Puedes editarla antes de guardar', 'success', 2000);
+        }
+
+        function ocultarPlantillas() {
+            document.getElementById('seccionPlantillas').classList.add('hidden');
+        }
+
+        // ==========================================
+        // v14.0: IMÁGENES DE MUESTRA
+        // ==========================================
+        function renderImagenesMuestra(subcategoria) {
+            const seccion = document.getElementById('seccionImagenesMuestra');
+            const miniaturas = document.getElementById('miniaturasMuestra');
+
+            if (typeof obtenerImagenesMuestra === 'undefined') {
+                seccion.classList.add('hidden');
+                return;
+            }
+
+            const imgs = obtenerImagenesMuestra(subcategoria);
+            if (imgs.length === 0) {
+                seccion.classList.add('hidden');
+                return;
+            }
+
+            miniaturas.innerHTML = imgs.map((url, i) => `
+                <div class="imagen-muestra-item">
+                    <img src="${url}" alt="Muestra ${i+1}" loading="lazy">
+                    <button type="button" class="btn-usar-imagen" onclick="usarImagenMuestra('${url}', ${i+1})">Usar</button>
+                </div>
+            `).join('');
+
+            seccion.classList.remove('hidden');
+        }
+
+        function usarImagenMuestra(url, numero) {
+            const imgField = document.getElementById(`f_imagen${numero}`);
+            const preview = document.getElementById(`preview${numero}`);
+
+            if (imgField.value.trim() !== '') {
+                if (!confirm(`Ya hay una imagen en el slot ${numero}. ¿Reemplazarla?`)) {
+                    return;
+                }
+            }
+
+            imgField.value = url;
+            preview.src = url;
+            preview.classList.remove('hidden');
+            showToast('Imagen aplicada', `Imagen ${numero} de muestra cargada`, 'success', 2000);
+        }
+
+        // ==========================================
         // v13.18: Reglas de imágenes por plan + destacado automático
-        // Gratuito=1, Básico=2, Completo=3 (destacado forzado)
         // ==========================================
         function toggleImagenesPorPlan() {
             const plan = document.getElementById('f_tipo_plan').value;
@@ -705,7 +838,6 @@
             const destacado = document.getElementById('f_destacado_switch');
             const hint = document.getElementById('destacadoHint');
 
-            // Limpiar campos ocultos
             if (plan === 'gratuito') {
                 img2.classList.add('hidden');
                 img3.classList.add('hidden');
@@ -718,12 +850,11 @@
                 img3.classList.add('hidden');
                 document.getElementById('f_imagen3').value = '';
                 document.getElementById('preview3').classList.add('hidden');
-            } else { // completo
+            } else {
                 img2.classList.remove('hidden');
                 img3.classList.remove('hidden');
             }
 
-            // Destacado automático para completo
             if (plan === 'completo') {
                 destacado.checked = true;
                 destacado.disabled = true;
@@ -949,9 +1080,24 @@
             container.innerHTML = html;
         }
 
+        // v14.0: Mensaje institucional al copiar
         function copiarDatos(texto) {
-            navigator.clipboard.writeText(texto).then(() => {
-                showToast('¡Copiado!', 'Datos listos para pegar en WhatsApp', 'success', 2000);
+            const mensajeCompleto = `¡Hola! Gracias por comunicarte con La Paz te Acerca 🤝
+
+A continuación te enviamos los datos del servicio que solicitaste:
+
+${texto}
+
+💡 Te sugerimos llamar antes para confirmar disponibilidad.
+
+¿Necesitas otro servicio? Escríbenos nuevamente.
+¡Estamos para ayudarte! 🚀
+
+— Equipo La Paz te Acerca
+🌐 lapazteacerca.pages.dev`;
+
+            navigator.clipboard.writeText(mensajeCompleto).then(() => {
+                showToast('¡Copiado!', 'Mensaje completo listo para enviar por WhatsApp', 'success', 2000);
             }).catch(err => {
                 showToast('Error', 'No se pudo copiar: ' + err, 'error');
             });
@@ -977,6 +1123,10 @@
             document.getElementById('f_categoria').value = 'Salud y Bienestar';
             actualizarSubcategorias();
             toggleImagenesPorPlan();
+
+            // v14.0: Ocultar plantillas al abrir formulario nuevo
+            ocultarPlantillas();
+            document.getElementById('seccionImagenesMuestra').classList.add('hidden');
 
             for (let i = 1; i <= 3; i++) {
                 document.getElementById(`preview${i}`).classList.add('hidden');
@@ -1035,10 +1185,17 @@
             }
 
             toggleImagenesPorPlan();
-            // Restaurar estado de destacado (por si el plan no es completo)
             if (p.tipo_plan !== 'completo') {
                 document.getElementById('f_destacado_switch').checked = p.destacado == 1;
             }
+
+            // v14.0: Mostrar plantillas e imágenes de muestra al editar
+            const subActual = document.getElementById('f_subcategoria').value;
+            if (subActual && subActual !== 'Otro') {
+                renderPlantillas(subActual);
+                renderImagenesMuestra(subActual);
+            }
+
             document.getElementById('editModal').classList.add('active');
         }
 
@@ -1073,7 +1230,6 @@
                 }
             }
 
-            // v13.19: sin teléfono, sin precios. Destacado forzado si es completo.
             const plan = document.getElementById('f_tipo_plan').value;
             const newProvider = {
                 id: nuevoId,
