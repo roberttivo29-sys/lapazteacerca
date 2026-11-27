@@ -1,5 +1,5 @@
 // ========================================
-// LA PAZ TE ACERCA — Sistema de Horarios v14.0
+// LA PAZ TE ACERCA — Sistema de Horarios v14.1
 // ========================================
 // Plantillas de días + reloj nativo + checkbox 24h
 //
@@ -16,6 +16,9 @@
 //   - Si es_24horas = true, se ocultan apertura/cierre
 //   - Si dias = "personalizado", se ocultan apertura/cierre y aparece campo de texto
 //   - El reloj nativo (<input type="time">) usa el formato del navegador
+//
+// v14.1 FIX: Corregir ID de contenedor de horario personalizado
+//            (horario_texto → horario_texto_container)
 // ========================================
 
 // ---------- PLANTILLAS DE DÍAS ----------
@@ -66,20 +69,26 @@ function seleccionarDia(contenedorId, diaId) {
 }
 
 // Mostrar/ocultar campos según el tipo de día seleccionado
+// v14.1 FIX: usar horario_texto_container (el div padre con clase 'hidden')
+//            en lugar de horario_texto (el textarea interno)
 function actualizarCamposHorario(contenedorId, diaId) {
   const esPersonalizado = diaId === 'personalizado';
   const es24Horas = document.getElementById('horario_24horas')?.checked || false;
 
-  // Campo de texto para personalizado
+  // ⚠️ FIX: El contenedor (no el textarea) es el que tiene la clase 'hidden'
+  const contenedorTexto = document.getElementById('horario_texto_container');
   const campoTexto = document.getElementById('horario_texto');
-  if (campoTexto) {
+  
+  if (contenedorTexto) {
     if (esPersonalizado) {
-      campoTexto.classList.remove('hidden');
-      campoTexto.required = true;
+      contenedorTexto.classList.remove('hidden');
+      if (campoTexto) campoTexto.required = true;
     } else {
-      campoTexto.classList.add('hidden');
-      campoTexto.required = false;
-      campoTexto.value = '';
+      contenedorTexto.classList.add('hidden');
+      if (campoTexto) {
+        campoTexto.required = false;
+        campoTexto.value = '';
+      }
     }
   }
 
