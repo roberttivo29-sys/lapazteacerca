@@ -1,5 +1,5 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA — JavaScript v13.15
+// LA PAZ TE ACERCA — JavaScript v14.0
 // ========================================
 // Doctrina: rescatar lo operativo, reinventar lo estético.
 //
@@ -18,10 +18,14 @@
 // Cambios v13.15:
 // - FIX: Sidebar sticky recuperado (overflow-x: clip en body).
 // - FIX: Cache-buster a v=13.15.
+//
+// Cambios v14.0:
+// - NUEVO: formatearHorario() para mostrar horarios estructurados.
+// - FIX: Reemplazo de escaparHTML(p.horario) por formatearHorario(p.horario).
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ La Paz te Acerca - JS v13.15 cargado');
+    console.log('✅ La Paz te Acerca - JS v14.0 cargado');
 
     initHeader();
     initMenuHamburguesa();
@@ -67,6 +71,45 @@ function escaparHTML(valor) {
         '"': '&quot;',
         "'": '&#39;'
     }[s]));
+}
+
+// ========================================
+// v14.0: Formatear horario estructurado
+// ========================================
+// Convierte el objeto JSON de horario a texto legible.
+// Compatible con:
+//   - Horarios nuevos (objeto JSON)
+//   - Horarios antiguos (string de texto libre)
+//   - Casos vacíos (devuelve string vacío)
+function formatearHorario(horario) {
+    if (!horario) return '';
+
+    // Si es string (proveedor antiguo no migrado), devolver tal cual
+    if (typeof horario === 'string') return horario;
+
+    // Si es objeto estructurado
+    if (horario.es_24horas) return 'Atención 24 horas';
+
+    if (horario.dias === 'personalizado') {
+        return horario.nota || 'Horario personalizado';
+    }
+
+    const diasTexto = {
+        'lunes_viernes': 'Lun-Vie',
+        'lunes_sabado': 'Lun-Sáb',
+        'domingo_feriado': 'Dom-Feriados',
+        'todos': 'Todos los días'
+    };
+
+    const dias = diasTexto[horario.dias] || horario.dias || '';
+    const apertura = horario.apertura || '';
+    const cierre = horario.cierre || '';
+
+    if (apertura && cierre) {
+        return `${dias}: ${apertura} - ${cierre}`;
+    }
+
+    return dias;
 }
 
 function getCategoriaClass(categoria) {
@@ -192,12 +235,13 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
 // ========================================
 // GENERAR TARJETA DE PROVEEDOR
 // v13.15: simplificada (sin precios, sin subcategoría redundante)
+// v14.0: formatearHorario() para horarios estructurados
 // ========================================
 
 function generarTarjetaProveedor(p) {
     const waLink = p.whatsapp ? buildWhatsLink(p.whatsapp, 'Hola, vi tu perfil en La Paz te Acerca y me interesa tu servicio') : null;
     const telLink = p.telefono ? `tel:${String(p.telefono).replace(/[^\d+]/g, '')}` : null;
-    
+
     const categoriaClass = getCategoriaClass(p.categoria);
     const colorVar = getColorVariable(p.categoria);
 
@@ -229,9 +273,10 @@ function generarTarjetaProveedor(p) {
     const tieneDesc = p.descripcion && p.descripcion.trim() !== '';
     const serviciosLinea = tieneDesc ? p.descripcion : (p.subcategoria || '');
 
-    // Lista de datos: horario + dirección (SIN precios)
+    // v14.0: Lista de datos con horario formateado
     let datosLista = '';
-    if (p.horario) datosLista += `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${escaparHTML(p.horario)}</li>`;
+    const horarioFormateado = formatearHorario(p.horario);
+    if (horarioFormateado) datosLista += `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${escaparHTML(horarioFormateado)}</li>`;
     if (p.direccion) datosLista += `<li><i class="fas fa-map-marker-alt" style="width:16px; color:#ef4444;"></i> ${escaparHTML(p.direccion)}</li>`;
 
     return `
@@ -291,7 +336,7 @@ async function cargarDestacados() {
 function generarTarjetaDestacada(p) {
     const waLink = p.whatsapp ? buildWhatsLink(p.whatsapp, 'Hola, vi tu perfil destacado en La Paz te Acerca') : null;
     const telLink = p.telefono ? `tel:${String(p.telefono).replace(/[^\d+]/g, '')}` : null;
-    
+
     const categoriaClass = getCategoriaClass(p.categoria);
     const colorVar = getColorVariable(p.categoria);
 
@@ -322,8 +367,10 @@ function generarTarjetaDestacada(p) {
     const tieneDesc = p.descripcion && p.descripcion.trim() !== '';
     const serviciosLinea = tieneDesc ? p.descripcion : (p.subcategoria || '');
 
+    // v14.0: Horario formateado
     let datosLista = '';
-    if (p.horario) datosLista += `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${escaparHTML(p.horario)}</li>`;
+    const horarioFormateado = formatearHorario(p.horario);
+    if (horarioFormateado) datosLista += `<li><i class="fas fa-clock" style="width:16px; color:#3b82f6;"></i> ${escaparHTML(horarioFormateado)}</li>`;
     if (p.direccion) datosLista += `<li><i class="fas fa-map-marker-alt" style="width:16px; color:#ef4444;"></i> ${escaparHTML(p.direccion)}</li>`;
 
     return `
@@ -377,7 +424,7 @@ function initFiltrosEnVivo() {
         container.innerHTML = '<p class="text-center" style="padding:2rem;"><i class="fas fa-spinner fa-spin"></i> Filtrando...</p>';
 
         await cargarProveedoresEnContenedor(contenedorId, categoria, keyword || null);
-        
+
         const rect = container.getBoundingClientRect();
         if (rect.top < 0 || rect.bottom > window.innerHeight) {
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
