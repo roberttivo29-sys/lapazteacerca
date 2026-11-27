@@ -7,7 +7,13 @@
     "direccion": "Av. 6 de Agosto, Miraflores, La Paz",
     "telefono": "2-1234567",
     "whatsapp": "76511122",
-    "horario": "Lun-Dom: 7:00 - 22:00",
+    "horario": {
+      "dias": "todos",
+      "apertura": "07:00",
+      "cierre": "22:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Atención integral con 5 especialistas y urgencias 24h.",
     "tipo_plan": "basico",
     "destacado": 1,
@@ -26,7 +32,13 @@
     "direccion": "Av. Perú, Sopocachi, La Paz",
     "telefono": "2-2345678",
     "whatsapp": "76599988",
-    "horario": "Lun-Sáb: 8:00-18:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "08:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Especialistas en Toyota y Chevrolet. Garantía de 30 días.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -45,7 +57,13 @@
     "direccion": "Calle Jaén, Centro, La Paz",
     "telefono": "2-3456789",
     "whatsapp": "76522233",
-    "horario": "24 horas todos los días",
+    "horario": {
+      "dias": "todos",
+      "apertura": "00:00",
+      "cierre": "23:59",
+      "es_24horas": true,
+      "nota": ""
+    },
     "descripcion": "Destapes, fugas e instalaciones. Respuesta en menos de 1 hora.",
     "tipo_plan": "basico",
     "destacado": 1,
@@ -64,7 +82,13 @@
     "direccion": "Av. Buenos Aires, El Alto",
     "telefono": "2-4567890",
     "whatsapp": "76533344",
-    "horario": "Lun-Sáb: 7:00-19:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "07:00",
+      "cierre": "19:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Distribuidora autorizada SOBOCE y Fancesa. Flete disponible.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -83,7 +107,13 @@
     "direccion": "Calle Mercado, Centro, La Paz",
     "telefono": "2-5678901",
     "whatsapp": "76544455",
-    "horario": "Lun-Sáb: 9:00-20:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "09:00",
+      "cierre": "20:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Reparación de laptops, PCs, recuperación de datos. Garantía 6 meses.",
     "tipo_plan": "completo",
     "destacado": 1,
@@ -102,7 +132,13 @@
     "direccion": "Av. Arce, San Miguel, La Paz",
     "telefono": "2-6789012",
     "whatsapp": "76555566",
-    "horario": "24 horas, todos los días",
+    "horario": {
+      "dias": "todos",
+      "apertura": "00:00",
+      "cierre": "23:59",
+      "es_24horas": true,
+      "nota": ""
+    },
     "descripcion": "Atención inmediata, salas climatizadas, gestión de trámites legales.",
     "tipo_plan": "basico",
     "destacado": 1,
@@ -121,7 +157,13 @@
     "direccion": "Calle 21 de Calacoto, Zona Sur, La Paz",
     "telefono": "2-7890123",
     "whatsapp": "76566677",
-    "horario": "Lun-Dom: 9:00-21:00",
+    "horario": {
+      "dias": "todos",
+      "apertura": "09:00",
+      "cierre": "21:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Filmación 4K, fotografía profesional, drones. Entrega en 15 días.",
     "tipo_plan": "completo",
     "destacado": 1,
@@ -140,7 +182,13 @@
     "direccion": "Calle Sagárnaga, Centro, La Paz",
     "telefono": "2-8901234",
     "whatsapp": "76577788",
-    "horario": "Lun-Sáb: 9:00-20:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "09:00",
+      "cierre": "20:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Barbería tradicional con estilo moderno. Afeitado con navaja.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -159,7 +207,13 @@
     "direccion": "Av. Arce, Edificio Médico, La Paz",
     "telefono": "2-9012345",
     "whatsapp": "76588899",
-    "horario": "Lun-Vie: 9:00-19:00 | Sáb: 9:00-13:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "09:00",
+      "cierre": "19:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Odontología general, ortodoncia, blanqueamiento. Equipos modernos.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -178,7 +232,13 @@
     "direccion": "Zona 16 de Julio, El Alto",
     "telefono": "2-0123456",
     "whatsapp": "76599900",
-    "horario": "Lun-Dom: 7:00-20:00",
+    "horario": {
+      "dias": "todos",
+      "apertura": "07:00",
+      "cierre": "20:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "20 años de experiencia. Instalaciones, reparaciones, emergencias.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -197,7 +257,13 @@
     "direccion": "Av. 6 de Marzo, Sopocachi, La Paz",
     "telefono": "2-1122334",
     "whatsapp": "76500011",
-    "horario": "24 horas, todos los días",
+    "horario": {
+      "dias": "todos",
+      "apertura": "00:00",
+      "cierre": "23:59",
+      "es_24horas": true,
+      "nota": ""
+    },
     "descripcion": "Servicio de grúa y auxilio vial. Cobertura La Paz, El Alto y carreteras.",
     "tipo_plan": "basico",
     "destacado": 1,
@@ -216,7 +282,13 @@
     "direccion": "Av. Busch, Calacoto, La Paz",
     "telefono": "2-2233445",
     "whatsapp": "76511122",
-    "horario": "Lun-Vie: 9:00-18:00",
+    "horario": {
+      "dias": "lunes_viernes",
+      "apertura": "09:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Instalación de CCTV, monitoreo remoto, mantenimiento. Marcas Hikvision y Dahua.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -235,7 +307,13 @@
     "direccion": "Calle 10, Obrajes, La Paz",
     "telefono": "2-3344556",
     "whatsapp": "76522233",
-    "horario": "Lun-Sáb: 9:00-20:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "09:00",
+      "cierre": "20:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Cortes, tintes, tratamientos capilares, manicure. Atención familiar.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -254,7 +332,13 @@
     "direccion": "Av. 16 de Julio, El Alto",
     "telefono": "2-4455667",
     "whatsapp": "76533344",
-    "horario": "Lun-Sáb: 7:00-12:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "07:00",
+      "cierre": "12:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Resultados en 24h. Toma de muestras a domicilio. Resultados por WhatsApp.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -273,7 +357,13 @@
     "direccion": "Zona Villa Dolores, La Paz",
     "telefono": "2-5566778",
     "whatsapp": "76544455",
-    "horario": "Lun-Sáb: 7:00-18:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "07:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Reparación de paredes, techos, impermeabilización. 15 años de experiencia.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -292,7 +382,13 @@
     "direccion": "Camino a Irpavi, La Paz",
     "telefono": "2-6677889",
     "whatsapp": "76555566",
-    "horario": "24 horas",
+    "horario": {
+      "dias": "todos",
+      "apertura": "00:00",
+      "cierre": "23:59",
+      "es_24horas": true,
+      "nota": ""
+    },
     "descripcion": "Crematorio certificado. Proceso individual. Entrega de cenizas en 48h.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -311,7 +407,13 @@
     "direccion": "Av. Heroínas, Centro, La Paz",
     "telefono": "2-7788990",
     "whatsapp": "76566677",
-    "horario": "Lun-Dom: 10:00-22:00",
+    "horario": {
+      "dias": "todos",
+      "apertura": "10:00",
+      "cierre": "22:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Sonido profesional, luces LED, pantallas, DJs. Bodas, quinceañeros, corporativos.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -330,7 +432,13 @@
     "direccion": "Calle 21, Calacoto, La Paz",
     "telefono": "2-8899001",
     "whatsapp": "76577788",
-    "horario": "Lun-Dom: 10:00-21:00",
+    "horario": {
+      "dias": "todos",
+      "apertura": "10:00",
+      "cierre": "21:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Masajes terapéuticos, aromaterapia, piedras calientes. Ambiente relajante.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -349,7 +457,13 @@
     "direccion": "Av. Arce, San Jorge, La Paz",
     "telefono": "2-9900112",
     "whatsapp": "76588899",
-    "horario": "Lun-Sáb: 9:00-20:00 | Emergencias 24h",
+    "horario": {
+      "dias": "todos",
+      "apertura": "00:00",
+      "cierre": "23:59",
+      "es_24horas": true,
+      "nota": ""
+    },
     "descripcion": "Atención veterinaria integral, cirugía, hospitalización, pet shop.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -368,7 +482,13 @@
     "direccion": "Zona Miraflores, La Paz",
     "telefono": "2-0011223",
     "whatsapp": "76599900",
-    "horario": "Lun-Sáb: 7:00-18:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "07:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Pintura de interiores y exteriores, tratamiento de humedad, acabados.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -387,7 +507,13 @@
     "direccion": "Av. Perú, Obrajes, La Paz",
     "telefono": "2-1122334",
     "whatsapp": "76500011",
-    "horario": "Lun-Sáb: 8:00-18:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "08:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Cabina de pintura, enderezado, pulido. Trabajo garantizado.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -406,7 +532,13 @@
     "direccion": "El Alto, Zona 16 de Julio",
     "telefono": "2-2233445",
     "whatsapp": "76511122",
-    "horario": "Eventos: fines de semana",
+    "horario": {
+      "dias": "personalizado",
+      "apertura": "09:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": "Eventos: fines de semana"
+    },
     "descripcion": "Banda de cumbia y folklore boliviano. 8 músicos. Equipos propios.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -425,7 +557,13 @@
     "direccion": "Calle Comercio, Centro, La Paz",
     "telefono": "2-3344556",
     "whatsapp": "76522233",
-    "horario": "Con cita previa",
+    "horario": {
+      "dias": "personalizado",
+      "apertura": "09:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": "Con cita previa"
+    },
     "descripcion": "Maquilladora profesional. Bodas, quinceañeros, sesiones fotográficas.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -444,7 +582,13 @@
     "direccion": "Av. 16 de Julio, El Alto",
     "telefono": "2-4455667",
     "whatsapp": "76533344",
-    "horario": "Lun-Sáb: 9:00-20:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "09:00",
+      "cierre": "20:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Exámenes de vista, lentes, lentillas, audífonos. Marcas reconocidas.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -463,7 +607,13 @@
     "direccion": "Zona Sur, La Paz",
     "telefono": "2-5566778",
     "whatsapp": "76544455",
-    "horario": "24 horas",
+    "horario": {
+      "dias": "todos",
+      "apertura": "00:00",
+      "cierre": "23:59",
+      "es_24horas": true,
+      "nota": ""
+    },
     "descripcion": "Cerrajero urgente. Apertura de puertas, cambio de chapas, copias de llaves.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -482,7 +632,13 @@
     "direccion": "Av. Blanco Galindo, Cochabamba (sucursal La Paz)",
     "telefono": "2-6677889",
     "whatsapp": "76555566",
-    "horario": "Lun-Sáb: 8:00-18:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "08:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Alineación computarizada, balanceo dinámico, suspensión.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -501,7 +657,13 @@
     "direccion": "Calle Sagárnaga, Centro, La Paz",
     "telefono": "2-7788990",
     "whatsapp": "76566677",
-    "horario": "Lun-Dom: 7:00-20:00",
+    "horario": {
+      "dias": "todos",
+      "apertura": "07:00",
+      "cierre": "20:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Coronas, arreglos florales, obituarios. Entrega en velatorios y cementerios.",
     "tipo_plan": "gratuito",
     "destacado": 0,
@@ -520,7 +682,13 @@
     "direccion": "Av. Busch, Calacoto, La Paz",
     "telefono": "2-8899001",
     "whatsapp": "76577788",
-    "horario": "Eventos: fines de semana",
+    "horario": {
+      "dias": "personalizado",
+      "apertura": "09:00",
+      "cierre": "18:00",
+      "es_24horas": false,
+      "nota": "Eventos: fines de semana"
+    },
     "descripcion": "Salón elegante con cocina, estacionamiento, baños. Ideal para bodas.",
     "tipo_plan": "completo",
     "destacado": 1,
@@ -539,7 +707,13 @@
     "direccion": "Calle 10, Obrajes, La Paz",
     "telefono": "2-9900112",
     "whatsapp": "76588899",
-    "horario": "Lun-Sáb: 9:00-19:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "09:00",
+      "cierre": "19:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Limpiezas faciales, tratamientos corporales, depilación láser.",
     "tipo_plan": "basico",
     "destacado": 0,
@@ -558,7 +732,13 @@
     "direccion": "Av. Arce, San Miguel, La Paz",
     "telefono": "2-0011223",
     "whatsapp": "76599900",
-    "horario": "Lun-Vie: 8:00-20:00 | Sáb: 9:00-13:00",
+    "horario": {
+      "dias": "lunes_sabado",
+      "apertura": "08:00",
+      "cierre": "20:00",
+      "es_24horas": false,
+      "nota": ""
+    },
     "descripcion": "Kinesiología, terapia de columna, post-operatorios. Profesionales titulados.",
     "tipo_plan": "basico",
     "destacado": 0,
