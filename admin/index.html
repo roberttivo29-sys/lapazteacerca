@@ -105,6 +105,7 @@
         .badge{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .75rem;border-radius:var(--r-full);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
         .badge-destacado{background:var(--ocre-claro);color:#1F2937}
         .badge-24h{background:var(--azul-profundo);color:#fff}
+        .badge-domicilio{background:var(--verde-accion);color:#fff}
         .badge-gratuito{background:#F1F5F9;color:#475569;border:1px solid #CBD5E1}
         .badge-basico{background:var(--grad-azul);color:#fff}
         .badge-completo{background:var(--grad-ocre);color:#fff;box-shadow:0 0 10px rgba(217,119,6,.5)}
@@ -496,6 +497,15 @@
                                 <input type="checkbox" id="f_24horas_switch">
                                 <label for="f_24horas_switch">Nocturno/Festivos</label>
                             </div>
+                        </div>
+                        <!-- v14.1: ATENCIÓN A DOMICILIO -->
+                        <div>
+                            <label class="form-label">¿Atención a domicilio?</label>
+                            <div class="form-check" style="margin-top:.5rem">
+                                <input type="checkbox" id="f_domicilio_switch">
+                                <label for="f_domicilio_switch">Atiende a domicilio</label>
+                            </div>
+                            <small style="color:var(--gris-medio);font-size:.75rem">🏠 Mostrar badge en la web pública</small>
                         </div>
                         <div class="full-width">
                             <label class="form-label">Audio URL (opcional)</label>
@@ -1034,6 +1044,7 @@
                                 ${escaparHTML(p.nombre)}
                                 ${p.destacado == 1 ? '<span class="badge badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
                                 ${p['24horas'] ? '<span class="badge badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
+                                ${p.domicilio ? '<span class="badge badge-domicilio"><i class="fas fa-home"></i> Domicilio</span>' : ''}
                                 <span class="badge ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span>
                             </h4>
                             <p><strong>${escaparHTML(p.categoria)}</strong> &gt; ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
@@ -1100,6 +1111,7 @@
                                 ${escaparHTML(p.nombre)}
                                 ${p.destacado == 1 ? '<span class="badge badge-destacado"><i class="fas fa-star"></i> Destacado</span>' : ''}
                                 ${p['24horas'] ? '<span class="badge badge-24h"><i class="fas fa-moon"></i> 24h</span>' : ''}
+                                ${p.domicilio ? '<span class="badge badge-domicilio"><i class="fas fa-home"></i> Domicilio</span>' : ''}
                                 <span class="badge ${getPlanClass(p.tipo_plan || 'gratuito')}">${getPlanLabel(p.tipo_plan || 'gratuito')}</span>
                             </h5>
                             <p><strong>${escaparHTML(p.categoria)}</strong> &gt; ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
@@ -1171,6 +1183,9 @@ ${texto}
             document.getElementById('horario_24horas').checked = false;
             document.getElementById('horario_texto').value = '';
 
+            // v14.1: Reset checkbox domicilio
+            document.getElementById('f_domicilio_switch').checked = false;
+
             ocultarPlantillas();
             document.getElementById('seccionImagenesMuestra').classList.add('hidden');
 
@@ -1215,6 +1230,7 @@ ${texto}
             document.getElementById('f_descripcion').value = p.descripcion || '';
             document.getElementById('f_tipo_plan').value = p.tipo_plan || 'gratuito';
             document.getElementById('f_24horas_switch').checked = p['24horas'] || false;
+            document.getElementById('f_domicilio_switch').checked = p.domicilio || false;
             document.getElementById('f_audio_url').value = p.audio_url || '';
 
             // v14.0: Cargar horario
@@ -1296,6 +1312,7 @@ ${texto}
                 tipo_plan: plan,
                 destacado: plan === 'completo' ? 1 : (document.getElementById('f_destacado_switch').checked ? 1 : 0),
                 '24horas': document.getElementById('f_24horas_switch').checked,
+                domicilio: document.getElementById('f_domicilio_switch').checked,
                 imagen1: document.getElementById('f_imagen1').value,
                 imagen2: document.getElementById('f_imagen2').value,
                 imagen3: document.getElementById('f_imagen3').value,
@@ -1380,6 +1397,4 @@ ${texto}
         });
     </script>
 </body>
-</html> 
- < ! - -   v 1 4 . 0   d e p l o y   f i x   - - >  
- 
+</html>

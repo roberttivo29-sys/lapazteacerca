@@ -1,5 +1,5 @@
 ﻿// ========================================
-// LA PAZ TE ACERCA — JavaScript v14.0
+// LA PAZ TE ACERCA — JavaScript v14.1
 // ========================================
 // Doctrina: rescatar lo operativo, reinventar lo estético.
 //
@@ -22,10 +22,14 @@
 // Cambios v14.0:
 // - NUEVO: formatearHorario() para mostrar horarios estructurados.
 // - FIX: Reemplazo de escaparHTML(p.horario) por formatearHorario(p.horario).
+//
+// Cambios v14.1:
+// - NUEVO: generarBadgeDomicilio() para mostrar badge "Atención a domicilio".
+// - NUEVO: Badge integrado en generarTarjetaProveedor() y generarTarjetaDestacada().
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ La Paz te Acerca - JS v14.0 cargado');
+    console.log('✅ La Paz te Acerca - JS v14.1 cargado');
 
     initHeader();
     initMenuHamburguesa();
@@ -110,6 +114,16 @@ function formatearHorario(horario) {
     }
 
     return dias;
+}
+
+// ========================================
+// v14.1: Badge de atención a domicilio
+// ========================================
+function generarBadgeDomicilio(p) {
+  if (p.domicilio) {
+    return '<div style="text-align:center; margin-bottom:.5rem;"><span style="display:inline-block; background:#10B981; color:#fff; padding:.3rem .8rem; border-radius:20px; font-size:.8rem; font-weight:600;"><i class="fas fa-home"></i> Atención a domicilio</span></div>';
+  }
+  return '';
 }
 
 function getCategoriaClass(categoria) {
@@ -236,6 +250,7 @@ async function cargarProveedoresEnContenedor(contenedorId, categoria, palabraCla
 // GENERAR TARJETA DE PROVEEDOR
 // v13.15: simplificada (sin precios, sin subcategoría redundante)
 // v14.0: formatearHorario() para horarios estructurados
+// v14.1: generarBadgeDomicilio() para atención a domicilio
 // ========================================
 
 function generarTarjetaProveedor(p) {
@@ -291,6 +306,7 @@ function generarTarjetaProveedor(p) {
                 ${serviciosLinea ? `<p class="proveedor-servicios">${escaparHTML(serviciosLinea)}</p>` : ''}
 
                 ${html24h}
+                ${generarBadgeDomicilio(p)}
 
                 ${datosLista ? `<ul class="category-services">${datosLista}</ul>` : ''}
 
@@ -383,6 +399,7 @@ function generarTarjetaDestacada(p) {
                 ${serviciosLinea ? `<p class="proveedor-servicios">${escaparHTML(serviciosLinea)}</p>` : ''}
 
                 ${html24h}
+                ${generarBadgeDomicilio(p)}
 
                 ${datosLista ? `<ul class="category-services">${datosLista}</ul>` : ''}
 
