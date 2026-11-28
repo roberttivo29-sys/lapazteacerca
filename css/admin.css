@@ -1,5 +1,5 @@
 /* ============================================================
-   LA PAZ TE ACERCA — ADMIN v1.0
+   LA PAZ TE ACERCA — ADMIN v1.1
    Estilos propios del panel. Sin arrastrar el público.
    ============================================================ */
 
@@ -159,6 +159,10 @@ ul { list-style: none; }
 }
 
 .btn-outline:hover { background: var(--azul-confianza); color: #fff; }
+
+/* v14.1: Botón Invitar */
+.btn-invitar { background: var(--grad-ocre); color: #fff; }
+.btn-invitar:hover { box-shadow: 0 0 30px rgba(217, 119, 6, .3); }
 
 .btn-block { width: 100%; }
 .btn-sm { padding: .5rem 1rem; font-size: .85rem; }
@@ -344,6 +348,7 @@ ul { list-style: none; }
 
 .badge-destacado { background: var(--ocre-claro); color: #1F2937; }
 .badge-24h { background: var(--azul-profundo); color: #fff; }
+.badge-domicilio { background: var(--verde-accion); color: #fff; }
 .badge-gratuito { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
 .badge-basico { background: var(--grad-azul); color: #fff; }
 .badge-completo {
@@ -621,7 +626,106 @@ ul { list-style: none; }
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* ---------- 15. RESPONSIVE ---------- */
+/* ---------- 15. v14.1: SELECCIÓN MÚLTIPLE ---------- */
+.seleccion-bar {
+  background: var(--blanco);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-md);
+  margin-bottom: var(--sp-2);
+  box-shadow: var(--sh-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  border-left: 4px solid var(--verde-accion);
+}
+
+.seleccion-info { font-weight: 600; color: var(--azul-profundo); font-size: .9rem; }
+.seleccion-info i { color: var(--verde-accion); margin-right: .5rem; }
+
+.seleccion-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+.btn-copiar-multiple {
+  background: var(--verde-accion);
+  color: #fff;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: var(--r-sm);
+  font-size: .85rem;
+  cursor: pointer;
+  transition: var(--t-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  font-weight: 600;
+}
+
+.btn-copiar-multiple:hover { background: var(--verde-oscuro); transform: translateY(-2px); }
+.btn-copiar-multiple:disabled { background: var(--gris-claro); cursor: not-allowed; transform: none; }
+
+.checkbox-seleccion {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--verde-accion);
+  flex-shrink: 0;
+}
+
+.quick-provider-row.seleccionado {
+  border-left-color: var(--verde-accion);
+  background: #F0FDF4;
+}
+
+.seleccionar-todos-row {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: var(--sp-2);
+}
+
+.seleccionar-todos-row label {
+  font-size: .85rem;
+  color: var(--gris-medio);
+  cursor: pointer;
+}
+
+/* ---------- 16. v14.1: INVITACIONES ---------- */
+.invitacion-preview {
+  background: var(--gris-suave);
+  border: 1px solid var(--gris-borde);
+  border-radius: var(--r-md);
+  padding: var(--sp-3);
+  margin-top: var(--sp-2);
+  max-height: 400px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-family: var(--f-cuerpo);
+  font-size: .9rem;
+  line-height: 1.6;
+  color: var(--gris-oscuro);
+}
+
+.invitacion-hint {
+  background: #FEF3C7;
+  border-left: 4px solid var(--ocre-calidad);
+  padding: var(--sp-2);
+  border-radius: var(--r-md);
+  font-size: .85rem;
+  color: #92400E;
+  margin-top: var(--sp-2);
+}
+
+.invitacion-hint i { color: var(--ocre-calidad); margin-right: .5rem; }
+
+.invitacion-actions {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+/* ---------- 17. RESPONSIVE ---------- */
 @media (max-width: 767px) {
   .form-grid { grid-template-columns: 1fr; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
@@ -629,4 +733,5 @@ ul { list-style: none; }
   .provider-actions { width: 100%; justify-content: flex-start; }
   .quick-provider-row { flex-direction: column; align-items: flex-start; }
   .quick-provider-actions { width: 100%; }
+  .seleccion-bar { flex-direction: column; align-items: flex-start; }
 }
