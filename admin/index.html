@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -59,6 +59,8 @@
         .btn-secondary:hover{background:var(--gris-claro)}
         .btn-outline{background:transparent;border-color:var(--azul-confianza);color:var(--azul-confianza)}
         .btn-outline:hover{background:var(--azul-confianza);color:#fff}
+        .btn-invitar{background:var(--grad-ocre);color:#fff}
+        .btn-invitar:hover{box-shadow:0 0 30px rgba(217,119,6,.3)}
         .btn-block{width:100%}
         .btn-sm{padding:.5rem 1rem;font-size:.85rem}
         .login-error{background:#FEE2E2;color:#991B1B;padding:1rem;border-radius:var(--r-md);font-size:.9rem;margin-top:var(--sp-3);border-left:4px solid var(--rojo-alerta)}
@@ -142,6 +144,12 @@
         .quick-provider-row.seleccionado{border-left-color:var(--verde-accion);background:#F0FDF4}
         .seleccionar-todos-row{display:flex;align-items:center;gap:.5rem;margin-bottom:var(--sp-2)}
         .seleccionar-todos-row label{font-size:.85rem;color:var(--gris-medio);cursor:pointer}
+
+        /* v14.1: MODAL INVITACIONES */
+        .invitacion-preview{background:var(--gris-suave);border:1px solid var(--gris-borde);border-radius:var(--r-md);padding:var(--sp-3);margin-top:var(--sp-2);max-height:400px;overflow-y:auto;white-space:pre-wrap;font-family:var(--f-cuerpo);font-size:.9rem;line-height:1.6;color:var(--gris-oscuro)}
+        .invitacion-hint{background:#FEF3C7;border-left:4px solid var(--ocre-calidad);padding:var(--sp-2);border-radius:var(--r-md);font-size:.85rem;color:#92400E;margin-top:var(--sp-2)}
+        .invitacion-hint i{color:var(--ocre-calidad);margin-right:.5rem}
+        .invitacion-actions{display:flex;gap:var(--sp-2);margin-top:var(--sp-3);flex-wrap:wrap}
 
         /* MODAL */
         .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:var(--sp-3);opacity:0;visibility:hidden;transition:all .3s}
@@ -301,6 +309,8 @@
                     <div>
                         <button onclick="addProvider()" class="btn btn-success"><i class="fas fa-plus"></i> Agregar Negocio</button>
                         <button onclick="loadProviders()" class="btn btn-primary" style="margin-left:.5rem"><i class="fas fa-sync"></i> Recargar</button>
+                        <!-- v14.1: Botón Invitar Proveedor -->
+                        <button onclick="abrirModalInvitacion()" class="btn btn-invitar" style="margin-left:.5rem"><i class="fas fa-bullhorn"></i> Invitar Proveedor</button>
                     </div>
                 </div>
             </div>
@@ -557,6 +567,69 @@
         </div>
     </div>
 
+    <!-- v14.1: MODAL INVITACIONES -->
+    <div class="modal-overlay" id="invitacionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-bullhorn" style="color:var(--ocre-calidad);margin-right:.5rem"></i> Invitar Nuevo Proveedor</h3>
+                <button class="modal-close" onclick="cerrarModalInvitacion()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p style="color:var(--gris-medio);margin-bottom:var(--sp-3);font-size:.9rem">
+                    Genera un mensaje personalizado para invitar a un nuevo proveedor.
+                    <strong style="color:var(--ocre-calidad)">Enero y febrero GRATIS.</strong>
+                </p>
+
+                <div class="form-grid">
+                    <div>
+                        <label class="form-label">Categoría *</label>
+                        <select id="inv_categoria" class="form-control" onchange="actualizarSubcategoriasInvitacion()">
+                            <option value="">Selecciona una categoría</option>
+                            <option value="Salud y Bienestar">Salud y Bienestar</option>
+                            <option value="Mantenimiento del Hogar">Mantenimiento del Hogar</option>
+                            <option value="Materiales de Construcción">Materiales de Construcción</option>
+                            <option value="Talleres Automotrices">Talleres Automotrices</option>
+                            <option value="Tecnología y Redes">Tecnología y Redes</option>
+                            <option value="Servicios de Despedida">Servicios de Despedida</option>
+                            <option value="Servicios para Eventos">Servicios para Eventos</option>
+                            <option value="Imagen y Cuidado Personal">Imagen y Cuidado Personal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Subcategoría *</label>
+                        <select id="inv_subcategoria" class="form-control" onchange="actualizarPreviewInvitacion()">
+                            <option value="">Primero selecciona categoría</option>
+                        </select>
+                    </div>
+                    <div class="full-width">
+                        <label class="form-label">Nombre del proveedor (opcional)</label>
+                        <input type="text" id="inv_nombre" class="form-control" placeholder="Ej: Juan Pérez, Clínica San Juan..." oninput="actualizarPreviewInvitacion()">
+                        <small style="color:var(--gris-medio);font-size:.8rem">Si lo dejas vacío, el saludo será genérico.</small>
+                    </div>
+                </div>
+
+                <div class="full-width" style="margin-top:var(--sp-3)">
+                    <label class="form-label">Vista previa del mensaje</label>
+                    <div id="inv_preview" class="invitacion-preview">Selecciona categoría y subcategoría para ver el mensaje...</div>
+                </div>
+
+                <div class="invitacion-hint">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Tip:</strong> Adjunta una captura de pantalla de un proveedor similar ya publicado en la web (ej: "Clínica San Juan" para salud, "Tech Solutions" para tecnología). Esto aumenta la conversión.
+                </div>
+
+                <div class="invitacion-actions">
+                    <button class="btn btn-success" onclick="copiarInvitacion()">
+                        <i class="fas fa-copy"></i> Copiar mensaje
+                    </button>
+                    <button class="btn btn-secondary" onclick="cerrarModalInvitacion()">
+                        <i class="fas fa-times"></i> Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- TOAST CONTAINER -->
     <div id="toastContainer" class="toast-container"></div>
 
@@ -564,6 +637,8 @@
     <script src="plantillas.js"></script>
     <script src="comunicacion.js"></script>
     <script src="horarios.js"></script>
+    <!-- v14.1: Sistema de invitaciones -->
+    <script src="invitaciones.js"></script>
 
     <script>
         // ==========================================
@@ -1348,6 +1423,82 @@ ${bloques}
             }).catch(err => {
                 showToast('Error', 'No se pudo copiar: ' + err, 'error');
             });
+        }
+
+        // ==========================================
+        // v14.1: SISTEMA DE INVITACIONES
+        // ==========================================
+        function abrirModalInvitacion() {
+            document.getElementById('invitacionModal').classList.add('active');
+            // Resetear formulario
+            document.getElementById('inv_categoria').value = '';
+            document.getElementById('inv_subcategoria').innerHTML = '<option value="">Primero selecciona categoría</option>';
+            document.getElementById('inv_nombre').value = '';
+            document.getElementById('inv_preview').textContent = 'Selecciona categoría y subcategoría para ver el mensaje...';
+        }
+
+        function cerrarModalInvitacion() {
+            document.getElementById('invitacionModal').classList.remove('active');
+        }
+
+        function actualizarSubcategoriasInvitacion() {
+            const categoria = document.getElementById('inv_categoria').value;
+            const subSelect = document.getElementById('inv_subcategoria');
+            
+            subSelect.innerHTML = '<option value="">Selecciona una subcategoría</option>';
+            
+            if (categoria && typeof obtenerSubcategoriasInvitacion === 'function') {
+                const subs = obtenerSubcategoriasInvitacion(categoria);
+                subs.forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subSelect.appendChild(option);
+                });
+            }
+            
+            actualizarPreviewInvitacion();
+        }
+
+        function actualizarPreviewInvitacion() {
+            const categoria = document.getElementById('inv_categoria').value;
+            const subcategoria = document.getElementById('inv_subcategoria').value;
+            const nombre = document.getElementById('inv_nombre').value.trim();
+            const preview = document.getElementById('inv_preview');
+
+            if (!categoria || !subcategoria) {
+                preview.textContent = 'Selecciona categoría y subcategoría para ver el mensaje...';
+                return;
+            }
+
+            if (typeof generarMensajeInvitacion === 'function') {
+                const mensaje = generarMensajeInvitacion(categoria, subcategoria, nombre);
+                preview.textContent = mensaje;
+            } else {
+                preview.textContent = 'Error: invitaciones.js no cargado correctamente.';
+            }
+        }
+
+        async function copiarInvitacion() {
+            const categoria = document.getElementById('inv_categoria').value;
+            const subcategoria = document.getElementById('inv_subcategoria').value;
+            const nombre = document.getElementById('inv_nombre').value.trim();
+
+            if (!categoria || !subcategoria) {
+                showToast('Aviso', 'Selecciona categoría y subcategoría', 'warning');
+                return;
+            }
+
+            if (typeof generarMensajeInvitacion === 'function') {
+                const mensaje = generarMensajeInvitacion(categoria, subcategoria, nombre);
+                const ok = await copiarMensajeInvitacion(mensaje);
+                
+                if (ok) {
+                    showToast('¡Mensaje copiado!', 'Pégalo en WhatsApp y adjunta una captura de ejemplo', 'success', 3000);
+                } else {
+                    showToast('Error', 'No se pudo copiar el mensaje', 'error');
+                }
+            }
         }
 
         function addProvider() {
