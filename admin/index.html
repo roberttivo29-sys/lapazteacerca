@@ -130,6 +130,19 @@
         .no-results{text-align:center;padding:var(--sp-5);color:var(--gris-claro)}
         .no-results i{font-size:3rem;margin-bottom:var(--sp-2);display:block}
 
+        /* v14.1: SELECCIÓN MÚLTIPLE */
+        .seleccion-bar{background:var(--blanco);padding:var(--sp-2) var(--sp-3);border-radius:var(--r-md);margin-bottom:var(--sp-2);box-shadow:var(--sh-2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--sp-2);border-left:4px solid var(--verde-accion)}
+        .seleccion-info{font-weight:600;color:var(--azul-profundo);font-size:.9rem}
+        .seleccion-info i{color:var(--verde-accion);margin-right:.5rem}
+        .seleccion-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+        .btn-copiar-multiple{background:var(--verde-accion);color:#fff;border:none;padding:.5rem 1rem;border-radius:var(--r-sm);font-size:.85rem;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.3rem;font-weight:600}
+        .btn-copiar-multiple:hover{background:var(--verde-oscuro);transform:translateY(-2px)}
+        .btn-copiar-multiple:disabled{background:var(--gris-claro);cursor:not-allowed;transform:none}
+        .checkbox-seleccion{width:18px;height:18px;cursor:pointer;accent-color:var(--verde-accion);flex-shrink:0}
+        .quick-provider-row.seleccionado{border-left-color:var(--verde-accion);background:#F0FDF4}
+        .seleccionar-todos-row{display:flex;align-items:center;gap:.5rem;margin-bottom:var(--sp-2)}
+        .seleccionar-todos-row label{font-size:.85rem;color:var(--gris-medio);cursor:pointer}
+
         /* MODAL */
         .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:var(--sp-3);opacity:0;visibility:hidden;transition:all .3s}
         .modal-overlay.active{opacity:1;visibility:visible}
@@ -214,6 +227,7 @@
             .provider-actions{width:100%;justify-content:flex-start}
             .quick-provider-row{flex-direction:column;align-items:flex-start}
             .quick-provider-actions{width:100%}
+            .seleccion-bar{flex-direction:column;align-items:flex-start}
         }
     </style>
 </head>
@@ -331,7 +345,29 @@
                     </div>
                 </div>
 
+                <!-- v14.1: Seleccionar todos -->
+                <div class="seleccionar-todos-row">
+                    <input type="checkbox" id="seleccionarTodos" class="checkbox-seleccion" onchange="toggleSeleccionarTodos()">
+                    <label for="seleccionarTodos">Seleccionar todos los resultados</label>
+                </div>
+
                 <div id="resultsCounter" class="results-counter hidden"></div>
+
+                <!-- v14.1: Barra de selección múltiple -->
+                <div id="seleccionBar" class="seleccion-bar hidden">
+                    <div class="seleccion-info">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="seleccionContador">0</span> proveedor(es) seleccionado(s)
+                    </div>
+                    <div class="seleccion-actions">
+                        <button class="btn-copiar-multiple" id="btnCopiarSeleccionados" onclick="copiarSeleccionados()" disabled>
+                            <i class="fas fa-copy"></i> Copiar seleccionados
+                        </button>
+                        <button class="btn btn-secondary btn-sm" onclick="limpiarSeleccion()">
+                            <i class="fas fa-times"></i> Limpiar
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div id="consultaRapidaList"></div>
@@ -555,12 +591,42 @@
         let providers = [];
         let sessionTimerInterval;
 
+        // v14.1: Estado de selección múltiple
+        let proveedoresSeleccionados = new Set();
+        let listaFiltradaActual = [];
+
         // ==========================================
         // UTILIDADES
         // ==========================================
         function escaparHTML(v) {
             if (v === null || v === undefined) return '';
             return String(v).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+        }
+
+        // v14.1: Formatear horario en el admin (para evitar [object Object])
+        function formatearHorarioAdmin(horario) {
+            if (!horario) return 'Sin horario';
+            if (typeof horario === 'string') {
+                try {
+                    const obj = JSON.parse(horario);
+                    return formatearHorarioAdmin(obj);
+                } catch {
+                    return horario;
+                }
+            }
+            if (horario.es_24horas) return 'Atención 24 horas';
+            if (horario.dias === 'personalizado') return horario.nota || 'Horario personalizado';
+            const diasTexto = {
+                'lunes_viernes': 'Lun-Vie',
+                'lunes_sabado': 'Lun-Sáb',
+                'domingo_feriado': 'Dom-Feriados',
+                'todos': 'Todos los días'
+            };
+            const dias = diasTexto[horario.dias] || horario.dias || '';
+            const apertura = horario.apertura || '';
+            const cierre = horario.cierre || '';
+            if (apertura && cierre) return `${dias}: ${apertura} - ${cierre}`;
+            return dias || 'Sin horario';
         }
 
         // ==========================================
@@ -1093,19 +1159,35 @@
         function renderConsultaRapida(lista) {
             const container = document.getElementById('consultaRapidaList');
 
+            // v14.1: Al re-renderizar, limpiar selección
+            listaFiltradaActual = lista;
+            proveedoresSeleccionados.clear();
+            const bar = document.getElementById('seleccionBar');
+            if (bar) bar.classList.add('hidden');
+            const btn = document.getElementById('btnCopiarSeleccionados');
+            if (btn) btn.disabled = true;
+            const contador = document.getElementById('seleccionContador');
+            if (contador) contador.textContent = '0';
+            const todos = document.getElementById('seleccionarTodos');
+            if (todos) todos.checked = false;
+
             if (lista.length === 0) {
                 container.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><p>No se encontraron negocios con esos filtros</p><small style="color:var(--gris-medio)">Intenta cambiar la categoría o el texto de búsqueda</small></div>`;
                 return;
             }
 
-            const html = lista.map(p => {
+            const html = lista.map((p, i) => {
                 const whatsappNum = (p.whatsapp || '').replace(/\D/g, '');
                 const fullNum = whatsappNum.startsWith('591') ? whatsappNum : '591' + whatsappNum;
                 const whatsappLink = whatsappNum ? `https://wa.me/${fullNum}` : '#';
-                const textoCopiar = `${p.nombre}\n${p.categoria} > ${p.subcategoria}\n📍 ${p.direccion || 'Sin dirección'}\n💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}\n🕒 ${p.horario || 'Sin horario'}`;
+                const horarioTxt = formatearHorarioAdmin(p.horario);
+                const textoCopiar = `${p.nombre}\n${p.categoria} > ${p.subcategoria}\n📍 ${p.direccion || 'Sin dirección'}\n💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}\n🕒 ${horarioTxt}`;
 
                 return `
-                    <div class="quick-provider-row">
+                    <div class="quick-provider-row" id="fila-${i}">
+                        <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0">
+                            <input type="checkbox" class="checkbox-seleccion" data-index="${i}" onchange="actualizarSeleccion()" aria-label="Seleccionar ${escaparHTML(p.nombre)}">
+                        </div>
                         <div class="quick-provider-info">
                             <h5>
                                 ${escaparHTML(p.nombre)}
@@ -1117,7 +1199,7 @@
                             <p><strong>${escaparHTML(p.categoria)}</strong> &gt; ${escaparHTML(p.subcategoria || 'Sin subcategoría')}</p>
                             <p><i class="fas fa-map-marker-alt" style="color:var(--rojo-alerta)"></i> ${escaparHTML(p.direccion || 'Sin dirección')}</p>
                             <p><i class="fab fa-whatsapp" style="color:var(--verde-accion)"></i> ${escaparHTML(p.whatsapp || 'Sin WhatsApp')}</p>
-                            <p><i class="fas fa-clock" style="color:var(--ocre-calidad)"></i> ${escaparHTML(p.horario || 'Sin horario')}</p>
+                            <p><i class="fas fa-clock" style="color:var(--ocre-calidad)"></i> ${escaparHTML(horarioTxt)}</p>
                         </div>
                         <div class="quick-provider-actions">
                             ${whatsappNum ? `
@@ -1163,6 +1245,111 @@ ${texto}
             });
         }
 
+        // ==========================================
+        // v14.1: SELECCIÓN MÚLTIPLE
+        // ==========================================
+        function actualizarSeleccion() {
+            const checkboxes = document.querySelectorAll('.checkbox-seleccion[data-index]');
+            proveedoresSeleccionados.clear();
+
+            checkboxes.forEach(cb => {
+                const index = parseInt(cb.dataset.index);
+                const fila = document.getElementById(`fila-${index}`);
+                if (cb.checked) {
+                    proveedoresSeleccionados.add(index);
+                    if (fila) fila.classList.add('seleccionado');
+                } else {
+                    if (fila) fila.classList.remove('seleccionado');
+                }
+            });
+
+            const contador = proveedoresSeleccionados.size;
+            document.getElementById('seleccionContador').textContent = contador;
+
+            const bar = document.getElementById('seleccionBar');
+            const btn = document.getElementById('btnCopiarSeleccionados');
+
+            if (contador > 0) {
+                bar.classList.remove('hidden');
+                btn.disabled = false;
+            } else {
+                bar.classList.add('hidden');
+                btn.disabled = true;
+            }
+
+            const todosCheckbox = document.getElementById('seleccionarTodos');
+            const totalFiltrados = document.querySelectorAll('.checkbox-seleccion[data-index]').length;
+            if (todosCheckbox) {
+                todosCheckbox.checked = contador === totalFiltrados && totalFiltrados > 0;
+            }
+        }
+
+        function toggleSeleccionarTodos() {
+            const todosCheckbox = document.getElementById('seleccionarTodos');
+            const checkboxes = document.querySelectorAll('.checkbox-seleccion[data-index]');
+            const seleccionar = todosCheckbox.checked;
+
+            checkboxes.forEach(cb => { cb.checked = seleccionar; });
+
+            actualizarSeleccion();
+        }
+
+        function limpiarSeleccion() {
+            document.querySelectorAll('.checkbox-seleccion').forEach(cb => { cb.checked = false; });
+            proveedoresSeleccionados.clear();
+            document.querySelectorAll('.quick-provider-row').forEach(fila => fila.classList.remove('seleccionado'));
+            document.getElementById('seleccionBar').classList.add('hidden');
+            document.getElementById('btnCopiarSeleccionados').disabled = true;
+            document.getElementById('seleccionContador').textContent = '0';
+            const todos = document.getElementById('seleccionarTodos');
+            if (todos) todos.checked = false;
+        }
+
+        function copiarSeleccionados() {
+            if (proveedoresSeleccionados.size === 0) {
+                showToast('Aviso', 'No hay proveedores seleccionados', 'warning');
+                return;
+            }
+
+            const indices = Array.from(proveedoresSeleccionados).sort((a, b) => a - b);
+            const proveedoresLista = indices.map(i => listaFiltradaActual[i]).filter(p => p);
+
+            if (proveedoresLista.length === 0) {
+                showToast('Aviso', 'No hay proveedores seleccionados', 'warning');
+                return;
+            }
+
+            const bloques = proveedoresLista.map((p, idx) => {
+                const horarioTxt = formatearHorarioAdmin(p.horario);
+                return `${idx + 1}. ${p.nombre}
+📂 ${p.categoria} > ${p.subcategoria || 'Sin subcategoría'}
+📍 ${p.direccion || 'Sin dirección'}
+💬 WhatsApp: ${p.whatsapp || 'Sin WhatsApp'}
+🕒 ${horarioTxt}${p.domicilio ? '\n🏠 Atención a domicilio' : ''}${p['24horas'] ? '\n🌙 Atención 24h' : ''}`;
+            }).join('\n\n');
+
+            const mensajeCompleto = `¡Hola! Gracias por comunicarte con La Paz te Acerca 🤝
+
+A continuación te enviamos los datos de los servicios que solicitaste (${proveedoresLista.length} opciones):
+
+${bloques}
+
+💡 Te sugerimos llamar antes para confirmar disponibilidad.
+
+¿Necesitas otra opción? Escríbenos nuevamente.
+¡Estamos para ayudarte! 🚀
+
+— Equipo La Paz te Acerca
+🌐 lapazteacerca.pages.dev`;
+
+            navigator.clipboard.writeText(mensajeCompleto).then(() => {
+                showToast('¡Copiado!', `${proveedoresLista.length} proveedor(es) listos para enviar por WhatsApp`, 'success', 3000);
+                limpiarSeleccion();
+            }).catch(err => {
+                showToast('Error', 'No se pudo copiar: ' + err, 'error');
+            });
+        }
+
         function addProvider() {
             document.getElementById('modalTitle').textContent = 'Agregar Nuevo Negocio';
             document.getElementById('editIndex').value = '-1';
@@ -1176,14 +1363,12 @@ ${texto}
             actualizarSubcategorias();
             toggleImagenesPorPlan();
 
-            // v14.0: Inicializar sistema de horarios
             renderizarChipsDias('horario_dias_chips', 'lunes_viernes');
             document.getElementById('horario_apertura').value = '08:00';
             document.getElementById('horario_cierre').value = '18:00';
             document.getElementById('horario_24horas').checked = false;
             document.getElementById('horario_texto').value = '';
 
-            // v14.1: Reset checkbox domicilio
             document.getElementById('f_domicilio_switch').checked = false;
 
             ocultarPlantillas();
@@ -1233,7 +1418,6 @@ ${texto}
             document.getElementById('f_domicilio_switch').checked = p.domicilio || false;
             document.getElementById('f_audio_url').value = p.audio_url || '';
 
-            // v14.0: Cargar horario
             cargarHorarioJSON(p.horario);
 
             for (let i = 1; i <= 3; i++) {
@@ -1293,7 +1477,6 @@ ${texto}
                 }
             }
 
-            // v14.0: Obtener horario como JSON string
             const horarioJSON = obtenerHorarioJSON();
             const horarioTexto = JSON.stringify(horarioJSON);
 
